@@ -1,0 +1,40 @@
+<h1>New request form goes here</h1>
+
+<form action="/requests" method="post">
+  <label for="week">Week</label>
+  <input type="number" name="week" min="1" max="52"><br>
+
+  <label for="contractor">Contractor</label><br>
+  <select name="contractor">
+    <option value="tasi_track">TASI TRACK</option>
+    <option value="test1">test1</option>
+    <option value="test2">test2</option>
+  </select><br>
+
+  <label for="description">Description</label><br>
+  <input type="text" name="description"><br>
+
+  <label for="single_track">Single track?</label><br>
+  <input type="radio" name="single_track" value="single"> Yes <br>
+  <input type="radio" name="single_track" value="multi"> No <br>
+
+  <label>Track</label><br>
+  MT 1<input type="checkbox" name="MT1" value="MT1"><br>
+  MT 2<input type="checkbox" name="MT2" value="MT2"><br>
+  MT 3<input type="checkbox" name="MT3" value="MT3"><br>
+  MT 4<input type="checkbox" name="MT4" value="MT4"><br>
+
+  <label for="protection">Protection</label><br>
+  TAW<input type="checkbox" name="taw" value="taw"><br>
+  Form B<input type="checkbox" name="form_b" value="form_b"><br>
+  Form C<input type="checkbox" name="form_c" value="form_c"><br>
+  Track & Time<input type="checkbox" name="track_and_time" value="track_and_time"><br>
+
+  <label for="night_work">Night Work?</label><br>
+  <input type="checkbox" name="night_work" value="1"><br>
+
+  <label for="description">Description</label><br>
+  <input type="text" name="description"><br>
+
+  <input type="submit" name="submit" value="Submit Request">
+</form>
