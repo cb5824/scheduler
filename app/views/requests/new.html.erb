@@ -1,8 +1,174 @@
 <h1>New request form goes here</h1>
 
 <form action="/requests" method="post">
+
+  <label for="week">Year</label>
+  <input type="number" name="year" min="2019"><br>
+  <br>
   <label for="week">Week</label>
   <input type="number" name="week" min="1" max="52"><br>
+  <br>
+
+  <label>Days</label><br>
+  Mon<input type="checkbox" name="monday" value="monday"><br>
+  Tues<input type="checkbox" name="tuesday" value="tuesday"><br>
+  Wed<input type="checkbox" name="wednesday" value="wednesday"><br>
+  Thurs<input type="checkbox" name="thursday" value="thursday"><br>
+  Fri<input type="checkbox" name="friday" value="friday"><br>
+  Sat<input type="checkbox" name="saturday" value="saturday"><br>
+  Sun<input type="checkbox" name="sunday" value="sunday"><br>
+  <br>
+  
+  <label for="start_time">Start Time</label>
+  <%= time_select 'start_time', 'start_time', {minute_step: 30} %>
+  <br>
+  <label for="end_time">End Time</label>
+  <%= time_select 'end_time', 'end_time', {minute_step: 30} %>
+  <br>
+  <br>
+
+  <label for="cp1">CP 1</label><br>
+  <select name="cp1">'
+    <%= options_for_select([
+['N.L. CP 4th', 1],
+['S.L. CP 4th', 2],
+['N.L. CP Common', 3],
+['S.L. CP Common', 4],
+['N.L. CP Army', 5],
+['S.L. CP Army', 6],
+['N.L. CP Tunnel', 7],
+['S.L. CP Tunnel', 8],
+['N.L. CP Geneva', 9],
+['S.L. CP Geneva', 10],
+['N.L. CP Brisbane', 11],
+['S.L. CP Brisbane', 12],
+['N.L. CP Sierra', 13],
+['S.L. CP Sierra', 14],
+['N.L. CP Scott', 15],
+['S.L. CP Scott', 16],
+['N.L. CP Center', 17],
+['S.L. CP Center', 18],
+['N.L. CP Bart', 19],
+['S.L. CP Bart', 20],
+['N.L. CP Trousdale', 21],
+['S.L. CP Trousdale', 22],
+['N.L. CP Palm', 23],
+['S.L. CP Palm', 24],
+['N.L. CP Ralston', 25],
+['S.L. CP Ralston', 26],
+['N.L. CP Dumbarton', 27],
+['S.L. CP Dumbarton', 28],
+['N.L. CP Junction', 29],
+['S.L. CP Junction', 30],
+['N.L. CP Alma', 31],
+['S.L. CP Alma', 32],
+['N.L. CP Mayfield', 33],
+['S.L. CP Mayfield', 34],
+['N.L. CP Mary', 35],
+['S.L. CP Mary', 36],
+['N.L. CP Hendy', 37],
+['S.L. CP Hendy', 38],
+['N.L. CP Bowers', 39],
+['S.L. CP Bowers', 40],
+['N.L. CP De La Cruz', 41],
+['S.L. CP De La Cruz', 42],
+['N.L. CP Coast', 43],
+['S.L. CP Coast', 44],
+['N.L. CP Franklin', 45],
+['S.L. CP Franklin', 46],
+['N.L. CP Stockton', 47],
+['S.L. CP Stockton', 48],
+['N.L. CP Shark', 49],
+['S.L. CP Shark', 50],
+['N.L. CP Alameda', 51],
+['S.L. CP Alameda', 52],
+['N.L. CP Bird', 53],
+['S.L. CP Bird', 54],
+['N.L. CP Delmas', 55],
+['S.L. CP Delmas', 56],
+['N.L. CP Mack', 57],
+['S.L. CP Mack', 58],
+['N.L. CP Michael', 59],
+['S.L. CP Michael', 60],
+['N.L. CP Lick', 61],
+['S.L. CP Lick', 62]
+]) %>
+  </select>
+  <label for="mp1">MP 1</label><br>
+  <input type="number" name="mp1" min="1"><br>
+  <br>
+
+  <label for="cp2">CP 2</label><br>
+  <select name="cp2">
+    <%= options_for_select([
+['N.L. CP 4th', 1],
+['S.L. CP 4th', 2],
+['N.L. CP Common', 3],
+['S.L. CP Common', 4],
+['N.L. CP Army', 5],
+['S.L. CP Army', 6],
+['N.L. CP Tunnel', 7],
+['S.L. CP Tunnel', 8],
+['N.L. CP Geneva', 9],
+['S.L. CP Geneva', 10],
+['N.L. CP Brisbane', 11],
+['S.L. CP Brisbane', 12],
+['N.L. CP Sierra', 13],
+['S.L. CP Sierra', 14],
+['N.L. CP Scott', 15],
+['S.L. CP Scott', 16],
+['N.L. CP Center', 17],
+['S.L. CP Center', 18],
+['N.L. CP Bart', 19],
+['S.L. CP Bart', 20],
+['N.L. CP Trousdale', 21],
+['S.L. CP Trousdale', 22],
+['N.L. CP Palm', 23],
+['S.L. CP Palm', 24],
+['N.L. CP Ralston', 25],
+['S.L. CP Ralston', 26],
+['N.L. CP Dumbarton', 27],
+['S.L. CP Dumbarton', 28],
+['N.L. CP Junction', 29],
+['S.L. CP Junction', 30],
+['N.L. CP Alma', 31],
+['S.L. CP Alma', 32],
+['N.L. CP Mayfield', 33],
+['S.L. CP Mayfield', 34],
+['N.L. CP Mary', 35],
+['S.L. CP Mary', 36],
+['N.L. CP Hendy', 37],
+['S.L. CP Hendy', 38],
+['N.L. CP Bowers', 39],
+['S.L. CP Bowers', 40],
+['N.L. CP De La Cruz', 41],
+['S.L. CP De La Cruz', 42],
+['N.L. CP Coast', 43],
+['S.L. CP Coast', 44],
+['N.L. CP Franklin', 45],
+['S.L. CP Franklin', 46],
+['N.L. CP Stockton', 47],
+['S.L. CP Stockton', 48],
+['N.L. CP Shark', 49],
+['S.L. CP Shark', 50],
+['N.L. CP Alameda', 51],
+['S.L. CP Alameda', 52],
+['N.L. CP Bird', 53],
+['S.L. CP Bird', 54],
+['N.L. CP Delmas', 55],
+['S.L. CP Delmas', 56],
+['N.L. CP Mack', 57],
+['S.L. CP Mack', 58],
+['N.L. CP Michael', 59],
+['S.L. CP Michael', 60],
+['N.L. CP Lick', 61],
+['S.L. CP Lick', 62]
+]) %>
+  </select>
+  <label for="mp2">MP 2</label><br>
+  <input type="number" name="mp2" min="1"><br>
+<br>
+
 
   <label for="contractor">Contractor</label><br>
   <select name="contractor">
@@ -10,31 +176,181 @@
     <option value="test1">test1</option>
     <option value="test2">test2</option>
   </select><br>
+  <br>
 
-  <label for="description">Description</label><br>
-  <input type="text" name="description"><br>
+  <label for="worker_primary">Worker Allocation Primary</label><br>
+  <select name="worker_primary">
+    <%= options_for_select([
+  ['', 1],
+  ['Ambassador', 2],
+  ['Blue Flag', 3],
+  ['Signal Tech', 4],
+  ['Signal Inspector', 5],
+  ['Maintainer', 6],
+  ['No Protection Required', 7],
+  ['Pilot', 8],
+  ['Test Train', 9],
+  ['Radio Tech', 10],
+  ['Work Train', 11],
+  ['UP Flagman', 12],
+  ['Watchman', 13],
+  ['Flagger (RWIC)', 14],
+  ['Track Inspector', 15],
+  ['Stabilizer', 16],
+  ['Shared Flagger', 17],
+  ['Shared Watchman', 18],
+  ['Shared Maintainer, 19']
+]) %>
+  </select>
+  <br>
+  <label for="worker_secondary1">Secondary</label><br>
+  <select name="worker_secondary1">
+    <%= options_for_select([
+  ['', 1],
+  ['Ambassador', 2],
+  ['Blue Flag', 3],
+  ['Signal Tech', 4],
+  ['Signal Inspector', 5],
+  ['Maintainer', 6],
+  ['Pilot', 8],
+  ['Test Train', 9],
+  ['Radio Tech', 10],
+  ['Work Train', 11],
+  ['UP Flagman', 12],
+  ['Watchman', 13],
+  ['Flagger (RWIC)', 14],
+  ['Track Inspector', 15],
+  ['Stabilizer', 16],
+  ['Shared Flagger', 17],
+  ['Shared Watchman', 18],
+  ['Shared Maintainer, 19']
+]) %>
+  </select>
+  <br>
+  <label for="worker_secondary2">Secondary</label><br>
+  <select name="worker_secondary2">
+    <%= options_for_select([
+  ['', 1],
+  ['Ambassador', 2],
+  ['Blue Flag', 3],
+  ['Signal Tech', 4],
+  ['Signal Inspector', 5],
+  ['Maintainer', 6],
+  ['Pilot', 8],
+  ['Test Train', 9],
+  ['Radio Tech', 10],
+  ['Work Train', 11],
+  ['UP Flagman', 12],
+  ['Watchman', 13],
+  ['Flagger (RWIC)', 14],
+  ['Track Inspector', 15],
+  ['Stabilizer', 16],
+  ['Shared Flagger', 17],
+  ['Shared Watchman', 18],
+  ['Shared Maintainer, 19']
+]) %>
+  </select>
+  <br>
+  <label for="worker_secondary3">Secondary</label><br>
+  <select name="worker_secondary3">
+    <%= options_for_select([
+  ['', 1],
+  ['Ambassador', 2],
+  ['Blue Flag', 3],
+  ['Signal Tech', 4],
+  ['Signal Inspector', 5],
+  ['Maintainer', 6],
+  ['Pilot', 8],
+  ['Test Train', 9],
+  ['Radio Tech', 10],
+  ['Work Train', 11],
+  ['UP Flagman', 12],
+  ['Watchman', 13],
+  ['Flagger (RWIC)', 14],
+  ['Track Inspector', 15],
+  ['Stabilizer', 16],
+  ['Shared Flagger', 17],
+  ['Shared Watchman', 18],
+  ['Shared Maintainer, 19']
+]) %>
+  </select>
+  <br>
+  <label for="worker_secondary4">Secondary</label><br>
+  <select name="worker_secondary4">
+    <%= options_for_select([
+  ['', 1],
+  ['Ambassador', 2],
+  ['Blue Flag', 3],
+  ['Signal Tech', 4],
+  ['Signal Inspector', 5],
+  ['Maintainer', 6],
+  ['Pilot', 8],
+  ['Test Train', 9],
+  ['Radio Tech', 10],
+  ['Work Train', 11],
+  ['UP Flagman', 12],
+  ['Watchman', 13],
+  ['Flagger (RWIC)', 14],
+  ['Track Inspector', 15],
+  ['Stabilizer', 16],
+  ['Shared Flagger', 17],
+  ['Shared Watchman', 18],
+  ['Shared Maintainer, 19']
+]) %>
+  </select>
+  <br>
+  <label for="worker_secondary5">Secondary</label><br>
+  <select name="worker_secondary5">
+    <%= options_for_select([
+  ['', 1],
+  ['Ambassador', 2],
+  ['Blue Flag', 3],
+  ['Signal Tech', 4],
+  ['Signal Inspector', 5],
+  ['Maintainer', 6],
+  ['Pilot', 8],
+  ['Test Train', 9],
+  ['Radio Tech', 10],
+  ['Work Train', 11],
+  ['UP Flagman', 12],
+  ['Watchman', 13],
+  ['Flagger (RWIC)', 14],
+  ['Track Inspector', 15],
+  ['Stabilizer', 16],
+  ['Shared Flagger', 17],
+  ['Shared Watchman', 18],
+  ['Shared Maintainer, 19']
+]) %>
+  </select>
+  <br>
 
+  <br>
   <label for="single_track">Single track?</label><br>
   <input type="radio" name="single_track" value="single"> Yes <br>
   <input type="radio" name="single_track" value="multi"> No <br>
+  <br>
 
   <label>Track</label><br>
   MT 1<input type="checkbox" name="MT1" value="MT1"><br>
   MT 2<input type="checkbox" name="MT2" value="MT2"><br>
   MT 3<input type="checkbox" name="MT3" value="MT3"><br>
   MT 4<input type="checkbox" name="MT4" value="MT4"><br>
+  <br>
 
   <label for="protection">Protection</label><br>
   TAW<input type="checkbox" name="taw" value="taw"><br>
   Form B<input type="checkbox" name="form_b" value="form_b"><br>
   Form C<input type="checkbox" name="form_c" value="form_c"><br>
   Track & Time<input type="checkbox" name="track_and_time" value="track_and_time"><br>
+  <br>
 
   <label for="night_work">Night Work?</label><br>
   <input type="checkbox" name="night_work" value="1"><br>
+  <br>
 
   <label for="description">Description</label><br>
   <input type="text" name="description"><br>
+  <br>
 
   <input type="submit" name="submit" value="Submit Request">
 </form>
