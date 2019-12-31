@@ -13,3 +13,45 @@
  *= require_tree .
  *= require_self
  */
+ #dash_main{
+   background: url("https://picsum.photos/id/392/5580/3720") no-repeat fixed center / cover;
+   position:relative;
+   border: 100px solid transparent;
+ }
+
+#top_nav_bar{
+  background-color: #23272a;
+  color: #ffffff;
+  display: inline-block;
+  z-index: 1;
+  width: 100%;
+}
+
+#top_nav_bar a:visited, #top_nav_bar a{
+  color: #ffffff;
+}
+
+#alert_box{
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+body{
+  background-color: 	#99aab5;
+}
+
+.nav_link, #account_overlay{
+  display: inline-block;
+}
+
+.nav_link{
+  float: left;
+}
+
+#account_overlay{
+  float: right;
+}

@@ -2,6 +2,7 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @requests = Request.all
   end
 
   def new
@@ -9,7 +10,13 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-    binding.pry
+    @request.user = current_user
+    if @request.save
+      redirect_to root_path, notice: 'Request was saved successfully'
+    else
+      @errors = @request.errors.full_messages
+      render action: 'new'
+    end
   end
 
   def request_params

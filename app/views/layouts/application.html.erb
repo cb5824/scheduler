@@ -10,8 +10,23 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div id="top_nav_bar">
+      <a class='nav_link' href='<%= root_path %>'>Dashboard</a>
+      <div id="account_overlay" class="hide">
+        <% if user_signed_in? %>
+          <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete,  :class => "nav_link" %>
+          <a class='nav_link' href='<%= edit_user_registration_path(current_user.id) %>'>My Account</a>
+
+        <% else %>
+          <%= link_to 'Sign In', new_user_session_path, :class => "nav_link"  %>
+          <%= link_to 'Sign Up', new_user_registration_path, :class => "nav_link"  %>
+        <% end %>
+      </div>
+    </div>
+    <div id="alert_box">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
     <%= yield %>
   </body>
 </html>
