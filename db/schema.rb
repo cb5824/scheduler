@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_30_014105) do
+ActiveRecord::Schema.define(version: 2020_01_06_001917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,41 @@ ActiveRecord::Schema.define(version: 2019_12_30_014105) do
     t.integer "worker_secondary5"
     t.text "description", null: false
     t.string "single_track", null: false
+    t.string "requestor_name", null: false
+    t.string "requestor_email", null: false
+    t.string "requestor_phone", null: false
+    t.string "requestor_project", null: false
+    t.string "requestor_work_directive", null: false
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.string "sunday"
+    t.string "night_work", null: false
+    t.string "MT1"
+    t.string "MT2"
+    t.string "MT3"
+    t.string "MT4"
+    t.string "taw"
+    t.string "form_b"
+    t.string "form_c"
+    t.string "track_and_time"
+    t.string "title"
+    t.string "sswps"
+    t.string "change_notices"
+    t.string "rwp"
+    t.string "ocs"
+    t.string "disturb"
+    t.string "rrm"
+    t.string "foul"
+    t.string "crossings"
+    t.string "underground"
+    t.string "flagging"
+    t.string "late_reason"
+    t.string "rush_reason"
+    t.string "change_reason"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -47,6 +82,9 @@ ActiveRecord::Schema.define(version: 2019_12_30_014105) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "phone"
+    t.string "company"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

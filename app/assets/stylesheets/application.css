@@ -19,6 +19,42 @@
    border: 100px solid transparent;
  }
 
+.hidden{
+  display: none;
+}
+
+.form_block_container{
+  display: flex;
+  width: 1000px;
+  background-color: #6b767e;
+  align-items: center;
+  flex-direction: column;
+  border-style: solid;
+  border-color: #2c2f33;
+  border-width: 10px;
+
+}
+
+.form_block{
+  background-color:	#ffffff;
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.form_header{
+  background-color: #7289da;
+  width: 100%;
+  text-align: center;
+  border-bottom: solid;
+  border-top: solid;
+  border-color: #2c2f33;
+  border-width: 2px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 #top_nav_bar{
   background-color: #23272a;
   color: #ffffff;
