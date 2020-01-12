@@ -1,7 +1,30 @@
 <div id="dash_main">
-  <div class="white-overlay">
-    <h1>test</h1>
-    <a href="<%= new_request_path %>">New Request Form</a>
-    <a href='<%= requests_path %>'>Requests</a>
+  <div class="page_title">
+    <h1>Right to Work Request Portal</h1>
   </div>
+  <% if @user != nil %>
+    <% if @user.role == 'admin' %>
+      <div class="control_panel">
+        <a href="<%= registrations_path %>">Users</a>
+        <br>
+        <a href='<%= requests_path %>'>Requests</a>
+      </div>
+    <% elsif @user.role == 'inspector' %>
+    <% else %>
+      <div class="account_summary">
+        <ul>
+
+        <% @user.requests.each do |request| %>
+          <li><%= request.title%>: submitted on <%= request.created_at%></li>
+        <% end %>
+      </ul>
+      </div>
+      <br>
+      <div class="control_panel">
+        <a href="<%= new_request_path %>">New Request Form</a>
+        <br>
+        <a href='<%= requests_path %>'>Requests</a>
+      </div>
+    <% end %>
+  <% end %>
 </div>

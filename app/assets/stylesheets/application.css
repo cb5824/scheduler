@@ -13,11 +13,25 @@
  *= require_tree .
  *= require_self
  */
+ html, body { margin: 0; padding: 0; }
+
  #dash_main{
    background: url("https://picsum.photos/id/392/5580/3720") no-repeat fixed center / cover;
-   position:relative;
+   position: flex;
    border: 100px solid transparent;
+   min-height: 800px;
  }
+
+.control_panel, .account_summary{
+  background-color: #ffffff;
+  opacity: 0.75;
+  padding: 10px;
+}
+
+.page_title{
+  align-self: center;
+  text-align: center;
+}
 
 .hidden{
   display: none;
@@ -65,6 +79,7 @@
 
 #top_nav_bar a:visited, #top_nav_bar a{
   color: #ffffff;
+  padding: 10px;
 }
 
 #alert_box{
@@ -86,6 +101,10 @@ body{
 
 .nav_link{
   float: left;
+  background-color:	#7289da;
+  border-radius: 25px;
+  border: 5px solid #23272a;
+
 }
 
 #account_overlay{

@@ -1,0 +1,5 @@
+<ul>
+  <% @users.each do |user| %>
+    <li><a href="<%= registration_path(user) %>">Edit User Settings</a><%= user.name %>, <%= user.email %>, <%= user.phone %></li>
+  <% end %>
+</ul>

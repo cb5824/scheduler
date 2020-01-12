@@ -10,7 +10,6 @@ class RequestsController < ApplicationController
   end
 
   def create
-    binding.pry
     @request = Request.new(request_params)
     @request.user = current_user
     if @request.save
