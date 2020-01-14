@@ -1,3 +1,53 @@
+<table class='requests_table'>
+  <thead>
+    <tr>
+      <th>Job Title</th>
+      <th>Contractor</th>
+      <th>Description</th>
+      <th>Mon</th>
+      <th>Tues</th>
+      <th>Wed</th>
+      <th>Thurs</th>
+      <th>Fri</th>
+      <th>Sat</th>
+      <th>Sun</th>
+      <th>Night Work</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>TAW</th>
+      <th>Form B</th>
+      <th>Form C</th>
+      <th>Track & Time</th>
+      <th>Submitted</th>
+      <th>Last Edit</th>
+    </tr>
+</thead>
+<tbody>
+
 <% @requests.each do |request| %>
-<li><%= request.description %></li>
+  <tr>
+    <td><%= request.title %></td>
+    <td><%= request.contractor %></td>
+    <td><%= request.description %></td>
+    <td><%= request.monday %></td>
+    <td><%= request.tuesday %></td>
+    <td><%= request.wednesday %></td>
+    <td><%= request.thursday %></td>
+    <td><%= request.friday %></td>
+    <td><%= request.saturday %></td>
+    <td><%= request.sunday %></td>
+    <td><%= request.night_work %></td>
+    <td><%= request.start_time %></td>
+    <td><%= request.end_time %></td>
+    <td><%= request.taw %></td>
+    <td><%= request.form_b %></td>
+    <td><%= request.form_c %></td>
+    <td><%= request.track_and_time %></td>
+    <td><%= request.created_at %></td>
+    <td><%= request.updated_at %></td>
+  </tr>
+
 <% end %>
+</tbody>
+
+</table>

@@ -5,7 +5,7 @@
   <% if @user != nil %>
     <% if @user.role == 'admin' %>
       <div class="control_panel">
-        <a href="<%= registrations_path %>">Users</a>
+        <a href="<%= profiles_path %>">Users</a>
         <br>
         <a href='<%= requests_path %>'>Requests</a>
       </div>

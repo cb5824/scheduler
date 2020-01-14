@@ -1,0 +1,17 @@
+<ul>
+  <li>Name: <%= @user.name %></li>
+  <li>Email: <%= @user.email %></li>
+  <li>Phone #: <%= @user.phone %></li>
+  <li>Company: <%= @user.company %></li>
+  <li>Role: <%= @user.role %></li>
+
+</ul>
+
+<form action="/profiles/<%= @user.id %>" method="post">
+  <input name="_method" type="hidden" value="patch" />
+  <select name="updates[new_role]">
+
+  <%= options_for_select([['Admin', 'admin'], ['User', 'user'], ['Investigator', 'investigator']]) %>
+  </select>
+  <input name="commit" type="submit" value="Update Role" />
+</form>
