@@ -7,3 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 user = User.create! :name => 'Administrator', :email => 'admin@testemail.com', :password => 'password', :password_confirmation => 'password', :phone => '5555555555', :role => 'admin', :company => 'admin'
 user.save!
+
+5.times do
+  FactoryBot.create(:user)
+end
+
+10.times do
+  FactoryBot.create(:request)
+end
