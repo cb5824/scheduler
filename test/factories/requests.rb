@@ -50,6 +50,7 @@ FactoryBot.define do
     late_reason {""}
     rush_reason {""}
     change_reason {""}
+    status {"pending"}
     user
   end
 end

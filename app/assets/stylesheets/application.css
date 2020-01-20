@@ -111,6 +111,12 @@ body{
   float: right;
 }
 
+.status_icon{
+  height: 30px;
+  width: 30px
+
+}
+
 table.requests_table {
   border: 1px solid #1D2CD2;
   background-color: #EEEEEE;

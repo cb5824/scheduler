@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_10_204923) do
+ActiveRecord::Schema.define(version: 2020_01_19_210117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2020_01_10_204923) do
     t.string "late_reason"
     t.string "rush_reason"
     t.string "change_reason"
+    t.string "status", default: "pending"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 

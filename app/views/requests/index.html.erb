@@ -1,6 +1,7 @@
 <table class='requests_table'>
   <thead>
     <tr>
+      <th>Status</th>
       <th>Job Title</th>
       <th>Contractor</th>
       <th>Description</th>
@@ -26,6 +27,25 @@
 
 <% @requests.each do |request| %>
   <tr>
+    <td>
+    <% if @user.role == 'admin' %>
+      <% if request.status == 'pending'%>
+        <a href="<%= request_path(request) %>"><%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %></a>
+      <% elsif request.status == 'approved'%>
+        <a href="<%= request_path(request) %>"><%= image_tag "green.png", class: 'status_icon', alt: "Approved" %></a>
+      <% elsif request.status == 'rejected'%>
+        <a href="<%= request_path(request) %>"><%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %></a>
+      <% end %>
+    <% else %>
+      <% if request.status == 'pending'%>
+        <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
+      <% elsif request.status == 'approved'%>
+        <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
+      <% elsif request.status == 'rejected'%>
+        <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
+      <% end %>
+    <% end %>
+    </td>
     <td><%= request.title %></td>
     <td><%= request.contractor %></td>
     <td><%= request.description %></td>

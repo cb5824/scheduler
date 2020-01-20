@@ -6,5 +6,10 @@ Rails.application.routes.draw do
   resources :requests
   resources :profiles
 
+  resources :requests do
+    patch :approve
+    put :approve
+  end
+
   root to: 'landing#index'
 end
