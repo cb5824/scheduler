@@ -1,3 +1,5 @@
+<%= link_to 'Back to Requests', requests_path %>
+
 <h1><%= @request.title %></h1>
 <ul>
   <li>Contractor: <%= @request.contractor %></li>
@@ -21,7 +23,8 @@
 </ul>
 
 <h3>Current Status: <%= @request.status.upcase %>
-<%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' } %>
+  <%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' }, params: {new_status: 'approved'} %>
+  <%= button_to 'Reject', request_approve_path(@request), method: :put, data: { confirm: 'This request will be rejected. Proceed?' }, params: {new_status: 'rejected'} %>
 
 <h1>Change Log</h1>
 

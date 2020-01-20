@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>Status</th>
+      <th>Edit</th>
       <th>Job Title</th>
       <th>Contractor</th>
       <th>Description</th>
@@ -46,6 +47,7 @@
       <% end %>
     <% end %>
     </td>
+    <td><%= link_to 'Edit', edit_request_path(request) %></td>
     <td><%= request.title %></td>
     <td><%= request.contractor %></td>
     <td><%= request.description %></td>

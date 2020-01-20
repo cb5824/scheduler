@@ -1,0 +1,5 @@
+<%= link_to 'Back to Requests', requests_path %>
+
+<%= form_for @request do |f| %>
+<%= render "layouts/request_form", f: f %>
+<% end %>

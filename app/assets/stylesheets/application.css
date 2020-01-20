@@ -165,6 +165,9 @@ table.requests_table tfoot {
 table.requests_table tfoot td {
   font-size: 14px;
 }
+table.requests_table {
+  min-width: 1500px;
+}
 table.requests_table tfoot .links {
   text-align: right;
 }
