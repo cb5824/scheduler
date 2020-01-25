@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_19_210117) do
+ActiveRecord::Schema.define(version: 2020_01_25_033830) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
+
+  create_table "changelogs", force: :cascade do |t|
+    t.bigint "request_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.hstore "old_values", default: {}, null: false
+    t.hstore "new_values", default: {}, null: false
+    t.index ["request_id"], name: "index_changelogs_on_request_id"
+    t.index ["user_id"], name: "index_changelogs_on_user_id"
+  end
 
   create_table "requests", force: :cascade do |t|
     t.datetime "created_at", null: false

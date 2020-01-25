@@ -28,11 +28,35 @@
 
 <h1>Change Log</h1>
 
-<%# will need to create log_enty table, linked to one user and one requests_table
-will have:
-user
-request
-time created
-changes (nested arrays of length 2, first entry being the old values and second being the new values)
+<% @entries.each do |entry| %>
+<li>
+  <div class="log_block_container">
+    <div class="log_header">
+      User: <%= User.where(id: entry.user_id)[0].name %> at <%= entry.created_at %>
+    </div>
+    <div class="log_block">
+      <div class="old_value_block">
+        Previous Values:
+        <ul>
+        <% entry[:old_values].each do |key, value| %>
+        <li>
+        <%= key %> => <%= value %>
+        </li>
+        <% end %>
+        <ul>
+      </div>
+      <div class="new_value_block">
+        New Values:
+        <ul>
+        <% entry[:new_values].each do |key, value| %>
+        <li>
+        <%= key %> => <%= value %>
+        </li>
+        <% end %>
+        <ul>
+      </div>
+  </div>
+</div>
+</li>
 
- %>
+<% end %>

@@ -5,8 +5,10 @@ Rails.application.routes.draw do
 
   resources :requests
   resources :profiles
+  resources :changelogs
 
   resources :requests do
+    resources :changelogs
     patch :approve
     put :approve
   end

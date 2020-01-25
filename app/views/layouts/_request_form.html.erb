@@ -6,11 +6,11 @@
   </div>
   <div class="form_header">Requester Information</div>
   <div class="form_block">
-    <p>Submitting request for <%= @user.company %></p>
-    <input type="hidden" name="request[contractor]" value="<%= @user.company%>">
 
     <%= f.label :requestor_name %>
     <%= f.text_field :requestor_name %>
+    <%= f.label :contractor, "Company" %>
+    <%= f.text_field :contractor %>
     <%= f.label :requestor_email %>
     <%= f.email_field :requestor_email %>
     <%= f.label :requestor_phone %>
@@ -184,6 +184,8 @@
     <br>
     <%= f.label :rush_reason, "Explain why work must be performed on short notice rather than in accordancy with standard RTW approval:" %>
     <%= f.text_field :rush_reason %>
+    <%= f.label :change_reason, "Explain why the change is being requested" %>
+    <%= f.text_field :change_reason %>
     <br>
 
   </div>

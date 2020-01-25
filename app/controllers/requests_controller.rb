@@ -109,6 +109,7 @@ class RequestsController < ApplicationController
   def show
     @request = Request.where(id: params[:id])[0]
     @user = current_user
+    @entries = @request.changelogs.sort_by { |entry| entry.created_at }
   end
 
   def edit
@@ -123,6 +124,14 @@ class RequestsController < ApplicationController
     @user = current_user
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
+    @request2 = Request.new(request_params)
+    @request2[:id] = @request[:id]
+    @request2[:created_at] = @request[:created_at]
+    @request2[:updated_at] = @request[:updated_at]
+    @request2[:user_id] = @request[:user_id]
+
+    @request.generate_changelog(@request2, @user)
+
     @request.update_attributes(request_params)
     @request.update_attribute(:status, 'pending')
     flash[:notice] = "Request updated. Status changed to Pending Approval!"

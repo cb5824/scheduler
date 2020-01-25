@@ -69,6 +69,54 @@
   padding-bottom: 20px;
 }
 
+.log_block_container{
+  display: flex;
+  width: 500px;
+  background-color: #6b767e;
+  align-items: center;
+  flex-direction: column;
+  border-style: solid;
+  border-color: #2c2f33;
+  border-width: 2px;
+
+}
+
+.log_header{
+  background-color: #7289da;
+  width: 100%;
+  text-align: center;
+  border-bottom: solid;
+  border-color: #2c2f33;
+  border-width: 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.log_block{
+  display: flex;
+  width: 100%;
+}
+
+li{
+  list-style-type: none;
+}
+
+.log_block ul{
+  padding: 0;
+}
+
+.old_value_block{
+  border-right: solid;
+  border-color: #2c2f33;
+  border-width: 2px;
+}
+
+.new_value_block, .old_value_block{
+  text-align: center;
+  background-color:	#ffffff;
+  width: 50%;
+}
+
 #top_nav_bar{
   background-color: #23272a;
   color: #ffffff;

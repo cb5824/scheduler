@@ -32,6 +32,8 @@ FactoryBot.define do
     night_work {"1"}
     MT1 {"MT1"}
     MT2 {"MT2"}
+    MT3 {"MT3"}
+    MT4 {"MT4"}
     taw {"taw"}
     form_b {"form_b"}
     form_c {"form_c"}
