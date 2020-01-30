@@ -3,7 +3,6 @@ class Request < ApplicationRecord
   has_many :changelogs
 
   def generate_changelog(temp_request, user)
-    # self
     new_changelog = Changelog.new
     new_changelog.user_id = user.id
     new_changelog.request = self
@@ -17,4 +16,15 @@ class Request < ApplicationRecord
     new_changelog.save
 
   end
+
+  def generate_approval_log(user, old_status)
+    new_changelog = Changelog.new
+    new_changelog.user_id = user.id
+    new_changelog[:old_values]["status"] = old_status
+    new_changelog[:new_values]["status"] = self.status
+    new_changelog.request = self
+    new_changelog.save
+
+  end
+
 end

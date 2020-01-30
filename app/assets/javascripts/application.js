@@ -12,3 +12,15 @@
 //
 //= require rails-ujs
 //= require_tree .
+//= require jquery
+//= require jquery_ujs
+$( document ).ready(function() {
+
+$('*[data-href]').on("click",function(){
+  window.location = $(this).data('href');
+  return false;
+});
+$("td > a").on("click",function(e){
+  e.stopPropagation();
+});
+});

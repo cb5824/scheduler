@@ -23,40 +23,50 @@
 </ul>
 
 <h3>Current Status: <%= @request.status.upcase %>
+  <br>
+  <%= link_to 'Edit', edit_request_path(@request) %>
+  <% if @user.role == "admin" %>
   <%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' }, params: {new_status: 'approved'} %>
   <%= button_to 'Reject', request_approve_path(@request), method: :put, data: { confirm: 'This request will be rejected. Proceed?' }, params: {new_status: 'rejected'} %>
 
-<h1>Change Log</h1>
+  <h1>Change Log</h1>
 
-<% @entries.each do |entry| %>
-<li>
-  <div class="log_block_container">
-    <div class="log_header">
-      User: <%= User.where(id: entry.user_id)[0].name %> at <%= entry.created_at %>
+  <% @entries.each do |entry| %>
+  <li>
+    <div class="log_block_container">
+      <div class="log_header">
+        User: <%= User.where(id: entry.user_id)[0].name %> at <%= entry.created_at %>
+      </div>
+      <div class="log_block <% if entry[:new_values]["status"] %><%= entry[:new_values]["status"] %><% end %>">
+        <div class="old_value_block">
+          Previous Values:
+          <ul>
+          <% entry[:old_values].each do |key, value| %>
+          <li>
+          <%= key %> => <%= value %>
+          </li>
+          <% end %>
+          <ul>
+        </div>
+        <div class="new_value_block">
+          New Values:
+          <ul>
+          <% entry[:new_values].each do |key, value| %>
+          <li>
+          <%= key %> => <%= value %>
+          </li>
+          <% end %>
+          <ul>
+        </div>
+        <div class="comments_block">
+          Comments:
+          <ul>
+            <li><%= entry[:comments] %><li>
+          <ul>
+        </div>
     </div>
-    <div class="log_block">
-      <div class="old_value_block">
-        Previous Values:
-        <ul>
-        <% entry[:old_values].each do |key, value| %>
-        <li>
-        <%= key %> => <%= value %>
-        </li>
-        <% end %>
-        <ul>
-      </div>
-      <div class="new_value_block">
-        New Values:
-        <ul>
-        <% entry[:new_values].each do |key, value| %>
-        <li>
-        <%= key %> => <%= value %>
-        </li>
-        <% end %>
-        <ul>
-      </div>
   </div>
-</div>
-</li>
+  </li>
 
+  <% end %>
 <% end %>

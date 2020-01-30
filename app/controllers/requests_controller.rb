@@ -135,11 +135,12 @@ class RequestsController < ApplicationController
     @request.update_attributes(request_params)
     @request.update_attribute(:status, 'pending')
     flash[:notice] = "Request updated. Status changed to Pending Approval!"
-    redirect_to action: "edit", id: @request.id
+    redirect_to @request
   end
 
   def approve
     @request = Request.find(params[:request_id])
+    old_status = @request.status
     if params[:new_status] == 'approved'
       @request.update_attribute(:status, 'approved')
       flash[:notice] = "Request approved!"
@@ -150,6 +151,7 @@ class RequestsController < ApplicationController
       @request.update_attribute(:status, 'rejected')
       flash[:notice] = "Request rejected!"
     end
+    @request.generate_approval_log(current_user, old_status)
     redirect_to @request
   end
 

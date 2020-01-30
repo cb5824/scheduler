@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_25_033830) do
+ActiveRecord::Schema.define(version: 2020_01_30_025105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_01_25_033830) do
     t.datetime "updated_at", null: false
     t.hstore "old_values", default: {}, null: false
     t.hstore "new_values", default: {}, null: false
+    t.string "comments", default: "-"
     t.index ["request_id"], name: "index_changelogs_on_request_id"
     t.index ["user_id"], name: "index_changelogs_on_user_id"
   end
