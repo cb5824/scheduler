@@ -86,6 +86,14 @@ class RequestsController < ApplicationController
   def index
     @user = current_user
     @requests = Request.all
+    respond_to do |format|
+      format.xlsx {
+        response.headers[
+          'Content-Disposition'
+        ] = "attachment; filename=Requests.xlsx"
+      }
+      format.html { render :index }
+    end
   end
 
   def new
