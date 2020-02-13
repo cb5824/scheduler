@@ -21,6 +21,13 @@
   <li>Created: <%= @request.created_at %></li>
   <li>Last Updated: <%= @request.updated_at %></li>
 </ul>
+<br>
+
+<% @request.attachments.each do |attachment| %>
+<div class="level">
+  <%= link_to attachment.filename, rails_blob_path(attachment, only_path: true) %>
+</div>
+<% end %>
 
 <h3>Current Status: <%= @request.status.upcase %>
   <br>

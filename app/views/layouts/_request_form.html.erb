@@ -191,6 +191,9 @@
   </div>
 
   <div class="form_header">Submittal</div>
+
+  <%= f.file_field :attachments, multiple: true %>
+  <br>
   <div class="form_block">
     <p>By clicking submit button, I verify that blah blah blah…</p>
     <input type="submit" value="Submit Request">

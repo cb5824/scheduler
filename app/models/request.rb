@@ -1,7 +1,8 @@
 class Request < ApplicationRecord
   belongs_to :user
   has_many :changelogs
-
+  has_many_attached :attachments
+  
   def generate_changelog(temp_request, user)
     new_changelog = Changelog.new
     new_changelog.user_id = user.id
