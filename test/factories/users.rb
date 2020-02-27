@@ -7,6 +7,6 @@ FactoryBot.define do
     phone {'5552220213'}
     sequence(:company) {|n| "Test Company #{n}"}
     role {"user"}
-
+    approval_group {0}
   end
 end

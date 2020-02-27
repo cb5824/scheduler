@@ -154,19 +154,55 @@ class RequestsController < ApplicationController
 
   def approve
     @request = Request.find(params[:request_id])
-    old_status = @request.status
+    @user = current_user
+    if @user.approval_group == 1
+      old_status = @request.approval1
+    elsif   @user.approval_group == 2
+      old_status = @request.approval2
+    elsif   @user.approval_group == 3
+      old_status = @request.approval3
+    elsif   @user.approval_group == 4
+      old_status = @request.approval4
+    end
     if params[:new_status] == 'approved'
-      @request.update_attribute(:status, 'approved')
+      if @user.approval_group == 1
+        @request.update_attribute(:approval1, 'approved')
+      elsif   @user.approval_group == 2
+        @request.update_attribute(:approval2, 'approved')
+      elsif   @user.approval_group == 3
+        @request.update_attribute(:approval3, 'approved')
+      elsif   @user.approval_group == 4
+        @request.update_attribute(:approval4, 'approved')
+      end
       flash[:notice] = "Request approved!"
     elsif params[:new_status] == 'pending'
-      @request.update_attribute(:status, 'pending')
+      if @user.approval_group == 1
+        @request.update_attribute(:approval1, 'pending')
+      elsif   @user.approval_group == 2
+        @request.update_attribute(:approval2, 'pending')
+      elsif   @user.approval_group == 3
+        @request.update_attribute(:approval3, 'pending')
+      elsif   @user.approval_group == 4
+        @request.update_attribute(:approval4, 'pending')
+      end
       flash[:notice] = "Request set to pending approval!"
     elsif params[:new_status] == 'rejected'
-      @request.update_attribute(:status, 'rejected')
+      if @user.approval_group == 1
+        @request.update_attribute(:approval1, 'rejected')
+      elsif   @user.approval_group == 2
+        @request.update_attribute(:approval2, 'rejected')
+      elsif   @user.approval_group == 3
+        @request.update_attribute(:approval3, 'rejected')
+      elsif   @user.approval_group == 4
+        @request.update_attribute(:approval4, 'rejected')
+      end
       flash[:notice] = "Request rejected!"
     end
-    @request.generate_approval_log(current_user, old_status)
+
+    @request.generate_approval_log(current_user, old_status, params[:new_status])
+    @request.approval_check
     redirect_to @request
+
   end
 
   def request_params

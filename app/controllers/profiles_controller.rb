@@ -10,7 +10,12 @@ class ProfilesController < ApplicationController
 
   def update
     @user = User.where(id: params[:id])[0]
-    @user.role = params[:updates][:new_role]
+    if params[:updates][:new_role] != 'no_change'
+      @user.role = params[:updates][:new_role]
+    end
+    if params[:updates][:new_approval_group] != 'no_change'
+      @user.approval_group = params[:updates][:new_approval_group]
+    end
     @user.save!
     render :show
   end

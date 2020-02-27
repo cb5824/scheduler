@@ -4,14 +4,19 @@
   <li>Phone #: <%= @user.phone %></li>
   <li>Company: <%= @user.company %></li>
   <li>Role: <%= @user.role %></li>
+  <li>Approval Group: <%= @user.approval_group %></li>
 
 </ul>
 
 <form action="/profiles/<%= @user.id %>" method="post">
   <input name="_method" type="hidden" value="patch" />
   <select name="updates[new_role]">
-
-  <%= options_for_select([['Admin', 'admin'], ['User', 'user'], ['Investigator', 'investigator']]) %>
+  <%= options_for_select([['Select New Role', 'no_change'], ['Admin', 'admin'], ['User', 'user'], ['Investigator', 'investigator']]) %>
   </select>
-  <input name="commit" type="submit" value="Update Role" />
+  <br>
+  <select name="updates[new_approval_group]">
+    <%= options_for_select([['Select New Approval Group', 'no_change'], ['No Approval Rights', 0], ['Group 1', 1], ['Group 2', 2], ['Group 3', 3], ['Group 4', 4]]) %>
+  </select>
+  <br>
+  <input name="commit" type="submit" value="Update User" />
 </form>

@@ -117,15 +117,15 @@ tr a{
   padding: 0;
 }
 
-.log_block.pending div{
+.pending, .pending div{
   background-color: #ffe500;
 }
 
-.log_block.rejected div{
+.rejected, .rejected div {
   background-color: #ce2323;
 }
 
-.log_block.approved div{
+.approved, .approved div {
   background-color: #40b33f;
 }
 
@@ -249,4 +249,25 @@ table.requests_table tfoot .links a{
   color: #FFFFFF;
   padding: 2px 8px;
   border-radius: 5px;
+}
+
+.approvals_bar_container{
+  display: flex;
+  width: 200px;
+  background-color: #6b767e;
+  align-items: center;
+  border-style: solid;
+  border-color: #2c2f33;
+  border-width: 2px;
+  border-radius: 5px;
+
+}
+
+.approvals_bar_block{
+  text-align: center;
+  width: 25%;
+  border-style: solid;
+  border-color: #2c2f33;
+  border-color: #2c2f33;
+  border-width: 2px;
 }

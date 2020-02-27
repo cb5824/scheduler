@@ -53,6 +53,10 @@ FactoryBot.define do
     rush_reason {""}
     change_reason {""}
     status {"pending"}
+    approval1 {"pending"}
+    approval2 {"pending"}
+    approval3 {"pending"}
+    approval4 {"pending"}
     user
   end
 end

@@ -31,6 +31,22 @@
 
 <h3>Current Status: <%= @request.status.upcase %>
   <br>
+<div class="approvals_bar_container">
+  <div class="approvals_bar_block <%= @request.approval1 %>">
+    1
+  </div>
+  <div class="approvals_bar_block <%= @request.approval2 %>">
+    2
+  </div>
+  <div class="approvals_bar_block <%= @request.approval3 %>">
+    3
+  </div>
+  <div class="approvals_bar_block <%= @request.approval4 %>">
+    4
+  </div>
+</div>
+
+  <br>
   <%= link_to 'Edit', edit_request_path(@request) %>
   <% if @user.role == "admin" %>
   <%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' }, params: {new_status: 'approved'} %>
