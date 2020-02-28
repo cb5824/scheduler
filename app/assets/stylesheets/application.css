@@ -288,3 +288,40 @@ table.requests_table tfoot .links a{
 .notes_container div{
   border-bottom: 1px solid #2c2f33;
 }
+
+
+.color_ffffff{
+  background-color: #ffffff;
+}
+.color_ff1100{
+  background-color: #ff1100;
+}
+.color_f2bb07{
+  background-color: #f2bb07;
+}
+.color_fc9d0f{
+  background-color: #fc9d0f;
+}
+.color_bf7e1d{
+  background-color: #bf7e1d;
+}
+.color_531199{
+  background-color: #531199;
+  color: #ffffff
+}
+.color_249ee0{
+  background-color: #249ee0;
+}
+.color_24290f{
+  background-color: #24290f;
+  color: #ffffff
+}
+.color_187d3f{
+  background-color: #187d3f;
+}
+.color_0a5cad{
+  background-color: #0a5cad;
+}
+.color_e30eca{
+  background-color: #e30eca;
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_28_022230) do
+ActiveRecord::Schema.define(version: 2020_02_28_211643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 2020_02_28_022230) do
     t.string "approval2", default: "pending"
     t.string "approval3", default: "pending"
     t.string "approval4", default: "pending"
+    t.string "archived", default: "no"
+    t.string "color", default: "color_ffffff"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 

@@ -4,15 +4,60 @@ wb.add_worksheet(name: "Requests") do |sheet|
   sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"]
   entry_count = 1
 
-  def project_color(workbook, color)
-    workbook.styles.add_style(bg_color: color)
+  def project_color(workbook, backgroundcolor, textcolor)
+    workbook.styles.add_style(fg_color: textcolor, bg_color: backgroundcolor);
+  end
+
+  def night_work_color(workbook, backgroundcolor)
+    workbook.styles.add_style(bg_color: backgroundcolor);
   end
 
   @requests.each do |request|
+    if request.color == "color_ffffff"
+      backgroundcolor = "ffffff"
+      textcolor = "000000"
+    elsif request.color == "color_ff1100"
+      backgroundcolor = "ff1100"
+      textcolor = "000000"
+    elsif request.color == "color_f2bb07"
+      backgroundcolor = "f2bb07"
+      textcolor = "000000"
+    elsif request.color == "color_fc9d0f"
+      backgroundcolor = "fc9d0f"
+      textcolor = "000000"
+    elsif request.color == "color_bf7e1d"
+      backgroundcolor = "bf7e1d"
+      textcolor = "000000"
+    elsif request.color == "color_531199"
+      backgroundcolor = "531199"
+      textcolor = "ffffff"
+    elsif request.color == "color_249ee0"
+      backgroundcolor = "249ee0"
+      textcolor = "000000"
+    elsif request.color == "color_24290f"
+      backgroundcolor = "24290f"
+      textcolor = "ffffff"
+    elsif request.color == "color_187d3f"
+      backgroundcolor = "187d3f"
+      textcolor = "000000"
+    elsif request.color == "color_0a5cad"
+      backgroundcolor = "0a5cad"
+      textcolor = "000000"
+    elsif request.color == "color_e30eca"
+      backgroundcolor = "e30eca"
+      textcolor = "000000"
+    end
+
+    if request.night_work == "1"
+      nwcolor = "fff896"
+    else
+      nwcolor = "ffffff"
+    end
+
     milepost = request.mp1.to_s + " - " + request.mp2.to_s
     controlpoint = request.cp1.to_s + " - " + request.cp2.to_s
     timeframe = request.start_time.to_s + " - " + request.end_time.to_s
-    sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.MT1, request.MT2, request.MT3, request.MT4, request.description, request.monday, request.tuesday, request.wednesday, request.thursday, request.friday, request.saturday, request.sunday, request.night_work, timeframe, request.taw, request.form_b, request.form_c, request.track_and_time], style: [project_color(wb, "EFC376"), project_color(wb, "EFC376"), nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+    sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.MT1, request.MT2, request.MT3, request.MT4, request.description, request.monday, request.tuesday, request.wednesday, request.thursday, request.friday, request.saturday, request.sunday, request.night_work, timeframe, request.taw, request.form_b, request.form_c, request.track_and_time], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
     entry_count += 1
   end
 end

@@ -19,6 +19,10 @@
     <%= f.text_field :requestor_project %>
     <%= f.label :requestor_work_directive %>
     <%= f.text_field :requestor_work_directive %>
+    <%= f.label :color %>
+    <select name="request[color]" id="select_color" class="color_ffffff" style="width: 100px;">
+      <%= options_for_select([["          ", "color_ffffff", {class: "color_ffffff"}], ["          ", "color_ff1100", {class: "color_ff1100"}], ["          ", "color_f2bb07", {class: "color_f2bb07"}], ["          ", "color_fc9d0f", {class: "color_fc9d0f"}], ["          ", "color_bf7e1d", {class: "color_bf7e1d"}], ["          ", "color_531199", {class: "color_531199"}], ["          ", "color_249ee0", {class: "color_249ee0"}], ["          ", "color_24290f", {class: "color_24290f"}], ["          ", "color_187d3f", {class: "color_187d3f"}], ["          ", "color_0a5cad", {class: "color_0a5cad"}], ["          ", "color_e30eca", {class: "color_e30eca"}], ]) %>
+    </select>
 
   </div>
 

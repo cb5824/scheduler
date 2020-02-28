@@ -1,6 +1,6 @@
 <%= link_to 'Back to Requests', requests_path %>
 
-<h1><%= @request.title %></h1>
+<h1 class="<%= @request.color %>"><%= @request.title %></h1>
 <ul>
   <li>Contractor: <%= @request.contractor %></li>
   <li>Description: <%= @request.description %></li>
