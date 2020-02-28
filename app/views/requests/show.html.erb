@@ -48,9 +48,26 @@
 
   <br>
   <%= link_to 'Edit', edit_request_path(@request) %>
+  <br>
+  <%= link_to 'Copy Request', new_request_path(:copyfrom => @request.id) %>
+
   <% if @user.role == "admin" %>
   <%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' }, params: {new_status: 'approved'} %>
   <%= button_to 'Reject', request_approve_path(@request), method: :put, data: { confirm: 'This request will be rejected. Proceed?' }, params: {new_status: 'rejected'} %>
+
+  <h1>Notes</h1>
+  <div class="notes_container">
+    <% if @notes %>
+      <% @notes.each do |note| %>
+      <div><%= note.user.name %> @ <%= note.created_at.strftime("%d %b %y") %>: <%= note.body %> </div>
+      <% end %>
+    <% end %>
+  </div>
+  <form method="get" action="/requests/new/note">
+    <input type="hidden" name="note[request_id]" value=<%= @request.id %>>
+    <input type="text" name="note[body]">
+    <input type="submit" value="Log Note">
+  </form>
 
   <h1>Change Log</h1>
 

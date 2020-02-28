@@ -1,7 +1,16 @@
 class Request < ApplicationRecord
   belongs_to :user
   has_many :changelogs
+  has_many :notes
   has_many_attached :attachments
+
+  def generate_note(user, text)
+    new_note = Note.new
+    new_note.user_id = user.id
+    new_note.request = self
+    new_note.body = text
+    new_note.save
+  end
 
   def generate_changelog(temp_request, user)
     new_changelog = Changelog.new

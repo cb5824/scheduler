@@ -271,3 +271,20 @@ table.requests_table tfoot .links a{
   border-color: #2c2f33;
   border-width: 2px;
 }
+
+.notes_container{
+  display: flex;
+  width: 600px;
+  background-color: #ffffff;
+  align-items: left;
+  border-style: solid;
+  border-color: #2c2f33;
+  border-width: 2px;
+  border-radius: 5px;
+  flex-direction: column;
+
+}
+
+.notes_container div{
+  border-bottom: 1px solid #2c2f33;
+}

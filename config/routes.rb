@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     patch :approve
     put :approve
   end
+  resources :requests do
+    get 'note', on: :new
+  end
 
   root to: 'landing#index'
 end

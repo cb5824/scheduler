@@ -100,7 +100,12 @@ class RequestsController < ApplicationController
     @user = current_user
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
-    @request = Request.new
+    if params[:copyfrom]
+      temp = Request.where(id: params[:copyfrom])[0]
+      @request = temp.dup
+    else
+      @request = Request.new
+    end
   end
 
   def create
@@ -121,6 +126,7 @@ class RequestsController < ApplicationController
     @request = Request.where(id: params[:id])[0]
     @user = current_user
     @entries = @request.changelogs.sort_by { |entry| entry.created_at }
+    @notes = @request.notes.sort_by { |entry| entry.created_at }
   end
 
   def edit
@@ -203,6 +209,13 @@ class RequestsController < ApplicationController
     @request.approval_check
     redirect_to @request
 
+  end
+
+  def note
+    @request = Request.find(params[:note][:request_id])
+    @user = current_user
+    @request.generate_note(@user, params[:note][:body])
+    redirect_to @request
   end
 
   def request_params
