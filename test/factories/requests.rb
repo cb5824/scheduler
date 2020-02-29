@@ -22,22 +22,22 @@ FactoryBot.define do
     requestor_phone {'5552220213'}
     sequence(:requestor_project) {|n| "Test Project #{n}"}
     requestor_work_directive {""}
-    monday {"monday"}
-    tuesday {""}
-    wednesday {"wednesday"}
-    thursday {""}
-    friday {"friday"}
-    saturday {""}
-    sunday {""}
-    night_work {"1"}
-    MT1 {"MT1"}
-    MT2 {"MT2"}
-    MT3 {"MT3"}
-    MT4 {"MT4"}
-    taw {"taw"}
-    form_b {"form_b"}
-    form_c {"form_c"}
-    track_and_time {"track_and_time"}
+    monday {1}
+    tuesday {0}
+    wednesday {1}
+    thursday {0}
+    friday {1}
+    saturday {0}
+    sunday {0}
+    night_work {1}
+    MT1 {1}
+    MT2 {1}
+    MT3 {1}
+    MT4 {1}
+    taw {1}
+    form_b {1}
+    form_c {1}
+    track_and_time {1}
     sequence(:title) {|n| "Test job #{n}"}
     sswps {"dunno"}
     change_notices {"still dunno"}

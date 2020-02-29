@@ -35,13 +35,13 @@
 
     <%= f.label :days %>
     <br>
-    Mon<%= f.check_box :monday, {}, checked_value = "monday", unchecked_value = "" %>
-    Tues<%= f.check_box :tuesday, {}, checked_value = "tuesday", unchecked_value = "" %>
-    Wed<%= f.check_box :wednesday, {}, checked_value = "wednesday", unchecked_value = "" %>
-    Thurs<%= f.check_box :thursday, {}, checked_value = "thursday", unchecked_value = "" %>
-    Fri<%= f.check_box :friday, {}, checked_value = "friday", unchecked_value = "" %>
-    Sat<%= f.check_box :saturday, {}, checked_value = "saturday", unchecked_value = "" %>
-    Sun<%= f.check_box :sunday, {}, checked_value = "sunday", unchecked_value = "" %>
+    Mon<%= f.check_box :monday, {}, checked_value = 1, unchecked_value = 0 %>
+    Tues<%= f.check_box :tuesday, {}, checked_value = 1, unchecked_value = 0 %>
+    Wed<%= f.check_box :wednesday, {}, checked_value = 1, unchecked_value = 0 %>
+    Thurs<%= f.check_box :thursday, {}, checked_value = 1, unchecked_value = 0 %>
+    Fri<%= f.check_box :friday, {}, checked_value = 1, unchecked_value = 0 %>
+    Sat<%= f.check_box :saturday, {}, checked_value = 1, unchecked_value = 0 %>
+    Sun<%= f.check_box :sunday, {}, checked_value = 1, unchecked_value = 0 %>
     <br>
     <%= f.label :start_time %>
     <%= f.time_field :start_time %>
@@ -52,7 +52,7 @@
 
     <%= f.label :night_work %>?
     <br>
-    <%= f.check_box :night_work, {}, checked_value = "1", unchecked_value = "" %>  </div>
+    <%= f.check_box :night_work, {}, checked_value = 1, unchecked_value = 0 %>  </div>
 
   <div class="form_header">Work Location</div>
   <div class="form_block">
@@ -97,17 +97,17 @@
     <br>
     <%= f.label :track %>
     <br>
-    MT1<%= f.check_box :MT1, {}, checked_value = "MT1", unchecked_value = "" %>
-    MT2<%= f.check_box :MT2, {}, checked_value = "MT2", unchecked_value = "" %>
-    MT3<%= f.check_box :MT3, {}, checked_value = "MT3", unchecked_value = "" %>
-    MT4<%= f.check_box :MT4, {}, checked_value = "MT4", unchecked_value = "" %>
+    MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+    MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+    MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+    MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
     <br>
     <%= f.label :protection %>
     <br>
-    TAW<%= f.check_box :taw, {}, checked_value = "taw", unchecked_value = "" %>
-    Form B<%= f.check_box :form_b, {}, checked_value = "form_b", unchecked_value = "" %>
-    Form C<%= f.check_box :form_c, {}, checked_value = "form_c", unchecked_value = "" %>
-    Track & Time<%= f.check_box :track_and_time, {}, checked_value = "track_and_time", unchecked_value = "" %>
+    TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+    Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+    Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+    Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
     <br>
 
 

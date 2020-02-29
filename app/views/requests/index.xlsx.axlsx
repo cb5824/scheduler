@@ -48,7 +48,7 @@ wb.add_worksheet(name: "Requests") do |sheet|
       textcolor = "000000"
     end
 
-    if request.night_work == "1"
+    if request.night_work == 1
       nwcolor = "fff896"
     else
       nwcolor = "ffffff"

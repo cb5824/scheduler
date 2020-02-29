@@ -85,22 +85,22 @@ ActiveRecord::Schema.define(version: 2020_02_28_211643) do
     t.string "requestor_phone", null: false
     t.string "requestor_project", null: false
     t.string "requestor_work_directive", null: false
-    t.string "monday"
-    t.string "tuesday"
-    t.string "wednesday"
-    t.string "thursday"
-    t.string "friday"
-    t.string "saturday"
-    t.string "sunday"
-    t.string "night_work", null: false
-    t.string "MT1"
-    t.string "MT2"
-    t.string "MT3"
-    t.string "MT4"
-    t.string "taw"
-    t.string "form_b"
-    t.string "form_c"
-    t.string "track_and_time"
+    t.integer "monday", default: 0
+    t.integer "tuesday", default: 0
+    t.integer "wednesday", default: 0
+    t.integer "thursday", default: 0
+    t.integer "friday", default: 0
+    t.integer "saturday", default: 0
+    t.integer "sunday", default: 0
+    t.integer "night_work", default: 0
+    t.integer "MT1", default: 0
+    t.integer "MT2", default: 0
+    t.integer "MT3", default: 0
+    t.integer "MT4", default: 0
+    t.integer "taw", default: 0
+    t.integer "form_b", default: 0
+    t.integer "form_c", default: 0
+    t.integer "track_and_time", default: 0
     t.string "title"
     t.string "sswps"
     t.string "change_notices"

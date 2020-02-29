@@ -55,14 +55,14 @@
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.saturday %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.sunday %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.night_work %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.start_time %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.end_time %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.start_time.strftime("%k:%M") %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.end_time.strftime("%k:%M") %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.taw %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.form_b %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.form_c %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.track_and_time %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
   </tr>
 <% end %>
 </tbody>

@@ -5,22 +5,22 @@ class AddFieldsToRequests < ActiveRecord::Migration[5.2]
     add_column :requests, :requestor_phone, :string, null: false
     add_column :requests, :requestor_project, :string, null: false
     add_column :requests, :requestor_work_directive, :string, null: false
-    add_column :requests, :monday, :string
-    add_column :requests, :tuesday, :string
-    add_column :requests, :wednesday, :string
-    add_column :requests, :thursday, :string
-    add_column :requests, :friday, :string
-    add_column :requests, :saturday, :string
-    add_column :requests, :sunday, :string
-    add_column :requests, :night_work, :string, null: false
-    add_column :requests, :MT1, :string
-    add_column :requests, :MT2, :string
-    add_column :requests, :MT3, :string
-    add_column :requests, :MT4, :string
-    add_column :requests, :taw, :string
-    add_column :requests, :form_b, :string
-    add_column :requests, :form_c, :string
-    add_column :requests, :track_and_time, :string
+    add_column :requests, :monday, :integer, default: 0
+    add_column :requests, :tuesday, :integer, default: 0
+    add_column :requests, :wednesday, :integer, default: 0
+    add_column :requests, :thursday, :integer, default: 0
+    add_column :requests, :friday, :integer, default: 0
+    add_column :requests, :saturday, :integer, default: 0
+    add_column :requests, :sunday, :integer, default: 0
+    add_column :requests, :night_work, :integer, default: 0
+    add_column :requests, :MT1, :integer, default: 0
+    add_column :requests, :MT2, :integer, default: 0
+    add_column :requests, :MT3, :integer, default: 0
+    add_column :requests, :MT4, :integer, default: 0
+    add_column :requests, :taw, :integer, default: 0
+    add_column :requests, :form_b, :integer, default: 0
+    add_column :requests, :form_c, :integer, default: 0
+    add_column :requests, :track_and_time, :integer, default: 0
     add_column :requests, :title, :string
     add_column :requests, :sswps, :string
     add_column :requests, :change_notices, :string
