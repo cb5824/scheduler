@@ -16,6 +16,11 @@
 //= require jquery_ujs
 $( document ).ready(function() {
 
+  let startcolor = $('#request_color').val();
+  $('#request_color').removeClass();
+  $('#request_color').addClass(startcolor);
+
+
 $('*[data-href]').on("click",function(){
   window.location = $(this).data('href');
   return false;
@@ -25,10 +30,10 @@ $("td > a").on("click",function(e){
   e.stopPropagation();
 });
 
-$('#select_color').on('change', (event) =>{
-  let color = $('#select_color').val();
-  $('#select_color').removeClass();
-  $('#select_color').addClass(color);
+$('#request_color').on('change', (event) =>{
+  let color = $('#request_color').val();
+  $('#request_color').removeClass();
+  $('#request_color').addClass(color);
 });
 
 });

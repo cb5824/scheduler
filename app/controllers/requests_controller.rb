@@ -1,5 +1,17 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!
+  COLOR_ARRAY = [["#ffffff", "color_ffffff"],
+    ["#ff1100", "color_ff1100"],
+    ["#f2bb07", "color_f2bb07"],
+    ["#fc9d0f", "color_fc9d0f"],
+    ["#bf7e1d", "color_bf7e1d"],
+    ["#531199", "color_531199"],
+    ["#249ee0", "color_249ee0"],
+    ["#24290f", "color_24290f"],
+    ["#187d3f", "color_187d3f"],
+    ["#0a5cad", "color_0a5cad"],
+    ["#e30eca", "color_e30eca"]]
+
   CP_ARRAY = [['N.L. CP 4th', 1],
         ['S.L. CP 4th', 2],
         ['N.L. CP Common', 3],
@@ -100,6 +112,7 @@ class RequestsController < ApplicationController
     @user = current_user
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
+    @color_options = COLOR_ARRAY
     if params[:copyfrom]
       temp = Request.where(id: params[:copyfrom])[0]
       @request = temp.dup
@@ -134,6 +147,8 @@ class RequestsController < ApplicationController
     @user = current_user
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
+    @color_options = COLOR_ARRAY
+
   end
 
   def update
@@ -141,6 +156,8 @@ class RequestsController < ApplicationController
     @user = current_user
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
+    @color_options = COLOR_ARRAY
+
     @request2 = Request.new(request_params)
     @request2[:id] = @request[:id]
     @request2[:created_at] = @request[:created_at]
