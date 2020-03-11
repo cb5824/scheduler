@@ -1,185 +1,734 @@
 <div class="form_block_container">
   <h3>Right To Work Request Form</h3>
   <div class="form_block">
+    <div class="form_block_line">
     <p>Statement about before filling out this form, gotta do some other things, blah blah blah…</p>
     <button type="button" name="reset_form">Reset Form</button>
   </div>
+</div>
   <div class="form_header">Requester Information</div>
   <div class="form_block">
-
-    <%= f.label :requestor_name %>
-    <%= f.text_field :requestor_name %>
-    <%= f.label :contractor, "Company" %>
-    <%= f.text_field :contractor %>
-    <%= f.label :requestor_email %>
-    <%= f.email_field :requestor_email %>
-    <%= f.label :requestor_phone %>
-    <%= f.text_field :requestor_phone %>
-    <%= f.label :requestor_project %>
-    <%= f.text_field :requestor_project %>
-    <%= f.label :requestor_work_directive %>
-    <%= f.text_field :requestor_work_directive %>
-    <%= f.label :color %>
+    <div class="form_block_line">
+    <%= f.label :requestor_name, "Name: " %>
+    <%= f.text_field :requestor_name, class: "grow" %>
+    </div>
+    <br>
+    <div class="form_block_line">
+    <%= f.label :requestor_email, "Email: " %>
+    <%= f.email_field :requestor_email, class: "grow"  %>
+    <%= f.label :requestor_phone, "Phone: " %>
+    <%= f.text_field :requestor_phone, class: "grow"  %>
+    </div>
+    <br>
+    <div class="form_block_line">
+    <%= f.label :contractor, "Organization/Company:" %>
+    <%= f.text_field :contractor, class: "grow"  %>
+    </div>
+    <br>
+    <div class="form_block_line">
+  <%= f.label :requestor_project, "Project: " %>
+    <%= f.text_field :requestor_project, class: "grow"  %>
+    <%= f.label :requestor_work_directive, "Work Directive: " %>
+    <%= f.text_field :requestor_work_directive, class: "grow"  %>
+    </div>
+    <br>
+    <div class="form_block_line">
+    <%= f.label :color, "Color:" %>
     <%= f.select(:color, @color_options.map { |value| [ value[0], value[1], {class: value[1]} ] }) %>
+    </div>
   </div>
 
-  <div class="form_header">Work Schedule</div>
+  <div class="form_header">Time Period</div>
   <div class="form_block">
-    <%= f.label :year %>
-    <%= f.number_field :year, min: 2019 %>
-    <br>
+    <div class="form_block_line">
 
-    <%= f.label :week %>
+    <%= f.label :year, "Year:" %>
+    <%= f.number_field :year, min: 2020 %>
+
+    <%= f.label :week, "Week:" %>
     <%= f.number_field :week, min: 1 %>
+    <%= f.label :night_work, "Night Work?:" %>
+    <%= f.check_box :night_work, {}, checked_value = 1, unchecked_value = 0 %>
+    </div>
     <br>
+    <div class="form_block_line">
 
-    <%= f.label :days %>
-    <br>
-    Mon<%= f.check_box :monday, {}, checked_value = 1, unchecked_value = 0 %>
-    Tues<%= f.check_box :tuesday, {}, checked_value = 1, unchecked_value = 0 %>
-    Wed<%= f.check_box :wednesday, {}, checked_value = 1, unchecked_value = 0 %>
-    Thurs<%= f.check_box :thursday, {}, checked_value = 1, unchecked_value = 0 %>
-    Fri<%= f.check_box :friday, {}, checked_value = 1, unchecked_value = 0 %>
-    Sat<%= f.check_box :saturday, {}, checked_value = 1, unchecked_value = 0 %>
-    Sun<%= f.check_box :sunday, {}, checked_value = 1, unchecked_value = 0 %>
-    <br>
-    <%= f.label :start_time %>
-    <%= f.time_field :start_time %>
-    <br>
-    <%= f.label :end_time %>
-    <%= f.time_field :end_time %>
-    <br>
+    </div>
+</div>
 
-    <%= f.label :night_work %>?
-    <br>
-    <%= f.check_box :night_work, {}, checked_value = 1, unchecked_value = 0 %>  </div>
+    <div class="form_header">Description of Work</div>
+    <div class="form_block">
+      <div class="form_block_line">
+        <div class="form_block_line_item">
+          <%= f.label :title, "Job/Task Title:" %>
+          <%= f.text_field :title, class: "grow"  %>
+        </div>
+    </div>
+      <br>
+      <div class="form_block_line">
+        <div class="form_block_line_item">
+            <%= f.label :description, "Description of Work:" %>
+            <%= f.text_area :description, class: "tall" %>
+        </div>
+      </div>
+      <br>
+      <div class="form_block_line">
+        <div class="form_block_line_item">
 
-  <div class="form_header">Work Location</div>
+      <%= f.label :sswps, "Associated (approved) SSWP's" %>
+      <%= f.text_area :sswps, class: "tall"  %>
+        </div>
+      <div class="form_block_line_item">
+      <%= f.label :change_notices, "Associated Change Notice(s)" %>
+      <%= f.text_area :change_notices, class: "tall"  %>
+    </div>
+      <br>
+    </div>
+
+    </div>
+    <div class="form_header">Additional Information</div>
+    <div class="form_block">
+      <div class="form_block_line left_align">
+      <%= f.radio_button :rwp, "yes" %> Yes
+      <%= f.radio_button :rwp, "no" %> No
+      <%= f.label :rwp, "All crew members will have curent RWP certification at time of project." %>
+      </div>
+      <br>
+      <h4>Will this work...</h4>
+      <div class="form_block_line left_align">
+      <%= f.radio_button :ocs, "yes" %> Yes
+      <%= f.radio_button :ocs, "no" %> No
+      <%= f.label :ocs, "Require OCS or other high voltage equipmrny to be de-energized?" %>
+      </div>
+      <div class="form_block_line left_align">
+      <%= f.radio_button :disturb, "yes" %> Yes
+      <%= f.radio_button :disturb, "no" %> No
+      <%= f.label :disturb, "Disturb the track ballast, ties, or structure?" %>
+      </div>
+      <div class="form_block_line left_align">
+      <%= f.radio_button :rrm, "yes" %> Yes
+      <%= f.radio_button :rrm, "no" %> No
+      <%= f.label :rrm, "Require Railroad Maintenance Machinery (RRM) or Hirail equipment on track?" %>
+      </div>
+      <div class="form_block_line left_align">
+      <%= f.radio_button :foul, "yes" %> Yes
+      <%= f.radio_button :foul, "no" %> No
+      <%= f.label :foul, "Require equipment off track that may foul track?" %>
+      </div>
+      <div class="form_block_line left_align">
+      <%= f.radio_button :crossings, "yes" %> Yes
+      <%= f.radio_button :crossings, "no" %> No
+      <%= f.label :crossings, "Disable/Affect crossings? (ex. Will equipment be staged on traffic loops?)" %>
+      </div>
+      <div class="form_block_line left_align">
+      <%= f.radio_button :underground, "yes" %> Yes
+      <%= f.radio_button :underground, "no" %> No
+      <%= f.label :underground, "Involve underground work, requiring utility locates?" %>
+      </div>
+      <div class="form_block_line left_align">
+      <%= f.radio_button :flagging, "yes" %> Yes
+      <%= f.radio_button :flagging, "no" %> No
+      <%= f.label :flagging, "Require crossing flagging or traffic control?" %>
+      </div>
+      <br>
+    </div>
+
+
+    <div class="form_header">Daily Schedule</div>
+    <div class="form_block">
+      <div class="form_block_line">
+      <%= f.label :days %>
+      </div>
+      <div class="form_block_line">
+      Mon<%= f.check_box :monday, {}, checked_value = 1, unchecked_value = 0 %>
+      Tues<%= f.check_box :tuesday, {}, checked_value = 1, unchecked_value = 0 %>
+      Wed<%= f.check_box :wednesday, {}, checked_value = 1, unchecked_value = 0 %>
+      Thurs<%= f.check_box :thursday, {}, checked_value = 1, unchecked_value = 0 %>
+      Fri<%= f.check_box :friday, {}, checked_value = 1, unchecked_value = 0 %>
+      Sat<%= f.check_box :saturday, {}, checked_value = 1, unchecked_value = 0 %>
+      Sun<%= f.check_box :sunday, {}, checked_value = 1, unchecked_value = 0 %>
+
+      </div>
+      <br>
+      <div class="form_day_block hidden" id="monday_block">
+        <div class="form_block_line">
+        <h4>Monday</h4>
+        </div>
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Window</div>
+          <div class="form_block_line_right">
+          <%= f.label :start_time %>
+          <%= f.time_field :start_time %>
+          <br>
+          <%= f.label :end_time %>
+          <%= f.time_field :end_time %>
+        </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Area Limits</div>
+          <div class="column">
+            <div class="form_block_line_right">
+            <%= f.label :cp1 %>
+            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :mp1 %>
+            <%= f.number_field :mp1, min: 1 %>
+            </div>
+            <div class="form_block_line_right">
+                <%= f.label :cp2 %>
+                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= f.label :mp2 %>
+                <%= f.number_field :mp2, min: 1 %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Track(s)</div>
+          <div class="form_block_line_right">
+            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Protection</div>
+          <div class="form_block_line_right">
+          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Single Tracking</div>
+        <div class="form_block_line_right">
+          <%= f.radio_button :single_track, "single" %> Yes <br>
+          <%= f.radio_button :single_track, "multi" %> No <br>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Support Allocation</div>
+        <div class="form_block_line_right">
+          <div class="form_block_line_item">
+            <%= f.label :worker_primary, "Primary:" %>
+            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <div>
+              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form_day_block hidden" id="tuesday_block">
+        <div class="form_block_line">
+        <h4>Tuesday</h4>
+        </div>
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Window</div>
+          <div class="form_block_line_right">
+          <%= f.label :start_time %>
+          <%= f.time_field :start_time %>
+          <br>
+          <%= f.label :end_time %>
+          <%= f.time_field :end_time %>
+        </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Area Limits</div>
+          <div class="column">
+            <div class="form_block_line_right">
+            <%= f.label :cp1 %>
+            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :mp1 %>
+            <%= f.number_field :mp1, min: 1 %>
+            </div>
+            <div class="form_block_line_right">
+                <%= f.label :cp2 %>
+                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= f.label :mp2 %>
+                <%= f.number_field :mp2, min: 1 %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Track(s)</div>
+          <div class="form_block_line_right">
+            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Protection</div>
+          <div class="form_block_line_right">
+          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Single Tracking</div>
+        <div class="form_block_line_right">
+          <%= f.radio_button :single_track, "single" %> Yes <br>
+          <%= f.radio_button :single_track, "multi" %> No <br>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Support Allocation</div>
+        <div class="form_block_line_right">
+          <div class="form_block_line_item">
+            <%= f.label :worker_primary, "Primary:" %>
+            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <div>
+              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form_day_block hidden" id="wednesday_block">
+        <div class="form_block_line">
+        <h4>Wednesday</h4>
+        </div>
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Window</div>
+          <div class="form_block_line_right">
+          <%= f.label :start_time %>
+          <%= f.time_field :start_time %>
+          <br>
+          <%= f.label :end_time %>
+          <%= f.time_field :end_time %>
+        </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Area Limits</div>
+          <div class="column">
+            <div class="form_block_line_right">
+            <%= f.label :cp1 %>
+            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :mp1 %>
+            <%= f.number_field :mp1, min: 1 %>
+            </div>
+            <div class="form_block_line_right">
+                <%= f.label :cp2 %>
+                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= f.label :mp2 %>
+                <%= f.number_field :mp2, min: 1 %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Track(s)</div>
+          <div class="form_block_line_right">
+            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Protection</div>
+          <div class="form_block_line_right">
+          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Single Tracking</div>
+        <div class="form_block_line_right">
+          <%= f.radio_button :single_track, "single" %> Yes <br>
+          <%= f.radio_button :single_track, "multi" %> No <br>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Support Allocation</div>
+        <div class="form_block_line_right">
+          <div class="form_block_line_item">
+            <%= f.label :worker_primary, "Primary:" %>
+            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <div>
+              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form_day_block hidden" id="thursday_block">
+        <div class="form_block_line">
+        <h4>Thursday</h4>
+        </div>
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Window</div>
+          <div class="form_block_line_right">
+          <%= f.label :start_time %>
+          <%= f.time_field :start_time %>
+          <br>
+          <%= f.label :end_time %>
+          <%= f.time_field :end_time %>
+        </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Area Limits</div>
+          <div class="column">
+            <div class="form_block_line_right">
+            <%= f.label :cp1 %>
+            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :mp1 %>
+            <%= f.number_field :mp1, min: 1 %>
+            </div>
+            <div class="form_block_line_right">
+                <%= f.label :cp2 %>
+                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= f.label :mp2 %>
+                <%= f.number_field :mp2, min: 1 %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Track(s)</div>
+          <div class="form_block_line_right">
+            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Protection</div>
+          <div class="form_block_line_right">
+          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Single Tracking</div>
+        <div class="form_block_line_right">
+          <%= f.radio_button :single_track, "single" %> Yes <br>
+          <%= f.radio_button :single_track, "multi" %> No <br>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Support Allocation</div>
+        <div class="form_block_line_right">
+          <div class="form_block_line_item">
+            <%= f.label :worker_primary, "Primary:" %>
+            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <div>
+              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form_day_block hidden" id="friday_block">
+        <div class="form_block_line">
+        <h4>Friday</h4>
+        </div>
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Window</div>
+          <div class="form_block_line_right">
+          <%= f.label :start_time %>
+          <%= f.time_field :start_time %>
+          <br>
+          <%= f.label :end_time %>
+          <%= f.time_field :end_time %>
+        </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Area Limits</div>
+          <div class="column">
+            <div class="form_block_line_right">
+            <%= f.label :cp1 %>
+            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :mp1 %>
+            <%= f.number_field :mp1, min: 1 %>
+            </div>
+            <div class="form_block_line_right">
+                <%= f.label :cp2 %>
+                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= f.label :mp2 %>
+                <%= f.number_field :mp2, min: 1 %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Track(s)</div>
+          <div class="form_block_line_right">
+            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Protection</div>
+          <div class="form_block_line_right">
+          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Single Tracking</div>
+        <div class="form_block_line_right">
+          <%= f.radio_button :single_track, "single" %> Yes <br>
+          <%= f.radio_button :single_track, "multi" %> No <br>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Support Allocation</div>
+        <div class="form_block_line_right">
+          <div class="form_block_line_item">
+            <%= f.label :worker_primary, "Primary:" %>
+            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <div>
+              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form_day_block hidden" id="saturday_block">
+        <div class="form_block_line">
+        <h4>Saturday</h4>
+        </div>
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Window</div>
+          <div class="form_block_line_right">
+          <%= f.label :start_time %>
+          <%= f.time_field :start_time %>
+          <br>
+          <%= f.label :end_time %>
+          <%= f.time_field :end_time %>
+        </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Area Limits</div>
+          <div class="column">
+            <div class="form_block_line_right">
+            <%= f.label :cp1 %>
+            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :mp1 %>
+            <%= f.number_field :mp1, min: 1 %>
+            </div>
+            <div class="form_block_line_right">
+                <%= f.label :cp2 %>
+                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= f.label :mp2 %>
+                <%= f.number_field :mp2, min: 1 %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Track(s)</div>
+          <div class="form_block_line_right">
+            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Protection</div>
+          <div class="form_block_line_right">
+          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Single Tracking</div>
+        <div class="form_block_line_right">
+          <%= f.radio_button :single_track, "single" %> Yes <br>
+          <%= f.radio_button :single_track, "multi" %> No <br>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Support Allocation</div>
+        <div class="form_block_line_right">
+          <div class="form_block_line_item">
+            <%= f.label :worker_primary, "Primary:" %>
+            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <div>
+              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="form_day_block hidden" id="sunday_block">
+        <div class="form_block_line">
+        <h4>Sunday</h4>
+        </div>
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Window</div>
+          <div class="form_block_line_right">
+          <%= f.label :start_time %>
+          <%= f.time_field :start_time %>
+          <br>
+          <%= f.label :end_time %>
+          <%= f.time_field :end_time %>
+        </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Work Area Limits</div>
+          <div class="column">
+            <div class="form_block_line_right">
+            <%= f.label :cp1 %>
+            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :mp1 %>
+            <%= f.number_field :mp1, min: 1 %>
+            </div>
+            <div class="form_block_line_right">
+                <%= f.label :cp2 %>
+                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= f.label :mp2 %>
+                <%= f.number_field :mp2, min: 1 %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Track(s)</div>
+          <div class="form_block_line_right">
+            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Protection</div>
+          <div class="form_block_line_right">
+          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Single Tracking</div>
+        <div class="form_block_line_right">
+          <%= f.radio_button :single_track, "single" %> Yes <br>
+          <%= f.radio_button :single_track, "multi" %> No <br>
+        </div>
+      </div>
+
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Support Allocation</div>
+        <div class="form_block_line_right">
+          <div class="form_block_line_item">
+            <%= f.label :worker_primary, "Primary:" %>
+            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <div>
+              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+  <div class="form_header">Reason for Late Submittal</div>
   <div class="form_block">
-    <%= f.label :cp1 %>
-    <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-    <%= f.label :mp1 %>
-    <%= f.number_field :mp1, min: 1 %>
-    <br>
-    <%= f.label :cp2 %>
-    <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-    <%= f.label :mp2 %>
-    <%= f.number_field :mp2, min: 1 %>
+    <div class="form_block_line">
 
-  </div>
-
-  <div class="form_header">On Track Safety Method (OTS)</div>
-  <div class="form_block">
-    <%= f.label :worker_primary %>
-    <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-    <%= f.label :worker_secondary1 %>
-    <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-    <%= f.label :worker_secondary2 %>
-    <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-    <%= f.label :worker_secondary3 %>
-    <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-    <%= f.label :worker_secondary4 %>
-    <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-    <%= f.label :worker_secondary5 %>
-    <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-    <br>
-
-    <%= f.label :single_track %>?
-    <%= f.radio_button :single_track, "single" %> Yes <br>
-    <%= f.radio_button :single_track, "multi" %> No <br>
-    <br>
-    <%= f.label :track %>
-    <br>
-    MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-    MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-    MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-    MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
-    <br>
-    <%= f.label :protection %>
-    <br>
-    TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-    Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-    Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-    Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
-    <br>
-
-
-  </div>
-
-  <div class="form_header">Description of Work</div>
-  <div class="form_block">
-    <%= f.label :title, "Job/Task Title" %>
-    <%= f.text_field :title %>
-    <br>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-    <br>
-    <%= f.label :sswps, "Associated (approved) SSWP's" %>
-    <%= f.text_field :sswps %>
-    <br>
-    <%= f.label :change_notices, "Associated Change Notice(s)" %>
-    <%= f.text_field :change_notices %>
-    <br>
-
-  </div>
-
-  <div class="form_header">Additional Information</div>
-  <div class="form_block">
-    <h4>Does this project...</h4>
-    <br>
-    <br>
-    <%= f.label :rwp, "All crew members will have curent RWP certification at time of project." %>
-    <br>
-    <%= f.radio_button :rwp, "yes" %> Yes <br>
-    <%= f.radio_button :rwp, "no" %> No <br>
-    <br>
-    <%= f.label :ocs, "Require OCS or other high voltage equipmrny to be de-energized?" %>
-    <br>
-    <%= f.radio_button :ocs, "yes" %> Yes <br>
-    <%= f.radio_button :ocs, "no" %> No <br>
-    <br>
-    <%= f.label :disturb, "Disturb the track ballast, ties, or structure?" %>
-    <br>
-    <%= f.radio_button :disturb, "yes" %> Yes <br>
-    <%= f.radio_button :disturb, "no" %> No <br>
-    <br>
-    <%= f.label :rrm, "Require Railroad Maintenance Machinery (RRM) or Hirail equipment on track?" %>
-    <br>
-    <%= f.radio_button :rrm, "yes" %> Yes <br>
-    <%= f.radio_button :rrm, "no" %> No <br>
-    <br>
-    <%= f.label :foul, "Require equipment off track that may foul track?" %>
-    <br>
-    <%= f.radio_button :foul, "yes" %> Yes <br>
-    <%= f.radio_button :foul, "no" %> No <br>
-    <br>
-    <%= f.label :crossings, "Disable/Affect crossings? (ex. Will equipment be staged on traffic loops?)" %>
-    <br>
-    <%= f.radio_button :crossings, "yes" %> Yes <br>
-    <%= f.radio_button :crossings, "no" %> No <br>
-    <br>
-    <%= f.label :underground, "Involve underground work, requiring utility locates?" %>
-    <br>
-    <%= f.radio_button :underground, "yes" %> Yes <br>
-    <%= f.radio_button :underground, "no" %> No <br>
-    <br>
-    <%= f.label :flagging, "Require crossing flagging or traffic control?" %>
-    <br>
-    <%= f.radio_button :flagging, "yes" %> Yes <br>
-    <%= f.radio_button :flagging, "no" %> No <br>
-    <br>
-
-  </div>
-
-  <div class="form_header hidden">Reason for Late Submittal</div>
-  <div class="form_block hidden">
     <%= f.label :late_reason, "Explain why request was not submitted at least two weeks prior to start of work:" %>
     <%= f.text_field :late_reason %>
     <br>
@@ -188,6 +737,7 @@
     <%= f.label :change_reason, "Explain why the change is being requested" %>
     <%= f.text_field :change_reason %>
     <br>
+  </div>
 
   </div>
 
@@ -196,9 +746,12 @@
   <%= f.file_field :attachments, multiple: true %>
   <br>
   <div class="form_block">
+    <div class="form_block_line">
+
     <p>By clicking submit button, I verify that blah blah blah…</p>
     <input type="submit" value="Submit Request">
   </div>
+</div>
 
 </div>
 

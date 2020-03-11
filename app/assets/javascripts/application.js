@@ -36,4 +36,27 @@ $('#request_color').on('change', (event) =>{
   $('#request_color').addClass(color);
 });
 
+$('#request_monday').on('change', (event) =>{
+  $('#monday_block').toggleClass("hidden", this.checked);
+});
+$('#request_tuesday').on('change', (event) =>{
+  $('#tuesday_block').toggleClass("hidden", this.checked);
+});
+$('#request_wednesday').on('change', (event) =>{
+  $('#wednesday_block').toggleClass("hidden", this.checked);
+});
+$('#request_thursday').on('change', (event) =>{
+  $('#thursday_block').toggleClass("hidden", this.checked);
+});
+$('#request_friday').on('change', (event) =>{
+  $('#friday_block').toggleClass("hidden", this.checked);
+});
+$('#request_saturday').on('change', (event) =>{
+  $('#saturday_block').toggleClass("hidden", this.checked);
+});
+$('#request_sunday').on('change', (event) =>{
+  $('#sunday_block').toggleClass("hidden", this.checked);
+});
+
+
 });
