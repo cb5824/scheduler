@@ -75,25 +75,25 @@ class RequestsController < ApplicationController
         ['N.L. CP Lick', 61],
         ['S.L. CP Lick', 62]]
 
-  WORKER_ARRAY = [['', 1],
-        ['Ambassador', 2],
-        ['Blue Flag', 3],
-        ['Signal Tech', 4],
-        ['Signal Inspector', 5],
-        ['Maintainer', 6],
-        ['No Protection Required', 7],
-        ['Pilot', 8],
-        ['Test Train', 9],
-        ['Radio Tech', 10],
-        ['Work Train', 11],
-        ['UP Flagman', 12],
-        ['Watchman', 13],
-        ['Flagger (RWIC)', 14],
-        ['Track Inspector', 15],
-        ['Stabilizer', 16],
-        ['Shared Flagger', 17],
-        ['Shared Watchman', 18],
-        ['Shared Maintainer', 19]]
+  WORKER_ARRAY = [['', 'none'],
+        ['Ambassador', 'A'],
+        ['Blue Flag', 'B'],
+        ['Signal Tech', 'E'],
+        ['Signal Inspector', 'S'],
+        ['Maintainer', 'M'],
+        ['No Protection Required', 'O'],
+        ['Pilot', 'P'],
+        ['Test Train', 'Q'],
+        ['Radio Tech', 'R'],
+        ['Work Train', 'T'],
+        ['UP Flagman', 'U'],
+        ['Watchman', 'W'],
+        ['Flagger (RWIC)', 'X'],
+        ['Track Inspector', 'Y'],
+        ['Stabilizer', 'Z'],
+        ['Shared Flagger', 'sX'],
+        ['Shared Watchman', 'sW'],
+        ['Shared Maintainer', 'sM']]
 
   def index
     @user = current_user
@@ -128,6 +128,7 @@ class RequestsController < ApplicationController
       @request.attachments.attach(request_params[:attachments])
     end
     if @request.save
+      @request.update_weekly
       redirect_to root_path, notice: 'Request was saved successfully'
     else
       @errors = @request.errors.full_messages
@@ -171,6 +172,7 @@ class RequestsController < ApplicationController
     if request_params[:attachments]
       @request.attachments.attach(request_params[:attachments])
     end
+    @request.update_weekly
     flash[:notice] = "Request updated. Status changed to Pending Approval!"
     redirect_to @request
   end
@@ -236,6 +238,6 @@ class RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(:requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :year, :week, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :start_time, :end_time, :night_work, :cp1, :mp1, :cp2, :mp2, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :single_track, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :description, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :contractor, :status, :id, :color, attachments: [])
+    params.require(:request).permit(:year, :week, :start_time, :end_time, :cp1, :mp1, :cp2, :mp2, :contractor, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :description, :single_track, :requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :night_work, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :status, :approval1, :approval2, :approval3, :approval4, :archived, :color, :monday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5],:tuesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :wednesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :thursday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :friday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :saturday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :sunday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], attachments: [])
   end
 end

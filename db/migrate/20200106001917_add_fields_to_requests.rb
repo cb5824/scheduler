@@ -5,13 +5,13 @@ class AddFieldsToRequests < ActiveRecord::Migration[5.2]
     add_column :requests, :requestor_phone, :string, null: false
     add_column :requests, :requestor_project, :string, null: false
     add_column :requests, :requestor_work_directive, :string, null: false
-    add_column :requests, :monday, :integer, default: 0
-    add_column :requests, :tuesday, :integer, default: 0
-    add_column :requests, :wednesday, :integer, default: 0
-    add_column :requests, :thursday, :integer, default: 0
-    add_column :requests, :friday, :integer, default: 0
-    add_column :requests, :saturday, :integer, default: 0
-    add_column :requests, :sunday, :integer, default: 0
+    add_column :requests, :mon, :integer, default: 0
+    add_column :requests, :tue, :integer, default: 0
+    add_column :requests, :wed, :integer, default: 0
+    add_column :requests, :thu, :integer, default: 0
+    add_column :requests, :fri, :integer, default: 0
+    add_column :requests, :sat, :integer, default: 0
+    add_column :requests, :sun, :integer, default: 0
     add_column :requests, :night_work, :integer, default: 0
     add_column :requests, :MT1, :integer, default: 0
     add_column :requests, :MT2, :integer, default: 0

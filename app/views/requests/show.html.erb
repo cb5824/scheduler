@@ -4,20 +4,20 @@
 <ul>
   <li>Contractor: <%= @request.contractor %></li>
   <li>Description: <%= @request.description %></li>
-  <li>Mon: <%= @request.monday %></li>
-  <li>Tues: <%= @request.tuesday %></li>
-  <li>Wed: <%= @request.wednesday %></li>
-  <li>Thurs: <%= @request.thursday %></li>
-  <li>Fri: <%= @request.friday %></li>
-  <li>Sat: <%= @request.saturday %></li>
-  <li>Sun: <%= @request.sunday %></li>
+  <li>Mon: <%= @request.mon %></li>
+  <li>Tues: <%= @request.tue %></li>
+  <li>Wed: <%= @request.wed %></li>
+  <li>Thurs: <%= @request.thu %></li>
+  <li>Fri: <%= @request.fri %></li>
+  <li>Sat: <%= @request.sat %></li>
+  <li>Sun: <%= @request.sun %></li>
   <li>Night Work?: <%= @request.night_work %></li>
-  <li>Start Time: <%= @request.start_time %></li>
-  <li>End Time: <%= @request.end_time %></li>
-  <li>TAW: <%= @request.taw %></li>
-  <li>Form B: <%= @request.form_b %></li>
-  <li>form C: <%= @request.form_c %></li>
-  <li>Track and Time: <%= @request.track_and_time %></li>
+  <li>Start Time: <%= @request.weekly.start %></li>
+  <li>End Time: <%= @request.weekly.end %></li>
+  <li>TAW: <%= @request.weekly.taw %></li>
+  <li>Form B: <%= @request.weekly.form_b %></li>
+  <li>form C: <%= @request.weekly.form_c %></li>
+  <li>Track and Time: <%= @request.weekly.track_and_time %></li>
   <li>Created: <%= @request.created_at %></li>
   <li>Last Updated: <%= @request.updated_at %></li>
 </ul>

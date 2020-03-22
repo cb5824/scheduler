@@ -12,9 +12,9 @@
       <th>Contractor</th>
       <th>Description</th>
       <th>Mon</th>
-      <th>Tues</th>
+      <th>Tue</th>
       <th>Wed</th>
-      <th>Thurs</th>
+      <th>Thu</th>
       <th>Fri</th>
       <th>Sat</th>
       <th>Sun</th>
@@ -47,20 +47,20 @@
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.title %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.monday %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.tuesday %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.wednesday %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.thursday %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.friday %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.saturday %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.sunday %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.night_work %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.start_time.strftime("%k:%M") %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.end_time.strftime("%k:%M") %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.taw %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.form_b %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.form_c %></a></td>
-    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.track_and_time %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.mon_workers %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.tue_workers %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.wed_workers %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.thu_workers %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.fri_workers %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.sat_workers %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.sun_workers %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %><% end %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.start %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.weekly.end %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %><% end %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %><% end %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %><% end %></a></td>
+    <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %><% end %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
     <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
   </tr>

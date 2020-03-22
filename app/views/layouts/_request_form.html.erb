@@ -140,13 +140,13 @@
       <%= f.label :days %>
       </div>
       <div class="form_block_line">
-      Mon<%= f.check_box :monday, {}, checked_value = 1, unchecked_value = 0 %>
-      Tues<%= f.check_box :tuesday, {}, checked_value = 1, unchecked_value = 0 %>
-      Wed<%= f.check_box :wednesday, {}, checked_value = 1, unchecked_value = 0 %>
-      Thurs<%= f.check_box :thursday, {}, checked_value = 1, unchecked_value = 0 %>
-      Fri<%= f.check_box :friday, {}, checked_value = 1, unchecked_value = 0 %>
-      Sat<%= f.check_box :saturday, {}, checked_value = 1, unchecked_value = 0 %>
-      Sun<%= f.check_box :sunday, {}, checked_value = 1, unchecked_value = 0 %>
+      Mon<%= f.check_box :mon, {}, checked_value = 1, unchecked_value = 0 %>
+      Tues<%= f.check_box :tue, {}, checked_value = 1, unchecked_value = 0 %>
+      Wed<%= f.check_box :wed, {}, checked_value = 1, unchecked_value = 0 %>
+      Thurs<%= f.check_box :thu, {}, checked_value = 1, unchecked_value = 0 %>
+      Fri<%= f.check_box :fri, {}, checked_value = 1, unchecked_value = 0 %>
+      Sat<%= f.check_box :sat, {}, checked_value = 1, unchecked_value = 0 %>
+      Sun<%= f.check_box :sun, {}, checked_value = 1, unchecked_value = 0 %>
 
       </div>
       <br>
@@ -157,11 +157,12 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-          <%= f.label :start_time %>
-          <%= f.time_field :start_time %>
+            <%= f.fields_for :monday_hash, @request.monday_hash do |p| %>
+          <%= p.label :start_time %>
+          <%= p.time_field :start_time %>
           <br>
-          <%= f.label :end_time %>
-          <%= f.time_field :end_time %>
+          <%= p.label :end_time %>
+          <%= p.time_field :end_time %>
         </div>
         </div>
 
@@ -169,16 +170,16 @@
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
-            <%= f.label :cp1 %>
-            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :mp1 %>
-            <%= f.number_field :mp1, min: 1 %>
+            <%= p.label :cp1 %>
+            <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :mp1 %>
+            <%= p.number_field :mp1, min: 1 %>
             </div>
             <div class="form_block_line_right">
-                <%= f.label :cp2 %>
-                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-                <%= f.label :mp2 %>
-                <%= f.number_field :mp2, min: 1 %>
+                <%= p.label :cp2 %>
+                <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= p.label :mp2 %>
+                <%= p.number_field :mp2, min: 1 %>
             </div>
           </div>
         </div>
@@ -187,28 +188,28 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
           <div class="form_block_line_right">
-            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            MT1<%= p.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Protection</div>
           <div class="form_block_line_right">
-          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          TAW<%= p.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 
       <div class="daily_form_block_line">
         <div class="form_block_line_left">Single Tracking</div>
         <div class="form_block_line_right">
-          <%= f.radio_button :single_track, "single" %> Yes <br>
-          <%= f.radio_button :single_track, "multi" %> No <br>
+          <%= p.radio_button :single_track, "single" %> Yes <br>
+          <%= p.radio_button :single_track, "multi" %> No <br>
         </div>
       </div>
 
@@ -216,20 +217,20 @@
         <div class="form_block_line_left">Support Allocation</div>
         <div class="form_block_line_right">
           <div class="form_block_line_item">
-            <%= f.label :worker_primary, "Primary:" %>
-            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <%= p.label :worker_primary, "Primary:" %>
+            <%= p.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :worker_secondary1, "Secondary(s):" %>
             <div>
-              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
             </div>
           </div>
         </div>
+        <% end %>
       </div>
-
       </div>
 
       <div class="form_day_block hidden" id="tuesday_block">
@@ -239,11 +240,12 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-          <%= f.label :start_time %>
-          <%= f.time_field :start_time %>
+            <%= f.fields_for :tuesday_hash, @request.tuesday_hash do |p| %>
+          <%= p.label :start_time %>
+          <%= p.time_field :start_time %>
           <br>
-          <%= f.label :end_time %>
-          <%= f.time_field :end_time %>
+          <%= p.label :end_time %>
+          <%= p.time_field :end_time %>
         </div>
         </div>
 
@@ -251,16 +253,16 @@
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
-            <%= f.label :cp1 %>
-            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :mp1 %>
-            <%= f.number_field :mp1, min: 1 %>
+            <%= p.label :cp1 %>
+            <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :mp1 %>
+            <%= p.number_field :mp1, min: 1 %>
             </div>
             <div class="form_block_line_right">
-                <%= f.label :cp2 %>
-                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-                <%= f.label :mp2 %>
-                <%= f.number_field :mp2, min: 1 %>
+                <%= p.label :cp2 %>
+                <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= p.label :mp2 %>
+                <%= p.number_field :mp2, min: 1 %>
             </div>
           </div>
         </div>
@@ -269,28 +271,28 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
           <div class="form_block_line_right">
-            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            MT1<%= p.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Protection</div>
           <div class="form_block_line_right">
-          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          TAW<%= p.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 
       <div class="daily_form_block_line">
         <div class="form_block_line_left">Single Tracking</div>
         <div class="form_block_line_right">
-          <%= f.radio_button :single_track, "single" %> Yes <br>
-          <%= f.radio_button :single_track, "multi" %> No <br>
+          <%= p.radio_button :single_track, "single" %> Yes <br>
+          <%= p.radio_button :single_track, "multi" %> No <br>
         </div>
       </div>
 
@@ -298,34 +300,35 @@
         <div class="form_block_line_left">Support Allocation</div>
         <div class="form_block_line_right">
           <div class="form_block_line_item">
-            <%= f.label :worker_primary, "Primary:" %>
-            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <%= p.label :worker_primary, "Primary:" %>
+            <%= p.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :worker_secondary1, "Secondary(s):" %>
             <div>
-              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
             </div>
           </div>
         </div>
+        <% end %>
       </div>
-
       </div>
 
       <div class="form_day_block hidden" id="wednesday_block">
         <div class="form_block_line">
-        <h4>Wednesday</h4>
+        <h4>wWdnesday</h4>
         </div>
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-          <%= f.label :start_time %>
-          <%= f.time_field :start_time %>
+            <%= f.fields_for :wednesday_hash, @request.wednesday_hash do |p| %>
+          <%= p.label :start_time %>
+          <%= p.time_field :start_time %>
           <br>
-          <%= f.label :end_time %>
-          <%= f.time_field :end_time %>
+          <%= p.label :end_time %>
+          <%= p.time_field :end_time %>
         </div>
         </div>
 
@@ -333,16 +336,16 @@
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
-            <%= f.label :cp1 %>
-            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :mp1 %>
-            <%= f.number_field :mp1, min: 1 %>
+            <%= p.label :cp1 %>
+            <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :mp1 %>
+            <%= p.number_field :mp1, min: 1 %>
             </div>
             <div class="form_block_line_right">
-                <%= f.label :cp2 %>
-                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-                <%= f.label :mp2 %>
-                <%= f.number_field :mp2, min: 1 %>
+                <%= p.label :cp2 %>
+                <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= p.label :mp2 %>
+                <%= p.number_field :mp2, min: 1 %>
             </div>
           </div>
         </div>
@@ -351,28 +354,28 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
           <div class="form_block_line_right">
-            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            MT1<%= p.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Protection</div>
           <div class="form_block_line_right">
-          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          TAW<%= p.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 
       <div class="daily_form_block_line">
         <div class="form_block_line_left">Single Tracking</div>
         <div class="form_block_line_right">
-          <%= f.radio_button :single_track, "single" %> Yes <br>
-          <%= f.radio_button :single_track, "multi" %> No <br>
+          <%= p.radio_button :single_track, "single" %> Yes <br>
+          <%= p.radio_button :single_track, "multi" %> No <br>
         </div>
       </div>
 
@@ -380,20 +383,20 @@
         <div class="form_block_line_left">Support Allocation</div>
         <div class="form_block_line_right">
           <div class="form_block_line_item">
-            <%= f.label :worker_primary, "Primary:" %>
-            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <%= p.label :worker_primary, "Primary:" %>
+            <%= p.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :worker_secondary1, "Secondary(s):" %>
             <div>
-              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
             </div>
           </div>
         </div>
+        <% end %>
       </div>
-
       </div>
 
       <div class="form_day_block hidden" id="thursday_block">
@@ -403,11 +406,12 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-          <%= f.label :start_time %>
-          <%= f.time_field :start_time %>
+            <%= f.fields_for :thursday_hash, @request.thursday_hash do |p| %>
+          <%= p.label :start_time %>
+          <%= p.time_field :start_time %>
           <br>
-          <%= f.label :end_time %>
-          <%= f.time_field :end_time %>
+          <%= p.label :end_time %>
+          <%= p.time_field :end_time %>
         </div>
         </div>
 
@@ -415,16 +419,16 @@
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
-            <%= f.label :cp1 %>
-            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :mp1 %>
-            <%= f.number_field :mp1, min: 1 %>
+            <%= p.label :cp1 %>
+            <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :mp1 %>
+            <%= p.number_field :mp1, min: 1 %>
             </div>
             <div class="form_block_line_right">
-                <%= f.label :cp2 %>
-                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-                <%= f.label :mp2 %>
-                <%= f.number_field :mp2, min: 1 %>
+                <%= p.label :cp2 %>
+                <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= p.label :mp2 %>
+                <%= p.number_field :mp2, min: 1 %>
             </div>
           </div>
         </div>
@@ -433,28 +437,28 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
           <div class="form_block_line_right">
-            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            MT1<%= p.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Protection</div>
           <div class="form_block_line_right">
-          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          TAW<%= p.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 
       <div class="daily_form_block_line">
         <div class="form_block_line_left">Single Tracking</div>
         <div class="form_block_line_right">
-          <%= f.radio_button :single_track, "single" %> Yes <br>
-          <%= f.radio_button :single_track, "multi" %> No <br>
+          <%= p.radio_button :single_track, "single" %> Yes <br>
+          <%= p.radio_button :single_track, "multi" %> No <br>
         </div>
       </div>
 
@@ -462,20 +466,20 @@
         <div class="form_block_line_left">Support Allocation</div>
         <div class="form_block_line_right">
           <div class="form_block_line_item">
-            <%= f.label :worker_primary, "Primary:" %>
-            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <%= p.label :worker_primary, "Primary:" %>
+            <%= p.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :worker_secondary1, "Secondary(s):" %>
             <div>
-              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
             </div>
           </div>
         </div>
+        <% end %>
       </div>
-
       </div>
 
       <div class="form_day_block hidden" id="friday_block">
@@ -485,11 +489,12 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-          <%= f.label :start_time %>
-          <%= f.time_field :start_time %>
+            <%= f.fields_for :friday_hash, @request.friday_hash do |p| %>
+          <%= p.label :start_time %>
+          <%= p.time_field :start_time %>
           <br>
-          <%= f.label :end_time %>
-          <%= f.time_field :end_time %>
+          <%= p.label :end_time %>
+          <%= p.time_field :end_time %>
         </div>
         </div>
 
@@ -497,16 +502,16 @@
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
-            <%= f.label :cp1 %>
-            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :mp1 %>
-            <%= f.number_field :mp1, min: 1 %>
+            <%= p.label :cp1 %>
+            <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :mp1 %>
+            <%= p.number_field :mp1, min: 1 %>
             </div>
             <div class="form_block_line_right">
-                <%= f.label :cp2 %>
-                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-                <%= f.label :mp2 %>
-                <%= f.number_field :mp2, min: 1 %>
+                <%= p.label :cp2 %>
+                <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= p.label :mp2 %>
+                <%= p.number_field :mp2, min: 1 %>
             </div>
           </div>
         </div>
@@ -515,28 +520,28 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
           <div class="form_block_line_right">
-            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            MT1<%= p.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Protection</div>
           <div class="form_block_line_right">
-          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          TAW<%= p.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 
       <div class="daily_form_block_line">
         <div class="form_block_line_left">Single Tracking</div>
         <div class="form_block_line_right">
-          <%= f.radio_button :single_track, "single" %> Yes <br>
-          <%= f.radio_button :single_track, "multi" %> No <br>
+          <%= p.radio_button :single_track, "single" %> Yes <br>
+          <%= p.radio_button :single_track, "multi" %> No <br>
         </div>
       </div>
 
@@ -544,20 +549,20 @@
         <div class="form_block_line_left">Support Allocation</div>
         <div class="form_block_line_right">
           <div class="form_block_line_item">
-            <%= f.label :worker_primary, "Primary:" %>
-            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <%= p.label :worker_primary, "Primary:" %>
+            <%= p.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :worker_secondary1, "Secondary(s):" %>
             <div>
-              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
             </div>
           </div>
         </div>
+        <% end %>
       </div>
-
       </div>
 
       <div class="form_day_block hidden" id="saturday_block">
@@ -567,11 +572,12 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-          <%= f.label :start_time %>
-          <%= f.time_field :start_time %>
+            <%= f.fields_for :saturday_hash, @request.saturday_hash do |p| %>
+          <%= p.label :start_time %>
+          <%= p.time_field :start_time %>
           <br>
-          <%= f.label :end_time %>
-          <%= f.time_field :end_time %>
+          <%= p.label :end_time %>
+          <%= p.time_field :end_time %>
         </div>
         </div>
 
@@ -579,16 +585,16 @@
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
-            <%= f.label :cp1 %>
-            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :mp1 %>
-            <%= f.number_field :mp1, min: 1 %>
+            <%= p.label :cp1 %>
+            <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :mp1 %>
+            <%= p.number_field :mp1, min: 1 %>
             </div>
             <div class="form_block_line_right">
-                <%= f.label :cp2 %>
-                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-                <%= f.label :mp2 %>
-                <%= f.number_field :mp2, min: 1 %>
+                <%= p.label :cp2 %>
+                <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= p.label :mp2 %>
+                <%= p.number_field :mp2, min: 1 %>
             </div>
           </div>
         </div>
@@ -597,28 +603,28 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
           <div class="form_block_line_right">
-            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            MT1<%= p.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Protection</div>
           <div class="form_block_line_right">
-          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          TAW<%= p.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 
       <div class="daily_form_block_line">
         <div class="form_block_line_left">Single Tracking</div>
         <div class="form_block_line_right">
-          <%= f.radio_button :single_track, "single" %> Yes <br>
-          <%= f.radio_button :single_track, "multi" %> No <br>
+          <%= p.radio_button :single_track, "single" %> Yes <br>
+          <%= p.radio_button :single_track, "multi" %> No <br>
         </div>
       </div>
 
@@ -626,20 +632,20 @@
         <div class="form_block_line_left">Support Allocation</div>
         <div class="form_block_line_right">
           <div class="form_block_line_item">
-            <%= f.label :worker_primary, "Primary:" %>
-            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <%= p.label :worker_primary, "Primary:" %>
+            <%= p.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :worker_secondary1, "Secondary(s):" %>
             <div>
-              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
             </div>
           </div>
         </div>
+        <% end %>
       </div>
-
       </div>
 
       <div class="form_day_block hidden" id="sunday_block">
@@ -649,11 +655,12 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-          <%= f.label :start_time %>
-          <%= f.time_field :start_time %>
+            <%= f.fields_for :sunday_hash, @request.sunday_hash do |p| %>
+          <%= p.label :start_time %>
+          <%= p.time_field :start_time %>
           <br>
-          <%= f.label :end_time %>
-          <%= f.time_field :end_time %>
+          <%= p.label :end_time %>
+          <%= p.time_field :end_time %>
         </div>
         </div>
 
@@ -661,16 +668,16 @@
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
-            <%= f.label :cp1 %>
-            <%= f.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :mp1 %>
-            <%= f.number_field :mp1, min: 1 %>
+            <%= p.label :cp1 %>
+            <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :mp1 %>
+            <%= p.number_field :mp1, min: 1 %>
             </div>
             <div class="form_block_line_right">
-                <%= f.label :cp2 %>
-                <%= f.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
-                <%= f.label :mp2 %>
-                <%= f.number_field :mp2, min: 1 %>
+                <%= p.label :cp2 %>
+                <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
+                <%= p.label :mp2 %>
+                <%= p.number_field :mp2, min: 1 %>
             </div>
           </div>
         </div>
@@ -679,28 +686,28 @@
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
           <div class="form_block_line_right">
-            MT1<%= f.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
-            MT2<%= f.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
-            MT3<%= f.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
-            MT4<%= f.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            MT1<%= p.check_box :MT1, {}, checked_value = 1, unchecked_value = 0 %>
+            MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
+            MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
+            MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Protection</div>
           <div class="form_block_line_right">
-          TAW<%= f.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
-          Form B<%= f.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
-          Form C<%= f.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
-          Track & Time<%= f.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          TAW<%= p.check_box :taw, {}, checked_value = 1, unchecked_value = 0 %>
+          Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
+          Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
+          Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 
       <div class="daily_form_block_line">
         <div class="form_block_line_left">Single Tracking</div>
         <div class="form_block_line_right">
-          <%= f.radio_button :single_track, "single" %> Yes <br>
-          <%= f.radio_button :single_track, "multi" %> No <br>
+          <%= p.radio_button :single_track, "single" %> Yes <br>
+          <%= p.radio_button :single_track, "multi" %> No <br>
         </div>
       </div>
 
@@ -708,22 +715,25 @@
         <div class="form_block_line_left">Support Allocation</div>
         <div class="form_block_line_right">
           <div class="form_block_line_item">
-            <%= f.label :worker_primary, "Primary:" %>
-            <%= f.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-            <%= f.label :worker_secondary1, "Secondary(s):" %>
+            <%= p.label :worker_primary, "Primary:" %>
+            <%= p.select(:worker_primary, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+            <%= p.label :worker_secondary1, "Secondary(s):" %>
             <div>
-              <%= f.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
-              <%= f.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary1, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary2, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary3, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary4, @worker_options.map { |value| [ value[0], value[1] ] }) %>
+              <%= p.select(:worker_secondary5, @worker_options.map { |value| [ value[0], value[1] ] }) %>
             </div>
           </div>
         </div>
+        <% end %>
+      </div>
       </div>
 
+
+
       </div>
-    </div>
 
   <div class="form_header">Reason for Late Submittal</div>
   <div class="form_block">
@@ -743,7 +753,7 @@
 
   <div class="form_header">Submittal</div>
 
-  <%= f.file_field :attachments, multiple: true %>
+  <%= f.file_field :attachments, multiple: 1 %>
   <br>
   <div class="form_block">
     <div class="form_block_line">
@@ -757,3 +767,9 @@
 
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
   <br>
+
+<% [["MonData", @request.monday_hash], ["TueData", @request.tuesday_hash], ["WedData", @request.wednesday_hash], ["ThuData", @request.thursday_hash], ["FriData", @request.friday_hash], ["SatData", @request.saturday_hash], ["SunData", @request.sunday_hash]].each do |day| %>
+  <% if day[1]["start_time"] != "" && day[1]["start_time"] != nil  %>
+    <input name="<%= day[0] %>" id="<%= day[0] %>" data-start="<%= day[1]["start_time"] %>" data-end="<%= day[1]["end_time"] %>" data-cp1="<%= day[1]["cp1"] %>" data-cp2="<%= day[1]["cp2"] %>" data-mp1="<%= day[1]["mp1"] %>" data-mp2="<%= day[1]["mp2"] %>" data-MT1="<%= day[1]["MT1"] %>" data-MT2="<%= day[1]["MT2"] %>" data-MT3="<%= day[1]["MT3"] %>" data-MT4="<%= day[1]["MT4"] %>" data-taw="<%= day[1]["taw"] %>" data-form_b="<%= day[1]["form_b"] %>" data-form_c="<%= day[1]["form_c"] %>" data-track_and_time="<%= day[1]["track_and_time"] %>"  data-single_track="<%= day[1]["single_track"] %>" data-worker_primary="<%= day[1]["worker_primary"] %>" data-worker_secondary1="<%= day[1]["worker_secondary1"] %>" data-worker_secondary2="<%= day[1]["worker_secondary2"] %>" data-worker_secondary3="<%= day[1]["worker_secondary3"] %>" data-worker_secondary4="<%= day[1]["worker_secondary4"] %>" data-worker_secondary5="<%= day[1]["worker_secondary5"] %>" type = hidden>
+  <% end %>
+<% end %>
