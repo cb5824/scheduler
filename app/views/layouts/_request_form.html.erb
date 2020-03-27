@@ -155,6 +155,14 @@
         <h4>Monday</h4>
         </div>
         <div class="daily_form_block_line">
+          <button type="button" class="copy_day" data-to="mon" data-from="tue">Copy Tue</button>
+          <button type="button" class="copy_day" data-to="mon" data-from="wed">Copy Wed</button>
+          <button type="button" class="copy_day" data-to="mon" data-from="thu">Copy Thu</button>
+          <button type="button" class="copy_day" data-to="mon" data-from="fri">Copy Fri</button>
+          <button type="button" class="copy_day" data-to="mon" data-from="sat">Copy Sat</button>
+          <button type="button" class="copy_day" data-to="mon" data-from="sun">Copy Sun</button>
+        </div>
+        <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
             <%= f.fields_for :monday_hash, @request.monday_hash do |p| %>
@@ -238,6 +246,15 @@
         <h4>Tuesday</h4>
         </div>
         <div class="daily_form_block_line">
+          <button type="button" class="copy_day" data-to="tue" data-from="mon">Copy Mon</button>
+          <button type="button" class="copy_day" data-to="tue" data-from="wed">Copy Wed</button>
+          <button type="button" class="copy_day" data-to="tue" data-from="thu">Copy Thu</button>
+          <button type="button" class="copy_day" data-to="tue" data-from="fri">Copy Fri</button>
+          <button type="button" class="copy_day" data-to="tue" data-from="sat">Copy Sat</button>
+          <button type="button" class="copy_day" data-to="tue" data-from="sun">Copy Sun</button>
+        </div>
+
+        <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
             <%= f.fields_for :tuesday_hash, @request.tuesday_hash do |p| %>
@@ -318,8 +335,17 @@
 
       <div class="form_day_block hidden" id="wednesday_block">
         <div class="form_block_line">
-        <h4>wWdnesday</h4>
+        <h4>Wednesday</h4>
         </div>
+        <div class="daily_form_block_line">
+          <button type="button" class="copy_day" data-to="wed" data-from="mon">Copy Mon</button>
+          <button type="button" class="copy_day" data-to="wed" data-from="tue">Copy Tue</button>
+          <button type="button" class="copy_day" data-to="wed" data-from="thu">Copy Thu</button>
+          <button type="button" class="copy_day" data-to="wed" data-from="fri">Copy Fri</button>
+          <button type="button" class="copy_day" data-to="wed" data-from="sat">Copy Sat</button>
+          <button type="button" class="copy_day" data-to="wed" data-from="sun">Copy Sun</button>
+        </div>
+
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
@@ -404,6 +430,15 @@
         <h4>Thursday</h4>
         </div>
         <div class="daily_form_block_line">
+          <button type="button" class="copy_day" data-to="thu" data-from="mon">Copy Mon</button>
+          <button type="button" class="copy_day" data-to="thu" data-from="tue">Copy Tue</button>
+          <button type="button" class="copy_day" data-to="thu" data-from="wed">Copy Wed</button>
+          <button type="button" class="copy_day" data-to="thu" data-from="fri">Copy Fri</button>
+          <button type="button" class="copy_day" data-to="thu" data-from="sat">Copy Sat</button>
+          <button type="button" class="copy_day" data-to="thu" data-from="sun">Copy Sun</button>
+        </div>
+
+        <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
             <%= f.fields_for :thursday_hash, @request.thursday_hash do |p| %>
@@ -486,6 +521,15 @@
         <div class="form_block_line">
         <h4>Friday</h4>
         </div>
+        <div class="daily_form_block_line">
+          <button type="button" class="copy_day" data-to="fri" data-from="mon">Copy Mon</button>
+          <button type="button" class="copy_day" data-to="fri" data-from="tue">Copy Tue</button>
+          <button type="button" class="copy_day" data-to="fri" data-from="wed">Copy Wed</button>
+          <button type="button" class="copy_day" data-to="fri" data-from="thu">Copy Thu</button>
+          <button type="button" class="copy_day" data-to="fri" data-from="sat">Copy Sat</button>
+          <button type="button" class="copy_day" data-to="fri" data-from="sun">Copy Sun</button>
+        </div>
+
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
@@ -570,6 +614,15 @@
         <h4>Saturday</h4>
         </div>
         <div class="daily_form_block_line">
+          <button type="button" class="copy_day" data-to="sat" data-from="mon">Copy Mon</button>
+          <button type="button" class="copy_day" data-to="sat" data-from="tue">Copy Tue</button>
+          <button type="button" class="copy_day" data-to="sat" data-from="wed">Copy Wed</button>
+          <button type="button" class="copy_day" data-to="sat" data-from="thu">Copy Thu</button>
+          <button type="button" class="copy_day" data-to="sat" data-from="fri">Copy Fri</button>
+          <button type="button" class="copy_day" data-to="sat" data-from="sun">Copy Sun</button>
+        </div>
+
+        <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
             <%= f.fields_for :saturday_hash, @request.saturday_hash do |p| %>
@@ -652,6 +705,15 @@
         <div class="form_block_line">
         <h4>Sunday</h4>
         </div>
+        <div class="daily_form_block_line">
+          <button type="button" class="copy_day" data-to="sun" data-from="mon">Copy Mon</button>
+          <button type="button" class="copy_day" data-to="sun" data-from="tue">Copy Tue</button>
+          <button type="button" class="copy_day" data-to="sun" data-from="wed">Copy Wed</button>
+          <button type="button" class="copy_day" data-to="sun" data-from="thu">Copy Thu</button>
+          <button type="button" class="copy_day" data-to="sun" data-from="fri">Copy Fri</button>
+          <button type="button" class="copy_day" data-to="sun" data-from="sat">Copy Sat</button>
+        </div>
+
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">

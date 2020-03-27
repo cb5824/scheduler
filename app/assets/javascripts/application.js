@@ -30,6 +30,578 @@ $("td > a").on("click",function(e){
   e.stopPropagation();
 });
 
+$(".copy_day").on("click", function(){
+    to_day = event.target.dataset.to;
+    from_day = event.target.dataset.from;
+
+    start_time = null;
+    end_time = null;
+    cp1 = null;
+    cp2 = null;
+    mp1 = null;
+    mp2 = null;
+    mt1 = null;
+    mt2 = null;
+    mt3 = null;
+    mt4 = null;
+    formb = null;
+    formc = null;
+    tandt = null;
+    taw = null;
+    single = null;
+    multi = null;
+    primary = null;
+    secondary1 = null;
+    secondary2 = null;
+    secondary3 = null;
+    secondary4 = null;
+    secondary5 = null;
+
+    if (from_day == "mon") {
+
+      start_time = $("#request_monday_hash_start_time")[0].value;
+      end_time = $("#request_monday_hash_end_time")[0].value;
+      cp1 = $("#request_monday_hash_cp1")[0].value;
+      cp2 = $("#request_monday_hash_cp2")[0].value;
+      mp1 = $("#request_monday_hash_mp1")[0].value;
+      mp2 = $("#request_monday_hash_mp2")[0].value;
+      if ($("#request_monday_hash_MT1").is(':checked')) {
+        mt1 = 'true';}
+      if ($("#request_monday_hash_MT2").is(':checked')) {
+        mt2 = 'true';}
+      if ($("#request_monday_hash_MT3").is(':checked')) {
+        mt3 = 'true';}
+      if ($("#request_monday_hash_MT4").is(':checked')) {
+        mt4 = 'true';}
+      if ($("#request_monday_hash_form_b").is(':checked')) {
+        formb = 'true';}
+      if ($("#request_monday_hash_form_c").is(':checked')) {
+        formc = 'true';}
+      if ($("#request_monday_hash_track_and_time").is(':checked')) {
+        tandt = 'true';}
+      if ($("#request_monday_hash_taw").is(':checked')) {
+        taw = 'true';}
+      if ($("#request_monday_hash_single_track_single").is(':checked')) {
+        single = 'true';}
+      if ($("#request_monday_hash_single_track_multi").is(':checked')) {
+        multi = 'true';}
+      primary = $("#request_monday_hash_worker_primary")[0].value;
+      secondary1 = $("#request_monday_hash_worker_secondary1")[0].value;
+      secondary2 = $("#request_monday_hash_worker_secondary2")[0].value;
+      secondary3 = $("#request_monday_hash_worker_secondary3")[0].value;
+      secondary4 = $("#request_monday_hash_worker_secondary4")[0].value;
+      secondary5 = $("#request_monday_hash_worker_secondary5")[0].value;
+
+    } else if  (from_day == "tue") {
+      start_time = $("#request_tuesday_hash_start_time")[0].value;
+      end_time = $("#request_tuesday_hash_end_time")[0].value;
+      cp1 = $("#request_tuesday_hash_cp1")[0].value;
+      cp2 = $("#request_tuesday_hash_cp2")[0].value;
+      mp1 = $("#request_tuesday_hash_mp1")[0].value;
+      mp2 = $("#request_tuesday_hash_mp2")[0].value;
+      if ($("#request_tuesday_hash_MT1").is(':checked')) {
+        mt1 = 'true';}
+      if ($("#request_tuesday_hash_MT2").is(':checked')) {
+        mt2 = 'true';}
+      if ($("#request_tuesday_hash_MT3").is(':checked')) {
+        mt3 = 'true';}
+      if ($("#request_tuesday_hash_MT4").is(':checked')) {
+        mt4 = 'true';}
+      if ($("#request_tuesday_hash_form_b").is(':checked')) {
+        formb = 'true';}
+      if ($("#request_tuesday_hash_form_c").is(':checked')) {
+        formc = 'true';}
+      if ($("#request_tuesday_hash_track_and_time").is(':checked')) {
+        tandt = 'true';}
+      if ($("#request_tuesday_hash_taw").is(':checked')) {
+        taw = 'true';}
+      if ($("#request_tuesday_hash_single_track_single").is(':checked')) {
+        single = 'true';}
+      if ($("#request_tuesday_hash_single_track_multi").is(':checked')) {
+        multi = 'true';}
+      primary = $("#request_tuesday_hash_worker_primary")[0].value;
+      secondary1 = $("#request_tuesday_hash_worker_secondary1")[0].value;
+      secondary2 = $("#request_tuesday_hash_worker_secondary2")[0].value;
+      secondary3 = $("#request_tuesday_hash_worker_secondary3")[0].value;
+      secondary4 = $("#request_tuesday_hash_worker_secondary4")[0].value;
+      secondary5 = $("#request_tuesday_hash_worker_secondary5")[0].value;
+
+    } else if  (from_day == "wed") {
+      start_time = $("#request_wednesday_hash_start_time")[0].value;
+      end_time = $("#request_wednesday_hash_end_time")[0].value;
+      cp1 = $("#request_wednesday_hash_cp1")[0].value;
+      cp2 = $("#request_wednesday_hash_cp2")[0].value;
+      mp1 = $("#request_wednesday_hash_mp1")[0].value;
+      mp2 = $("#request_wednesday_hash_mp2")[0].value;
+      if ($("#request_wednesday_hash_MT1").is(':checked')) {
+        mt1 = 'true';}
+      if ($("#request_wednesday_hash_MT2").is(':checked')) {
+        mt2 = 'true';}
+      if ($("#request_wednesday_hash_MT3").is(':checked')) {
+        mt3 = 'true';}
+      if ($("#request_wednesday_hash_MT4").is(':checked')) {
+        mt4 = 'true';}
+      if ($("#request_wednesday_hash_form_b").is(':checked')) {
+        formb = 'true';}
+      if ($("#request_wednesday_hash_form_c").is(':checked')) {
+        formc = 'true';}
+      if ($("#request_wednesday_hash_track_and_time").is(':checked')) {
+        tandt = 'true';}
+      if ($("#request_wednesday_hash_taw").is(':checked')) {
+        taw = 'true';}
+      if ($("#request_wednesday_hash_single_track_single").is(':checked')) {
+        single = 'true';}
+      if ($("#request_wednesday_hash_single_track_multi").is(':checked')) {
+        multi = 'true';}
+      primary = $("#request_wednesday_hash_worker_primary")[0].value;
+      secondary1 = $("#request_wednesday_hash_worker_secondary1")[0].value;
+      secondary2 = $("#request_wednesday_hash_worker_secondary2")[0].value;
+      secondary3 = $("#request_wednesday_hash_worker_secondary3")[0].value;
+      secondary4 = $("#request_wednesday_hash_worker_secondary4")[0].value;
+      secondary5 = $("#request_wednesday_hash_worker_secondary5")[0].value;
+
+    } else if  (from_day == "thu") {
+      start_time = $("#request_thursday_hash_start_time")[0].value;
+      end_time = $("#request_thursday_hash_end_time")[0].value;
+      cp1 = $("#request_thursday_hash_cp1")[0].value;
+      cp2 = $("#request_thursday_hash_cp2")[0].value;
+      mp1 = $("#request_thursday_hash_mp1")[0].value;
+      mp2 = $("#request_thursday_hash_mp2")[0].value;
+      if ($("#request_thursday_hash_MT1").is(':checked')) {
+        mt1 = 'true';}
+      if ($("#request_thursday_hash_MT2").is(':checked')) {
+        mt2 = 'true';}
+      if ($("#request_thursday_hash_MT3").is(':checked')) {
+        mt3 = 'true';}
+      if ($("#request_thursday_hash_MT4").is(':checked')) {
+        mt4 = 'true';}
+      if ($("#request_thursday_hash_form_b").is(':checked')) {
+        formb = 'true';}
+      if ($("#request_thursday_hash_form_c").is(':checked')) {
+        formc = 'true';}
+      if ($("#request_thursday_hash_track_and_time").is(':checked')) {
+        tandt = 'true';}
+      if ($("#request_thursday_hash_taw").is(':checked')) {
+        taw = 'true';}
+      if ($("#request_thursday_hash_single_track_single").is(':checked')) {
+        single = 'true';}
+      if ($("#request_thursday_hash_single_track_multi").is(':checked')) {
+        multi = 'true';}
+      primary = $("#request_thursday_hash_worker_primary")[0].value;
+      secondary1 = $("#request_thursday_hash_worker_secondary1")[0].value;
+      secondary2 = $("#request_thursday_hash_worker_secondary2")[0].value;
+      secondary3 = $("#request_thursday_hash_worker_secondary3")[0].value;
+      secondary4 = $("#request_thursday_hash_worker_secondary4")[0].value;
+      secondary5 = $("#request_thursday_hash_worker_secondary5")[0].value;
+
+    } else if  (from_day == "fri") {
+      start_time = $("#request_friday_hash_start_time")[0].value;
+      end_time = $("#request_friday_hash_end_time")[0].value;
+      cp1 = $("#request_friday_hash_cp1")[0].value;
+      cp2 = $("#request_friday_hash_cp2")[0].value;
+      mp1 = $("#request_friday_hash_mp1")[0].value;
+      mp2 = $("#request_friday_hash_mp2")[0].value;
+      if ($("#request_friday_hash_MT1").is(':checked')) {
+        mt1 = 'true';}
+      if ($("#request_friday_hash_MT2").is(':checked')) {
+        mt2 = 'true';}
+      if ($("#request_friday_hash_MT3").is(':checked')) {
+        mt3 = 'true';}
+      if ($("#request_friday_hash_MT4").is(':checked')) {
+        mt4 = 'true';}
+      if ($("#request_friday_hash_form_b").is(':checked')) {
+        formb = 'true';}
+      if ($("#request_friday_hash_form_c").is(':checked')) {
+        formc = 'true';}
+      if ($("#request_friday_hash_track_and_time").is(':checked')) {
+        tandt = 'true';}
+      if ($("#request_friday_hash_taw").is(':checked')) {
+        taw = 'true';}
+      if ($("#request_friday_hash_single_track_single").is(':checked')) {
+        single = 'true';}
+      if ($("#request_friday_hash_single_track_multi").is(':checked')) {
+        multi = 'true';}
+      primary = $("#request_friday_hash_worker_primary")[0].value;
+      secondary1 = $("#request_friday_hash_worker_secondary1")[0].value;
+      secondary2 = $("#request_friday_hash_worker_secondary2")[0].value;
+      secondary3 = $("#request_friday_hash_worker_secondary3")[0].value;
+      secondary4 = $("#request_friday_hash_worker_secondary4")[0].value;
+      secondary5 = $("#request_friday_hash_worker_secondary5")[0].value;
+
+    } else if  (from_day == "sat") {
+      start_time = $("#request_saturday_hash_start_time")[0].value;
+      end_time = $("#request_saturday_hash_end_time")[0].value;
+      cp1 = $("#request_saturday_hash_cp1")[0].value;
+      cp2 = $("#request_saturday_hash_cp2")[0].value;
+      mp1 = $("#request_saturday_hash_mp1")[0].value;
+      mp2 = $("#request_saturday_hash_mp2")[0].value;
+      if ($("#request_saturday_hash_MT1").is(':checked')) {
+        mt1 = 'true';}
+      if ($("#request_saturday_hash_MT2").is(':checked')) {
+        mt2 = 'true';}
+      if ($("#request_saturday_hash_MT3").is(':checked')) {
+        mt3 = 'true';}
+      if ($("#request_saturday_hash_MT4").is(':checked')) {
+        mt4 = 'true';}
+      if ($("#request_saturday_hash_form_b").is(':checked')) {
+        formb = 'true';}
+      if ($("#request_saturday_hash_form_c").is(':checked')) {
+        formc = 'true';}
+      if ($("#request_saturday_hash_track_and_time").is(':checked')) {
+        tandt = 'true';}
+      if ($("#request_saturday_hash_taw").is(':checked')) {
+        taw = 'true';}
+      if ($("#request_saturday_hash_single_track_single").is(':checked')) {
+        single = 'true';}
+      if ($("#request_saturday_hash_single_track_multi").is(':checked')) {
+        multi = 'true';}
+      primary = $("#request_saturday_hash_worker_primary")[0].value;
+      secondary1 = $("#request_saturday_hash_worker_secondary1")[0].value;
+      secondary2 = $("#request_saturday_hash_worker_secondary2")[0].value;
+      secondary3 = $("#request_saturday_hash_worker_secondary3")[0].value;
+      secondary4 = $("#request_saturday_hash_worker_secondary4")[0].value;
+      secondary5 = $("#request_saturday_hash_worker_secondary5")[0].value;
+
+    } else if  (from_day == "sun") {
+      start_time = $("#request_sunday_hash_start_time")[0].value;
+      end_time = $("#request_sunday_hash_end_time")[0].value;
+      cp1 = $("#request_sunday_hash_cp1")[0].value;
+      cp2 = $("#request_sunday_hash_cp2")[0].value;
+      mp1 = $("#request_sunday_hash_mp1")[0].value;
+      mp2 = $("#request_sunday_hash_mp2")[0].value;
+      if ($("#request_sunday_hash_MT1").is(':checked')) {
+        mt1 = 'true';}
+      if ($("#request_sunday_hash_MT2").is(':checked')) {
+        mt2 = 'true';}
+      if ($("#request_sunday_hash_MT3").is(':checked')) {
+        mt3 = 'true';}
+      if ($("#request_sunday_hash_MT4").is(':checked')) {
+        mt4 = 'true';}
+      if ($("#request_sunday_hash_form_b").is(':checked')) {
+        formb = 'true';}
+      if ($("#request_sunday_hash_form_c").is(':checked')) {
+        formc = 'true';}
+      if ($("#request_sunday_hash_track_and_time").is(':checked')) {
+        tandt = 'true';}
+      if ($("#request_sunday_hash_taw").is(':checked')) {
+        taw = 'true';}
+      if ($("#request_sunday_hash_single_track_single").is(':checked')) {
+        single = 'true';}
+      if ($("#request_sunday_hash_single_track_multi").is(':checked')) {
+        multi = 'true';}
+      primary = $("#request_sunday_hash_worker_primary")[0].value;
+      secondary1 = $("#request_sunday_hash_worker_secondary1")[0].value;
+      secondary2 = $("#request_sunday_hash_worker_secondary2")[0].value;
+      secondary3 = $("#request_sunday_hash_worker_secondary3")[0].value;
+      secondary4 = $("#request_sunday_hash_worker_secondary4")[0].value;
+      secondary5 = $("#request_sunday_hash_worker_secondary5")[0].value;
+    }
+
+
+    if (to_day == "mon") {
+      $("#request_monday_hash_start_time").val(start_time);
+      $("#request_monday_hash_end_time").val(end_time);
+      $("#request_monday_hash_cp1").val(cp1);
+      $("#request_monday_hash_cp2").val(cp2);
+      $("#request_monday_hash_mp1").val(mp1);
+      $("#request_monday_hash_mp2").val(mp2);
+
+      if (mt1 === "true") {
+        $("#request_monday_hash_MT1").prop( "checked", true );
+      }
+      if ( mt2 === "true"){
+      $("#request_monday_hash_MT2").prop( "checked", true );
+      }
+      if ( mt3 === "true"){
+        $("#request_monday_hash_MT3").prop( "checked", true );
+      }
+      if ( mt4 === "true"){
+        $("#request_monday_hash_MT4").prop( "checked", true );
+      }
+      if ( formb === "true"){
+        $("#request_monday_hash_form_b").prop( "checked", true );
+      }
+      if ( formc === "true"){
+        $("#request_monday_hash_form_c").prop( "checked", true );
+      }
+      if ( tandt === "true"){
+        $("#request_monday_hash_track_and_time").prop( "checked", true );
+      }
+      if ( single === "true"){
+        $("#request_monday_hash_single_track_single").prop( "checked", true );
+      }
+      if ( multi === "true"){
+        $("#request_monday_hash_single_track_multi").prop( "checked", true );
+      }
+
+      $("#request_monday_hash_worker_primary").val(primary);
+      $("#request_monday_hash_worker_secondary1").val(secondary1);
+      $("#request_monday_hash_worker_secondary2").val(secondary2);
+      $("#request_monday_hash_worker_secondary3").val(secondary3);
+      $("#request_monday_hash_worker_secondary4").val(secondary4);
+      $("#request_monday_hash_worker_secondary5").val(secondary5);
+
+    } else if (to_day == "tue") {
+      $("#request_tuesday_hash_start_time").val(start_time);
+      $("#request_tuesday_hash_end_time").val(end_time);
+      $("#request_tuesday_hash_cp1").val(cp1);
+      $("#request_tuesday_hash_cp2").val(cp2);
+      $("#request_tuesday_hash_mp1").val(mp1);
+      $("#request_tuesday_hash_mp2").val(mp2);
+
+      if (mt1 === "true") {
+        $("#request_tuesday_hash_MT1").prop( "checked", true );
+      }
+      if ( mt2 === "true"){
+      $("#request_tuesday_hash_MT2").prop( "checked", true );
+      }
+      if ( mt3 === "true"){
+        $("#request_tuesday_hash_MT3").prop( "checked", true );
+      }
+      if ( mt4 === "true"){
+        $("#request_tuesday_hash_MT4").prop( "checked", true );
+      }
+      if ( formb === "true"){
+        $("#request_tuesday_hash_form_b").prop( "checked", true );
+      }
+      if ( formc === "true"){
+        $("#request_tuesday_hash_form_c").prop( "checked", true );
+      }
+      if ( tandt === "true"){
+        $("#request_tuesday_hash_track_and_time").prop( "checked", true );
+      }
+      if ( single === "true"){
+        $("#request_tuesday_hash_single_track_single").prop( "checked", true );
+      }
+      if ( multi === "true"){
+        $("#request_tuesday_hash_single_track_multi").prop( "checked", true );
+      }
+
+      $("#request_tuesday_hash_worker_primary").val(primary);
+      $("#request_tuesday_hash_worker_secondary1").val(secondary1);
+      $("#request_tuesday_hash_worker_secondary2").val(secondary2);
+      $("#request_tuesday_hash_worker_secondary3").val(secondary3);
+      $("#request_tuesday_hash_worker_secondary4").val(secondary4);
+      $("#request_tuesday_hash_worker_secondary5").val(secondary5);
+
+    } else if (to_day == "wed") {
+      $("#request_wednesday_hash_start_time").val(start_time);
+      $("#request_wednesday_hash_end_time").val(end_time);
+      $("#request_wednesday_hash_cp1").val(cp1);
+      $("#request_wednesday_hash_cp2").val(cp2);
+      $("#request_wednesday_hash_mp1").val(mp1);
+      $("#request_wednesday_hash_mp2").val(mp2);
+
+      if (mt1 === "true") {
+        $("#request_wednesday_hash_MT1").prop( "checked", true );
+      }
+      if ( mt2 === "true"){
+      $("#request_wednesday_hash_MT2").prop( "checked", true );
+      }
+      if ( mt3 === "true"){
+        $("#request_wednesday_hash_MT3").prop( "checked", true );
+      }
+      if ( mt4 === "true"){
+        $("#request_wednesday_hash_MT4").prop( "checked", true );
+      }
+      if ( formb === "true"){
+        $("#request_wednesday_hash_form_b").prop( "checked", true );
+      }
+      if ( formc === "true"){
+        $("#request_wednesday_hash_form_c").prop( "checked", true );
+      }
+      if ( tandt === "true"){
+        $("#request_wednesday_hash_track_and_time").prop( "checked", true );
+      }
+      if ( single === "true"){
+        $("#request_wednesday_hash_single_track_single").prop( "checked", true );
+      }
+      if ( multi === "true"){
+        $("#request_wednesday_hash_single_track_multi").prop( "checked", true );
+      }
+
+      $("#request_wednesday_hash_worker_primary").val(primary);
+      $("#request_wednesday_hash_worker_secondary1").val(secondary1);
+      $("#request_wednesday_hash_worker_secondary2").val(secondary2);
+      $("#request_wednesday_hash_worker_secondary3").val(secondary3);
+      $("#request_wednesday_hash_worker_secondary4").val(secondary4);
+      $("#request_wednesday_hash_worker_secondary5").val(secondary5);
+
+    } else if (to_day == "thu") {
+      $("#request_thursday_hash_start_time").val(start_time);
+      $("#request_thursday_hash_end_time").val(end_time);
+      $("#request_thursday_hash_cp1").val(cp1);
+      $("#request_thursday_hash_cp2").val(cp2);
+      $("#request_thursday_hash_mp1").val(mp1);
+      $("#request_thursday_hash_mp2").val(mp2);
+
+      if (mt1 === "true") {
+        $("#request_thursday_hash_MT1").prop( "checked", true );
+      }
+      if ( mt2 === "true"){
+      $("#request_thursday_hash_MT2").prop( "checked", true );
+      }
+      if ( mt3 === "true"){
+        $("#request_thursday_hash_MT3").prop( "checked", true );
+      }
+      if ( mt4 === "true"){
+        $("#request_thursday_hash_MT4").prop( "checked", true );
+      }
+      if ( formb === "true"){
+        $("#request_thursday_hash_form_b").prop( "checked", true );
+      }
+      if ( formc === "true"){
+        $("#request_thursday_hash_form_c").prop( "checked", true );
+      }
+      if ( tandt === "true"){
+        $("#request_thursday_hash_track_and_time").prop( "checked", true );
+      }
+      if ( single === "true"){
+        $("#request_thursday_hash_single_track_single").prop( "checked", true );
+      }
+      if ( multi === "true"){
+        $("#request_thursday_hash_single_track_multi").prop( "checked", true );
+      }
+
+      $("#request_thursday_hash_worker_primary").val(primary);
+      $("#request_thursday_hash_worker_secondary1").val(secondary1);
+      $("#request_thursday_hash_worker_secondary2").val(secondary2);
+      $("#request_thursday_hash_worker_secondary3").val(secondary3);
+      $("#request_thursday_hash_worker_secondary4").val(secondary4);
+      $("#request_thursday_hash_worker_secondary5").val(secondary5);
+
+    } else if (to_day == "fri") {
+      $("#request_friday_hash_start_time").val(start_time);
+      $("#request_friday_hash_end_time").val(end_time);
+      $("#request_friday_hash_cp1").val(cp1);
+      $("#request_friday_hash_cp2").val(cp2);
+      $("#request_friday_hash_mp1").val(mp1);
+      $("#request_friday_hash_mp2").val(mp2);
+
+      if (mt1 === "true") {
+        $("#request_friday_hash_MT1").prop( "checked", true );
+      }
+      if ( mt2 === "true"){
+      $("#request_friday_hash_MT2").prop( "checked", true );
+      }
+      if ( mt3 === "true"){
+        $("#request_friday_hash_MT3").prop( "checked", true );
+      }
+      if ( mt4 === "true"){
+        $("#request_friday_hash_MT4").prop( "checked", true );
+      }
+      if ( formb === "true"){
+        $("#request_friday_hash_form_b").prop( "checked", true );
+      }
+      if ( formc === "true"){
+        $("#request_friday_hash_form_c").prop( "checked", true );
+      }
+      if ( tandt === "true"){
+        $("#request_friday_hash_track_and_time").prop( "checked", true );
+      }
+      if ( single === "true"){
+        $("#request_friday_hash_single_track_single").prop( "checked", true );
+      }
+      if ( multi === "true"){
+        $("#request_friday_hash_single_track_multi").prop( "checked", true );
+      }
+
+      $("#request_friday_hash_worker_primary").val(primary);
+      $("#request_friday_hash_worker_secondary1").val(secondary1);
+      $("#request_friday_hash_worker_secondary2").val(secondary2);
+      $("#request_friday_hash_worker_secondary3").val(secondary3);
+      $("#request_friday_hash_worker_secondary4").val(secondary4);
+      $("#request_friday_hash_worker_secondary5").val(secondary5);
+
+    } else if (to_day == "sat") {
+      $("#request_saturday_hash_start_time").val(start_time);
+      $("#request_saturday_hash_end_time").val(end_time);
+      $("#request_saturday_hash_cp1").val(cp1);
+      $("#request_saturday_hash_cp2").val(cp2);
+      $("#request_saturday_hash_mp1").val(mp1);
+      $("#request_saturday_hash_mp2").val(mp2);
+
+      if (mt1 === "true") {
+        $("#request_saturday_hash_MT1").prop( "checked", true );
+      }
+      if ( mt2 === "true"){
+      $("#request_saturday_hash_MT2").prop( "checked", true );
+      }
+      if ( mt3 === "true"){
+        $("#request_saturday_hash_MT3").prop( "checked", true );
+      }
+      if ( mt4 === "true"){
+        $("#request_saturday_hash_MT4").prop( "checked", true );
+      }
+      if ( formb === "true"){
+        $("#request_saturday_hash_form_b").prop( "checked", true );
+      }
+      if ( formc === "true"){
+        $("#request_saturday_hash_form_c").prop( "checked", true );
+      }
+      if ( tandt === "true"){
+        $("#request_saturday_hash_track_and_time").prop( "checked", true );
+      }
+      if ( single === "true"){
+        $("#request_saturday_hash_single_track_single").prop( "checked", true );
+      }
+      if ( multi === "true"){
+        $("#request_saturday_hash_single_track_multi").prop( "checked", true );
+      }
+
+      $("#request_saturday_hash_worker_primary").val(primary);
+      $("#request_saturday_hash_worker_secondary1").val(secondary1);
+      $("#request_saturday_hash_worker_secondary2").val(secondary2);
+      $("#request_saturday_hash_worker_secondary3").val(secondary3);
+      $("#request_saturday_hash_worker_secondary4").val(secondary4);
+      $("#request_saturday_hash_worker_secondary5").val(secondary5);
+
+    } else if (to_day == "sun") {
+      $("#request_sunday_hash_start_time").val(start_time);
+      $("#request_sunday_hash_end_time").val(end_time);
+      $("#request_sunday_hash_cp1").val(cp1);
+      $("#request_sunday_hash_cp2").val(cp2);
+      $("#request_sunday_hash_mp1").val(mp1);
+      $("#request_sunday_hash_mp2").val(mp2);
+
+      if (mt1 === "true") {
+        $("#request_sunday_hash_MT1").prop( "checked", true );
+      }
+      if ( mt2 === "true"){
+      $("#request_sunday_hash_MT2").prop( "checked", true );
+      }
+      if ( mt3 === "true"){
+        $("#request_sunday_hash_MT3").prop( "checked", true );
+      }
+      if ( mt4 === "true"){
+        $("#request_sunday_hash_MT4").prop( "checked", true );
+      }
+      if ( formb === "true"){
+        $("#request_sunday_hash_form_b").prop( "checked", true );
+      }
+      if ( formc === "true"){
+        $("#request_sunday_hash_form_c").prop( "checked", true );
+      }
+      if ( tandt === "true"){
+        $("#request_sunday_hash_track_and_time").prop( "checked", true );
+      }
+      if ( single === "true"){
+        $("#request_sunday_hash_single_track_single").prop( "checked", true );
+      }
+      if ( multi === "true"){
+        $("#request_sunday_hash_single_track_multi").prop( "checked", true );
+      }
+
+      $("#request_sunday_hash_worker_primary").val(primary);
+      $("#request_sunday_hash_worker_secondary1").val(secondary1);
+      $("#request_sunday_hash_worker_secondary2").val(secondary2);
+      $("#request_sunday_hash_worker_secondary3").val(secondary3);
+      $("#request_sunday_hash_worker_secondary4").val(secondary4);
+      $("#request_sunday_hash_worker_secondary5").val(secondary5);
+    }
+  
+});
+
 $('#request_color').on('change', (event) =>{
   let color = $('#request_color').val();
   $('#request_color').removeClass();
