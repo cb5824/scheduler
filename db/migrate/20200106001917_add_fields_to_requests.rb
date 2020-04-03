@@ -13,14 +13,6 @@ class AddFieldsToRequests < ActiveRecord::Migration[5.2]
     add_column :requests, :sat, :integer, default: 0
     add_column :requests, :sun, :integer, default: 0
     add_column :requests, :night_work, :integer, default: 0
-    add_column :requests, :MT1, :integer, default: 0
-    add_column :requests, :MT2, :integer, default: 0
-    add_column :requests, :MT3, :integer, default: 0
-    add_column :requests, :MT4, :integer, default: 0
-    add_column :requests, :taw, :integer, default: 0
-    add_column :requests, :form_b, :integer, default: 0
-    add_column :requests, :form_c, :integer, default: 0
-    add_column :requests, :track_and_time, :integer, default: 0
     add_column :requests, :title, :string
     add_column :requests, :sswps, :string
     add_column :requests, :change_notices, :string

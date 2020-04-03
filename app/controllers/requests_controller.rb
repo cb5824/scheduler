@@ -97,7 +97,7 @@ class RequestsController < ApplicationController
 
   def index
     @user = current_user
-    @requests = Request.all.sort_by{|request| request.color}
+    @requests = Request.where(archived: "no" ).sort_by{|request| request.color}
     respond_to do |format|
       format.xlsx {
         response.headers[

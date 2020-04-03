@@ -413,3 +413,19 @@ table.requests_table tfoot .links a{
 .color_e30eca{
   background-color: #e30eca;
 }
+
+.daytab{
+  color: #ffffff;
+  display: inline-block;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.inactive{
+  background-color: #23272a;
+}
+
+.active{
+  background-color:	#7289da;
+
+}

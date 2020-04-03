@@ -30,6 +30,39 @@ $("td > a").on("click",function(e){
   e.stopPropagation();
 });
 
+$(".daytab").on("click", function(){
+  $( ".daytab" ).each(function() {
+    $( this ).removeClass( "active" );
+    $( this ).addClass( "inactive" );
+  });
+  this.classList.remove("inactive");
+  this.classList.add("active");
+
+  $( ".displaytable" ).each(function() {
+    $( this ).addClass( "hidden" );
+  });
+
+  tab = this.dataset.displaytab;
+  if (tab === "week") {
+    $("#weekly_table")[0].classList.remove("hidden");
+  }  else if (tab === "mon") {
+    $("#monday_table")[0].classList.remove("hidden");
+  }  else if (tab === "tue") {
+    $("#tuesday_table")[0].classList.remove("hidden");
+  }  else if (tab === "wed") {
+    $("#wednesday_table")[0].classList.remove("hidden");
+  }  else if (tab === "thu") {
+    $("#thursday_table")[0].classList.remove("hidden");
+  }  else if (tab === "fri") {
+    $("#friday_table")[0].classList.remove("hidden");
+  }  else if (tab === "sat") {
+    $("#saturday_table")[0].classList.remove("hidden");
+  }  else if (tab === "sun") {
+    $("#sunday_table")[0].classList.remove("hidden");
+  }
+
+});
+
 $(".copy_day").on("click", function(){
     to_day = event.target.dataset.to;
     from_day = event.target.dataset.from;
@@ -599,7 +632,7 @@ $(".copy_day").on("click", function(){
       $("#request_sunday_hash_worker_secondary4").val(secondary4);
       $("#request_sunday_hash_worker_secondary5").val(secondary5);
     }
-  
+
 });
 
 $('#request_color').on('change', (event) =>{
