@@ -19,5 +19,9 @@ user.save!
 end
 
 10.times do
-  FactoryBot.create(:request)
+   FactoryBot.create(:request)
+end
+
+Request.all.each do |request|
+  request.update_weekly
 end

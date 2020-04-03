@@ -142,8 +142,4 @@ class Request < ApplicationRecord
     self.save
   end
 
-  def retrieve_weekly_attribute(att)
-    #nope, we are going to do this the smart way. make each day a hash
-  end
-
 end

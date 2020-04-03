@@ -65,19 +65,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_010720) do
     t.bigint "user_id"
     t.integer "year", null: false
     t.integer "week", null: false
-    t.time "start_time"
-    t.time "end_time"
-    t.integer "cp1"
-    t.integer "mp1"
-    t.integer "cp2"
-    t.integer "mp2"
     t.string "contractor"
-    t.string "worker_primary"
-    t.string "worker_secondary1"
-    t.string "worker_secondary2"
-    t.string "worker_secondary3"
-    t.string "worker_secondary4"
-    t.string "worker_secondary5"
     t.text "description", null: false
     t.string "requestor_name", null: false
     t.string "requestor_email", null: false
@@ -92,14 +80,6 @@ ActiveRecord::Schema.define(version: 2020_03_20_010720) do
     t.integer "sat", default: 0
     t.integer "sun", default: 0
     t.integer "night_work", default: 0
-    t.integer "MT1", default: 0
-    t.integer "MT2", default: 0
-    t.integer "MT3", default: 0
-    t.integer "MT4", default: 0
-    t.integer "taw", default: 0
-    t.integer "form_b", default: 0
-    t.integer "form_c", default: 0
-    t.integer "track_and_time", default: 0
     t.string "title"
     t.string "sswps"
     t.string "change_notices"

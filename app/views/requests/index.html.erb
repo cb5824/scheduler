@@ -1,8 +1,35 @@
+<% if @user != nil %>
+  <% if @user.role == 'admin' %>
+    <div class="control_panel">
+      <a href="<%= profiles_path %>">Users</a>
+      <br>
+      <a href='<%= requests_path %>'>Requests</a>
+    </div>
+  <% elsif @user.role == 'inspector' %>
+  <% else %>
+    <div class="control_panel">
+      <a href="<%= new_request_path %>">New Request Form</a>
+    </div>
+  <% end %>
+<% end %>
+
+
+<h4>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h4>
+
+<%= form_tag(requests_path, method: "get") do %>
+  <%= label_tag(:year, "Year:") %>
+  <%= number_field_tag(:year, @thisyear) %>
+  <%= label_tag(:week, "Week:") %>
+  <%= number_field_tag(:week, @thisweek) %>
+
+  <%= submit_tag("Search") %>
+<% end %>
+
 <%=
   link_to 'Download as Excel',
   requests_path(format: :xlsx)
 %>
-
+<br>
 <br>
 
 <div class="daytab active" data-displaytab="week">

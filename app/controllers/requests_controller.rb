@@ -96,8 +96,15 @@ class RequestsController < ApplicationController
         ['Shared Maintainer', 'sM']]
 
   def index
+    if params["week"] && params["year"]
+      @thisweek = params["week"]
+      @thisyear = params["year"]
+    else
+      @thisweek = Date.today.cweek
+      @thisyear = Date.today.cwyear
+    end
     @user = current_user
-    @requests = Request.where(archived: "no" ).sort_by{|request| request.color}
+    @requests = Request.where(archived: "no", week: @thisweek, year: @thisyear ).sort_by{|request| request.color}
     respond_to do |format|
       format.xlsx {
         response.headers[

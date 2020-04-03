@@ -1,43 +1,22 @@
 FactoryBot.define do
   factory :request do
     year {'2020'}
-    week {'10'}
-    start_time{'2000-01-01 01:00:00 UTC'}
-    end_time{'2000-01-01 02:00:00 UTC'}
-    cp1 {1}
-    mp1 {2}
-    cp2 {7}
-    mp2 {3}
+    week {'14'}
     contractor {'tasi_track'}
-    worker_primary {5}
-    worker_secondary1 {2}
-    worker_secondary2 {3}
-    worker_secondary3 {1}
-    worker_secondary4 {1}
-    worker_secondary5 {1}
     sequence(:description) {|n| "This is a description of test job #{n}"}
-    single_track {"multi"}
     sequence(:requestor_name) {|n| "Test Name #{n}"}
     sequence(:requestor_email) {|n| "person#{n}@example.com"}
     requestor_phone {'5552220213'}
     sequence(:requestor_project) {|n| "Test Project #{n}"}
     requestor_work_directive {""}
-    monday {1}
-    tuesday {0}
-    wednesday {1}
-    thursday {0}
-    friday {1}
-    saturday {0}
-    sunday {0}
+    mon {1}
+    tue {0}
+    wed {1}
+    thu {0}
+    fri {1}
+    sat {0}
+    sun {0}
     night_work {1}
-    MT1 {1}
-    MT2 {1}
-    MT3 {1}
-    MT4 {1}
-    taw {1}
-    form_b {1}
-    form_c {1}
-    track_and_time {1}
     sequence(:title) {|n| "Test job #{n}"}
     sswps {"dunno"}
     change_notices {"still dunno"}
@@ -57,6 +36,15 @@ FactoryBot.define do
     approval2 {"pending"}
     approval3 {"pending"}
     approval4 {"pending"}
+    archived {"no"}
+    monday_hash{{"start_time"=>"2020-01-01 01:00:00 UTC", "end_time"=>"2020-01-01 02:00:00 UTC", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "formc"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    tuesday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "formc"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    wednesday_hash{{"start_time"=>"2020-01-01 01:00:00 UTC", "end_time"=>"2020-01-01 02:00:00 UTC", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "formc"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    thursday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "formc"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    friday_hash{{"start_time"=>"2020-01-01 01:00:00 UTC", "end_time"=>"2020-01-01 02:00:00 UTC", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "formc"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    saturday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "formc"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    sunday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "formc"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+
     user
   end
 end
