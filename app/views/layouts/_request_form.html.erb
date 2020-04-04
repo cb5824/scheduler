@@ -239,6 +239,14 @@
         </div>
         <% end %>
       </div>
+
+      <div class="daily_form_block_line <% if @user.role =="user" %>hidden<% end %>">
+        <div class="form_block_line_left">Admin Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :admin_notes_mon, class: "tall grow"  %>
+        </div>
+      </div>
+
       </div>
 
       <div class="form_day_block hidden" id="tuesday_block">
@@ -283,7 +291,6 @@
             </div>
           </div>
         </div>
-
 
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Track(s)</div>
@@ -331,6 +338,14 @@
         </div>
         <% end %>
       </div>
+
+      <div class="daily_form_block_line <% if @user.role =="user" %>hidden<% end %>">
+        <div class="form_block_line_left">Admin Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :admin_notes_tue, class: "tall grow"  %>
+        </div>
+      </div>
+
       </div>
 
       <div class="form_day_block hidden" id="wednesday_block">
@@ -423,6 +438,14 @@
         </div>
         <% end %>
       </div>
+
+      <div class="daily_form_block_line <% if @user.role =="user" %>hidden<% end %>">
+        <div class="form_block_line_left">Admin Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :admin_notes_wed, class: "tall grow"  %>
+        </div>
+      </div>
+
       </div>
 
       <div class="form_day_block hidden" id="thursday_block">
@@ -515,6 +538,14 @@
         </div>
         <% end %>
       </div>
+
+      <div class="daily_form_block_line <% if @user.role =="user" %>hidden<% end %>">
+        <div class="form_block_line_left">Admin Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :admin_notes_thu, class: "tall grow"  %>
+        </div>
+      </div>
+
       </div>
 
       <div class="form_day_block hidden" id="friday_block">
@@ -607,6 +638,13 @@
         </div>
         <% end %>
       </div>
+      <div class="daily_form_block_line <% if @user.role =="user" %>hidden<% end %>">
+        <div class="form_block_line_left">Admin Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :admin_notes_fri, class: "tall grow"  %>
+        </div>
+      </div>
+
       </div>
 
       <div class="form_day_block hidden" id="saturday_block">
@@ -699,6 +737,13 @@
         </div>
         <% end %>
       </div>
+      <div class="daily_form_block_line <% if @user.role =="user" %>hidden<% end %>">
+        <div class="form_block_line_left">Admin Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :admin_notes_sun, class: "tall grow"  %>
+        </div>
+      </div>
+
       </div>
 
       <div class="form_day_block hidden" id="sunday_block">
@@ -791,6 +836,13 @@
         </div>
         <% end %>
       </div>
+      <div class="daily_form_block_line <% if @user.role =="user" %>hidden<% end %>">
+        <div class="form_block_line_left">Admin Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :admin_notes_sun, class: "tall grow"  %>
+        </div>
+      </div>
+
       </div>
 
 

@@ -156,7 +156,7 @@ class RequestsController < ApplicationController
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
     @color_options = COLOR_ARRAY
-
+    binding.pry
   end
 
   def update
@@ -173,9 +173,12 @@ class RequestsController < ApplicationController
     @request2[:user_id] = @request[:user_id]
 
     @request.generate_changelog(@request2, @user)
-
-    @request.update_attributes(request_params)
-    @request.update_attribute(:status, 'pending')
+    if  ["admin_notes_mon", "admin_notes_tue", "admin_notes_wed", "admin_notes_thu", "admin_notes_fri", "admin_notes_sat", "admin_notes_sun"].any? {|note| (@request.attributes.to_a - @request2.attributes.to_a).map(&:first).include?(note)}
+      @request.update_attributes(request_params)
+    else
+      @request.update_attributes(request_params)
+      @request.update_attribute(:status, 'pending')
+    end
     if request_params[:attachments]
       @request.attachments.attach(request_params[:attachments])
     end
@@ -245,6 +248,6 @@ class RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(:year, :week, :start_time, :end_time, :cp1, :mp1, :cp2, :mp2, :contractor, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :description, :single_track, :requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :night_work, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :status, :approval1, :approval2, :approval3, :approval4, :archived, :color, :monday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5],:tuesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :wednesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :thursday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :friday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :saturday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :sunday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], attachments: [])
+    params.require(:request).permit(:year, :week, :start_time, :end_time, :cp1, :mp1, :cp2, :mp2, :contractor, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :description, :single_track, :requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :night_work, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :status, :approval1, :approval2, :approval3, :approval4, :archived, :color, :admin_notes_mon, :admin_notes_tue, :admin_notes_wed, :admin_notes_thu, :admin_notes_fri, :admin_notes_sat, :admin_notes_sun, :monday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5],:tuesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :wednesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :thursday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :friday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :saturday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], :sunday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5], attachments: [])
   end
 end
