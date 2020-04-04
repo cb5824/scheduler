@@ -156,7 +156,6 @@ class RequestsController < ApplicationController
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
     @color_options = COLOR_ARRAY
-    binding.pry
   end
 
   def update
@@ -171,7 +170,6 @@ class RequestsController < ApplicationController
     @request2[:created_at] = @request[:created_at]
     @request2[:updated_at] = @request[:updated_at]
     @request2[:user_id] = @request[:user_id]
-
     @request.generate_changelog(@request2, @user)
     if  ["admin_notes_mon", "admin_notes_tue", "admin_notes_wed", "admin_notes_thu", "admin_notes_fri", "admin_notes_sat", "admin_notes_sun"].any? {|note| (@request.attributes.to_a - @request2.attributes.to_a).map(&:first).include?(note)}
       @request.update_attributes(request_params)
