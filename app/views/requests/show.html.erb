@@ -51,7 +51,7 @@
   <br>
   <%= link_to 'Copy Request', new_request_path(:copyfrom => @request.id) %>
 
-  <% if @user.role == "admin" %>
+  <% if @user.role == "admin" || @user.role == "superadmin" %>
   <%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' }, params: {new_status: 'approved'} %>
   <%= button_to 'Reject', request_approve_path(@request), method: :put, data: { confirm: 'This request will be rejected. Proceed?' }, params: {new_status: 'rejected'} %>
 

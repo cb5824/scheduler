@@ -664,7 +664,9 @@ $('#request_sun').on('change', (event) =>{
 });
 
 if ($('#MonData').length > 0){
-    $('#monday_block').removeClass("hidden");
+    if ($('#MonData').attr('data-cancelled') === 'no') {
+      $('#monday_block').removeClass("hidden");
+    }
     $('#request_monday_hash_start_time').val($('#MonData').attr('data-start'));
     $('#request_monday_hash_end_time').val($('#MonData').attr('data-end'));
     $('#request_monday_hash_cp1').val($('#MonData').attr('data-cp1'));
@@ -976,6 +978,7 @@ if ($('#SatData').length > 0){
 }
 
 if ($('#SunData').length > 0){
+
     $('#sunday_block').removeClass("hidden");
     $('#request_sunday_hash_start_time').val($('#SunData').attr('data-start'));
     $('#request_sunday_hash_end_time').val($('#SunData').attr('data-end'));

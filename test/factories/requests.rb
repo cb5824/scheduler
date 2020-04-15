@@ -37,13 +37,13 @@ FactoryBot.define do
     approval3 {"pending"}
     approval4 {"pending"}
     archived {"no"}
-    monday_hash{{"start_time"=>"01:00", "end_time"=>"02:00", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "form_c"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    monday_hash{{"start_time"=>"01:00", "end_time"=>"02:00", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "form_c"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none", "cancelled"=>"no" }}
     tuesday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "form_c"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
-    wednesday_hash{{"start_time"=>"01:00", "end_time"=>"02:00", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "form_c"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
-    thursday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "form_c"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
-    friday_hash{{"start_time"=>"01:00", "end_time"=>"02:00", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "form_c"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
-    saturday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "form_c"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
-    sunday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "form_c"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none" }}
+    wednesday_hash{{"start_time"=>"01:00", "end_time"=>"02:00", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "form_c"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none", "cancelled"=>"no" }}
+    thursday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "form_c"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none", "cancelled"=>"no" }}
+    friday_hash{{"start_time"=>"01:00", "end_time"=>"02:00", "cp1"=>1, "cp2"=>7, "mp1"=>2, "mp2"=>3, "MT1"=>1, "MT2"=>1, "MT3"=>1, "MT4"=>1, "taw"=>1, "form_b"=>1, "form_c"=>1, "track_and_time"=>1, "single_track"=>"multi", "worker_primary"=>"A", "worker_secondary1"=>"X", "worker_secondary2"=>"Q", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none", "cancelled"=>"no" }}
+    saturday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "form_c"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none", "cancelled"=>"no" }}
+    sunday_hash{{"start_time"=>"", "end_time"=>"", "cp1"=>1, "cp2"=>1, "mp1"=>"", "mp2"=>"", "MT1"=>0, "MT2"=>0, "MT3"=>0, "MT4"=>0, "taw"=>0, "form_b"=>0, "form_c"=>0, "track_and_time"=>0, "worker_primary"=>"none", "worker_secondary1"=>"none", "worker_secondary2"=>"none", "worker_secondary3"=>"none", "worker_secondary4"=>"none", "worker_secondary5"=>"none", "cancelled"=>"no" }}
     admin_notes_mon {"Test"}
     admin_notes_tue {""}
     admin_notes_wed {""}
@@ -51,6 +51,13 @@ FactoryBot.define do
     admin_notes_fri {"Test"}
     admin_notes_sat {""}
     admin_notes_sun {""}
+    inspector_notes_mon {"Test"}
+    inspector_notes_tue {""}
+    inspector_notes_wed {""}
+    inspector_notes_thu {""}
+    inspector_notes_fri {"Test"}
+    inspector_notes_sat {""}
+    inspector_notes_sun {""}
     user
   end
 end

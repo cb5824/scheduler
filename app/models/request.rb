@@ -67,13 +67,12 @@ class Request < ApplicationRecord
   [["Mon", self.monday_hash], ["Tue", self.tuesday_hash], ["Wed", self.wednesday_hash], ["Thu", self.thursday_hash], ["Fri", self.friday_hash], ["Sat", self.saturday_hash], ["Sun", self.sunday_hash]].each do |day|
 
 
-    if day[1]["start_time"] != "" && starting_time == nil
+    if day[1]["start_time"] != "" && starting_time == nil && day[1]["cancelled"] != "yes"
       starting_time = day[1]["start_time"]
       starting_day = day[0]
 
     end
-
-    if day[1]["end_time"] != ""
+    if day[1]["end_time"] != "" && day[1]["cancelled"] != "yes"
       ending_time = day[1]["end_time"]
       ending_day = day[0]
     end

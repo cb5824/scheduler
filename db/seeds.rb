@@ -13,6 +13,10 @@ user = User.create! :name => 'Administrator 3', :email => 'admin3@testemail.com'
 user.save!
 user = User.create! :name => 'Administrator 4', :email => 'admin4@testemail.com', :password => 'password', :password_confirmation => 'password', :phone => '5555555555', :role => 'admin', :company => 'admin', :approval_group => 4
 user.save!
+user = User.create! :name => 'Travis Johnson', :email => 'JohnsonT@samtrans.com', :password => 'password', :password_confirmation => 'password', :phone => '5555555555', :role => 'superadmin', :company => 'admin', :approval_group => 4
+user.save!
+user = User.create! :name => 'Inspector', :email => 'inspector@testemail.com', :password => 'password', :password_confirmation => 'password', :phone => '5555555555', :role => 'inspector', :company => 'admin', :approval_group => 4
+user.save!
 
 5.times do
   FactoryBot.create(:user)

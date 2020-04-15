@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_183430) do
+ActiveRecord::Schema.define(version: 2020_04_10_001705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -115,6 +115,13 @@ ActiveRecord::Schema.define(version: 2020_04_04_183430) do
     t.text "admin_notes_fri", default: ""
     t.text "admin_notes_sat", default: ""
     t.text "admin_notes_sun", default: ""
+    t.text "inspector_notes_mon", default: ""
+    t.text "inspector_notes_tue", default: ""
+    t.text "inspector_notes_wed", default: ""
+    t.text "inspector_notes_thu", default: ""
+    t.text "inspector_notes_fri", default: ""
+    t.text "inspector_notes_sat", default: ""
+    t.text "inspector_notes_sun", default: ""
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 

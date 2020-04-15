@@ -17,9 +17,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Type/Description of work", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil, nil, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -64,11 +64,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       nwcolor = "ffffff"
     end
 
-    milepost = request.mp1.to_s + " - " + request.mp2.to_s
-    controlpoint = request.cp1.to_s + " - " + request.cp2.to_s
     timeframe = request.weekly.start + " - " + request.weekly.end
 
-    sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.MT1, request.MT2, request.MT3, request.MT4, request.description, request.weekly.mon_workers, request.weekly.tue_workers, request.weekly.wed_workers, request.weekly.thu_workers, request.weekly.fri_workers, request.weekly.sat_workers, request.weekly.sun_workers, request.night_work, timeframe, request.weekly.taw, request.weekly.form_b, request.weekly.form_c, request.weekly.track_and_time], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+    sheet.add_row [entry_count, request.requestor_project, request.contractor, request.description, request.weekly.mon_workers, request.weekly.tue_workers, request.weekly.wed_workers, request.weekly.thu_workers, request.weekly.fri_workers, request.weekly.sat_workers, request.weekly.sun_workers, request.night_work, timeframe, request.weekly.taw, request.weekly.form_b, request.weekly.form_c, request.weekly.track_and_time], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
     entry_count += 1
   end
 end
@@ -82,9 +80,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -136,7 +134,7 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.monday_hash["cp1"].to_s + " - " + request.monday_hash["cp2"].to_s
       timeframe = "#{request.monday_hash["start_time"]} - #{request.monday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.monday_hash["MT1"], request.monday_hash["MT2"], request.monday_hash["MT3"], request.monday_hash["MT4"], request.description, request.night_work, timeframe, request.monday_hash["taw"], request.monday_hash["form_b"], request.monday_hash["form_c"], request.monday_hash["track_and_time"]], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.monday_hash["MT1"], request.monday_hash["MT2"], request.monday_hash["MT3"], request.monday_hash["MT4"], request.description, request.night_work, timeframe, request.monday_hash["taw"], request.monday_hash["form_b"], request.monday_hash["form_c"], request.monday_hash["track_and_time"], "", "", "", request.admin_notes_mon, request.inspector_notes_mon], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
       entry_count += 1
 
 
@@ -153,9 +151,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -207,7 +205,7 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.tuesday_hash["cp1"].to_s + " - " + request.tuesday_hash["cp2"].to_s
       timeframe = "#{request.tuesday_hash["start_time"]} - #{request.tuesday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.tuesday_hash["MT1"], request.tuesday_hash["MT2"], request.tuesday_hash["MT3"], request.tuesday_hash["MT4"], request.description, request.night_work, timeframe, request.tuesday_hash["taw"], request.tuesday_hash["form_b"], request.tuesday_hash["form_c"], request.tuesday_hash["track_and_time"]], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.tuesday_hash["MT1"], request.tuesday_hash["MT2"], request.tuesday_hash["MT3"], request.tuesday_hash["MT4"], request.description, request.night_work, timeframe, request.tuesday_hash["taw"], request.tuesday_hash["form_b"], request.tuesday_hash["form_c"], request.tuesday_hash["track_and_time"], "", "", "", request.admin_notes_tue, request.inspector_notes_tue], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
       entry_count += 1
 
 
@@ -224,9 +222,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -278,7 +276,7 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.wednesday_hash["cp1"].to_s + " - " + request.wednesday_hash["cp2"].to_s
       timeframe = "#{request.wednesday_hash["start_time"]} - #{request.wednesday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.wednesday_hash["MT1"], request.wednesday_hash["MT2"], request.wednesday_hash["MT3"], request.wednesday_hash["MT4"], request.description, request.night_work, timeframe, request.wednesday_hash["taw"], request.wednesday_hash["form_b"], request.wednesday_hash["form_c"], request.wednesday_hash["track_and_time"]], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.wednesday_hash["MT1"], request.wednesday_hash["MT2"], request.wednesday_hash["MT3"], request.wednesday_hash["MT4"], request.description, request.night_work, timeframe, request.wednesday_hash["taw"], request.wednesday_hash["form_b"], request.wednesday_hash["form_c"], request.wednesday_hash["track_and_time"], "", "", "", request.admin_notes_wed, request.inspector_notes_wed], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
       entry_count += 1
 
 
@@ -295,9 +293,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -349,7 +347,7 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.thursday_hash["cp1"].to_s + " - " + request.thursday_hash["cp2"].to_s
       timeframe = "#{request.thursday_hash["start_time"]} - #{request.thursday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.thursday_hash["MT1"], request.thursday_hash["MT2"], request.thursday_hash["MT3"], request.thursday_hash["MT4"], request.description, request.night_work, timeframe, request.thursday_hash["taw"], request.thursday_hash["form_b"], request.thursday_hash["form_c"], request.thursday_hash["track_and_time"]], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.thursday_hash["MT1"], request.thursday_hash["MT2"], request.thursday_hash["MT3"], request.thursday_hash["MT4"], request.description, request.night_work, timeframe, request.thursday_hash["taw"], request.thursday_hash["form_b"], request.thursday_hash["form_c"], request.thursday_hash["track_and_time"], "", "", "", request.admin_notes_thu, request.inspector_notes_thu], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
       entry_count += 1
 
 
@@ -366,9 +364,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -420,7 +418,7 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.friday_hash["cp1"].to_s + " - " + request.friday_hash["cp2"].to_s
       timeframe = "#{request.friday_hash["start_time"]} - #{request.friday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.friday_hash["MT1"], request.friday_hash["MT2"], request.friday_hash["MT3"], request.friday_hash["MT4"], request.description, request.night_work, timeframe, request.friday_hash["taw"], request.friday_hash["form_b"], request.friday_hash["form_c"], request.friday_hash["track_and_time"]], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.friday_hash["MT1"], request.friday_hash["MT2"], request.friday_hash["MT3"], request.friday_hash["MT4"], request.description, request.night_work, timeframe, request.friday_hash["taw"], request.friday_hash["form_b"], request.friday_hash["form_c"], request.friday_hash["track_and_time"], "", "", "", request.admin_notes_fri, request.inspector_notes_fri], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
       entry_count += 1
 
 
@@ -437,9 +435,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -491,7 +489,7 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.saturday_hash["cp1"].to_s + " - " + request.saturday_hash["cp2"].to_s
       timeframe = "#{request.saturday_hash["start_time"]} - #{request.saturday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.saturday_hash["MT1"], request.saturday_hash["MT2"], request.saturday_hash["MT3"], request.saturday_hash["MT4"], request.description, request.night_work, timeframe, request.saturday_hash["taw"], request.saturday_hash["form_b"], request.saturday_hash["form_c"], request.saturday_hash["track_and_time"]], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.saturday_hash["MT1"], request.saturday_hash["MT2"], request.saturday_hash["MT3"], request.saturday_hash["MT4"], request.description, request.night_work, timeframe, request.saturday_hash["taw"], request.saturday_hash["form_b"], request.saturday_hash["form_c"], request.saturday_hash["track_and_time"], "", "", "", request.admin_notes_sat, request.inspector_notes_sat], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
       entry_count += 1
 
 
@@ -508,9 +506,9 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
   sheet.add_row
   sheet.add_row
   sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header]
+  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil
+  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
   entry_count = 1
 
   @requests.each do |request|
@@ -562,7 +560,7 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.sunday_hash["cp1"].to_s + " - " + request.sunday_hash["cp2"].to_s
       timeframe = "#{request.sunday_hash["start_time"]} - #{request.sunday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.sunday_hash["MT1"], request.sunday_hash["MT2"], request.sunday_hash["MT3"], request.sunday_hash["MT4"], request.description, request.night_work, timeframe, request.sunday_hash["taw"], request.sunday_hash["form_b"], request.sunday_hash["form_c"], request.sunday_hash["track_and_time"]], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.sunday_hash["MT1"], request.sunday_hash["MT2"], request.sunday_hash["MT3"], request.sunday_hash["MT4"], request.description, request.night_work, timeframe, request.sunday_hash["taw"], request.sunday_hash["form_b"], request.sunday_hash["form_c"], request.sunday_hash["track_and_time"], "", "", "", request.admin_notes_sun, request.inspector_notes_sun], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
       entry_count += 1
 
 
