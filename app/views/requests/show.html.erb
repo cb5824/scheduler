@@ -50,11 +50,17 @@
   <%= link_to 'Edit', edit_request_path(@request) %>
   <br>
   <%= link_to 'Copy Request', new_request_path(:copyfrom => @request.id) %>
-
+  <br>
+  <% if @request.cancelled == 0 %>
+    <%= button_to 'Cancel Request', request_cancel_path(@request), method: :put, data: { confirm: 'This request will be cancelled. Proceed?' } %>
+  <% else %>
+    <%= button_to 'Re-activate Request', request_cancel_path(@request), method: :put, data: { confirm: 'This request will be re-activated. Proceed?' } %>
+  <% end %>
   <% if @user.role == "admin" || @user.role == "superadmin" %>
-  <%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' }, params: {new_status: 'approved'} %>
-  <%= button_to 'Reject', request_approve_path(@request), method: :put, data: { confirm: 'This request will be rejected. Proceed?' }, params: {new_status: 'rejected'} %>
-
+    <% if @request.cancelled == 0 %>
+      <%= button_to 'Approve', request_approve_path(@request), method: :put, data: { confirm: 'This request will be approved. Proceed?' }, params: {new_status: 'approved'} %>
+      <%= button_to 'Reject', request_approve_path(@request), method: :put, data: { confirm: 'This request will be rejected. Proceed?' }, params: {new_status: 'rejected'} %>
+    <% end %>
   <h1>Notes</h1>
   <div class="notes_container">
     <% if @notes %>

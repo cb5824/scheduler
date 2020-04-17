@@ -104,7 +104,11 @@ class RequestsController < ApplicationController
       @thisyear = Date.today.cwyear
     end
     @user = current_user
-    @requests = Request.where(archived: "no", week: @thisweek, year: @thisyear ).sort_by{|request| request.color}
+    if params["hide"]
+      @requests = Request.where(archived: "no", week: @thisweek, year: @thisyear, cancelled: 0 ).sort_by{|request| request.color}
+    else
+      @requests = Request.where(archived: "no", week: @thisweek, year: @thisyear ).sort_by{|request| request.color}
+    end
     respond_to do |format|
       format.xlsx {
         response.headers[
@@ -292,6 +296,16 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:note][:request_id])
     @user = current_user
     @request.generate_note(@user, params[:note][:body])
+    redirect_to @request
+  end
+
+  def cancel
+    @request = Request.find(params[:request_id])
+    if @request.cancelled == 0
+      @request.update_attribute(:cancelled, 1)
+    elsif @request.cancelled == 1
+      @request.update_attribute(:cancelled, 0)
+    end
     redirect_to @request
   end
 

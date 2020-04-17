@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     resources :changelogs
     patch :approve
     put :approve
+    patch :cancel
+    put :cancel
   end
+
   resources :requests do
     get 'note', on: :new
   end

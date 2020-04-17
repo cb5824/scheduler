@@ -25,6 +25,16 @@
   <%= submit_tag("Search") %>
 <% end %>
 
+<%= form_tag(requests_path, method: "get") do %>
+    <%= hidden_field_tag("week", value = params["week"]) %>
+    <%= hidden_field_tag("year", value = params["year"]) %>
+    <% if params["hide"] == "yes" %>
+      <%= submit_tag("Show Cancelled Requests") %>
+    <% else %>
+      <%= hidden_field_tag("hide", value = "yes") %>
+      <%= submit_tag("Hide Cancelled Requests") %>
+    <% end %>
+<% end %>
 <%=
   link_to 'Download as Excel',
   requests_path(format: :xlsx)
@@ -89,7 +99,7 @@ Sun
   <tbody>
 
   <% @requests.each do |request| %>
-      <tr class="hover_row"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
       <td><a href="<%= request_path(request) %>">
         <% if request.status == 'pending'%>
           <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -152,7 +162,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.mon == 1 || request.monday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.monday_hash["cancelled"] == "yes" %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
         <td><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -210,7 +220,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.tue == 1  || request.tuesday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.tuesday_hash["cancelled"] == "yes" %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
         <td><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -268,7 +278,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.wed == 1  || request.wednesday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.wednesday_hash["cancelled"] == "yes" %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
         <td><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -326,7 +336,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.thu == 1  || request.thursday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.thursday_hash["cancelled"] == "yes" %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
         <td><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -384,7 +394,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.fri == 1  || request.friday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.friday_hash["cancelled"] == "yes" %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
         <td><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -442,7 +452,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.sat == 1  || request.saturday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.saturday_hash["cancelled"] == "yes" %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
         <td><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -500,7 +510,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.sun == 1  || request.sunday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.sunday_hash["cancelled"] == "yes" %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
         <td><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
