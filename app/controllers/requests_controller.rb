@@ -146,6 +146,8 @@ class RequestsController < ApplicationController
       @request.attachments.attach(request_params[:attachments])
     end
     if @request.save
+      @request.pending = Pending.new
+      @request.pending.save
       @request.update_weekly
       redirect_to root_path, notice: 'Request was saved successfully'
     else
