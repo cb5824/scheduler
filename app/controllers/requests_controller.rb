@@ -181,6 +181,8 @@ class RequestsController < ApplicationController
     @request2[:created_at] = @request[:created_at]
     @request2[:updated_at] = @request[:updated_at]
     @request2[:user_id] = @request[:user_id]
+
+    @request.pending.change(@request2)
     if (@request.mon == 1 && @request2.mon != 1) || (@request.monday_hash["cancelled"] == "yes" && @request2.mon = 0)
       @request2.monday_hash["cancelled"] = "yes"
     else
@@ -235,6 +237,7 @@ class RequestsController < ApplicationController
       @request.attachments.attach(request_params[:attachments])
     end
     @request.update_weekly
+    @request.pending.save
     flash[:notice] = "Request updated. Status changed to Pending Approval!"
     redirect_to @request
   end

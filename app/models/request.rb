@@ -4,6 +4,7 @@ class Request < ApplicationRecord
   has_many :notes
   has_many_attached :attachments
   has_one :weekly
+  has_one :pending
 
   def generate_note(user, text)
     new_note = Note.new
@@ -41,6 +42,7 @@ class Request < ApplicationRecord
       self.update_attribute(:status, 'rejected')
     elsif self.approval1 == "approved" && self.approval2 == "approved" && self.approval3 == "approved" && self.approval4 == "approved"
       self.update_attribute(:status, 'approved')
+      self.pending.clear
     else
       self.update_attribute(:status, 'pending')
     end
@@ -51,11 +53,10 @@ class Request < ApplicationRecord
     ending_day = nil
     starting_time = nil
     ending_time = nil
-    taw = 0
-    night = 0
-    formb = 0
-    formc = 0
-    tandt = 0
+    taw = false
+    formb = false
+    formc = false
+    tandt = false
     mon_workers = ""
     tue_workers = ""
     wed_workers = ""
@@ -78,16 +79,16 @@ class Request < ApplicationRecord
     end
 
     if day[1]["taw"] == "1"
-        taw = 1
+        taw = true
     end
     if day[1]["form_b"] == "1"
-        form_b = 1
+        form_b = true
     end
     if day[1]["form_c"] == "1"
-        form_c = 1
+        form_c = true
     end
     if day[1]["track_and_time"] == "1"
-        tandt = 1
+        tandt = true
     end
 
     temp_workers = day[1]["worker_primary"]
@@ -118,8 +119,52 @@ class Request < ApplicationRecord
 
     if self.weekly != nil
       @new_weekly = self.weekly
+      comparison = self.weekly
     else
       @new_weekly = Weekly.new
+      comparison = nil
+    end
+
+    if comparison
+      if comparison.mon_workers != mon_workers
+        self.pending.mon_workers = "1"
+      end
+      if comparison.tue_workers != tue_workers
+        self.pending.tue_workers = "1"
+      end
+      if comparison.wed_workers != wed_workers
+        self.pending.wed_workers = "1"
+      end
+      if comparison.thu_workers != thu_workers
+        self.pending.thu_workers = "1"
+      end
+      if comparison.fri_workers != fri_workers
+        self.pending.fri_workers = "1"
+      end
+      if comparison.sat_workers != sat_workers
+        self.pending.sat_workers = "1"
+      end
+      if comparison.sun_workers != sun_workers
+        self.pending.sun_workers = "1"
+      end
+      if comparison.start != "#{starting_day}: #{starting_time}"
+        self.pending.start = "1"
+      end
+      if comparison.end != "#{ending_day}: #{ending_time}"
+        self.pending.end = "1"
+      end
+      if comparison.taw != taw
+        self.pending.taw = "1"
+      end
+      if comparison.form_b != formb
+        self.pending.form_b = "1"
+      end
+      if comparison.form_c != formc
+        self.pending.form_c = "1"
+      end
+      if comparison.track_and_time != tandt
+        self.pending.track_and_time = "1"
+      end
     end
 
     @new_weekly.mon_workers = mon_workers
@@ -137,7 +182,9 @@ class Request < ApplicationRecord
     @new_weekly.track_and_time = tandt
     @new_weekly.request = self
     @new_weekly.save
+    self.pending.save
     self.save
+
   end
 
 end

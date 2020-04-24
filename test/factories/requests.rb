@@ -59,5 +59,8 @@ FactoryBot.define do
     inspector_notes_sat {""}
     inspector_notes_sun {""}
     user
+    after(:create) do |request, evaluator|
+      request.pending = FactoryBot.create(:pending)
+    end
   end
 end
