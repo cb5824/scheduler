@@ -441,3 +441,22 @@ table.requests_table tfoot .links a{
 .changed a{
   color: red;
 }
+
+.form_nav_link{
+  background-color:	#7289da;
+  border-radius: 25px;
+  border: 2px solid #23272a;
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
+  padding: 10px;
+}
+
+.form_nav{
+  text-align: center;
+}
+
+.red{
+  color: #b00909;
+  font-weight: bold;
+}

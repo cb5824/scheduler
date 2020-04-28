@@ -1,5 +1,13 @@
-<%= link_to 'Back to Requests', requests_path %>
 
 <%= form_for @request do |f| %>
+<br>
+<br>
+
+<div class="form_nav">
+  <%= link_to 'Back to Details', request_path(@request), class: "form_nav_link" %>
+  <%= link_to 'Discard Changes', edit_request_path(@request), class: "form_nav_link" %>
+</div>
+<br>
+<br>
 <%= render "layouts/request_form", f: f %>
 <% end %>

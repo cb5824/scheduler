@@ -3,7 +3,7 @@
   <div class="form_block">
     <div class="form_block_line">
     <p>Statement about before filling out this form, gotta do some other things, blah blah blah…</p>
-    <button type="button" name="reset_form">Reset Form</button>
+
   </div>
 </div>
   <div class="form_header">Requester Information</div>
@@ -140,15 +140,19 @@
       <%= f.label :days %>
       </div>
       <div class="form_block_line">
-      Mon<%= f.check_box :mon, {}, checked_value = 1, unchecked_value = 0 %>
-      Tues<%= f.check_box :tue, {}, checked_value = 1, unchecked_value = 0 %>
-      Wed<%= f.check_box :wed, {}, checked_value = 1, unchecked_value = 0 %>
-      Thurs<%= f.check_box :thu, {}, checked_value = 1, unchecked_value = 0 %>
-      Fri<%= f.check_box :fri, {}, checked_value = 1, unchecked_value = 0 %>
-      Sat<%= f.check_box :sat, {}, checked_value = 1, unchecked_value = 0 %>
-      Sun<%= f.check_box :sun, {}, checked_value = 1, unchecked_value = 0 %>
-
+        Mon<%= f.check_box :mon, {}, checked_value = 1, unchecked_value = 0 %>
+        Tues<%= f.check_box :tue, {}, checked_value = 1, unchecked_value = 0 %>
+        Wed<%= f.check_box :wed, {}, checked_value = 1, unchecked_value = 0 %>
+        Thurs<%= f.check_box :thu, {}, checked_value = 1, unchecked_value = 0 %>
+        Fri<%= f.check_box :fri, {}, checked_value = 1, unchecked_value = 0 %>
+        Sat<%= f.check_box :sat, {}, checked_value = 1, unchecked_value = 0 %>
+        Sun<%= f.check_box :sun, {}, checked_value = 1, unchecked_value = 0 %>
       </div>
+      <% if @action == "edit" %>
+        <div class="form_block_line">
+          <p class='red'>Unchecking a day will cancel that day only. To cancel full request please use cancel request button above.</p>
+        </div>
+      <% end %>
       <br>
       <div class="form_day_block hidden" id="monday_block">
         <div class="form_block_line">
@@ -240,6 +244,12 @@
         <% end %>
       </div>
 
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Requestor Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :requestor_notes_mon, class: "tall grow"  %>
+        </div>
+      </div>
       <div class="daily_form_block_line <% if @user.role !="admin" && @user.role != "superadmin" %>hidden<% end %>">
         <div class="form_block_line_left">Admin Notes</div>
         <div class="form_block_line_right">
@@ -346,6 +356,12 @@
         <% end %>
       </div>
 
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Requestor Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :requestor_notes_tue, class: "tall grow"  %>
+        </div>
+      </div>
       <div class="daily_form_block_line <% if @user.role !="admin" && @user.role != "superadmin" %>hidden<% end %>">
         <div class="form_block_line_left">Admin Notes</div>
         <div class="form_block_line_right">
@@ -452,6 +468,12 @@
         <% end %>
       </div>
 
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Requestor Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :requestor_notes_wed, class: "tall grow"  %>
+        </div>
+      </div>
       <div class="daily_form_block_line <% if @user.role !="admin" && @user.role != "superadmin" %>hidden<% end %>">
         <div class="form_block_line_left">Admin Notes</div>
         <div class="form_block_line_right">
@@ -558,6 +580,12 @@
         <% end %>
       </div>
 
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Requestor Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :requestor_notes_thu, class: "tall grow"  %>
+        </div>
+      </div>
       <div class="daily_form_block_line <% if @user.role !="admin" && @user.role != "superadmin" %>hidden<% end %>">
         <div class="form_block_line_left">Admin Notes</div>
         <div class="form_block_line_right">
@@ -662,6 +690,12 @@
           </div>
         </div>
         <% end %>
+      </div>
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Requestor Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :requestor_notes_fri, class: "tall grow"  %>
+        </div>
       </div>
       <div class="daily_form_block_line <% if @user.role !="admin" && @user.role != "superadmin" %>hidden<% end %>">
         <div class="form_block_line_left">Admin Notes</div>
@@ -769,6 +803,12 @@
         </div>
         <% end %>
       </div>
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Requestor Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :requestor_notes_sat, class: "tall grow"  %>
+        </div>
+      </div>
       <div class="daily_form_block_line <% if @user.role !="admin" && @user.role != "superadmin" %>hidden<% end %>">
         <div class="form_block_line_left">Admin Notes</div>
         <div class="form_block_line_right">
@@ -874,6 +914,12 @@
         </div>
         <% end %>
       </div>
+      <div class="daily_form_block_line">
+        <div class="form_block_line_left">Requestor Notes</div>
+        <div class="form_block_line_right">
+          <%= f.text_area :requestor_notes_sun, class: "tall grow"  %>
+        </div>
+      </div>
       <div class="daily_form_block_line <% if @user.role !="admin" && @user.role != "superadmin" %>hidden<% end %>">
         <div class="form_block_line_left">Admin Notes</div>
         <div class="form_block_line_right">
@@ -893,8 +939,8 @@
 
       </div>
 
-  <div class="form_header">Reason for Late Submittal</div>
-  <div class="form_block">
+  <div class="form_header hidden">Reason for Late Submittal</div>
+  <div class="form_block hidden">
     <div class="form_block_line">
 
     <%= f.label :late_reason, "Explain why request was not submitted at least two weeks prior to start of work:" %>

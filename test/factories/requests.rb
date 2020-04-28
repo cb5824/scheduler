@@ -58,6 +58,13 @@ FactoryBot.define do
     inspector_notes_fri {"Test"}
     inspector_notes_sat {""}
     inspector_notes_sun {""}
+    requestor_notes_mon {"Test"}
+    requestor_notes_tue {""}
+    requestor_notes_wed {""}
+    requestor_notes_thu {""}
+    requestor_notes_fri {"Test"}
+    requestor_notes_sat {""}
+    requestor_notes_sun {""}
     user
     after(:create) do |request, evaluator|
       request.pending = FactoryBot.create(:pending)
