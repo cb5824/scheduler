@@ -185,13 +185,13 @@
             <%= p.label :cp1 %>
             <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
             <%= p.label :mp1 %>
-            <%= p.number_field :mp1, min: 1 %>
+            <%= p.number_field :mp1, min: 0, step: 0.1 %>
             </div>
             <div class="form_block_line_right">
                 <%= p.label :cp2 %>
                 <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
                 <%= p.label :mp2 %>
-                <%= p.number_field :mp2, min: 1 %>
+                <%= p.number_field :mp2, min: 0, step: 0.1 %>
             </div>
           </div>
         </div>
@@ -298,13 +298,13 @@
             <%= p.label :cp1 %>
             <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
             <%= p.label :mp1 %>
-            <%= p.number_field :mp1, min: 1 %>
+            <%= p.number_field :mp1, min: 0, step: 0.1 %>
             </div>
             <div class="form_block_line_right">
                 <%= p.label :cp2 %>
                 <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
                 <%= p.label :mp2 %>
-                <%= p.number_field :mp2, min: 1 %>
+                <%= p.number_field :mp2, min: 0, step: 0.1 %>
             </div>
           </div>
         </div>
@@ -409,13 +409,13 @@
             <%= p.label :cp1 %>
             <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
             <%= p.label :mp1 %>
-            <%= p.number_field :mp1, min: 1 %>
+            <%= p.number_field :mp1, min: 0, step: 0.1 %>
             </div>
             <div class="form_block_line_right">
                 <%= p.label :cp2 %>
                 <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
                 <%= p.label :mp2 %>
-                <%= p.number_field :mp2, min: 1 %>
+                <%= p.number_field :mp2, min: 0, step: 0.1 %>
             </div>
           </div>
         </div>
@@ -521,13 +521,13 @@
             <%= p.label :cp1 %>
             <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
             <%= p.label :mp1 %>
-            <%= p.number_field :mp1, min: 1 %>
+            <%= p.number_field :mp1, min: 0, step: 0.1 %>
             </div>
             <div class="form_block_line_right">
                 <%= p.label :cp2 %>
                 <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
                 <%= p.label :mp2 %>
-                <%= p.number_field :mp2, min: 1 %>
+                <%= p.number_field :mp2, min: 0, step: 0.1 %>
             </div>
           </div>
         </div>
@@ -633,13 +633,13 @@
             <%= p.label :cp1 %>
             <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
             <%= p.label :mp1 %>
-            <%= p.number_field :mp1, min: 1 %>
+            <%= p.number_field :mp1, min: 0, step: 0.1 %>
             </div>
             <div class="form_block_line_right">
                 <%= p.label :cp2 %>
                 <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
                 <%= p.label :mp2 %>
-                <%= p.number_field :mp2, min: 1 %>
+                <%= p.number_field :mp2, min: 0, step: 0.1 %>
             </div>
           </div>
         </div>
@@ -745,13 +745,13 @@
             <%= p.label :cp1 %>
             <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
             <%= p.label :mp1 %>
-            <%= p.number_field :mp1, min: 1 %>
+            <%= p.number_field :mp1, min: 0, step: 0.1 %>
             </div>
             <div class="form_block_line_right">
                 <%= p.label :cp2 %>
                 <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
                 <%= p.label :mp2 %>
-                <%= p.number_field :mp2, min: 1 %>
+                <%= p.number_field :mp2, min: 0, step: 0.1 %>
             </div>
           </div>
         </div>
@@ -856,13 +856,13 @@
             <%= p.label :cp1 %>
             <%= p.select(:cp1, @cp_options.map { |value| [ value[0], value[1] ] }) %>
             <%= p.label :mp1 %>
-            <%= p.number_field :mp1, min: 1 %>
+            <%= p.number_field :mp1, min: 0, step: 0.1 %>
             </div>
             <div class="form_block_line_right">
                 <%= p.label :cp2 %>
                 <%= p.select(:cp2, @cp_options.map { |value| [ value[0], value[1] ] }) %>
                 <%= p.label :mp2 %>
-                <%= p.number_field :mp2, min: 1 %>
+                <%= p.number_field :mp2, min: 0, step: 0.1 %>
             </div>
           </div>
         </div>
@@ -961,11 +961,15 @@
     <br>
     <div class="form_block">
       <div class="form_block_line">
-        <% if @request.cancelled == 0 %>
-          <p>By clicking submit button, I verify that blah blah blah…</p>
-          <input type="submit" value="Submit Request">
+        <% if @action == 'edit' && @request.expired? && @user.role != 'superadmin' %>
+          <p>Cannot save edits to expired/completed requests</p>
         <% else %>
-          <p>Request has been cancelled. Cannot save edits to cancelled requests<p>
+          <% if @request.cancelled == 0 %>
+            <p>By clicking submit button, I verify that blah blah blah…</p>
+            <input type="submit" value="Submit Request">
+          <% else %>
+            <p>Request has been cancelled. Cannot save edits to cancelled requests<p>
+          <% end %>
         <% end %>
     </div>
   </div>

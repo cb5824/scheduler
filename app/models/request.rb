@@ -187,4 +187,45 @@ class Request < ApplicationRecord
 
   end
 
+  def expired?
+    thisyear = Time.now.year
+    thisweek = Date.today.cweek
+    timenow = (Time.zone.now.strftime("%H:%M").delete ":").to_i
+
+    case self.weekly.end[0..2]
+    when "Mon"
+      finalday = 1
+      finaldaytime = (self.monday_hash["end_time"].delete ":").to_i
+    when "Tue"
+      finalday = 2
+      finaldaytime = (self.tuesday_hash["end_time"].delete ":").to_i
+    when "Wed"
+      finalday = 3
+      finaldaytime = (self.wednesday_hash["end_time"].delete ":").to_i
+    when "Thu"
+      finalday = 4
+      finaldaytime = (self.thursday_hash["end_time"].delete ":").to_i
+    when "Fri"
+      finalday = 5
+      finaldaytime = (self.friday_hash["end_time"].delete ":").to_i
+    when "Sat"
+      finalday = 6
+      finaldaytime = (self.saturday_hash["end_time"].delete ":").to_i
+    when "Sun"
+      finalday = 0
+      finaldaytime = (self.sunday_hash["end_time"].delete ":").to_i
+    end
+
+    if self.year <= thisyear
+      if self.week <= thisweek
+        timenow > finaldaytime
+      else
+        return false
+      end
+    else
+      return false
+    end
+
+  end
+
 end
