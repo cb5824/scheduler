@@ -73,34 +73,34 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Mon</th>
-        <th>Tue</th>
-        <th>Wed</th>
-        <th>Thu</th>
-        <th>Fri</th>
-        <th>Sat</th>
-        <th>Sun</th>
-        <th>Night Work</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="small60">Mon</th>
+        <th class="small60">Tue</th>
+        <th class="small60">Wed</th>
+        <th class="small60">Thu</th>
+        <th class="small60">Fri</th>
+        <th class="small60">Sat</th>
+        <th class="small60">Sun</th>
+        <th class="small60">Night Work</th>
+        <th class="small80" >Start Time</th>
+        <th class="small80" >End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
       </tr>
   </thead>
   <tbody>
 
   <% @requests.each do |request| %>
       <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-      <td><a href="<%= request_path(request) %>">
+      <td class="small60"><a href="<%= request_path(request) %>">
         <% if request.status == 'pending'%>
           <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
         <% elsif request.status == 'approved'%>
@@ -110,26 +110,26 @@ Sun
         <% end %>
       </a>
       </td>
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %> <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["start"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.start %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["end"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.end %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+      <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+      <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+      <td data-href="<%= request_path(request) %>" class="medium  <% if request.pending["contractor"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+      <td data-href="<%= request_path(request) %>" class="medium  <% if request.pending["description"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending["start"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.weekly.start %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending["end"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.weekly.end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["taw"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["form_b"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["form_c"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["track_and_time"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="medium"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+      <td data-href="<%= request_path(request) %>" class="medium"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
     </tr>
   <% end %>
   </tbody>
@@ -141,28 +141,31 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Workers</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="medium">Workers</th>
+        <th class="small80">Start Time</th>
+        <th class="small80">End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
+        <th class="large">Requestor Notes</th>
+        <th class="large">Admin Notes</th>
+        <th class="large">Inspector Notes</th>
       </tr>
   </thead>
   <tbody>
 
   <% @requests.each do |request| %>
     <% if request.mon == 1 || request.monday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td><a href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  >
+        <td class="small60"><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
           <% elsif request.status == 'approved'%>
@@ -172,19 +175,22 @@ Sun
           <% end %>
         </a>
         </td>
-        <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["mon_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.mon_workers %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.monday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.monday_hash["start_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>"<% if request.pending.monday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.monday_hash["end_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.monday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.monday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.monday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.monday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["mon_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.mon_workers %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.monday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.monday_hash["start_time"] %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.monday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.monday_hash["end_time"] %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.monday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.monday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.monday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.monday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+        <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_mon %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
+        <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_mon %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
+        <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_mon %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
       </tr>
     <% end %>
   <% end %>
@@ -197,20 +203,23 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Workers</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="medium">Workers</th>
+        <th class="small80">Start Time</th>
+        <th class="small80">End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
+        <th class="large">Requestor Notes</th>
+        <th class="large">Admin Notes</th>
+        <th class="large">Inspector Notes</th>
       </tr>
   </thead>
   <tbody>
@@ -218,7 +227,7 @@ Sun
   <% @requests.each do |request| %>
     <% if request.tue == 1  || request.tuesday_hash["cancelled"] == "yes"%>
         <tr class="hover_row <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td><a href="<%= request_path(request) %>">
+        <td class="small60"><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
           <% elsif request.status == 'approved'%>
@@ -228,19 +237,22 @@ Sun
           <% end %>
         </a>
         </td>
-        <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["tue_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.tue_workers %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.tuesday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.tuesday_hash["start_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.tuesday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.tuesday_hash["end_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.tuesday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.tuesday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.tuesday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.tuesday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["tue_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.tue_workers %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.tuesday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.tuesday_hash["start_time"] %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.tuesday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.tuesday_hash["end_time"] %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.tuesday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.tuesday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.tuesday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.tuesday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+        <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+        <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_tue %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
+        <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_tue %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
+        <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_tue %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
       </tr>
     <% end %>
   <% end %>
@@ -253,20 +265,23 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Workers</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="medium">Workers</th>
+        <th class="small80">Start Time</th>
+        <th class="small80">End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
+        <th class="large">Requestor Notes</th>
+        <th class="large">Admin Notes</th>
+        <th class="large">Inspector Notes</th>
       </tr>
   </thead>
   <tbody>
@@ -274,29 +289,32 @@ Sun
   <% @requests.each do |request| %>
     <% if request.wed == 1  || request.wednesday_hash["cancelled"] == "yes"%>
         <tr class="hover_row <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td><a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
-        </a>
-        </td>
-        <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["wed_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.wed_workers %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.wednesday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.wednesday_hash["start_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.wednesday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.wednesday_hash["end_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.wednesday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.wednesday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.wednesday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.wednesday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="small60"><a href="<%= request_path(request) %>">
+            <% if request.status == 'pending'%>
+              <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
+            <% elsif request.status == 'approved'%>
+              <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
+            <% elsif request.status == 'rejected'%>
+              <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
+            <% end %>
+          </a>
+          </td>
+          <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["wed_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.wed_workers %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.wednesday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.wednesday_hash["start_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.wednesday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.wednesday_hash["end_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.wednesday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.wednesday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.wednesday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.wednesday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_wed %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
+          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_wed %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
+          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_wed %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
       </tr>
     <% end %>
   <% end %>
@@ -309,20 +327,23 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Workers</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="medium">Workers</th>
+        <th class="small80">Start Time</th>
+        <th class="small80">End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
+        <th class="large">Requestor Notes</th>
+        <th class="large">Admin Notes</th>
+        <th class="large">Inspector Notes</th>
       </tr>
   </thead>
   <tbody>
@@ -330,29 +351,32 @@ Sun
   <% @requests.each do |request| %>
     <% if request.thu == 1  || request.thursday_hash["cancelled"] == "yes"%>
         <tr class="hover_row <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td><a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
-        </a>
-        </td>
-        <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["thu_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.thu_workers %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.thursday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.thursday_hash["start_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.thursday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.thursday_hash["end_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.thursday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.thursday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.thursday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.thursday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="small60"><a href="<%= request_path(request) %>">
+            <% if request.status == 'pending'%>
+              <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
+            <% elsif request.status == 'approved'%>
+              <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
+            <% elsif request.status == 'rejected'%>
+              <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
+            <% end %>
+          </a>
+          </td>
+          <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["thu_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.thu_workers %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.thursday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.thursday_hash["start_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.thursday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.thursday_hash["end_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.thursday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.thursday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.thursday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.thursday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_thu %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
+          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_thu %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
+          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_thu %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
       </tr>
     <% end %>
   <% end %>
@@ -365,20 +389,23 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Workers</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="medium">Workers</th>
+        <th class="small80">Start Time</th>
+        <th class="small80">End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
+        <th class="large">Requestor Notes</th>
+        <th class="large">Admin Notes</th>
+        <th class="large">Inspector Notes</th>
       </tr>
   </thead>
   <tbody>
@@ -386,29 +413,32 @@ Sun
   <% @requests.each do |request| %>
     <% if request.fri == 1  || request.friday_hash["cancelled"] == "yes"%>
         <tr class="hover_row <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td><a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
-        </a>
-        </td>
-        <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["fri_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.fri_workers %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.friday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.friday_hash["start_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.friday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.friday_hash["end_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.friday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.friday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.friday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.friday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="small60"><a href="<%= request_path(request) %>">
+            <% if request.status == 'pending'%>
+              <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
+            <% elsif request.status == 'approved'%>
+              <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
+            <% elsif request.status == 'rejected'%>
+              <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
+            <% end %>
+          </a>
+          </td>
+          <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["fri_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.fri_workers %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.friday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.friday_hash["start_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.friday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.friday_hash["end_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.friday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.friday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.friday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.friday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_fri %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
+          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_fri %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
+          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_fri %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
       </tr>
     <% end %>
   <% end %>
@@ -421,20 +451,23 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Workers</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="medium">Workers</th>
+        <th class="small80">Start Time</th>
+        <th class="small80">End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
+        <th class="large">Requestor Notes</th>
+        <th class="large">Admin Notes</th>
+        <th class="large">Inspector Notes</th>
       </tr>
   </thead>
   <tbody>
@@ -442,29 +475,32 @@ Sun
   <% @requests.each do |request| %>
     <% if request.sat == 1  || request.saturday_hash["cancelled"] == "yes"%>
         <tr class="hover_row <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td><a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
-        </a>
-        </td>
-        <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["sat_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.sat_workers %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.saturday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.saturday_hash["start_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.saturday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.saturday_hash["end_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.saturday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.saturday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.saturday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.saturday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="small60"><a href="<%= request_path(request) %>">
+            <% if request.status == 'pending'%>
+              <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
+            <% elsif request.status == 'approved'%>
+              <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
+            <% elsif request.status == 'rejected'%>
+              <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
+            <% end %>
+          </a>
+          </td>
+          <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["sat_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.sat_workers %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.saturday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.saturday_hash["start_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.saturday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.saturday_hash["end_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.saturday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.saturday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.saturday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.saturday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_sat %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
+          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_sat %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
+          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_sat %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
       </tr>
     <% end %>
   <% end %>
@@ -477,20 +513,23 @@ Sun
   <table class='requests_table'>
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Project</th>
-        <th>Job Title</th>
-        <th>Contractor</th>
-        <th>Description</th>
-        <th>Workers</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>TAW</th>
-        <th>Form B</th>
-        <th>Form C</th>
-        <th>Track & Time</th>
-        <th>Submitted</th>
-        <th>Last Edit</th>
+        <th class="small60">Status</th>
+        <th class="medium">Project</th>
+        <th class="medium">Job Title</th>
+        <th class="medium">Contractor</th>
+        <th class="medium">Description</th>
+        <th class="medium">Workers</th>
+        <th class="small80">Start Time</th>
+        <th class="small80">End Time</th>
+        <th class="small60">TAW</th>
+        <th class="small60">Form B</th>
+        <th class="small60">Form C</th>
+        <th class="small60">Track & Time</th>
+        <th class="medium">Submitted</th>
+        <th class="medium">Last Edit</th>
+        <th class="large">Requestor Notes</th>
+        <th class="large">Admin Notes</th>
+        <th class="large">Inspector Notes</th>
       </tr>
   </thead>
   <tbody>
@@ -498,29 +537,32 @@ Sun
   <% @requests.each do |request| %>
     <% if request.sun == 1  || request.sunday_hash["cancelled"] == "yes"%>
         <tr class="hover_row <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td><a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
-        </a>
-        </td>
-        <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending["sun_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.sun_workers %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.sunday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.sunday_hash["start_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.sunday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.sunday_hash["end_time"] %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.sunday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.sunday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.sunday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>" <% if request.pending.sunday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-        <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="small60"><a href="<%= request_path(request) %>">
+            <% if request.status == 'pending'%>
+              <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
+            <% elsif request.status == 'approved'%>
+              <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
+            <% elsif request.status == 'rejected'%>
+              <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
+            <% end %>
+          </a>
+          </td>
+          <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.title %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["contractor"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["description"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["sun_workers"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.weekly.sun_workers %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.sunday_values["start_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.sunday_hash["start_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending.sunday_values["end_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><%= request.sunday_hash["end_time"] %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.sunday_values["taw"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["taw"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.sunday_values["form_b"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["form_b"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.sunday_values["form_c"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["form_c"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.sunday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+          <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_sun %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
+          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_sun %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
+          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_sun %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
       </tr>
     <% end %>
   <% end %>

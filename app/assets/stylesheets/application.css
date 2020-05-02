@@ -277,7 +277,6 @@ body{
 table.requests_table {
   border: 1px solid #1D2CD2;
   background-color: #EEEEEE;
-  width: 100%;
   text-align: center;
   border-collapse: collapse;
 }
@@ -459,4 +458,40 @@ table.requests_table tfoot .links a{
 .red{
   color: #b00909;
   font-weight: bold;
+}
+
+.displaytable{
+  overflow-x: auto;
+}
+
+.displaytable td{
+  word-wrap:break-word;
+}
+
+.small60{
+  min-width: 60px;
+  max-width: 61px;
+}
+
+.small80{
+  min-width: 80px;
+  max-width: 81px;
+}
+
+.medium{
+  min-width: 150px;
+  max-width: 151px;
+}
+
+.large{
+  min-width: 300px;
+  max-width: 301px;
+}
+
+tbody {
+  100%
+}
+
+.requests_table textarea{
+  width: 90%
 }
