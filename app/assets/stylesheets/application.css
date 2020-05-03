@@ -491,3 +491,11 @@ table.requests_table tfoot .links a{
 .requests_table textarea{
   width: 90%
 }
+
+textarea, .preserve-lines{
+  white-space: pre-wrap;
+}
+
+.index_status{
+    position: absolute;
+}

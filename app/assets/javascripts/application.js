@@ -1060,5 +1060,20 @@ if ($('#SunData').length > 0){
    });
   });
 
+$(".reqstatus").on("mouseover",function(e){
+
+  if (event.target.classList.contains("small60")) {
+    $(event.target).children(".index_status")[0].classList.remove("hidden");
+  }
+});
+$(".reqstatus").on("mouseleave",function(e){
+  if (event.target.classList.contains("small60")) {
+    $(event.target).children(".index_status")[0].classList.add("hidden");
+  }
+});
+$(".index_status").on("mouseleave",function(e){
+
+    $(event.target).parent(".index_status")[0].classList.add("hidden");
+});
 
 });
