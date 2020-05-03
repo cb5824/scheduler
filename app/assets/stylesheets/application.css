@@ -488,10 +488,6 @@ table.requests_table tfoot .links a{
   max-width: 301px;
 }
 
-tbody {
-  100%
-}
-
 .requests_table textarea{
   width: 90%
 }
