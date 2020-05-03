@@ -26,8 +26,13 @@
 <% end %>
 
 <%= form_tag(requests_path, method: "get") do %>
-    <%= hidden_field_tag("week", value = params["week"]) %>
-    <%= hidden_field_tag("year", value = params["year"]) %>
+  <% if params["week"] %>
+    <%= hidden_field_tag("filter_week", value = params["week"]) %>
+    <%= hidden_field_tag("filter_year", value = params["year"]) %>
+  <% else %>
+    <%= hidden_field_tag("filter_week", value = params["filter_week"]) %>
+    <%= hidden_field_tag("filter_year", value = params["filter_year"]) %>
+  <% end %>
     <% if params["hide"] == "yes" %>
       <%= submit_tag("Show Cancelled Requests") %>
     <% else %>
@@ -188,9 +193,17 @@ Sun
         <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.monday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.monday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
         <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
         <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-        <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_mon %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
-        <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_mon %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
-        <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_mon %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
+        <td class="large"><li><textarea id="requestornotesmon<%= request.id %>"><%= request.requestor_notes_mon %></textarea></li><li><button type="button" class="savenotes" data-type="requestor" data-day="mon" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+        <% if @user.role == "admin" || @user.role == "superadmin" %>
+          <td class="large"><li><textarea id="adminnotesmon<%= request.id %>"><%= request.admin_notes_mon %></textarea></li><li><button type="button" class="savenotes" data-type="admin" data-day="mon" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+        <% else %>
+          <td class="large"><%= request.admin_notes_mon %></td>
+        <% end %>
+        <% if @user.role == "inspector" || @user.role == "superadmin" %>
+          <td class="large"><li><textarea id="inspectornotesmon<%= request.id %>"><%= request.inspector_notes_mon %></textarea></li><li><button type="button" class="savenotes" data-type="inspector" data-day="mon" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+        <% else %>
+          <td class="large"><%= request.inspector_notes_mon %></td>
+        <% end %>
       </tr>
     <% end %>
   <% end %>
@@ -226,7 +239,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.tue == 1  || request.tuesday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>" >
         <td class="small60"><a href="<%= request_path(request) %>">
           <% if request.status == 'pending'%>
             <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -250,9 +263,17 @@ Sun
         <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.tuesday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.tuesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
         <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
         <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-        <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_tue %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
-        <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_tue %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
-        <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_tue %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
+        <td class="large"><li><textarea id="requestornotestue<%= request.id %>"><%= request.requestor_notes_tue %></textarea></li><li><button type="button" class="savenotes" data-type="requestor" data-day="tue" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+        <% if @user.role == "admin" || @user.role == "superadmin" %>
+          <td class="large"><li><textarea id="adminnotestue<%= request.id %>"><%= request.admin_notes_tue %></textarea></li><li><button type="button" class="savenotes" data-type="admin" data-day="tue" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+        <% else %>
+          <td class="large"><%= request.admin_notes_tue %></td>
+        <% end %>
+        <% if @user.role == "inspector" || @user.role == "superadmin" %>
+          <td class="large"><li><textarea id="inspectornotestue<%= request.id %>"><%= request.inspector_notes_tue %></textarea></li><li><button type="button" class="savenotes" data-type="inspector" data-day="tue" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+        <% else %>
+          <td class="large"><%= request.inspector_notes_tue %></td>
+        <% end %>
       </tr>
     <% end %>
   <% end %>
@@ -288,7 +309,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.wed == 1  || request.wednesday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>" >
           <td class="small60"><a href="<%= request_path(request) %>">
             <% if request.status == 'pending'%>
               <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -312,9 +333,17 @@ Sun
           <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.wednesday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.wednesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_wed %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
-          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_wed %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
-          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_wed %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
+          <td class="large"><li><textarea id="requestornoteswed<%= request.id %>"><%= request.requestor_notes_wed %></textarea></li><li><button type="button" class="savenotes" data-type="requestor" data-day="wed" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% if @user.role == "admin" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="adminnoteswed<%= request.id %>"><%= request.admin_notes_wed %></textarea></li><li><button type="button" class="savenotes" data-type="admin" data-day="wed" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.admin_notes_wed %></td>
+          <% end %>
+          <% if @user.role == "inspector" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="inspectornoteswed<%= request.id %>"><%= request.inspector_notes_wed %></textarea></li><li><button type="button" class="savenotes" data-type="inspector" data-day="wed" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.inspector_notes_wed %></td>
+          <% end %>
       </tr>
     <% end %>
   <% end %>
@@ -350,7 +379,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.thu == 1  || request.thursday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>" >
           <td class="small60"><a href="<%= request_path(request) %>">
             <% if request.status == 'pending'%>
               <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -374,9 +403,17 @@ Sun
           <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.thursday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.thursday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_thu %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
-          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_thu %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
-          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_thu %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
+          <td class="large"><li><textarea id="requestornotesthu<%= request.id %>"><%= request.requestor_notes_thu %></textarea></li><li><button type="button" class="savenotes" data-type="requestor" data-day="thu" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% if @user.role == "admin" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="adminnotesthu<%= request.id %>"><%= request.admin_notes_thu %></textarea></li><li><button type="button" class="savenotes" data-type="admin" data-day="thu" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.admin_notes_thu %></td>
+          <% end %>
+          <% if @user.role == "inspector" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="inspectornotesthu<%= request.id %>"><%= request.inspector_notes_thu %></textarea></li><li><button type="button" class="savenotes" data-type="inspector" data-day="thu" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.inspector_notes_thu %></td>
+          <% end %>
       </tr>
     <% end %>
   <% end %>
@@ -412,7 +449,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.fri == 1  || request.friday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>" >
           <td class="small60"><a href="<%= request_path(request) %>">
             <% if request.status == 'pending'%>
               <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -436,9 +473,17 @@ Sun
           <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.friday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.friday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_fri %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
-          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_fri %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
-          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_fri %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
+          <td class="large"><li><textarea id="requestornotesfri<%= request.id %>"><%= request.requestor_notes_fri %></textarea></li><li><button type="button" class="savenotes" data-type="requestor" data-day="fri" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% if @user.role == "admin" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="adminnotesfri<%= request.id %>"><%= request.admin_notes_fri %></textarea></li><li><button type="button" class="savenotes" data-type="admin" data-day="fri" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.admin_notes_fri %></td>
+          <% end %>
+          <% if @user.role == "inspector" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="inspectornotesfri<%= request.id %>"><%= request.inspector_notes_fri %></textarea></li><li><button type="button" class="savenotes" data-type="inspector" data-day="fri" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.inspector_notes_fri %></td>
+          <% end %>
       </tr>
     <% end %>
   <% end %>
@@ -474,7 +519,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.sat == 1  || request.saturday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>" >
           <td class="small60"><a href="<%= request_path(request) %>">
             <% if request.status == 'pending'%>
               <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -498,9 +543,17 @@ Sun
           <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.saturday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.saturday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_sat %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
-          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_sat %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
-          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_sat %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
+          <td class="large"><li><textarea id="requestornotessat<%= request.id %>"><%= request.requestor_notes_sat %></textarea></li><li><button type="button" class="savenotes" data-type="requestor" data-day="sat" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% if @user.role == "admin" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="adminnotessat<%= request.id %>"><%= request.admin_notes_sat %></textarea></li><li><button type="button" class="savenotes" data-type="admin" data-day="sat" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.admin_notes_sat %></td>
+          <% end %>
+          <% if @user.role == "inspector" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="inspectornotessat<%= request.id %>"><%= request.inspector_notes_sat %></textarea></li><li><button type="button" class="savenotes" data-type="inspector" data-day="sat" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.inspector_notes_sat %></td>
+          <% end %>
       </tr>
     <% end %>
   <% end %>
@@ -536,7 +589,7 @@ Sun
 
   <% @requests.each do |request| %>
     <% if request.sun == 1  || request.sunday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %>" >
           <td class="small60"><a href="<%= request_path(request) %>">
             <% if request.status == 'pending'%>
               <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
@@ -560,9 +613,17 @@ Sun
           <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending.sunday_values["track_and_time"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.sunday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %><% end %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
           <td data-href="<%= request_path(request) %>" class="medium" ><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-          <td class="large"><li><textarea name="requestornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.requestor_notes_sun %></textarea></li><li><button type="button" class="rnotes">Save</button></li></td>
-          <td class="large"><li><textarea name="adminnotes<%= request.id %>" data-request="<%= request.id %>"><%= request.admin_notes_sun %></textarea></li><li><button type="button" class="anotes">Save</button></li></td>
-          <td class="large"><li><textarea name="inspectornotes<%= request.id %>" data-request="<%= request.id %>"><%= request.inspector_notes_sun %></textarea></li><li><button type="button" class="inotes">Save</button></li></td>
+          <td class="large"><li><textarea id="requestornotessun<%= request.id %>"><%= request.requestor_notes_sun %></textarea></li><li><button type="button" class="savenotes" data-type="requestor" data-day="sun" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% if @user.role == "admin" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="adminnotessun<%= request.id %>"><%= request.admin_notes_sun %></textarea></li><li><button type="button" class="savenotes" data-type="admin" data-day="sun" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.admin_notes_sun %></td>
+          <% end %>
+          <% if @user.role == "inspector" || @user.role == "superadmin" %>
+            <td class="large"><li><textarea id="inspectornotessun<%= request.id %>"><%= request.inspector_notes_sun %></textarea></li><li><button type="button" class="savenotes" data-type="inspector" data-day="sun" data-request="<%= request.id %>" data-address="<%= api_v1_request_path (request) %>">Save</button></li></td>
+          <% else %>
+            <td class="large"><%= request.inspector_notes_sun %></td>
+          <% end %>
       </tr>
     <% end %>
   <% end %>

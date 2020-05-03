@@ -19,5 +19,12 @@ Rails.application.routes.draw do
     get 'note', on: :new
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :requests, only: [:index, :update, :show, :create]
+    end
+  end
+
   root to: 'landing#index'
+
 end

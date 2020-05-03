@@ -99,6 +99,9 @@ class RequestsController < ApplicationController
     if params["week"] && params["year"]
       @thisweek = params["week"]
       @thisyear = params["year"]
+    elsif params["filter_week"] && params["filter_year"]
+      @thisweek = params["filter_week"]
+      @thisyear = params["filter_year"]
     else
       @thisweek = Date.today.cweek
       @thisyear = Date.today.cwyear

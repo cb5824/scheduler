@@ -1028,6 +1028,37 @@ if ($('#SunData').length > 0){
     $('#request_sunday_hash_worker_secondary3').val($('#SunData').attr('data-worker_secondary3'));
     $('#request_sunday_hash_worker_secondary4').val($('#SunData').attr('data-worker_secondary4'));
     $('#request_sunday_hash_worker_secondary5').val($('#SunData').attr('data-worker_secondary5'));
-}
+  }
+
+  $('.savenotes').on('click', (event) =>{
+    event.preventDefault();
+    let address = event.target.dataset.address;
+    let req = event.target.dataset.request;
+    let day = event.target.dataset.day;
+    if (event.target.dataset.type === "requestor") {
+      var test = '#requestornotes' + day + req;
+      let notes = $(test).val();
+      var reqdata = { id: req, rnotes: notes,  day: day}
+    } else if (event.target.dataset.type === "admin") {
+      var test = '#adminnotes' + day + req;
+      let notes = $(test).val();
+      var reqdata = { id: req, anotes: notes,  day: day}
+    } else if (event.target.dataset.type === "inspector") {
+      var test = '#inspectornotes' + day + req;
+      let notes = $(test).val();
+      var reqdata = { id: req, inotes: notes,  day: day}
+    }
+
+    let request = $.ajax({
+      method: 'PATCH',
+      data: reqdata,
+      url: address
+    });
+
+    request.done(() => {
+
+   });
+  });
+
 
 });
