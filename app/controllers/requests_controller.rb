@@ -96,6 +96,7 @@ class RequestsController < ApplicationController
         ['Shared Maintainer', 'sM']]
 
   def index
+    binding.pry
     if params["week"] && params["year"]
       @thisweek = params["week"]
       @thisyear = params["year"]

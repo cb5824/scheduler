@@ -218,7 +218,11 @@ class Request < ApplicationRecord
 
     if self.year <= thisyear
       if self.week <= thisweek
-        timenow > finaldaytime
+        if finalday <= Time.current.wday
+          timenow > finaldaytime
+        else
+          return false
+        end
       else
         return false
       end
