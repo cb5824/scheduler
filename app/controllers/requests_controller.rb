@@ -167,7 +167,6 @@ end
   def show
     @request = Request.where(id: params[:id])[0]
     @user = current_user
-    binding.pry
     @entries = @request.changelogs.sort_by { |entry| entry.created_at }
     @notes = @request.notes.sort_by { |entry| entry.created_at }
   end

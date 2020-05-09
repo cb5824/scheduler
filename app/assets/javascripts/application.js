@@ -30,6 +30,22 @@ $("td > a").on("click",function(e){
   e.stopPropagation();
 });
 
+$(".notes_tab").on("click", function(){
+  $( ".notes_tab" ).each(function() {
+    $( this ).removeClass( "active" );
+    $( this ).addClass( "inactive" );
+  });
+  this.classList.remove("inactive");
+  this.classList.add("active");
+  $(event.target.dataset.daytable).find(".notes_content").each(function(){
+    $(this).addClass("hidden");
+  });
+
+  $(event.target.dataset.daytable).find(event.target.dataset.notetype).each(function(){
+    $(this).removeClass("hidden");
+  });
+});
+
 $(".daytab").on("click", function(){
   $( ".daytab" ).each(function() {
     $( this ).removeClass( "active" );

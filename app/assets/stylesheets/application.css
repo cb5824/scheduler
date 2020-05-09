@@ -422,6 +422,7 @@ table.requests_table tfoot .links a{
 
 .inactive{
   background-color: #23272a;
+  color: #ffffff;
 }
 
 .active{
@@ -570,4 +571,31 @@ th.rotated > div{
 
 .notes{
   width: 688px;
+  padding: 0;
+}
+
+.notes_tab_container{
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.notes_tab{
+  border: 1px solid black;
+  width: 75px;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.notes_wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.notes_title{
+  height: 50px;
+  line-height: 100px;
 }
