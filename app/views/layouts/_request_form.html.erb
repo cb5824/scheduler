@@ -156,6 +156,8 @@
       <br>
       <div class="form_day_block hidden" id="monday_block">
         <div class="form_block_line">
+
+
         <h4>Monday</h4>
         </div>
         <div class="daily_form_block_line">
@@ -166,16 +168,31 @@
           <button type="button" class="copy_day" data-to="mon" data-from="sat">Copy Sat</button>
           <button type="button" class="copy_day" data-to="mon" data-from="sun">Copy Sun</button>
         </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
+            <%= f.fields_for :monday_hash, @request.monday_hash do |p| %>
+            <%= p.label :b_time, "Time" %>
+            <%= p.time_field :b_time %>
+            <br>
+            <%= p.label :b_location, "Location" %>
+            <%= p.text_field :b_location %>
+            <br>
+            <%= p.label :b_name_number, "Name/Number" %>
+            <%= p.text_field :b_name_number %>
+          </div>
+        </div>
+
         <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
-            <%= f.fields_for :monday_hash, @request.monday_hash do |p| %>
-          <%= p.label :start_time %>
-          <%= p.time_field :start_time %>
-          <br>
-          <%= p.label :end_time %>
-          <%= p.time_field :end_time %>
-        </div>
+            <%= p.label :start_time %>
+            <%= p.time_field :start_time %>
+            <br>
+            <%= p.label :end_time %>
+            <%= p.time_field :end_time %>
+          </div>
         </div>
 
         <div class="daily_form_block_line">
@@ -204,6 +221,7 @@
             MT2<%= p.check_box :MT2, {}, checked_value = 1, unchecked_value = 0 %>
             MT3<%= p.check_box :MT3, {}, checked_value = 1, unchecked_value = 0 %>
             MT4<%= p.check_box :MT4, {}, checked_value = 1, unchecked_value = 0 %>
+            Other<%= p.check_box :other, {}, checked_value = 1, unchecked_value = 0 %>
           </div>
         </div>
 
@@ -214,6 +232,7 @@
           Form B<%= p.check_box :form_b, {}, checked_value = 1, unchecked_value = 0 %>
           Form C<%= p.check_box :form_c, {}, checked_value = 1, unchecked_value = 0 %>
           Track & Time<%= p.check_box :track_and_time, {}, checked_value = 1, unchecked_value = 0 %>
+          Inacc Track<%= p.check_box :inacc_track, {}, checked_value = 1, unchecked_value = 0 %>
         </div>
       </div>
 

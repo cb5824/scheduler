@@ -3,14 +3,14 @@
     <h1>Right to Work Request Portal</h1>
   </div>
   <% if @user != nil %>
-    <% if @user.role == 'admin' %>
+    <% if @user.role == 'admin' || @user.role == 'superadmin' %>
       <div class="control_panel">
         <a href="<%= profiles_path %>">Users</a>
         <br>
         <a href='<%= requests_path %>'>Requests</a>
       </div>
     <% elsif @user.role == 'inspector' %>
-    <% else %>
+    <% end %>
       <div class="account_summary">
         <ul>
 
@@ -25,6 +25,5 @@
         <br>
         <a href='<%= requests_path %>'>Requests</a>
       </div>
-    <% end %>
   <% end %>
 </div>

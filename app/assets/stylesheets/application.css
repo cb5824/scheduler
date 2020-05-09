@@ -269,8 +269,8 @@ body{
 }
 
 .status_icon{
-  height: 30px;
-  width: 30px
+  height: 25px;
+  width: 25px
 
 }
 
@@ -280,7 +280,7 @@ table.requests_table {
   text-align: center;
   border-collapse: collapse;
 }
-table.requests_table td, table.requests_table th {
+table.requests_table td{
   border: 1px solid #AAAAAA;
   padding: 3px 0px;
 }
@@ -298,9 +298,9 @@ table.requests_table thead {
   border-bottom: 2px solid #444444;
 }
 table.requests_table thead th {
-  font-size: 15px;
-  font-weight: bold;
-  color: #FFFFFF;
+  /* font-size: 15px; */
+  /* font-weight: bold; */
+  /* color: #FFFFFF; */
   text-align: center;
   border-left: 2px solid #D0E4F5;
 }
@@ -309,9 +309,9 @@ table.requests_table thead th:first-child {
 }
 
 table.requests_table tfoot {
-  font-size: 14px;
+  /* font-size: 14px; */
   font-weight: bold;
-  color: #FFFFFF;
+  /* color: #FFFFFF; */
   background: #23272A;
   background: -moz-linear-gradient(top, #5a5d5f 0%, #393c3f 66%, #23272A 100%);
   background: -webkit-linear-gradient(top, #5a5d5f 0%, #393c3f 66%, #23272A 100%);
@@ -322,7 +322,7 @@ table.requests_table tfoot td {
   font-size: 14px;
 }
 table.requests_table {
-  min-width: 1500px;
+  /* min-width: 1500px; */
 }
 table.requests_table tfoot .links {
   text-align: right;
@@ -460,9 +460,9 @@ table.requests_table tfoot .links a{
   font-weight: bold;
 }
 
-.displaytable{
+/* .displaytable{
   overflow-x: auto;
-}
+} */
 
 .displaytable td{
   word-wrap:break-word;
@@ -498,4 +498,63 @@ textarea, .preserve-lines{
 
 .index_status{
     position: absolute;
+}
+
+th.rotated{
+
+}
+
+th.rotated > div{
+  /* transform: rotate(-90deg); */
+  writing-mode:vertical-rl;
+  transform:scale(-1);
+  /* width:30px; */
+  text-align: left;
+}
+
+.trflex{
+
+}
+
+.trflex div{
+  display: flex;
+  align-items: center;
+}
+
+.requests_table th{
+  border: 2px solid black;
+  font-size: 8px;
+  font-family: Verdana, Geneva, sans-serif;
+}
+.wrapper{
+  width: 1900px;
+}
+
+.tallheader{
+  height: 100px;
+  width: 30px;
+}
+
+.smallheader{
+  height: 50px;
+}
+
+.topheader{
+  height: 50px;
+}
+
+.wmedium{
+  width: 80px;
+}
+
+.wsmall{
+  width: 30px;
+}
+
+.wlarge{
+  width: 250px;
+}
+
+.wverysmall{
+  width: 20px;
 }

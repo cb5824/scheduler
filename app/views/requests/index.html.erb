@@ -13,7 +13,6 @@
   <% end %>
 <% end %>
 
-
 <h4>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h4>
 
 <%= form_tag(requests_path, method: "get") do %>
@@ -46,6 +45,65 @@
 %>
 <br>
 <br>
+<!-- <div class="wrapper">
+  <table class="requests_table">
+    <thead>
+      <tr>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Approval Status</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Line #</div></th>
+        <th rowspan="2" class="wmedium"><div>Project <br>WD #</div></th>
+        <th rowspan="2"  class="wmedium"><div>Contractor</div></th>
+        <th colspan="7" class="topheader"><div>Location</th>
+        <th rowspan="2"><div class="wlarge">Description of Work</th>
+        <th colspan="7"><div>Support Allocation</th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
+        <th rowspan="2"><div>Shift (24 hr)</th>
+        <th colspan="5"><div>Protection</th>
+        <th rowspan="2" class="wmedium"><div>Associated SSWPs</th>
+        <th rowspan="2" class="wmedium"><div>Associated CNs</th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">RTW Training Complete?</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">OCS De-Energize?</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Disturb Track?</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">RMM On Track?</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">RMM Off Track?</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Disable/Affect Crossings?</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Underground Work Required?</div></th>
+        <th rowspan="2" class="rotated trflex"><div class="tallheader">Crossing Glagging or Traffic</div></th>
+        <th colspan="3"><div>Submittal Details</th>
+      </tr>
+      <tr>
+        <th>Mile Post</th>
+        <th>Control Point</th>
+        <th class="rotated"><div class="smallheader wverysmall">MT1</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">MT2</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
+        <th class="wsmall">Mon</th>
+        <th class="wsmall">Tue</th>
+        <th class="wsmall">Wed</th>
+        <th class="wsmall">Thu</th>
+        <th class="wsmall">Fri</th>
+        <th class="wsmall">Sat</th>
+        <th class="wsmall">Sun</th>
+        <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">T&T</div></th>
+        <th class="rotated"><div class="smallheader wverysmall">Inacc Trk</div></th>
+        <th class="wmedium">Date Submitted</th>
+        <th class="wmedium">Last Edited</th>
+        <th class="wmedium">Submitted By</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div> -->
+
+<br>
+<br>
 
 <div class="daytab active" data-displaytab="week">
 Week
@@ -74,38 +132,64 @@ Sun
 
 
 
+<div class="wrapper">
 <div id="weekly_table" class="displaytable">
-  <table class='requests_table'>
-    <thead>
-      <tr>
-        <th class="small60">Status</th>
-        <th class="medium">Project</th>
-        <th class="medium">Job Title</th>
-        <th class="medium">Contractor</th>
-        <th class="medium">Description</th>
-        <th class="small60">Mon</th>
-        <th class="small60">Tue</th>
-        <th class="small60">Wed</th>
-        <th class="small60">Thu</th>
-        <th class="small60">Fri</th>
-        <th class="small60">Sat</th>
-        <th class="small60">Sun</th>
-        <th class="small60">Night Work</th>
-        <th class="small80" >Start Time</th>
-        <th class="small80" >End Time</th>
-        <th class="small60">TAW</th>
-        <th class="small60">Form B</th>
-        <th class="small60">Form C</th>
-        <th class="small60">Track & Time</th>
-        <th class="medium">Submitted</th>
-        <th class="medium">Last Edit</th>
-      </tr>
-  </thead>
-  <tbody>
-
+    <table class="requests_table">
+      <thead>
+        <tr>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Approval Status</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Line #</div></th>
+          <th rowspan="2" class="wmedium"><div>Project <br>WD #</div></th>
+          <th rowspan="2"  class="wmedium"><div>Contractor</div></th>
+          <th colspan="7" class="topheader"><div>Location</th>
+          <th rowspan="2"><div class="wlarge">Description of Work</th>
+          <th colspan="7"><div>Support Allocation</th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
+          <th rowspan="2"><div>Shift (24 hr)</th>
+          <th colspan="5"><div>Protection</th>
+          <th rowspan="2" class="wmedium"><div>Associated SSWPs</th>
+          <th rowspan="2" class="wmedium"><div>Associated CNs</th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">RWP Training Complete?</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">OCS De-Energize?</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Disturb Track?</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">RMM On Track?</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">RMM Off Track?</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Disable/Affect Crossings?</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Underground Work Required?</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Crossing Glagging or Traffic</div></th>
+          <th colspan="3"><div>Submittal Details</th>
+        </tr>
+        <tr>
+          <th>Mile Post</th>
+          <th>Control Point</th>
+          <th class="rotated"><div class="smallheader wverysmall">MT1</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">MT2</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
+          <th class="wsmall">Mon</th>
+          <th class="wsmall">Tue</th>
+          <th class="wsmall">Wed</th>
+          <th class="wsmall">Thu</th>
+          <th class="wsmall">Fri</th>
+          <th class="wsmall">Sat</th>
+          <th class="wsmall">Sun</th>
+          <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">T&T</div></th>
+          <th class="rotated"><div class="smallheader wverysmall">Inacc Trk</div></th>
+          <th class="wmedium">Date Submitted</th>
+          <th class="wmedium">Last Edited</th>
+          <th class="wmedium">Submitted By</th>
+        </tr>
+      </thead>
+      <tbody>
+<% counter = 1 %>
   <% @requests.each do |request| %>
       <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
-        <td class="small60 reqstatus">
+        <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
               <div class="approvals_bar_block <%= request.approval1 %>">
@@ -132,27 +216,48 @@ Sun
           <% end %>
         </a>
       </td>
-      <td data-href="<%= request_path(request) %>" class="medium <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %></a></td>
-      <td data-href="<%= request_path(request) %>" class="medium <% if request.pending["title"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.title %></a></td>
-      <td data-href="<%= request_path(request) %>" class="medium  <% if request.pending["contractor"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-      <td data-href="<%= request_path(request) %>" class="medium preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending["start"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.weekly.start %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small80 <% if request.pending["end"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.weekly.end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["taw"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["form_b"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["form_c"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="small60 <% if request.pending["track_and_time"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %><% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="medium"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-      <td data-href="<%= request_path(request) %>" class="medium"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+      <td><%= counter %></td>
+
+      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><%= request.weekly.mile_post %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><%= request.weekly.control_point %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.description %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><a href="<%= request_path(request) %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><%= request.weekly.control_point %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><%= request.weekly.shift %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["taw"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["form_b"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["form_c"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["track_and_time"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class=""><a href="<%= request_path(request) %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><%= request.sswps %></a></td>
+      <td data-href="<%= request_path(request) %>" <a href="<%= request_path(request) %>"><%= request.change_notices %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["rwp"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.rwp == "yes" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["ocs"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.disturb == "ocs" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["disturb"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.disturb == "yes" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["rrm"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.rrm == "yes" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["foul"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.foul == "yes" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["crossings"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.crossings == "yes" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["underground"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.underground == "yes" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>" class="<% if request.pending["flagging"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.flagging == "yes" %><%= "\u2713" %><% else %><% end %></a></td>
+      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
+      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
+      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.requestor_name %></a></td>
     </tr>
+    <% counter += 1 %>
   <% end %>
   </tbody>
 
@@ -647,4 +752,5 @@ Sun
   </tbody>
 
   </table>
+</div>
 </div>

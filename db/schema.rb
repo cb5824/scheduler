@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_015159) do
+ActiveRecord::Schema.define(version: 2020_05_09_142946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -202,6 +202,16 @@ ActiveRecord::Schema.define(version: 2020_04_28_015159) do
     t.string "fri_workers"
     t.string "sat_workers"
     t.string "sun_workers"
+    t.boolean "mt1"
+    t.boolean "mt2"
+    t.boolean "mt3"
+    t.boolean "mt4"
+    t.boolean "other"
+    t.boolean "inacc_track"
+    t.string "mile_post"
+    t.string "control_point"
+    t.string "shift"
+    t.boolean "single_tracking"
     t.index ["request_id"], name: "index_weeklies_on_request_id"
   end
 

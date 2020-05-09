@@ -6,6 +6,69 @@ class Request < ApplicationRecord
   has_one :weekly
   has_one :pending
 
+  CP_ARRAY = [['N.L. CP 4th', 1],
+        ['S.L. CP 4th', 2],
+        ['N.L. CP Common', 3],
+        ['S.L. CP Common', 4],
+        ['N.L. CP Army', 5],
+        ['S.L. CP Army', 6],
+        ['N.L. CP Tunnel', 7],
+        ['S.L. CP Tunnel', 8],
+        ['N.L. CP Geneva', 9],
+        ['S.L. CP Geneva', 10],
+        ['N.L. CP Brisbane', 11],
+        ['S.L. CP Brisbane', 12],
+        ['N.L. CP Sierra', 13],
+        ['S.L. CP Sierra', 14],
+        ['N.L. CP Scott', 15],
+        ['S.L. CP Scott', 16],
+        ['N.L. CP Center', 17],
+        ['S.L. CP Center', 18],
+        ['N.L. CP Bart', 19],
+        ['S.L. CP Bart', 20],
+        ['N.L. CP Trousdale', 21],
+        ['S.L. CP Trousdale', 22],
+        ['N.L. CP Palm', 23],
+        ['S.L. CP Palm', 24],
+        ['N.L. CP Ralston', 25],
+        ['S.L. CP Ralston', 26],
+        ['N.L. CP Dumbarton', 27],
+        ['S.L. CP Dumbarton', 28],
+        ['N.L. CP Junction', 29],
+        ['S.L. CP Junction', 30],
+        ['N.L. CP Alma', 31],
+        ['S.L. CP Alma', 32],
+        ['N.L. CP Mayfield', 33],
+        ['S.L. CP Mayfield', 34],
+        ['N.L. CP Mary', 35],
+        ['S.L. CP Mary', 36],
+        ['N.L. CP Hendy', 37],
+        ['S.L. CP Hendy', 38],
+        ['N.L. CP Bowers', 39],
+        ['S.L. CP Bowers', 40],
+        ['N.L. CP De La Cruz', 41],
+        ['S.L. CP De La Cruz', 42],
+        ['N.L. CP Coast', 43],
+        ['S.L. CP Coast', 44],
+        ['N.L. CP Franklin', 45],
+        ['S.L. CP Franklin', 46],
+        ['N.L. CP Stockton', 47],
+        ['S.L. CP Stockton', 48],
+        ['N.L. CP Shark', 49],
+        ['S.L. CP Shark', 50],
+        ['N.L. CP Alameda', 51],
+        ['S.L. CP Alameda', 52],
+        ['N.L. CP Bird', 53],
+        ['S.L. CP Bird', 54],
+        ['N.L. CP Delmas', 55],
+        ['S.L. CP Delmas', 56],
+        ['N.L. CP Mack', 57],
+        ['S.L. CP Mack', 58],
+        ['N.L. CP Michael', 59],
+        ['S.L. CP Michael', 60],
+        ['N.L. CP Lick', 61],
+        ['S.L. CP Lick', 62]]
+
   def generate_note(user, text)
     new_note = Note.new
     new_note.user_id = user.id
@@ -52,11 +115,22 @@ class Request < ApplicationRecord
     starting_day = nil
     ending_day = nil
     starting_time = nil
-    ending_time = nil
+    ending_time = ""
+    starting_times_array = []
+    ending_times_array = []
+    mile_post = []
+    control_point = []
+    single_tracking = false
+    mt1 = false
+    mt2 = false
+    mt3 = false
+    mt4 = false
+    other = false
     taw = false
     formb = false
     formc = false
     tandt = false
+    inacc = false
     mon_workers = ""
     tue_workers = ""
     wed_workers = ""
@@ -65,31 +139,74 @@ class Request < ApplicationRecord
     sat_workers = ""
     sun_workers = ""
 
-  [["Mon", self.monday_hash], ["Tue", self.tuesday_hash], ["Wed", self.wednesday_hash], ["Thu", self.thursday_hash], ["Fri", self.friday_hash], ["Sat", self.saturday_hash], ["Sun", self.sunday_hash]].each do |day|
+  [[self.mon, self.monday_hash, "Mon"], [self.tue, self.tuesday_hash, "Tue"], [self.wed, self.wednesday_hash, "Wed"], [self.thu, self.thursday_hash, "Thu"], [self.fri, self.friday_hash, "Fri"], [self.sat, self.saturday_hash, "Sat"], [self.sun, self.sunday_hash, "Sun"]].each do |day|
 
 
     if day[1]["start_time"] != "" && starting_time == nil && day[1]["cancelled"] != "yes"
       starting_time = day[1]["start_time"]
-      starting_day = day[0]
+      starting_day = day[2]
 
     end
     if day[1]["end_time"] != "" && day[1]["cancelled"] != "yes"
       ending_time = day[1]["end_time"]
-      ending_day = day[0]
+      ending_day = day[2]
     end
 
-    if day[1]["taw"] == "1"
+    if day[1]["start_time"] != "" && day[1]["cancelled"] != "yes"
+       starting_times_array << (day[1]["start_time"].delete ":").to_i
+    end
+    if day[1]["end_time"] != "" && day[1]["cancelled"] != "yes"
+      ending_times_array << (day[1]["end_time"].delete ":").to_i
+    end
+    if day[1]["mp1"] != "" && day[1]["cancelled"] != "yes"
+      mile_post << (day[1]["mp1"]).to_i
+    end
+    if day[1]["mp2"] != "" && day[1]["cancelled"] != "yes"
+      mile_post << (day[1]["mp2"]).to_i
+    end
+    if day[0] != 0 && day[1]["cancelled"] != "yes"
+      control_point << (day[1]["cp1"]).to_i
+    end
+    if day[0] != 0 && day[1]["cancelled"] != "yes"
+      control_point << (day[1]["cp2"]).to_i
+    end
+
+    if day[1]["MT1"] == "1" && day[1]["cancelled"] != "yes"
+        mt1 = true
+    end
+    if day[1]["MT2"] == "1" && day[1]["cancelled"] != "yes"
+        mt2 = true
+    end
+    if day[1]["MT3"] == "1" && day[1]["cancelled"] != "yes"
+        mt3 = true
+    end
+    if day[1]["MT4"] == "1" && day[1]["cancelled"] != "yes"
+        mt4 = true
+    end
+    if day[1]["other"] == "1" && day[1]["cancelled"] != "yes"
+        other = true
+    end
+    if day[0] != 0 && day[1]["cancelled"] != "yes" && day[1]["single_track"] == "single"
+      single_tracking = true
+    end
+
+    if day[1]["taw"] == "1" && day[1]["cancelled"] != "yes"
         taw = true
     end
-    if day[1]["form_b"] == "1"
+    if day[1]["form_b"] == "1" && day[1]["cancelled"] != "yes"
         form_b = true
     end
-    if day[1]["form_c"] == "1"
+    if day[1]["form_c"] == "1" && day[1]["cancelled"] != "yes"
         form_c = true
     end
-    if day[1]["track_and_time"] == "1"
+    if day[1]["track_and_time"] == "1" && day[1]["cancelled"] != "yes"
         tandt = true
     end
+    if day[1]["inacc_track"] == "1" && day[1]["cancelled"] != "yes"
+        inacc = true
+    end
+
+
 
     temp_workers = day[1]["worker_primary"]
     [day[1]["worker_secondary1"], day[1]["worker_secondary2"], day[1]["worker_secondary3"], day[1]["worker_secondary4"], day[1]["worker_secondary5"]].each do |worker|
@@ -98,7 +215,7 @@ class Request < ApplicationRecord
       end
     end
 
-    case day[0]
+    case day[2]
     when "Mon"
       mon_workers = temp_workers
     when "Tue"
@@ -176,10 +293,20 @@ class Request < ApplicationRecord
     @new_weekly.sun_workers = sun_workers
     @new_weekly.start = "#{starting_day}: #{starting_time}"
     @new_weekly.end = "#{ending_day}: #{ending_time}"
+    @new_weekly.mile_post = "#{mile_post.min} - #{mile_post.max}"
+    @new_weekly.control_point = "#{(CP_ARRAY.rassoc(control_point.min))[0]} - #{(CP_ARRAY.rassoc(control_point.max))[0]}"
+    @new_weekly.shift = "#{starting_times_array.min} - #{ending_times_array.max}"
     @new_weekly.taw = taw
     @new_weekly.form_b = formb
     @new_weekly.form_c = formc
     @new_weekly.track_and_time = tandt
+    @new_weekly.inacc_track = inacc
+    @new_weekly.single_tracking = single_tracking
+    @new_weekly.mt1 = mt1
+    @new_weekly.mt2 = mt2
+    @new_weekly.mt3 = mt3
+    @new_weekly.mt4 = mt4
+    @new_weekly.other = other
     @new_weekly.request = self
     @new_weekly.save
     self.pending.save
