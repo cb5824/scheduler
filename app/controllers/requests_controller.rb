@@ -153,9 +153,10 @@ end
       @request.attachments.attach(request_params[:attachments])
     end
     if @request.save
+      @request.update_weekly
+      @request.weekly.save
       @request.pending = Pending.new
       @request.pending.save
-      @request.update_weekly
       redirect_to root_path, notice: 'Request was saved successfully'
     else
       @errors = @request.errors.full_messages
@@ -166,6 +167,7 @@ end
   def show
     @request = Request.where(id: params[:id])[0]
     @user = current_user
+    binding.pry
     @entries = @request.changelogs.sort_by { |entry| entry.created_at }
     @notes = @request.notes.sort_by { |entry| entry.created_at }
   end
@@ -192,7 +194,6 @@ end
     @request2[:updated_at] = @request[:updated_at]
     @request2[:user_id] = @request[:user_id]
 
-    @request.pending.change(@request2)
     if (@request.mon == 1 && @request2.mon != 1) || (@request.monday_hash["cancelled"] == "yes" && @request2.mon = 0)
       @request2.monday_hash["cancelled"] = "yes"
     else
@@ -229,6 +230,9 @@ end
       @request2.sunday_hash["cancelled"] = "no"
     end
     @request.generate_changelog(@request2, @user)
+    @request.pending.change(@request2)
+    @request.pending.save
+
     if  ["admin_notes_mon", "admin_notes_tue", "admin_notes_wed", "admin_notes_thu", "admin_notes_fri", "admin_notes_sat", "admin_notes_sun"].any? {|note| (@request.attributes.to_a - @request2.attributes.to_a).map(&:first).include?(note)}
       @request.update_attributes(request_params)
     else
@@ -242,11 +246,14 @@ end
       @request.friday_hash["cancelled"] = @request2.friday_hash["cancelled"]
       @request.saturday_hash["cancelled"] = @request2.saturday_hash["cancelled"]
       @request.sunday_hash["cancelled"] = @request2.sunday_hash["cancelled"]
+
+      @request.pending.change(@request2)
+      @request.update_weekly
+      @request.weekly.save
       @request.save
     if request_params[:attachments]
       @request.attachments.attach(request_params[:attachments])
     end
-    @request.update_weekly
     @request.pending.save
     flash[:notice] = "Request updated. Status changed to Pending Approval!"
     redirect_to @request
@@ -323,6 +330,6 @@ end
   end
 
   def request_params
-    params.require(:request).permit(:year, :week, :start_time, :end_time, :cp1, :mp1, :cp2, :mp2, :contractor, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :description, :single_track, :requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :night_work, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :status, :approval1, :approval2, :approval3, :approval4, :archived, :color, :admin_notes_mon, :admin_notes_tue, :admin_notes_wed, :admin_notes_thu, :admin_notes_fri, :admin_notes_sat, :admin_notes_sun, :requestor_notes_mon, :requestor_notes_tue, :requestor_notes_wed, :requestor_notes_thu, :requestor_notes_fri, :requestor_notes_sat, :requestor_notes_sun, :inspector_notes_mon, :inspector_notes_tue, :inspector_notes_wed, :inspector_notes_thu, :inspector_notes_fri, :inspector_notes_sat, :inspector_notes_sun, :monday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled],:tuesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :wednesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :thursday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :friday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :saturday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :sunday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], attachments: [])
+    params.require(:request).permit(:year, :week, :start_time, :end_time, :cp1, :mp1, :cp2, :mp2, :contractor, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :description, :single_track, :requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :night_work, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :status, :approval1, :approval2, :approval3, :approval4, :archived, :color, :admin_notes_mon, :admin_notes_tue, :admin_notes_wed, :admin_notes_thu, :admin_notes_fri, :admin_notes_sat, :admin_notes_sun, :requestor_notes_mon, :requestor_notes_tue, :requestor_notes_wed, :requestor_notes_thu, :requestor_notes_fri, :requestor_notes_sat, :requestor_notes_sun, :inspector_notes_mon, :inspector_notes_tue, :inspector_notes_wed, :inspector_notes_thu, :inspector_notes_fri, :inspector_notes_sat, :inspector_notes_sun, :monday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :b_name_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled],:tuesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :b_name_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :wednesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :b_name_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :thursday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :b_name_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :friday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :b_name_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :saturday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :b_name_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :sunday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :b_name_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], attachments: [])
   end
 end

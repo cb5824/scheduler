@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_142946) do
+ActiveRecord::Schema.define(version: 2020_05_09_180022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -93,6 +93,17 @@ ActiveRecord::Schema.define(version: 2020_05_09_142946) do
     t.string "fri_workers", default: "0", null: false
     t.string "sat_workers", default: "0", null: false
     t.string "sun_workers", default: "0", null: false
+    t.string "mile_post", default: "0", null: false
+    t.string "control_point", default: "0", null: false
+    t.string "mt1", default: "0", null: false
+    t.string "mt2", default: "0", null: false
+    t.string "mt3", default: "0", null: false
+    t.string "mt4", default: "0", null: false
+    t.string "other", default: "0", null: false
+    t.string "single_tracking", default: "0", null: false
+    t.string "inacc_track", default: "0", null: false
+    t.string "sswps", default: "0", null: false
+    t.string "shift", default: "0", null: false
     t.index ["request_id"], name: "index_pendings_on_request_id"
   end
 

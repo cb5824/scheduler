@@ -3,6 +3,7 @@ class Pending < ApplicationRecord
 
   def change(comparison)
     current = self.request
+    comparison.update_weekly
     # t.integer "project", default: 0, null: false
     if current.requestor_project != comparison.requestor_project
       self.project = "1"
@@ -52,6 +53,57 @@ class Pending < ApplicationRecord
       self.night_work = "1"
     end
 
+# •	Mile post
+if current.weekly.mile_post != comparison.weekly.mile_post
+  self.mile_post = "1"
+end
+
+# •	Cp
+if current.weekly.control_point != comparison.weekly.control_point
+  self.control_point = "1"
+end
+# •	Mt1 -4 and other
+if current.weekly.mt1 != comparison.weekly.mt1
+  self.mt1 = "1"
+end
+if current.weekly.mt2 != comparison.weekly.mt2
+  self.mt2 = "1"
+end
+if current.weekly.mt3 != comparison.weekly.mt3
+  self.mt3 = "1"
+end
+if current.weekly.mt4 != comparison.weekly.mt4
+  self.mt4 = "1"
+end
+if current.weekly.other != comparison.weekly.other
+  self.other = "1"
+end
+# •	Single tracking
+if current.weekly.single_tracking != comparison.weekly.single_tracking
+  self.single_tracking = "1"
+end
+# •	Shift
+if current.weekly.shift != comparison.weekly.shift
+  self.shift = "1"
+end
+
+# •	Inacc track
+if current.weekly.inacc_track != comparison.weekly.inacc_track
+  self.inacc_track = "1"
+end
+
+# •	Sswps
+if current.sswps != comparison.sswps
+  self.sswps = "1"
+end
+
+# •	Change notices
+if current.change_notices != comparison.change_notices
+  self.change_notices = "1"
+end
+#
+
+
     [[current.monday_hash, comparison.monday_hash], [current.tuesday_hash, comparison.tuesday_hash], [current.wednesday_hash, comparison.wednesday_hash], [current.thursday_hash, comparison.thursday_hash], [current.friday_hash, comparison.friday_hash], [current.saturday_hash, comparison.saturday_hash], [current.sunday_hash, comparison.sunday_hash]].each_with_index do |day, index|
       if day[0]["MT1"] != day[1]["MT1"]
         self.parse_day(index, "MT1")
@@ -64,6 +116,9 @@ class Pending < ApplicationRecord
       end
       if day[0]["MT4"] != day[1]["MT4"]
         self.parse_day(index, "MT4")
+      end
+      if day[0]["other"] != day[1]["other"]
+        self.parse_day(index, "other")
       end
       if day[0]["cp1"] != day[1]["cp1"]
         self.parse_day(index, "cp1")
@@ -116,11 +171,27 @@ class Pending < ApplicationRecord
       if day[0]["worker_secondary5"] != day[1]["worker_secondary5"]
         self.parse_day(index, "worker_secondary5")
       end
+      if day[0]["inacc_track"] != day[1]["inacc_track"]
+        self.parse_day(index, "inacc_track")
+      end
+      if day[0]["b_time"] != day[1]["b_time"]
+        self.parse_day(index, "b_time")
+      end
+      if day[0]["b_location"] != day[1]["b_location"]
+        self.parse_day(index, "b_location")
+      end
+      if day[0]["b_name_number"] != day[1]["b_name_number"]
+        self.parse_day(index, "b_name_number")
+      end
+
     end
   end
 
-  def parse_day(index, value)
+  # Day
+  # •	Briefing details
+  # •	Inacc track
 
+  def parse_day(index, value)
     case index
     when 0
       self.monday_values[value] = 1
@@ -149,7 +220,6 @@ class Pending < ApplicationRecord
         self[attr[0]] = {}
       end
     end
-    binding.pry
     self.save
   end
 

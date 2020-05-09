@@ -308,10 +308,10 @@ class Request < ApplicationRecord
     @new_weekly.mt4 = mt4
     @new_weekly.other = other
     @new_weekly.request = self
-    @new_weekly.save
-    self.pending.save
-    self.save
-
+    # @new_weekly.save
+    # self.pending.save
+    # self.save
+    #
   end
 
   def expired?
@@ -357,6 +357,10 @@ class Request < ApplicationRecord
       return false
     end
 
+  end
+
+  def parse_cp(num)
+    CP_ARRAY.rassoc(num)[0]
   end
 
 end

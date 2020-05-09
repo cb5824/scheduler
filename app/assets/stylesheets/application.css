@@ -494,6 +494,7 @@ table.requests_table tfoot .links a{
 
 textarea, .preserve-lines{
   white-space: pre-wrap;
+  text-align: left;
 }
 
 .index_status{
@@ -557,4 +558,16 @@ th.rotated > div{
 
 .wverysmall{
   width: 20px;
+}
+
+.briefing_details{
+  width: 185px;
+}
+
+.shift{
+  width: 40px;
+}
+
+.notes{
+  width: 688px;
 }
