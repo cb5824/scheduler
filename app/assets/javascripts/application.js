@@ -730,6 +730,11 @@ if ($('#MonData').length > 0){
     $('#request_monday_hash_worker_secondary3').val($('#MonData').attr('data-worker_secondary3'));
     $('#request_monday_hash_worker_secondary4').val($('#MonData').attr('data-worker_secondary4'));
     $('#request_monday_hash_worker_secondary5').val($('#MonData').attr('data-worker_secondary5'));
+
+    $('#request_monday_hash_b_time').val($('#MonData').attr('data-btime'));
+    $('#request_monday_hash_b_location').val($('#MonData').attr('data-blocation'));
+    $('#request_monday_hash_b_name_number').val($('#MonData').attr('data-bnamenumber'));
+
 }
 
 if ($('#TueData').length > 0){
@@ -775,6 +780,10 @@ if ($('#TueData').length > 0){
     $('#request_tuesday_hash_worker_secondary3').val($('#TueData').attr('data-worker_secondary3'));
     $('#request_tuesday_hash_worker_secondary4').val($('#TueData').attr('data-worker_secondary4'));
     $('#request_tuesday_hash_worker_secondary5').val($('#TueData').attr('data-worker_secondary5'));
+
+    $('#request_tuesday_hash_b_time').val($('#TueData').attr('data-btime'));
+    $('#request_tuesday_hash_b_location').val($('#TueData').attr('data-blocation'));
+    $('#request_tuesday_hash_b_name_number').val($('#TueData').attr('data-bnamenumber'));
 }
 
 if ($('#WedData').length > 0){
@@ -820,6 +829,10 @@ if ($('#WedData').length > 0){
     $('#request_wednesday_hash_worker_secondary3').val($('#WedData').attr('data-worker_secondary3'));
     $('#request_wednesday_hash_worker_secondary4').val($('#WedData').attr('data-worker_secondary4'));
     $('#request_wednesday_hash_worker_secondary5').val($('#WedData').attr('data-worker_secondary5'));
+
+    $('#request_wednesday_hash_b_time').val($('#WedData').attr('data-btime'));
+    $('#request_wednesday_hash_b_location').val($('#WedData').attr('data-blocation'));
+    $('#request_wednesday_hash_b_name_number').val($('#WedData').attr('data-bnamenumber'));
 }
 
 if ($('#ThuData').length > 0){
@@ -865,6 +878,10 @@ if ($('#ThuData').length > 0){
     $('#request_thursday_hash_worker_secondary3').val($('#ThuData').attr('data-worker_secondary3'));
     $('#request_thursday_hash_worker_secondary4').val($('#ThuData').attr('data-worker_secondary4'));
     $('#request_thursday_hash_worker_secondary5').val($('#ThuData').attr('data-worker_secondary5'));
+
+    $('#request_thursday_hash_b_time').val($('#ThuData').attr('data-btime'));
+    $('#request_thursday_hash_b_location').val($('#ThuData').attr('data-blocation'));
+    $('#request_thursday_hash_b_name_number').val($('#ThuData').attr('data-bnamenumber'));
 }
 
 if ($('#FriData').length > 0){
@@ -910,6 +927,10 @@ if ($('#FriData').length > 0){
     $('#request_friday_hash_worker_secondary3').val($('#FriData').attr('data-worker_secondary3'));
     $('#request_friday_hash_worker_secondary4').val($('#FriData').attr('data-worker_secondary4'));
     $('#request_friday_hash_worker_secondary5').val($('#FriData').attr('data-worker_secondary5'));
+
+    $('#request_friday_hash_b_time').val($('#FriData').attr('data-btime'));
+    $('#request_friday_hash_b_location').val($('#FriData').attr('data-blocation'));
+    $('#request_friday_hash_b_name_number').val($('#FriData').attr('data-bnamenumber'));
 }
 
 if ($('#SatData').length > 0){
@@ -955,6 +976,10 @@ if ($('#SatData').length > 0){
     $('#request_saturday_hash_worker_secondary3').val($('#SatData').attr('data-worker_secondary3'));
     $('#request_saturday_hash_worker_secondary4').val($('#SatData').attr('data-worker_secondary4'));
     $('#request_saturday_hash_worker_secondary5').val($('#SatData').attr('data-worker_secondary5'));
+
+    $('#request_saturday_hash_b_time').val($('#SatData').attr('data-btime'));
+    $('#request_saturday_hash_b_location').val($('#SatData').attr('data-blocation'));
+    $('#request_saturday_hash_b_name_number').val($('#SatData').attr('data-bnamenumber'));
 }
 
 if ($('#SunData').length > 0){
@@ -1001,7 +1026,11 @@ if ($('#SunData').length > 0){
     $('#request_sunday_hash_worker_secondary3').val($('#SunData').attr('data-worker_secondary3'));
     $('#request_sunday_hash_worker_secondary4').val($('#SunData').attr('data-worker_secondary4'));
     $('#request_sunday_hash_worker_secondary5').val($('#SunData').attr('data-worker_secondary5'));
-  }
+
+    $('#request_sunday_hash_b_time').val($('#SunData').attr('data-btime'));
+    $('#request_sunday_hash_b_location').val($('#SunData').attr('data-blocation'));
+    $('#request_sunday_hash_b_name_number').val($('#SunData').attr('data-bnamenumber'));
+}
 
   $('.savenotes').on('click', (event) =>{
     event.preventDefault();

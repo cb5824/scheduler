@@ -170,9 +170,20 @@
         </div>
 
         <div class="daily_form_block_line">
-          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_left">Work Window</div>
           <div class="form_block_line_right">
             <%= f.fields_for :monday_hash, @request.monday_hash do |p| %>
+            <%= p.label :start_time %>
+            <%= p.time_field :start_time %>
+            <br>
+            <%= p.label :end_time %>
+            <%= p.time_field :end_time %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
             <%= p.label :b_time, "Time" %>
             <%= p.time_field :b_time %>
             <br>
@@ -181,17 +192,6 @@
             <br>
             <%= p.label :b_name_number, "Name/Number" %>
             <%= p.text_field :b_name_number %>
-          </div>
-        </div>
-
-        <div class="daily_form_block_line">
-          <div class="form_block_line_left">Work Window</div>
-          <div class="form_block_line_right">
-            <%= p.label :start_time %>
-            <%= p.time_field :start_time %>
-            <br>
-            <%= p.label :end_time %>
-            <%= p.time_field :end_time %>
           </div>
         </div>
 
@@ -311,6 +311,20 @@
         </div>
 
         <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
+            <%= p.label :b_time, "Time" %>
+            <%= p.time_field :b_time %>
+            <br>
+            <%= p.label :b_location, "Location" %>
+            <%= p.text_field :b_location %>
+            <br>
+            <%= p.label :b_name_number, "Name/Number" %>
+            <%= p.text_field :b_name_number %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
@@ -419,6 +433,20 @@
           <%= p.label :end_time %>
           <%= p.time_field :end_time %>
         </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
+            <%= p.label :b_time, "Time" %>
+            <%= p.time_field :b_time %>
+            <br>
+            <%= p.label :b_location, "Location" %>
+            <%= p.text_field :b_location %>
+            <br>
+            <%= p.label :b_name_number, "Name/Number" %>
+            <%= p.text_field :b_name_number %>
+          </div>
         </div>
 
         <div class="daily_form_block_line">
@@ -534,6 +562,20 @@
         </div>
 
         <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
+            <%= p.label :b_time, "Time" %>
+            <%= p.time_field :b_time %>
+            <br>
+            <%= p.label :b_location, "Location" %>
+            <%= p.text_field :b_location %>
+            <br>
+            <%= p.label :b_name_number, "Name/Number" %>
+            <%= p.text_field :b_name_number %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
@@ -643,6 +685,20 @@
           <%= p.label :end_time %>
           <%= p.time_field :end_time %>
         </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
+            <%= p.label :b_time, "Time" %>
+            <%= p.time_field :b_time %>
+            <br>
+            <%= p.label :b_location, "Location" %>
+            <%= p.text_field :b_location %>
+            <br>
+            <%= p.label :b_name_number, "Name/Number" %>
+            <%= p.text_field :b_name_number %>
+          </div>
         </div>
 
         <div class="daily_form_block_line">
@@ -758,6 +814,20 @@
         </div>
 
         <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
+            <%= p.label :b_time, "Time" %>
+            <%= p.time_field :b_time %>
+            <br>
+            <%= p.label :b_location, "Location" %>
+            <%= p.text_field :b_location %>
+            <br>
+            <%= p.label :b_name_number, "Name/Number" %>
+            <%= p.text_field :b_name_number %>
+          </div>
+        </div>
+
+        <div class="daily_form_block_line">
           <div class="form_block_line_left">Work Area Limits</div>
           <div class="column">
             <div class="form_block_line_right">
@@ -866,6 +936,20 @@
           <%= p.label :end_time %>
           <%= p.time_field :end_time %>
         </div>
+        </div>
+
+        <div class="daily_form_block_line">
+          <div class="form_block_line_left">Briefing Details</div>
+          <div class="form_block_line_right">
+            <%= p.label :b_time, "Time" %>
+            <%= p.time_field :b_time %>
+            <br>
+            <%= p.label :b_location, "Location" %>
+            <%= p.text_field :b_location %>
+            <br>
+            <%= p.label :b_name_number, "Name/Number" %>
+            <%= p.text_field :b_name_number %>
+          </div>
         </div>
 
         <div class="daily_form_block_line">
@@ -1000,6 +1084,6 @@
 
 <% [["MonData", @request.monday_hash], ["TueData", @request.tuesday_hash], ["WedData", @request.wednesday_hash], ["ThuData", @request.thursday_hash], ["FriData", @request.friday_hash], ["SatData", @request.saturday_hash], ["SunData", @request.sunday_hash]].each do |day| %>
   <% if day[1]["start_time"] != "" && day[1]["start_time"] != nil  %>
-    <input name="<%= day[0] %>" id="<%= day[0] %>" data-start="<%= day[1]["start_time"] %>" data-end="<%= day[1]["end_time"] %>" data-cp1="<%= day[1]["cp1"] %>" data-cp2="<%= day[1]["cp2"] %>" data-mp1="<%= day[1]["mp1"] %>" data-mp2="<%= day[1]["mp2"] %>" data-MT1="<%= day[1]["MT1"] %>" data-MT2="<%= day[1]["MT2"] %>" data-MT3="<%= day[1]["MT3"] %>" data-MT4="<%= day[1]["MT4"] %>" data-taw="<%= day[1]["taw"] %>" data-form_b="<%= day[1]["form_b"] %>" data-form_c="<%= day[1]["form_c"] %>" data-track_and_time="<%= day[1]["track_and_time"] %>"  data-single_track="<%= day[1]["single_track"] %>" data-worker_primary="<%= day[1]["worker_primary"] %>" data-worker_secondary1="<%= day[1]["worker_secondary1"] %>" data-worker_secondary2="<%= day[1]["worker_secondary2"] %>" data-worker_secondary3="<%= day[1]["worker_secondary3"] %>" data-worker_secondary4="<%= day[1]["worker_secondary4"] %>" data-worker_secondary5="<%= day[1]["worker_secondary5"] %>" data-cancelled="<%= day[1]["cancelled"] %>" data-other="<%= day[1]["other"] %>" data-inacc_track="<%= day[1]["inacc_track"] %>" type = hidden>
+    <input name="<%= day[0] %>" id="<%= day[0] %>" data-start="<%= day[1]["start_time"] %>" data-end="<%= day[1]["end_time"] %>" data-cp1="<%= day[1]["cp1"] %>" data-cp2="<%= day[1]["cp2"] %>" data-mp1="<%= day[1]["mp1"] %>" data-mp2="<%= day[1]["mp2"] %>" data-MT1="<%= day[1]["MT1"] %>" data-MT2="<%= day[1]["MT2"] %>" data-MT3="<%= day[1]["MT3"] %>" data-MT4="<%= day[1]["MT4"] %>" data-taw="<%= day[1]["taw"] %>" data-form_b="<%= day[1]["form_b"] %>" data-form_c="<%= day[1]["form_c"] %>" data-track_and_time="<%= day[1]["track_and_time"] %>"  data-single_track="<%= day[1]["single_track"] %>" data-worker_primary="<%= day[1]["worker_primary"] %>" data-worker_secondary1="<%= day[1]["worker_secondary1"] %>" data-worker_secondary2="<%= day[1]["worker_secondary2"] %>" data-worker_secondary3="<%= day[1]["worker_secondary3"] %>" data-worker_secondary4="<%= day[1]["worker_secondary4"] %>" data-worker_secondary5="<%= day[1]["worker_secondary5"] %>" data-cancelled="<%= day[1]["cancelled"] %>" data-other="<%= day[1]["other"] %>" data-inacc_track="<%= day[1]["inacc_track"] %>" data-btime="<%= day[1]["b_time"] %>" data-blocation="<%= day[1]["b_location"] %>" data-bnamenumber="<%= day[1]["b_name_number"] %>" type = hidden>
   <% end %>
 <% end %>

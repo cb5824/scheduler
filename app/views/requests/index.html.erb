@@ -150,13 +150,49 @@ Sun
             </div>
           </div>
           <a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
+
+            <div class="status_wrapper">
+              <div class="status_half">
+                <% case request.approval1 %>
+                <% when "pending" %>
+                  <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval2 %>
+                <% when "pending" %>
+                  <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+              </div>
+              <div class="status_half">
+                <% case request.approval3 %>
+                <% when "pending" %>
+                  <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval4 %>
+                <% when "pending" %>
+                  <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+              </div>
+            </div>
+
         </a>
       </td>
       <td><%= counter %></td>
@@ -265,13 +301,47 @@ Sun
               </div>
             </div>
             <a href="<%= request_path(request) %>">
-            <% if request.status == 'pending'%>
-              <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-            <% elsif request.status == 'approved'%>
-              <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-            <% elsif request.status == 'rejected'%>
-              <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-            <% end %>
+              <div class="status_wrapper">
+                <div class="status_half">
+                  <% case request.approval1 %>
+                  <% when "pending" %>
+                    <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                  <% when "rejected" %>
+                    <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                  <% when "approved" %>
+                    <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                  <% end %>
+
+                  <% case request.approval2 %>
+                  <% when "pending" %>
+                    <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                  <% when "rejected" %>
+                    <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                  <% when "approved" %>
+                    <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                  <% end %>
+
+                </div>
+                <div class="status_half">
+                  <% case request.approval3 %>
+                  <% when "pending" %>
+                    <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                  <% when "rejected" %>
+                    <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                  <% when "approved" %>
+                    <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                  <% end %>
+
+                  <% case request.approval4 %>
+                  <% when "pending" %>
+                    <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                  <% when "rejected" %>
+                    <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                  <% when "approved" %>
+                    <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                  <% end %>
+                </div>
+              </div>
           </a>
         </td>
         <td><%= counter %></td>
@@ -367,13 +437,47 @@ Sun
             </div>
           </div>
           <a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
+            <div class="status_wrapper">
+              <div class="status_half">
+                <% case request.approval1 %>
+                <% when "pending" %>
+                  <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval2 %>
+                <% when "pending" %>
+                  <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+              </div>
+              <div class="status_half">
+                <% case request.approval3 %>
+                <% when "pending" %>
+                  <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval4 %>
+                <% when "pending" %>
+                  <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+              </div>
+            </div>
         </a>
       </td>
       <td><%= counter %></td>
@@ -467,13 +571,47 @@ Sun
             </div>
           </div>
           <a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
+            <div class="status_wrapper">
+              <div class="status_half">
+                <% case request.approval1 %>
+                <% when "pending" %>
+                  <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval2 %>
+                <% when "pending" %>
+                  <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+              </div>
+              <div class="status_half">
+                <% case request.approval3 %>
+                <% when "pending" %>
+                  <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval4 %>
+                <% when "pending" %>
+                  <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+              </div>
+            </div>
         </a>
       </td>
       <td><%= counter %></td>
@@ -567,13 +705,47 @@ Sun
             </div>
           </div>
           <a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
+            <div class="status_wrapper">
+              <div class="status_half">
+                <% case request.approval1 %>
+                <% when "pending" %>
+                  <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval2 %>
+                <% when "pending" %>
+                  <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+              </div>
+              <div class="status_half">
+                <% case request.approval3 %>
+                <% when "pending" %>
+                  <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval4 %>
+                <% when "pending" %>
+                  <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+              </div>
+            </div>
         </a>
       </td>
       <td><%= counter %></td>
@@ -667,13 +839,47 @@ Sun
             </div>
           </div>
           <a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
+            <div class="status_wrapper">
+              <div class="status_half">
+                <% case request.approval1 %>
+                <% when "pending" %>
+                  <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval2 %>
+                <% when "pending" %>
+                  <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+              </div>
+              <div class="status_half">
+                <% case request.approval3 %>
+                <% when "pending" %>
+                  <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval4 %>
+                <% when "pending" %>
+                  <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+              </div>
+            </div>
         </a>
       </td>
       <td><%= counter %></td>
@@ -767,13 +973,47 @@ Sun
             </div>
           </div>
           <a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
+            <div class="status_wrapper">
+              <div class="status_half">
+                <% case request.approval1 %>
+                <% when "pending" %>
+                  <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval2 %>
+                <% when "pending" %>
+                  <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+              </div>
+              <div class="status_half">
+                <% case request.approval3 %>
+                <% when "pending" %>
+                  <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval4 %>
+                <% when "pending" %>
+                  <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+              </div>
+            </div>
         </a>
       </td>
       <td><%= counter %></td>
@@ -866,13 +1106,47 @@ Sun
             </div>
           </div>
           <a href="<%= request_path(request) %>">
-          <% if request.status == 'pending'%>
-            <%= image_tag "yellow.png", class: 'status_icon', alt: "Pending" %>
-          <% elsif request.status == 'approved'%>
-            <%= image_tag "green.png", class: 'status_icon', alt: "Approved" %>
-          <% elsif request.status == 'rejected'%>
-            <%= image_tag "red.png", class: 'status_icon', alt: "Rejected" %>
-          <% end %>
+            <div class="status_wrapper">
+              <div class="status_half">
+                <% case request.approval1 %>
+                <% when "pending" %>
+                  <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval2 %>
+                <% when "pending" %>
+                  <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "tr_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "tr_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+              </div>
+              <div class="status_half">
+                <% case request.approval3 %>
+                <% when "pending" %>
+                  <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "bl_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+
+                <% case request.approval4 %>
+                <% when "pending" %>
+                  <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
+                <% when "rejected" %>
+                  <%= image_tag "br_red.png", class: "status_icon", alt: "Pending" %>
+                <% when "approved" %>
+                  <%= image_tag "br_green.png", class: "status_icon", alt: "Pending" %>
+                <% end %>
+              </div>
+            </div>
         </a>
       </td>
       <td><%= counter %></td>

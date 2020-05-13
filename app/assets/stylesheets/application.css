@@ -268,12 +268,6 @@ body{
   float: right;
 }
 
-.status_icon{
-  height: 25px;
-  width: 25px
-
-}
-
 table.requests_table {
   border: 1px solid #1D2CD2;
   background-color: #EEEEEE;
@@ -599,3 +593,17 @@ th.rotated > div{
   height: 50px;
   line-height: 100px;
 }
+
+.status_wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.status_half{
+  display: flex;
+  justify-content: center;
+}
+
+.status_icon{
+  height: 15px;
+  width: 15px
