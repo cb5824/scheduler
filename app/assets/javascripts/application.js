@@ -87,18 +87,20 @@ $(".copy_day").on("click", function(){
     end_time = null;
     cp1 = null;
     cp2 = null;
-    mp1 = null;
-    mp2 = null;
-    mt1 = null;
-    mt2 = null;
-    mt3 = null;
-    mt4 = null;
-    formb = null;
-    formc = null;
-    tandt = null;
-    taw = null;
-    single = null;
-    multi = null;
+    mp1 = "false";
+    mp2 = "false";
+    mt1 = "false";
+    mt2 = "false";
+    mt3 = "false";
+    mt4 = "false";
+    other = "false";
+    taw = "false";
+    formb = "false";
+    formc = "false";
+    tandt = "false";
+    inacc_track = "false";
+    single = "false";
+    multi = "false";
     primary = null;
     secondary1 = null;
     secondary2 = null;
@@ -122,12 +124,18 @@ $(".copy_day").on("click", function(){
         mt3 = 'true';}
       if ($("#request_monday_hash_MT4").is(':checked')) {
         mt4 = 'true';}
+      if ($("#request_monday_hash_other").is(':checked')) {
+        other = 'true';}
+      if ($("#request_monday_hash_taw").is(':checked')) {
+        taw = 'true';}
       if ($("#request_monday_hash_form_b").is(':checked')) {
         formb = 'true';}
       if ($("#request_monday_hash_form_c").is(':checked')) {
         formc = 'true';}
       if ($("#request_monday_hash_track_and_time").is(':checked')) {
         tandt = 'true';}
+      if ($("#request_monday_hash_inacc_track").is(':checked')) {
+        inacc_track = 'true';}
       if ($("#request_monday_hash_taw").is(':checked')) {
         taw = 'true';}
       if ($("#request_monday_hash_single_track_single").is(':checked')) {
@@ -140,6 +148,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_monday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_monday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_monday_hash_worker_secondary5")[0].value;
+
+      b_time = $("#request_monday_hash_b_time")[0].value;
+      b_location = $("#request_monday_hash_b_location")[0].value;
+      b_name_number = $("#request_monday_hash_b_name_number")[0].value;
 
     } else if  (from_day == "tue") {
       start_time = $("#request_tuesday_hash_start_time")[0].value;
@@ -156,12 +168,18 @@ $(".copy_day").on("click", function(){
         mt3 = 'true';}
       if ($("#request_tuesday_hash_MT4").is(':checked')) {
         mt4 = 'true';}
+      if ($("#request_tuesday_hash_other").is(':checked')) {
+        other = 'true';}
+      if ($("#request_tuesday_hash_taw").is(':checked')) {
+        taw = 'true';}
       if ($("#request_tuesday_hash_form_b").is(':checked')) {
         formb = 'true';}
       if ($("#request_tuesday_hash_form_c").is(':checked')) {
         formc = 'true';}
       if ($("#request_tuesday_hash_track_and_time").is(':checked')) {
         tandt = 'true';}
+      if ($("#request_tuesday_hash_inacc_track").is(':checked')) {
+        inacc_track = 'true';}
       if ($("#request_tuesday_hash_taw").is(':checked')) {
         taw = 'true';}
       if ($("#request_tuesday_hash_single_track_single").is(':checked')) {
@@ -174,6 +192,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_tuesday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_tuesday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_tuesday_hash_worker_secondary5")[0].value;
+
+      b_time = $("#request_tuesday_hash_b_time")[0].value;
+      b_location = $("#request_tuesday_hash_b_location")[0].value;
+      b_name_number = $("#request_tuesday_hash_b_name_number")[0].value;
 
     } else if  (from_day == "wed") {
       start_time = $("#request_wednesday_hash_start_time")[0].value;
@@ -190,12 +212,18 @@ $(".copy_day").on("click", function(){
         mt3 = 'true';}
       if ($("#request_wednesday_hash_MT4").is(':checked')) {
         mt4 = 'true';}
+      if ($("#request_wednesday_hash_other").is(':checked')) {
+        other = 'true';}
+      if ($("#request_wednesday_hash_taw").is(':checked')) {
+        taw = 'true';}
       if ($("#request_wednesday_hash_form_b").is(':checked')) {
         formb = 'true';}
       if ($("#request_wednesday_hash_form_c").is(':checked')) {
         formc = 'true';}
       if ($("#request_wednesday_hash_track_and_time").is(':checked')) {
         tandt = 'true';}
+      if ($("#request_wednesday_hash_inacc_track").is(':checked')) {
+        inacc_track = 'true';}
       if ($("#request_wednesday_hash_taw").is(':checked')) {
         taw = 'true';}
       if ($("#request_wednesday_hash_single_track_single").is(':checked')) {
@@ -208,6 +236,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_wednesday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_wednesday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_wednesday_hash_worker_secondary5")[0].value;
+
+      b_time = $("#request_wednesday_hash_b_time")[0].value;
+      b_location = $("#request_wednesday_hash_b_location")[0].value;
+      b_name_number = $("#request_wednesday_hash_b_name_number")[0].value;
 
     } else if  (from_day == "thu") {
       start_time = $("#request_thursday_hash_start_time")[0].value;
@@ -224,12 +256,18 @@ $(".copy_day").on("click", function(){
         mt3 = 'true';}
       if ($("#request_thursday_hash_MT4").is(':checked')) {
         mt4 = 'true';}
+      if ($("#request_thursday_hash_other").is(':checked')) {
+        other = 'true';}
+      if ($("#request_thursday_hash_taw").is(':checked')) {
+        taw = 'true';}
       if ($("#request_thursday_hash_form_b").is(':checked')) {
         formb = 'true';}
       if ($("#request_thursday_hash_form_c").is(':checked')) {
         formc = 'true';}
       if ($("#request_thursday_hash_track_and_time").is(':checked')) {
         tandt = 'true';}
+      if ($("#request_thursday_hash_inacc_track").is(':checked')) {
+        inacc_track = 'true';}
       if ($("#request_thursday_hash_taw").is(':checked')) {
         taw = 'true';}
       if ($("#request_thursday_hash_single_track_single").is(':checked')) {
@@ -242,6 +280,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_thursday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_thursday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_thursday_hash_worker_secondary5")[0].value;
+
+      b_time = $("#request_thursday_hash_b_time")[0].value;
+      b_location = $("#request_thursday_hash_b_location")[0].value;
+      b_name_number = $("#request_thursday_hash_b_name_number")[0].value;
 
     } else if  (from_day == "fri") {
       start_time = $("#request_friday_hash_start_time")[0].value;
@@ -258,12 +300,18 @@ $(".copy_day").on("click", function(){
         mt3 = 'true';}
       if ($("#request_friday_hash_MT4").is(':checked')) {
         mt4 = 'true';}
+      if ($("#request_friday_hash_other").is(':checked')) {
+        other = 'true';}
+      if ($("#request_friday_hash_taw").is(':checked')) {
+        taw = 'true';}
       if ($("#request_friday_hash_form_b").is(':checked')) {
         formb = 'true';}
       if ($("#request_friday_hash_form_c").is(':checked')) {
         formc = 'true';}
       if ($("#request_friday_hash_track_and_time").is(':checked')) {
         tandt = 'true';}
+      if ($("#request_friday_hash_inacc_track").is(':checked')) {
+        inacc_track = 'true';}
       if ($("#request_friday_hash_taw").is(':checked')) {
         taw = 'true';}
       if ($("#request_friday_hash_single_track_single").is(':checked')) {
@@ -276,6 +324,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_friday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_friday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_friday_hash_worker_secondary5")[0].value;
+
+      b_time = $("#request_friday_hash_b_time")[0].value;
+      b_location = $("#request_friday_hash_b_location")[0].value;
+      b_name_number = $("#request_friday_hash_b_name_number")[0].value;
 
     } else if  (from_day == "sat") {
       start_time = $("#request_saturday_hash_start_time")[0].value;
@@ -292,12 +344,18 @@ $(".copy_day").on("click", function(){
         mt3 = 'true';}
       if ($("#request_saturday_hash_MT4").is(':checked')) {
         mt4 = 'true';}
+      if ($("#request_saturday_hash_other").is(':checked')) {
+        other = 'true';}
+      if ($("#request_saturday_hash_taw").is(':checked')) {
+        taw = 'true';}
       if ($("#request_saturday_hash_form_b").is(':checked')) {
         formb = 'true';}
       if ($("#request_saturday_hash_form_c").is(':checked')) {
         formc = 'true';}
       if ($("#request_saturday_hash_track_and_time").is(':checked')) {
         tandt = 'true';}
+      if ($("#request_saturday_hash_inacc_track").is(':checked')) {
+        inacc_track = 'true';}
       if ($("#request_saturday_hash_taw").is(':checked')) {
         taw = 'true';}
       if ($("#request_saturday_hash_single_track_single").is(':checked')) {
@@ -310,6 +368,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_saturday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_saturday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_saturday_hash_worker_secondary5")[0].value;
+
+      b_time = $("#request_saturday_hash_b_time")[0].value;
+      b_location = $("#request_saturday_hash_b_location")[0].value;
+      b_name_number = $("#request_saturday_hash_b_name_number")[0].value;
 
     } else if  (from_day == "sun") {
       start_time = $("#request_sunday_hash_start_time")[0].value;
@@ -326,12 +388,18 @@ $(".copy_day").on("click", function(){
         mt3 = 'true';}
       if ($("#request_sunday_hash_MT4").is(':checked')) {
         mt4 = 'true';}
+      if ($("#request_sunday_hash_other").is(':checked')) {
+        other = 'true';}
+      if ($("#request_sunday_hash_taw").is(':checked')) {
+        taw = 'true';}
       if ($("#request_sunday_hash_form_b").is(':checked')) {
         formb = 'true';}
       if ($("#request_sunday_hash_form_c").is(':checked')) {
         formc = 'true';}
       if ($("#request_sunday_hash_track_and_time").is(':checked')) {
         tandt = 'true';}
+      if ($("#request_sunday_hash_inacc_track").is(':checked')) {
+        inacc_track = 'true';}
       if ($("#request_sunday_hash_taw").is(':checked')) {
         taw = 'true';}
       if ($("#request_sunday_hash_single_track_single").is(':checked')) {
@@ -344,6 +412,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_sunday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_sunday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_sunday_hash_worker_secondary5")[0].value;
+
+      b_time = $("#request_sunday_hash_b_time")[0].value;
+      b_location = $("#request_sunday_hash_b_location")[0].value;
+      b_name_number = $("#request_sunday_hash_b_name_number")[0].value;
     }
 
 
@@ -357,31 +429,40 @@ $(".copy_day").on("click", function(){
 
       if (mt1 === "true") {
         $("#request_monday_hash_MT1").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_MT1").prop( "checked", false );}
       if ( mt2 === "true"){
       $("#request_monday_hash_MT2").prop( "checked", true );
-      }
+    } else {$("#request_monday_hash_MT2").prop( "checked", false );}
       if ( mt3 === "true"){
         $("#request_monday_hash_MT3").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_MT3").prop( "checked", false );}
       if ( mt4 === "true"){
         $("#request_monday_hash_MT4").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_MT4").prop( "checked", false );}
+      if ( other === "true"){
+        $("#request_monday_hash_other").prop( "checked", true );
+      } else {$("#request_monday_hash_other").prop( "checked", false );}
+      if ( taw === "true"){
+        $("#request_monday_hash_taw").prop( "checked", true );
+      } else {$("#request_monday_hash_taw").prop( "checked", false );}
       if ( formb === "true"){
         $("#request_monday_hash_form_b").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_form_b").prop( "checked", false );}
       if ( formc === "true"){
         $("#request_monday_hash_form_c").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_form_c").prop( "checked", false );}
       if ( tandt === "true"){
         $("#request_monday_hash_track_and_time").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_track_and_time").prop( "checked", false );}
+      if ( inacc_track === "true"){
+        $("#request_monday_hash_inacc_track").prop( "checked", true );
+      } else {$("#request_monday_hash_track_and_time").prop( "checked", false );}
       if ( single === "true"){
         $("#request_monday_hash_single_track_single").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_single_track_single").prop( "checked", false );}
       if ( multi === "true"){
         $("#request_monday_hash_single_track_multi").prop( "checked", true );
-      }
+      } else {$("#request_monday_hash_single_track_multi").prop( "checked", false );}
 
       $("#request_monday_hash_worker_primary").val(primary);
       $("#request_monday_hash_worker_secondary1").val(secondary1);
@@ -389,6 +470,10 @@ $(".copy_day").on("click", function(){
       $("#request_monday_hash_worker_secondary3").val(secondary3);
       $("#request_monday_hash_worker_secondary4").val(secondary4);
       $("#request_monday_hash_worker_secondary5").val(secondary5);
+
+      $("#request_monday_hash_b_time").val(b_time);
+      $("#request_monday_hash_b_location").val(b_location);
+      $("#request_monday_hash_b_name_number").val(b_name_number);
 
     } else if (to_day == "tue") {
       $("#request_tuesday_hash_start_time").val(start_time);
@@ -400,31 +485,40 @@ $(".copy_day").on("click", function(){
 
       if (mt1 === "true") {
         $("#request_tuesday_hash_MT1").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_MT1").prop( "checked", false );}
       if ( mt2 === "true"){
       $("#request_tuesday_hash_MT2").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_MT2").prop( "checked", false );}
       if ( mt3 === "true"){
         $("#request_tuesday_hash_MT3").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_MT3").prop( "checked", false );}
       if ( mt4 === "true"){
         $("#request_tuesday_hash_MT4").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_MT4").prop( "checked", false );}
+      if ( other === "true"){
+        $("#request_tuesday_hash_other").prop( "checked", true );
+      } else {$("#request_tuesday_hash_other").prop( "checked", false );}
+      if ( taw === "true"){
+        $("#request_tuesday_hash_taw").prop( "checked", true );
+      } else {$("#request_tuesday_hash_taw").prop( "checked", false );}
       if ( formb === "true"){
         $("#request_tuesday_hash_form_b").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_form_b").prop( "checked", false );}
       if ( formc === "true"){
         $("#request_tuesday_hash_form_c").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_form_c").prop( "checked", false );}
       if ( tandt === "true"){
         $("#request_tuesday_hash_track_and_time").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_track_and_time").prop( "checked", false );}
+      if ( inacc_track === "true"){
+        $("#request_tuesday_hash_inacc_track").prop( "checked", true );
+      } else {$("#request_tuesday_hash_track_and_time").prop( "checked", false );}
       if ( single === "true"){
         $("#request_tuesday_hash_single_track_single").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_single_track_single").prop( "checked", false );}
       if ( multi === "true"){
         $("#request_tuesday_hash_single_track_multi").prop( "checked", true );
-      }
+      } else {$("#request_tuesday_hash_single_track_multi").prop( "checked", false );}
 
       $("#request_tuesday_hash_worker_primary").val(primary);
       $("#request_tuesday_hash_worker_secondary1").val(secondary1);
@@ -432,6 +526,10 @@ $(".copy_day").on("click", function(){
       $("#request_tuesday_hash_worker_secondary3").val(secondary3);
       $("#request_tuesday_hash_worker_secondary4").val(secondary4);
       $("#request_tuesday_hash_worker_secondary5").val(secondary5);
+
+      $("#request_tuesday_hash_b_time").val(b_time);
+      $("#request_tuesday_hash_b_location").val(b_location);
+      $("#request_tuesday_hash_b_name_number").val(b_name_number);
 
     } else if (to_day == "wed") {
       $("#request_wednesday_hash_start_time").val(start_time);
@@ -443,31 +541,40 @@ $(".copy_day").on("click", function(){
 
       if (mt1 === "true") {
         $("#request_wednesday_hash_MT1").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_MT1").prop( "checked", false );}
       if ( mt2 === "true"){
       $("#request_wednesday_hash_MT2").prop( "checked", true );
-      }
+    } else {$("#request_wednesday_hash_MT2").prop( "checked", false );}
       if ( mt3 === "true"){
         $("#request_wednesday_hash_MT3").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_MT3").prop( "checked", false );}
       if ( mt4 === "true"){
         $("#request_wednesday_hash_MT4").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_MT4").prop( "checked", false );}
+      if ( other === "true"){
+        $("#request_wednesday_hash_other").prop( "checked", true );
+      } else {$("#request_wednesday_hash_other").prop( "checked", false );}
+      if ( taw === "true"){
+        $("#request_wednesday_hash_taw").prop( "checked", true );
+      } else {$("#request_wednesday_hash_taw").prop( "checked", false );}
       if ( formb === "true"){
         $("#request_wednesday_hash_form_b").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_form_b").prop( "checked", false );}
       if ( formc === "true"){
         $("#request_wednesday_hash_form_c").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_form_c").prop( "checked", false );}
       if ( tandt === "true"){
         $("#request_wednesday_hash_track_and_time").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_track_and_time").prop( "checked", false );}
+      if ( inacc_track === "true"){
+        $("#request_wednesday_hash_inacc_track").prop( "checked", true );
+      } else {$("#request_wednesday_hash_track_and_time").prop( "checked", false );}
       if ( single === "true"){
         $("#request_wednesday_hash_single_track_single").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_single_track_single").prop( "checked", false );}
       if ( multi === "true"){
         $("#request_wednesday_hash_single_track_multi").prop( "checked", true );
-      }
+      } else {$("#request_wednesday_hash_single_track_multi").prop( "checked", false );}
 
       $("#request_wednesday_hash_worker_primary").val(primary);
       $("#request_wednesday_hash_worker_secondary1").val(secondary1);
@@ -475,6 +582,10 @@ $(".copy_day").on("click", function(){
       $("#request_wednesday_hash_worker_secondary3").val(secondary3);
       $("#request_wednesday_hash_worker_secondary4").val(secondary4);
       $("#request_wednesday_hash_worker_secondary5").val(secondary5);
+
+      $("#request_wednesday_hash_b_time").val(b_time);
+      $("#request_wednesday_hash_b_location").val(b_location);
+      $("#request_wednesday_hash_b_name_number").val(b_name_number);
 
     } else if (to_day == "thu") {
       $("#request_thursday_hash_start_time").val(start_time);
@@ -486,31 +597,40 @@ $(".copy_day").on("click", function(){
 
       if (mt1 === "true") {
         $("#request_thursday_hash_MT1").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_MT1").prop( "checked", false );}
       if ( mt2 === "true"){
       $("#request_thursday_hash_MT2").prop( "checked", true );
-      }
+    } else {$("#request_thursday_hash_MT2").prop( "checked", false );}
       if ( mt3 === "true"){
         $("#request_thursday_hash_MT3").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_MT3").prop( "checked", false );}
       if ( mt4 === "true"){
         $("#request_thursday_hash_MT4").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_MT4").prop( "checked", false );}
+      if ( other === "true"){
+        $("#request_thursday_hash_other").prop( "checked", true );
+      } else {$("#request_thursday_hash_other").prop( "checked", false );}
+      if ( taw === "true"){
+        $("#request_thursday_hash_taw").prop( "checked", true );
+      } else {$("#request_thursday_hash_taw").prop( "checked", false );}
       if ( formb === "true"){
         $("#request_thursday_hash_form_b").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_form_b").prop( "checked", false );}
       if ( formc === "true"){
         $("#request_thursday_hash_form_c").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_form_c").prop( "checked", false );}
       if ( tandt === "true"){
         $("#request_thursday_hash_track_and_time").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_track_and_time").prop( "checked", false );}
+      if ( inacc_track === "true"){
+        $("#request_thursday_hash_inacc_track").prop( "checked", true );
+      } else {$("#request_thursday_hash_track_and_time").prop( "checked", false );}
       if ( single === "true"){
         $("#request_thursday_hash_single_track_single").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_single_track_single").prop( "checked", false );}
       if ( multi === "true"){
         $("#request_thursday_hash_single_track_multi").prop( "checked", true );
-      }
+      } else {$("#request_thursday_hash_single_track_multi").prop( "checked", false );}
 
       $("#request_thursday_hash_worker_primary").val(primary);
       $("#request_thursday_hash_worker_secondary1").val(secondary1);
@@ -518,6 +638,10 @@ $(".copy_day").on("click", function(){
       $("#request_thursday_hash_worker_secondary3").val(secondary3);
       $("#request_thursday_hash_worker_secondary4").val(secondary4);
       $("#request_thursday_hash_worker_secondary5").val(secondary5);
+
+      $("#request_thursday_hash_b_time").val(b_time);
+      $("#request_thursday_hash_b_location").val(b_location);
+      $("#request_thursday_hash_b_name_number").val(b_name_number);
 
     } else if (to_day == "fri") {
       $("#request_friday_hash_start_time").val(start_time);
@@ -529,31 +653,40 @@ $(".copy_day").on("click", function(){
 
       if (mt1 === "true") {
         $("#request_friday_hash_MT1").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_MT1").prop( "checked", false );}
       if ( mt2 === "true"){
       $("#request_friday_hash_MT2").prop( "checked", true );
-      }
+    } else {$("#request_friday_hash_MT2").prop( "checked", false );}
       if ( mt3 === "true"){
         $("#request_friday_hash_MT3").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_MT3").prop( "checked", false );}
       if ( mt4 === "true"){
         $("#request_friday_hash_MT4").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_MT4").prop( "checked", false );}
+      if ( other === "true"){
+        $("#request_friday_hash_other").prop( "checked", true );
+      } else {$("#request_friday_hash_other").prop( "checked", false );}
+      if ( taw === "true"){
+        $("#request_friday_hash_taw").prop( "checked", true );
+      } else {$("#request_friday_hash_taw").prop( "checked", false );}
       if ( formb === "true"){
         $("#request_friday_hash_form_b").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_form_b").prop( "checked", false );}
       if ( formc === "true"){
         $("#request_friday_hash_form_c").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_form_c").prop( "checked", false );}
       if ( tandt === "true"){
         $("#request_friday_hash_track_and_time").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_track_and_time").prop( "checked", false );}
+      if ( inacc_track === "true"){
+        $("#request_friday_hash_inacc_track").prop( "checked", true );
+      } else {$("#request_friday_hash_track_and_time").prop( "checked", false );}
       if ( single === "true"){
         $("#request_friday_hash_single_track_single").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_single_track_single").prop( "checked", false );}
       if ( multi === "true"){
         $("#request_friday_hash_single_track_multi").prop( "checked", true );
-      }
+      } else {$("#request_friday_hash_single_track_multi").prop( "checked", false );}
 
       $("#request_friday_hash_worker_primary").val(primary);
       $("#request_friday_hash_worker_secondary1").val(secondary1);
@@ -561,6 +694,11 @@ $(".copy_day").on("click", function(){
       $("#request_friday_hash_worker_secondary3").val(secondary3);
       $("#request_friday_hash_worker_secondary4").val(secondary4);
       $("#request_friday_hash_worker_secondary5").val(secondary5);
+
+      $("#request_friday_hash_b_time").val(b_time);
+      $("#request_friday_hash_b_location").val(b_location);
+      $("#request_friday_hash_b_name_number").val(b_name_number);
+
 
     } else if (to_day == "sat") {
       $("#request_saturday_hash_start_time").val(start_time);
@@ -572,31 +710,40 @@ $(".copy_day").on("click", function(){
 
       if (mt1 === "true") {
         $("#request_saturday_hash_MT1").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_MT1").prop( "checked", false );}
       if ( mt2 === "true"){
       $("#request_saturday_hash_MT2").prop( "checked", true );
-      }
+    } else {$("#request_saturday_hash_MT2").prop( "checked", false );}
       if ( mt3 === "true"){
         $("#request_saturday_hash_MT3").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_MT3").prop( "checked", false );}
       if ( mt4 === "true"){
         $("#request_saturday_hash_MT4").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_MT4").prop( "checked", false );}
+      if ( other === "true"){
+        $("#request_saturday_hash_other").prop( "checked", true );
+      } else {$("#request_saturday_hash_other").prop( "checked", false );}
+      if ( taw === "true"){
+        $("#request_saturday_hash_taw").prop( "checked", true );
+      } else {$("#request_saturday_hash_taw").prop( "checked", false );}
       if ( formb === "true"){
         $("#request_saturday_hash_form_b").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_form_b").prop( "checked", false );}
       if ( formc === "true"){
         $("#request_saturday_hash_form_c").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_form_c").prop( "checked", false );}
       if ( tandt === "true"){
         $("#request_saturday_hash_track_and_time").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_track_and_time").prop( "checked", false );}
+      if ( inacc_track === "true"){
+        $("#request_saturday_hash_inacc_track").prop( "checked", true );
+      } else {$("#request_saturday_hash_track_and_time").prop( "checked", false );}
       if ( single === "true"){
         $("#request_saturday_hash_single_track_single").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_single_track_single").prop( "checked", false );}
       if ( multi === "true"){
         $("#request_saturday_hash_single_track_multi").prop( "checked", true );
-      }
+      } else {$("#request_saturday_hash_single_track_multi").prop( "checked", false );}
 
       $("#request_saturday_hash_worker_primary").val(primary);
       $("#request_saturday_hash_worker_secondary1").val(secondary1);
@@ -604,6 +751,11 @@ $(".copy_day").on("click", function(){
       $("#request_saturday_hash_worker_secondary3").val(secondary3);
       $("#request_saturday_hash_worker_secondary4").val(secondary4);
       $("#request_saturday_hash_worker_secondary5").val(secondary5);
+
+      $("#request_saturday_hash_b_time").val(b_time);
+      $("#request_saturday_hash_b_location").val(b_location);
+      $("#request_saturday_hash_b_name_number").val(b_name_number);
+
 
     } else if (to_day == "sun") {
       $("#request_sunday_hash_start_time").val(start_time);
@@ -615,31 +767,40 @@ $(".copy_day").on("click", function(){
 
       if (mt1 === "true") {
         $("#request_sunday_hash_MT1").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_MT1").prop( "checked", false );}
       if ( mt2 === "true"){
       $("#request_sunday_hash_MT2").prop( "checked", true );
-      }
+    } else {$("#request_sunday_hash_MT2").prop( "checked", false );}
       if ( mt3 === "true"){
         $("#request_sunday_hash_MT3").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_MT3").prop( "checked", false );}
       if ( mt4 === "true"){
         $("#request_sunday_hash_MT4").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_MT4").prop( "checked", false );}
+      if ( other === "true"){
+        $("#request_sunday_hash_other").prop( "checked", true );
+      } else {$("#request_sunday_hash_other").prop( "checked", false );}
+      if ( taw === "true"){
+        $("#request_sunday_hash_taw").prop( "checked", true );
+      } else {$("#request_sunday_hash_taw").prop( "checked", false );}
       if ( formb === "true"){
         $("#request_sunday_hash_form_b").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_form_b").prop( "checked", false );}
       if ( formc === "true"){
         $("#request_sunday_hash_form_c").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_form_c").prop( "checked", false );}
       if ( tandt === "true"){
         $("#request_sunday_hash_track_and_time").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_track_and_time").prop( "checked", false );}
+      if ( inacc_track === "true"){
+        $("#request_sunday_hash_inacc_track").prop( "checked", true );
+      } else {$("#request_sunday_hash_track_and_time").prop( "checked", false );}
       if ( single === "true"){
         $("#request_sunday_hash_single_track_single").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_single_track_single").prop( "checked", false );}
       if ( multi === "true"){
         $("#request_sunday_hash_single_track_multi").prop( "checked", true );
-      }
+      } else {$("#request_sunday_hash_single_track_multi").prop( "checked", false );}
 
       $("#request_sunday_hash_worker_primary").val(primary);
       $("#request_sunday_hash_worker_secondary1").val(secondary1);
@@ -647,6 +808,11 @@ $(".copy_day").on("click", function(){
       $("#request_sunday_hash_worker_secondary3").val(secondary3);
       $("#request_sunday_hash_worker_secondary4").val(secondary4);
       $("#request_sunday_hash_worker_secondary5").val(secondary5);
+
+      $("#request_sunday_hash_b_time").val(b_time);
+      $("#request_sunday_hash_b_location").val(b_location);
+      $("#request_sunday_hash_b_name_number").val(b_name_number);
+
     }
 
 });
