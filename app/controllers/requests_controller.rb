@@ -155,6 +155,8 @@ end
     if @request.save
       @request.update_weekly
       @request.weekly.save
+      @request.approval = Approval.new
+      @request.approval.save
       @request.pending = Pending.new
       @request.pending.save
       redirect_to root_path, notice: 'Request was saved successfully'

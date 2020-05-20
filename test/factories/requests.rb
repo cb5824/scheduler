@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :request do
-    year {'2020'}
-    week {'14'}
+    year {Time.now.year}
+    week {Date.today.cweek}
     contractor {'tasi_track'}
     sequence(:description) {|n| "This is a description of test job #{n}"}
     sequence(:requestor_name) {|n| "Test Name #{n}"}
@@ -68,6 +68,9 @@ FactoryBot.define do
     user
     after(:create) do |request, evaluator|
       request.pending = FactoryBot.create(:pending)
+    end
+    after(:create) do |request, evaluator|
+      request.approval = FactoryBot.create(:approval)
     end
   end
 end

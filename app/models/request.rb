@@ -5,6 +5,7 @@ class Request < ApplicationRecord
   has_many_attached :attachments
   has_one :weekly
   has_one :pending
+  has_one :approval
 
   CP_ARRAY = [['N.L. CP 4th', 1],
         ['S.L. CP 4th', 2],
@@ -310,8 +311,10 @@ class Request < ApplicationRecord
     @new_weekly.request = self
     # @new_weekly.save
     # self.pending.save
-    # self.save
+    self.save
+    self.weekly.save
     #
+
   end
 
   def expired?

@@ -189,6 +189,7 @@ li{
 tr.hover_row:hover{
   background-color: #626e72 !important;
   cursor: pointer;
+  position: relative;
 }
 
 tr a{
@@ -524,6 +525,7 @@ th.rotated > div{
 }
 .wrapper{
   width: 1900px;
+ position: relative;
 }
 
 .tallheader{
@@ -606,4 +608,87 @@ th.rotated > div{
 
 .status_icon{
   height: 15px;
-  width: 15px
+  width: 15px;
+}
+
+#divOverlay {
+  display: none;
+  background-color: #000000;
+  text-align: center;
+  position: absolute;
+  z-index: 10000;
+  opacity: 0.95;
+  justify-content: center;
+}
+
+
+.hover_row{
+  position: relative;
+}
+
+.closeoverlay{
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
+.overlay_button{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.superoverlay{
+  background: #8ea0e1;
+  position: absolute;
+  height: 0px;
+  width: 100%;
+  overflow:hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.daily_approve, .shrinkoverlay{
+  background-color: #ffffff;
+  display: inline-block;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.testclass{
+  display: flex;
+  align-items: center;
+}
+
+.testclass2{
+  display: inline-flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.testclass3{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.testclass3 button{
+  width: 130px;
+}
+
+.apitest{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#ajax_alert{
+    position: fixed;
+    top: 20px;
+    background-color: #d0e4f5;
+    left: 50%;
+    padding: 10px;
+    z-index: 3;
+    display: none;    
+}

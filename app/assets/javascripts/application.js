@@ -21,10 +21,10 @@ $( document ).ready(function() {
   $('#request_color').addClass(startcolor);
 
 
-$('*[data-href]').on("click",function(){
-  window.location = $(this).data('href');
-  return false;
-});
+// $('*[data-href]').on("click",function(){
+//   window.location = $(this).data('href');
+//   return false;
+// });
 
 $("td > a").on("click",function(e){
   e.stopPropagation();
@@ -47,6 +47,8 @@ $(".notes_tab").on("click", function(){
 });
 
 $(".daytab").on("click", function(){
+  $(".superoverlay").css({height: "0%"});
+  $('#divOverlay').hide();
   $( ".daytab" ).each(function() {
     $( this ).removeClass( "active" );
     $( this ).addClass( "inactive" );
@@ -1243,5 +1245,84 @@ $(".index_status").on("mouseleave",function(e){
 
     $(event.target).parent(".index_status")[0].classList.add("hidden");
 });
+
+$('.hover_row').on("click", function() {
+    var bottomWidth = $(this).css('width');
+    var bottomHeight = $(this).css('height');
+    var rowPos = $(this).offset();
+    bottomTop = rowPos.top;
+    bottomLeft = rowPos.left;
+    $(".superoverlay").css({height: "0%"});
+    $('#divOverlay').data("reqnum", this.dataset.reqnum);
+    $('#divOverlay').css({
+      position: 'absolute',
+      top: bottomTop,
+      left: bottomLeft,
+      width: '100%',
+      height: bottomHeight,
+      display: "flex"
+    });
+
+});
+
+ $(".closeoverlay").click(function() {
+    $('#divOverlay').hide();
+ });
+
+ $('.showpage').on("click",function(){
+  window.location = "/requests/" + $('#divOverlay').data('reqnum');
+   return false;
+ });
+
+$('.editrequest').on("click",function(){
+
+ window.location = "/requests/" + $('#divOverlay').data('reqnum') + "/edit";
+  return false;
+});
+
+$('.daily_approve').on("click",function(){
+  $(".superoverlay").animate({height: "100%"});
+});
+$('.shrinkoverlay').on("click",function(){
+  $(".superoverlay").animate({height: "0%"});
+});
+
+function closealert(){
+  $("#ajax_alert").fadeOut();
+}
+
+$('.apitest').on('click', (event) =>{
+  event.preventDefault();
+  $("#ajax_alert").html("Saving changes...");
+  $("#ajax_alert").css({display: 'block'});
+
+  let req = $('#divOverlay').data('reqnum');
+  let address = "/api/v1/approvals/" + req;
+  let change = $(event.target).data("change");
+  let mon = $("#mon_check").prop("checked");
+  let tue = $("#tue_check").prop("checked");
+  let wed = $("#wed_check").prop("checked");
+  let thu = $("#thu_check").prop("checked");
+  let fri = $("#fri_check").prop("checked");
+  let sat = $("#sat_check").prop("checked");
+  let sun = $("#sun_check").prop("checked");
+  if ($("#emulate").val() !== undefined) {
+    var emulate = ($("#emulate").val());
+  } else {
+    var emulate = "none";
+  }
+
+  let request = $.ajax({
+    method: 'PATCH',
+    data: {change: change, mon: mon, tue: tue, wed: wed, thu: thu, fri: fri, sat: sat, sun: sun, emulate: emulate},
+    url: address
+  });
+
+  request.done(() => {
+    $("#ajax_alert").html("Updates to request saved");
+    setTimeout(closealert, 2000);
+ });
+});
+
 
 });

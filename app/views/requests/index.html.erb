@@ -1,3 +1,5 @@
+<div id="ajax_alert" >Test test test</div>
+
 <% if @user != nil %>
   <% if @user.role == 'admin' %>
     <div class="control_panel">
@@ -48,6 +50,7 @@
 <br>
 <br>
 
+
 <div class="daytab active" data-displaytab="week">
 Week
 </div>
@@ -73,10 +76,54 @@ Sat
 Sun
 </div>
 
+  <div id="divOverlay">
+    <div class="testclass">
+      <%= image_tag "red_x.png", class: "closeoverlay", alt: "Pending" %>
+      <button type="button" class="showpage overlay_button">Request Details</button>
+      <button type="button" class="editrequest overlay_button">Edit</button>
+      <div class="daily_approve overlay_button">Approve/Reject Days &#9660;</div>
+    </div>
+    <div class="superoverlay">
+      <div class="testclass2">
+        <% if @user.role == "superadmin" %>
+          <label for="emulate">Admin group to emulate:</label>
+          <select id="emulate">
+            <option value="1">Group 1</option>
+            <option value="2">Group 2</option>
+            <option value="3">Group 3</option>
+            <option value="4">Group 4</option>
+            <option value="all">All Groups</option>
+          </select>
+        <% end %>
+        <button type="button" class="apitest" data-change="approve_all">Approve All</button>
+        <button type="button" class="apitest" data-change="reject_all">Reject All</button>
+        <label for="mon_check">Mon</label>
+        <input type="checkbox" id="mon_check" name="mon_check" value="mon_check"> |
+        <label for="tue_check">Tue</label>
+        <input type="checkbox" id="tue_check" name="tue_check" value="tue_check"> |
+        <label for="wed_check">Wed</label>
+        <input type="checkbox" id="wed_check" name="wed_check" value="wed_check"> |
+        <label for="thu_check">Thu</label>
+        <input type="checkbox" id="thu_check" name="thu_check" value="thu_check"> |
+        <label for="fri_check">Fri</label>
+        <input type="checkbox" id="fri_check" name="fri_check" value="fri_check"> |
+        <label for="sat_check">Sat</label>
+        <input type="checkbox" id="sat_check" name="sat_check" value="sat_check"> |
+        <label for="sun_check">Sun</label>
+        <input type="checkbox" id="sun_check" name="sun_check" value="sun_check">
+        <div class="testclass3">
+        <button class="apitest" data-change="approve_select">Approve Selected</button>
+        <button class="apitest" data-change="reject_select">Reject Selected</button>
+      </div>
+      </div>
+      <div class="shrinkoverlay">Back &#9650;</div>
+    </div>
+  </div>
 
 
 <div class="wrapper">
 <div id="weekly_table" class="displaytable">
+
     <table class="requests_table">
       <thead>
         <tr>
@@ -131,7 +178,7 @@ Sun
       <tbody>
 <% counter = 1 %>
   <% @requests.each do |request| %>
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -196,45 +243,44 @@ Sun
         </a>
       </td>
       <td><%= counter %></td>
-
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.contractor %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["mile_post"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.weekly.mile_post %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["control_point"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.weekly.control_point %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["mt1"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["mt2"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["mt3"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["mt4"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["other"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.description %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>"class="<% if request.pending["single_tracking"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.single_tracking == 1 %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["shift"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.weekly.shift %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["taw"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["form_b"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["form_c"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["track_and_time"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["inacc_track"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sswps"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.sswps %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["change_notices"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><%= request.change_notices %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["rwp"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.rwp == "yes" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["ocs"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.disturb == "ocs" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["disturb"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.disturb == "yes" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["rrm"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.rrm == "yes" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["foul"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.foul == "yes" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["crossings"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.crossings == "yes" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["underground"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.underground == "yes" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["flagging"] == "1" %>changed<% end %>"><a href="<%= request_path(request) %>"><% if request.flagging == "yes" %><%= "\u2713" %><% else %>-<% end %></a></td>
-      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.created_at.strftime("%m/%d/%Y") %></a></td>
-      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.updated_at.strftime("%m/%d/%Y") %></a></td>
-      <td data-href="<%= request_path(request) %>"><a href="<%= request_path(request) %>"><%= request.requestor_name %></a></td>
+      <td class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td class="<% if request.pending["mile_post"] == "1" %>changed<% end %>"><%= request.weekly.mile_post %></td>
+      <td class="<% if request.pending["control_point"] == "1" %>changed<% end %>"><%= request.weekly.control_point %></td>
+      <td class="<% if request.pending["mt1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["mt2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["mt3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["mt4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td class="<% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></td>
+      <td class="<% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></td>
+      <td class="<% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></td>
+      <td class="<% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></td>
+      <td class="<% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></td>
+      <td class="<% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></td>
+      <td class="<% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></td>
+      <td class="<% if request.pending["single_tracking"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["night_work"] == "1" %>changed<% end %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["shift"] == "1" %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td class="<% if request.pending["taw"] == "1" %>changed<% end %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["form_b"] == "1" %>changed<% end %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["form_c"] == "1" %>changed<% end %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["track_and_time"] == "1" %>changed<% end %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["sswps"] == "1" %>changed<% end %>"><%= request.sswps %></td>
+      <td class="<% if request.pending["change_notices"] == "1" %>changed<% end %>"><%= request.change_notices %></td>
+      <td class="<% if request.pending["rwp"] == "1" %>changed<% end %>"><% if request.rwp == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["ocs"] == "1" %>changed<% end %>"><% if request.disturb == "ocs" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["disturb"] == "1" %>changed<% end %>"><% if request.disturb == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["rrm"] == "1" %>changed<% end %>"><% if request.rrm == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["foul"] == "1" %>changed<% end %>"><% if request.foul == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["crossings"] == "1" %>changed<% end %>"><% if request.crossings == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["underground"] == "1" %>changed<% end %>"><% if request.underground == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="<% if request.pending["flagging"] == "1" %>changed<% end %>"><% if request.flagging == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td><%= request.created_at.strftime("%m/%d/%Y") %></td>
+      <td><%= request.updated_at.strftime("%m/%d/%Y") %></td>
+      <td><%= request.requestor_name %></td>
     </tr>
     <% counter += 1 %>
   <% end %>
@@ -282,7 +328,7 @@ Sun
           <% counter = 1 %>
     <% @requests.each do |request| %>
        <% if request.mon == 1  || request.monday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+        <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
           <td class="reqstatus">
             <div class="index_status hidden">
               <div class="approvals_bar_container">
@@ -303,7 +349,7 @@ Sun
             <a href="<%= request_path(request) %>">
               <div class="status_wrapper">
                 <div class="status_half">
-                  <% case request.approval1 %>
+                  <% case request.approval.group_1_mon %>
                   <% when "pending" %>
                     <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                   <% when "rejected" %>
@@ -312,7 +358,7 @@ Sun
                     <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                   <% end %>
 
-                  <% case request.approval2 %>
+                  <% case request.approval.group_2_mon %>
                   <% when "pending" %>
                     <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                   <% when "rejected" %>
@@ -323,7 +369,7 @@ Sun
 
                 </div>
                 <div class="status_half">
-                  <% case request.approval3 %>
+                  <% case request.approval.group_3_mon %>
                   <% when "pending" %>
                     <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                   <% when "rejected" %>
@@ -332,7 +378,7 @@ Sun
                     <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                   <% end %>
 
-                  <% case request.approval4 %>
+                  <% case request.approval.group_4_mon %>
                   <% when "pending" %>
                     <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                   <% when "rejected" %>
@@ -418,7 +464,7 @@ Sun
   <% @requests.each do |request| %>
     <% if request.tue == 1  || request.tuesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -439,7 +485,7 @@ Sun
           <a href="<%= request_path(request) %>">
             <div class="status_wrapper">
               <div class="status_half">
-                <% case request.approval1 %>
+                <% case request.approval.group_1_tue %>
                 <% when "pending" %>
                   <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -448,7 +494,7 @@ Sun
                   <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval2 %>
+                <% case request.approval.group_2_tue %>
                 <% when "pending" %>
                   <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -459,7 +505,7 @@ Sun
 
               </div>
               <div class="status_half">
-                <% case request.approval3 %>
+                <% case request.approval.group_3_tue %>
                 <% when "pending" %>
                   <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -468,7 +514,7 @@ Sun
                   <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval4 %>
+                <% case request.approval.group_4_tue %>
                 <% when "pending" %>
                   <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -552,7 +598,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.wed == 1  || request.wednesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -573,7 +619,7 @@ Sun
           <a href="<%= request_path(request) %>">
             <div class="status_wrapper">
               <div class="status_half">
-                <% case request.approval1 %>
+                <% case request.approval.group_1_wed %>
                 <% when "pending" %>
                   <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -582,7 +628,7 @@ Sun
                   <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval2 %>
+                <% case request.approval.group_2_wed %>
                 <% when "pending" %>
                   <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -593,7 +639,7 @@ Sun
 
               </div>
               <div class="status_half">
-                <% case request.approval3 %>
+                <% case request.approval.group_3_wed %>
                 <% when "pending" %>
                   <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -602,7 +648,7 @@ Sun
                   <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval4 %>
+                <% case request.approval.group_4_wed %>
                 <% when "pending" %>
                   <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -686,7 +732,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.thu == 1  || request.thursday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -707,7 +753,7 @@ Sun
           <a href="<%= request_path(request) %>">
             <div class="status_wrapper">
               <div class="status_half">
-                <% case request.approval1 %>
+                <% case request.approval.group_1_thu %>
                 <% when "pending" %>
                   <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -716,7 +762,7 @@ Sun
                   <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval2 %>
+                <% case request.approval.group_2_thu %>
                 <% when "pending" %>
                   <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -727,7 +773,7 @@ Sun
 
               </div>
               <div class="status_half">
-                <% case request.approval3 %>
+                <% case request.approval.group_3_thu %>
                 <% when "pending" %>
                   <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -736,7 +782,7 @@ Sun
                   <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval4 %>
+                <% case request.approval.group_4_thu %>
                 <% when "pending" %>
                   <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -820,7 +866,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.fri == 1  || request.friday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -841,7 +887,7 @@ Sun
           <a href="<%= request_path(request) %>">
             <div class="status_wrapper">
               <div class="status_half">
-                <% case request.approval1 %>
+                <% case request.approval.group_1_fri %>
                 <% when "pending" %>
                   <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -850,7 +896,7 @@ Sun
                   <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval2 %>
+                <% case request.approval.group_2_fri %>
                 <% when "pending" %>
                   <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -861,7 +907,7 @@ Sun
 
               </div>
               <div class="status_half">
-                <% case request.approval3 %>
+                <% case request.approval.group_3_fri %>
                 <% when "pending" %>
                   <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -870,7 +916,7 @@ Sun
                   <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval4 %>
+                <% case request.approval.group_4_fri %>
                 <% when "pending" %>
                   <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -954,7 +1000,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.sat == 1  || request.saturday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -975,7 +1021,7 @@ Sun
           <a href="<%= request_path(request) %>">
             <div class="status_wrapper">
               <div class="status_half">
-                <% case request.approval1 %>
+                <% case request.approval.group_1_sat %>
                 <% when "pending" %>
                   <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -984,7 +1030,7 @@ Sun
                   <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval2 %>
+                <% case request.approval.group_2_sat %>
                 <% when "pending" %>
                   <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -995,7 +1041,7 @@ Sun
 
               </div>
               <div class="status_half">
-                <% case request.approval3 %>
+                <% case request.approval.group_3_sat %>
                 <% when "pending" %>
                   <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -1004,7 +1050,7 @@ Sun
                   <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval4 %>
+                <% case request.approval.group_4_sat %>
                 <% when "pending" %>
                   <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -1087,7 +1133,7 @@ Sun
         <% counter = 1 %>
   <% @requests.each do |request| %>
   <% if request.sun == 1  || request.sunday_hash["cancelled"] == "yes"%>
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>"  data-href="<%= request_path(request) %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1108,7 +1154,7 @@ Sun
           <a href="<%= request_path(request) %>">
             <div class="status_wrapper">
               <div class="status_half">
-                <% case request.approval1 %>
+                <% case request.approval.group_1_sun %>
                 <% when "pending" %>
                   <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -1117,7 +1163,7 @@ Sun
                   <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval2 %>
+                <% case request.approval.group_2_sun %>
                 <% when "pending" %>
                   <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -1128,7 +1174,7 @@ Sun
 
               </div>
               <div class="status_half">
-                <% case request.approval3 %>
+                <% case request.approval.group_3_sun %>
                 <% when "pending" %>
                   <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -1137,7 +1183,7 @@ Sun
                   <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval4 %>
+                <% case request.approval.group_4_sun %>
                 <% when "pending" %>
                   <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>

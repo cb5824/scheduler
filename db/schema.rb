@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_180022) do
+ActiveRecord::Schema.define(version: 2020_05_17_180243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -35,6 +35,39 @@ ActiveRecord::Schema.define(version: 2020_05_09_180022) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "approvals", force: :cascade do |t|
+    t.bigint "request_id"
+    t.string "group_1_mon", default: "pending", null: false
+    t.string "group_1_tue", default: "pending", null: false
+    t.string "group_1_wed", default: "pending", null: false
+    t.string "group_1_thu", default: "pending", null: false
+    t.string "group_1_fri", default: "pending", null: false
+    t.string "group_1_sat", default: "pending", null: false
+    t.string "group_1_sun", default: "pending", null: false
+    t.string "group_2_mon", default: "pending", null: false
+    t.string "group_2_tue", default: "pending", null: false
+    t.string "group_2_wed", default: "pending", null: false
+    t.string "group_2_thu", default: "pending", null: false
+    t.string "group_2_fri", default: "pending", null: false
+    t.string "group_2_sat", default: "pending", null: false
+    t.string "group_2_sun", default: "pending", null: false
+    t.string "group_3_mon", default: "pending", null: false
+    t.string "group_3_tue", default: "pending", null: false
+    t.string "group_3_wed", default: "pending", null: false
+    t.string "group_3_thu", default: "pending", null: false
+    t.string "group_3_fri", default: "pending", null: false
+    t.string "group_3_sat", default: "pending", null: false
+    t.string "group_3_sun", default: "pending", null: false
+    t.string "group_4_mon", default: "pending", null: false
+    t.string "group_4_tue", default: "pending", null: false
+    t.string "group_4_wed", default: "pending", null: false
+    t.string "group_4_thu", default: "pending", null: false
+    t.string "group_4_fri", default: "pending", null: false
+    t.string "group_4_sat", default: "pending", null: false
+    t.string "group_4_sun", default: "pending", null: false
+    t.index ["request_id"], name: "index_approvals_on_request_id"
   end
 
   create_table "changelogs", force: :cascade do |t|

@@ -24,6 +24,11 @@ Rails.application.routes.draw do
       resources :requests, only: [:index, :update, :show, :create]
     end
   end
+  namespace :api do
+    namespace :v1 do
+      resources :approvals, only: [:index, :update, :show, :create]
+    end
+  end
 
   root to: 'landing#index'
 
