@@ -1291,7 +1291,7 @@ function closealert(){
   $("#ajax_alert").fadeOut();
 }
 
-$('.apitest').on('click', (event) =>{
+$('.superoverlay_button').on('click', (event) =>{
   event.preventDefault();
   $("#ajax_alert").html("Saving changes...");
   $("#ajax_alert").css({display: 'block'});

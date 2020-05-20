@@ -77,14 +77,16 @@ Sun
 </div>
 
   <div id="divOverlay">
-    <div class="testclass">
+    <div class="overlay_actions">
       <%= image_tag "red_x.png", class: "closeoverlay", alt: "Pending" %>
       <button type="button" class="showpage overlay_button">Request Details</button>
       <button type="button" class="editrequest overlay_button">Edit</button>
-      <div class="daily_approve overlay_button">Approve/Reject Days &#9660;</div>
+      <% if @user.role != "user" %>
+        <div class="daily_approve overlay_button">Approve/Reject Days &#9660;</div>
+      <% end %>
     </div>
     <div class="superoverlay">
-      <div class="testclass2">
+      <div class="superoverlay_actions">
         <% if @user.role == "superadmin" %>
           <label for="emulate">Admin group to emulate:</label>
           <select id="emulate">
@@ -95,8 +97,8 @@ Sun
             <option value="all">All Groups</option>
           </select>
         <% end %>
-        <button type="button" class="apitest" data-change="approve_all">Approve All</button>
-        <button type="button" class="apitest" data-change="reject_all">Reject All</button>
+        <button type="button" class="superoverlay_button" data-change="approve_all">Approve All</button>
+        <button type="button" class="superoverlay_button" data-change="reject_all">Reject All</button>
         <label for="mon_check">Mon</label>
         <input type="checkbox" id="mon_check" name="mon_check" value="mon_check"> |
         <label for="tue_check">Tue</label>
@@ -111,10 +113,10 @@ Sun
         <input type="checkbox" id="sat_check" name="sat_check" value="sat_check"> |
         <label for="sun_check">Sun</label>
         <input type="checkbox" id="sun_check" name="sun_check" value="sun_check">
-        <div class="testclass3">
-        <button class="apitest" data-change="approve_select">Approve Selected</button>
-        <button class="apitest" data-change="reject_select">Reject Selected</button>
-      </div>
+        <div class="superoverlay_button_container">
+        <button class="superoverlay_button" data-change="approve_select">Approve Selected</button>
+        <button class="superoverlay_button" data-change="reject_select">Reject Selected</button>
+        </div>
       </div>
       <div class="shrinkoverlay">Back &#9650;</div>
     </div>

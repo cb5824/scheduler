@@ -655,18 +655,18 @@ th.rotated > div{
   cursor: pointer;
 }
 
-.testclass{
+.overlay_actions{
   display: flex;
   align-items: center;
 }
 
-.testclass2{
+.superoverlay_actions{
   display: inline-flex;
   align-items: center;
   margin-right: 10px;
 }
 
-.testclass3{
+.superoverlay_button_container{
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -674,11 +674,11 @@ th.rotated > div{
   margin-left: 10px;
 }
 
-.testclass3 button{
+.superoverlay_button_container button{
   width: 130px;
 }
 
-.apitest{
+.superoverlay_button{
   margin-left: 5px;
   margin-right: 5px;
 }
@@ -690,5 +690,5 @@ th.rotated > div{
     left: 50%;
     padding: 10px;
     z-index: 3;
-    display: none;    
+    display: none;
 }
