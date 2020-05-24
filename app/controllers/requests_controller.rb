@@ -96,21 +96,22 @@ class RequestsController < ApplicationController
         ['Shared Maintainer', 'sM']]
 
   def index
-    if params["week"] && params["year"]
-      @thisweek = params["week"]
-      @thisyear = params["year"]
-    elsif params["filter_week"] && params["filter_year"]
-      @thisweek = params["filter_week"]
-      @thisyear = params["filter_year"]
-    else
-      @thisweek = Date.today.cweek
-      @thisyear = Date.today.cwyear
-    end
+    # if params["week"] && params["year"]
+    #   @thisweek = params["week"]
+    #   @thisyear = params["year"]
+    # elsif params["filter_week"] && params["filter_year"]
+    #   @thisweek = params["filter_week"]
+    #   @thisyear = params["filter_year"]
+    # else
+    #   @thisweek = Date.today.cweek
+    #   @thisyear = Date.today.cwyear
+    # end
+    setweek
     @user = current_user
-    if params["hide"]
-      @requests = Request.where(archived: "no", week: @thisweek, year: @thisyear, cancelled: 0 ).sort_by{|request| request.color}
-    else
-      @requests = Request.where(archived: "no", week: @thisweek, year: @thisyear ).sort_by{|request| request.color}
+
+    @requests = Request.where(nil)
+    filtering_params(params).each do |key, value|
+      @requests = @requests.public_send("filter_by_#{key}", value) if value.present?
     end
     respond_to do |format|
       format.xlsx {
@@ -328,6 +329,38 @@ end
       @request.update_attribute(:cancelled, 0)
     end
     redirect_to @request
+  end
+
+  def setweek
+    if params["week"] && params["year"]
+      @thisweek = params["week"]
+      @thisyear = params["year"]
+    elsif params["filter_week"] && params["filter_year"]
+      @thisweek = params["filter_week"]
+      @thisyear = params["filter_year"]
+    else
+      @thisweek = Date.today.cweek
+      @thisyear = Date.today.cwyear
+    end
+  end
+  # other
+  # taw
+  # form b
+  # form c
+  # Track and time
+  # Inacc Track
+  # contractor name
+  # RWP complete
+  # OCS
+  # Disturb track
+  # RMM on tack
+  # RMM off tack
+  # Disable crossings
+  # underground
+  # crossing flagging/traffic control
+
+  def filtering_params(params)
+    params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year)
   end
 
   def request_params

@@ -7,6 +7,31 @@ class Request < ApplicationRecord
   has_one :pending
   has_one :approval
 
+
+  scope :filter_by_night_work, -> (night_work) { where night_work: night_work }
+  scope :filter_by_week, -> (week) { where week: week }
+  scope :filter_by_year, -> (year) { where year: year }
+  scope :filter_by_single_tracking, -> (single_tracking) { joins(:weekly).where("single_tracking = ?", single_tracking)}
+  scope :filter_by_mt1, -> (mt1) { joins(:weekly).where("mt1 = ?", mt1)}
+  scope :filter_by_mt2, -> (mt2) { joins(:weekly).where("mt2 = ?", mt2)}
+  scope :filter_by_mt3, -> (mt3) { joins(:weekly).where("mt3 = ?", mt3)}
+  scope :filter_by_mt4, -> (mt4) { joins(:weekly).where("mt4 = ?", mt4)}
+  scope :filter_by_other, -> (other) { joins(:weekly).where("other = ?", other)}
+  scope :filter_by_taw, -> (taw) { joins(:weekly).where("taw = ?", taw)}
+  scope :filter_by_form_b, -> (form_b) { joins(:weekly).where("form_b = ?", form_b)}
+  scope :filter_by_form_c, -> (form_c) { joins(:weekly).where("form_c = ?", form_c)}
+  scope :filter_by_track_and_time, -> (track_and_time) { joins(:weekly).where("track_and_time = ?", track_and_time)}
+  scope :filter_by_contractor, -> (contractor) { joins(:weekly).where("contractor like ?", "#{contractor}%")}
+  scope :filter_by_rwp, -> (rwp) { joins(:weekly).where("rwp = ?", rwp)}
+  scope :filter_by_ocs, -> (ocs) { joins(:weekly).where("ocs = ?", ocs)}
+  scope :filter_by_disturb, -> (disturb) { joins(:weekly).where("disturb = ?", disturb)}
+  scope :filter_by_rrm, -> (rrm) { joins(:weekly).where("rrm = ?", rrm)}
+  scope :filter_by_foul, -> (foul) { joins(:weekly).where("foul = ?", foul)}
+  scope :filter_by_crossings, -> (crossings) { joins(:weekly).where("crossings = ?", crossings)}
+  scope :filter_by_underground, -> (underground) { joins(:weekly).where("underground = ?", underground)}
+  scope :filter_by_flagging, -> (flagging) { joins(:weekly).where("flagging = ?", flagging)}
+
+
   CP_ARRAY = [['N.L. CP 4th', 1],
         ['S.L. CP 4th', 2],
         ['N.L. CP Common', 3],
