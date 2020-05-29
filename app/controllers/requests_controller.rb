@@ -343,21 +343,6 @@ end
       @thisyear = Date.today.cwyear
     end
   end
-  # other
-  # taw
-  # form b
-  # form c
-  # Track and time
-  # Inacc Track
-  # contractor name
-  # RWP complete
-  # OCS
-  # Disturb track
-  # RMM on tack
-  # RMM off tack
-  # Disable crossings
-  # underground
-  # crossing flagging/traffic control
 
   def filtering_params(params)
     params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year)

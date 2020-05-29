@@ -1202,21 +1202,19 @@ if ($('#SunData').length > 0){
 
   $('.savenotes').on('click', (event) =>{
     event.preventDefault();
-    let address = event.target.dataset.address;
-    let req = event.target.dataset.request;
-    let day = event.target.dataset.day;
-    if (event.target.dataset.type === "requestor") {
-      var test = '#requestornotes' + day + req;
-      let notes = $(test).val();
-      var reqdata = { id: req, rnotes: notes,  day: day}
-    } else if (event.target.dataset.type === "admin") {
-      var test = '#adminnotes' + day + req;
-      let notes = $(test).val();
-      var reqdata = { id: req, anotes: notes,  day: day}
-    } else if (event.target.dataset.type === "inspector") {
-      var test = '#inspectornotes' + day + req;
-      let notes = $(test).val();
-      var reqdata = { id: req, inotes: notes,  day: day}
+    let notes = $("#notes_workspace").children("textarea").val();
+    let address = $('#notesOverlay').data("address");
+    let req =   $('#notesOverlay').data("reqnum");
+    let day = $('#notesOverlay').data("day");
+
+    if ($("#notes_workspace").children("textarea").data("type") == "requestor") {
+      var reqdata = { id: req, rnotes: notes,  day: day};
+    }
+    if ($("#notes_workspace").children("textarea").data("type") == "inspector") {
+      var reqdata = { id: req, inotes: notes,  day: day};
+    }
+    if ($("#notes_workspace").children("textarea").data("type") == "admin") {
+      var reqdata = { id: req, anotes: notes,  day: day};
     }
 
     let request = $.ajax({
@@ -1246,19 +1244,21 @@ $(".index_status").on("mouseleave",function(e){
     $(event.target).parent(".index_status")[0].classList.add("hidden");
 });
 
-$('.hover_row').on("click", function() {
-    var bottomWidth = $(this).css('width');
-    var bottomHeight = $(this).css('height');
-    var rowPos = $(this).offset();
+$('.trigger_overlay').on("click", function() {
+    var target_row = $(event.target).parent()[0];
+    var bottomWidth = $(target_row).css('width');
+    var bottomHeight = $(target_row).css('height');
+    var rowPos = $(target_row).offset();
     bottomTop = rowPos.top;
     bottomLeft = rowPos.left;
     $(".superoverlay").css({height: "0%"});
-    $('#divOverlay').data("reqnum", this.dataset.reqnum);
+    $('#notesOverlay').hide();
+    $('#divOverlay').data("reqnum", target_row.dataset.reqnum);
     $('#divOverlay').css({
       position: 'absolute',
       top: bottomTop,
       left: bottomLeft,
-      width: '100%',
+      width: '1900px',
       height: bottomHeight,
       display: "flex"
     });
@@ -1267,6 +1267,10 @@ $('.hover_row').on("click", function() {
 
  $(".closeoverlay").click(function() {
     $('#divOverlay').hide();
+ });
+
+ $(".closeNotesOverlay").click(function() {
+    $('#notesOverlay').hide();
  });
 
  $('.showpage').on("click",function(){
@@ -1322,6 +1326,42 @@ $('.superoverlay_button').on('click', (event) =>{
     $("#ajax_alert").html("Updates to request saved");
     setTimeout(closealert, 2000);
  });
+});
+
+$('.notes_content').on("click", function() {
+    let initial = $(event.target).html();
+    if ($(event.target).hasClass("requestor_notes")) {
+      var type = "requestor";
+    }
+    if ($(event.target).hasClass("admin_notes")) {
+      var type = "admin";
+    }
+    if ($(event.target).hasClass("inspector_notes")) {
+      var type = "inspector";
+    }
+    var target_cell = $(event.target).parent()[0];
+    $('#notesOverlay').data("reqnum", target_cell.dataset.reqnum);
+
+    var bottomWidth = $(target_cell).css('width');
+    var bottomHeight = $(target_cell).css('height');
+    var rowPos = $(target_cell).offset();
+    bottomTop = rowPos.top;
+    bottomLeft = rowPos.left;
+    $('#divOverlay').hide();
+    $(".superoverlay").css({height: "0%"});
+    $('#notesOverlay').data("reqnum", target_cell.dataset.reqnum);
+    $('#notesOverlay').data("day", target_cell.dataset.day);
+    $('#notesOverlay').data("address", target_cell.dataset.address);
+    $('#notesOverlay').css({
+      position: 'absolute',
+      top: bottomTop,
+      left: bottomLeft,
+      height: bottomHeight,
+      display: "flex"
+    });
+    $("#notes_workspace").children("textarea").val(initial);
+    $("#notes_workspace").children("textarea").data("type", type);
+    $("#notesOverlay").animate({height: "200px"});
 });
 
 

@@ -1,6 +1,7 @@
 class Api::V1::RequestsController < ApplicationController
 
   def update
+    binding.pry
     @request = Request.where(id: params[:id])[0]
     @user = current_user
     if params["rnotes"]
