@@ -342,6 +342,16 @@ class Request < ApplicationRecord
 
   end
 
+  def daystatus(group1, group2, group3, group4)
+    if group1 == "rejected" || group2 == "rejected" || group3 == "rejected" || group4 == "rejected"
+      return "rejected"
+    elsif group1 == "approved" && group2 == "approved" && group3 == "approved" && group4 == "approved"
+      return "approved"
+    else
+      return "pending"
+    end
+  end
+
   def expired?
     thisyear = Time.now.year
     thisweek = Date.today.cweek

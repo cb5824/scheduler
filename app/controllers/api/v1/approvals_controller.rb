@@ -5,7 +5,6 @@ class Api::V1::ApprovalsController < ApplicationController
     days = []
     status = ""
     group = []
-
     if params["change"] == "approve_all" || params["change"] == "reject_all"
       days = ["true", "true", "true", "true", "true", "true", "true"]
     elsif params["change"] == "approve_select" || params["change"] == "reject_select"
@@ -35,6 +34,7 @@ class Api::V1::ApprovalsController < ApplicationController
     when "none"
       group << current_user.approval_group
     end
+
     group.each do |g|
       case g
       when 1

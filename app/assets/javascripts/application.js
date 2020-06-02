@@ -14,6 +14,7 @@
 //= require_tree .
 //= require jquery
 //= require jquery_ujs
+var last_clicked;
 $( document ).ready(function() {
 
   let startcolor = $('#request_color').val();
@@ -1202,6 +1203,9 @@ if ($('#SunData').length > 0){
 
   $('.savenotes').on('click', (event) =>{
     event.preventDefault();
+    $("#ajax_alert").html("Saving notes...");
+    $("#ajax_alert").css({display: 'block'});
+
     let notes = $("#notes_workspace").children("textarea").val();
     let address = $('#notesOverlay').data("address");
     let req =   $('#notesOverlay').data("reqnum");
@@ -1224,6 +1228,9 @@ if ($('#SunData').length > 0){
     });
 
     request.done(() => {
+      $("#ajax_alert").html("Notes saved");
+      setTimeout(closealert, 2000);
+      last_clicked.html(notes);
 
    });
   });
@@ -1329,6 +1336,7 @@ $('.superoverlay_button').on('click', (event) =>{
 });
 
 $('.notes_content').on("click", function() {
+    last_clicked = $(event.target);
     let initial = $(event.target).html();
     if ($(event.target).hasClass("requestor_notes")) {
       var type = "requestor";
@@ -1363,6 +1371,72 @@ $('.notes_content').on("click", function() {
     $("#notes_workspace").children("textarea").data("type", type);
     $("#notesOverlay").animate({height: "200px"});
 });
+
+$('.group_approve').on('click', (event) =>{
+  event.preventDefault();
+
+  let req = $(event.target).data("req");
+  let address = "/api/v1/approvals/" + req;
+  let change = "approve_all";
+  var emulate = $(event.target).data("group");
+
+
+  let request = $.ajax({
+    method: 'PATCH',
+    data: {change: change, emulate: emulate},
+    url: address
+  });
+
+  request.done(() => {
+    $(".approvals_bar_block").each(function(){
+      if ($(this).text() === (("" + emulate)) && ($(this).hasClass("not_scheduled")) === false){
+
+      $(this).removeClass("pending");
+      $(this).removeClass("rejected");
+      $(this).addClass("approved");
+      }
+    });
+ });
+});
+
+$('.superadmin_approve').on('click', (event) =>{
+  event.preventDefault();
+
+  let req = $(event.target).data("req");
+  let address = "/api/v1/approvals/" + req;
+  let change = "approve_select";
+  var emulate = "all";
+  let mon = $(event.target).data("mon");
+  let tue = $(event.target).data("tue");
+  let wed = $(event.target).data("wed");
+  let thu = $(event.target).data("thu");
+  let fri = $(event.target).data("fri");
+  let sat = $(event.target).data("sat");
+  let sun = $(event.target).data("sun");
+
+
+  let request = $.ajax({
+    method: 'PATCH',
+    data: {change: change, mon: mon, tue: tue, wed: wed, thu: thu, fri: fri, sat: sat, sun: sun, emulate: emulate},
+    url: address
+  });
+
+  request.done(() => {
+    let day = $(event.target).data("day");
+    $(".approvals_bar_container").each(function(index){
+      if (day === index) {
+        $(this).children(".approvals_bar_block").each(function(){
+          if ($(this).hasClass("not_scheduled") === false) {
+            $(this).removeClass("pending");
+            $(this).removeClass("rejected");
+            $(this).addClass("approved");
+          }
+        });
+      }
+    });
+ });
+});
+
 
 
 });

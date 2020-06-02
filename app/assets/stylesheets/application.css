@@ -203,6 +203,10 @@ tr a{
   padding: 0;
 }
 
+.not_scheduled{
+  background-color: #d0d9d8;
+}
+
 .pending, .pending div{
   background-color: #ffe500;
 }
@@ -253,7 +257,7 @@ body{
   background-color: 	#99aab5;
 }
 
-.nav_link, #account_overlay{
+.nav_link, #account_overlay, .inlineblock{
   display: inline-block;
 }
 
@@ -331,7 +335,7 @@ table.requests_table tfoot .links a{
 }
 
 .approvals_bar_container{
-  display: flex;
+  display: inline-flex;
   width: 200px;
   background-color: #6b767e;
   align-items: center;
@@ -712,4 +716,63 @@ th.rotated > div{
 
 .closeNotesOverlay{
   margin-top: 5px;
+}
+
+.fakebutton{
+  cursor: pointer;
+  border: 1px solid #767676;
+  background-color: #efefef;
+  padding: 5px;
+  text-decoration: none;
+  color: #000000;
+  border-radius: 5px;
+}
+
+.fakebutton:hover{
+  background-color: #a9a9a9;
+}
+
+.fakebutton:active{
+    background-color: #43484c;
+}
+
+.underline{
+  text-decoration: underline;
+}
+
+.showstatus{
+  display: inline-grid;
+}
+
+.showstatus li{
+  width: 440px;
+  height: 26px;
+  margin-bottom: 5px;
+}
+
+.showstatus .approval_summary{
+  float: right;
+}
+
+.status_text{
+  display: inline-block;
+  padding: 4px;
+  width: 140px;
+}
+
+.day_header{
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+.superadmin_buttons{
+  display: inline-flex;
+  flex-direction: column;
+  height: 212px;
+  justify-content: space-between;
+}
+
+.group_approve{
+  cursor: pointer;
 }
