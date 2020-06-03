@@ -3,7 +3,7 @@ class Pending < ApplicationRecord
 
   def change(comparison)
     current = self.request
-    comparison.update_weekly
+    comparison_weekly = comparison.update_weekly("yes")
     # t.integer "project", default: 0, null: false
     if current.requestor_project != comparison.requestor_project
       self.project = "1"
@@ -54,41 +54,41 @@ class Pending < ApplicationRecord
     end
 
 # •	Mile post
-if current.weekly.mile_post != comparison.weekly.mile_post
+if current.weekly.mile_post != comparison_weekly.mile_post
   self.mile_post = "1"
 end
 
 # •	Cp
-if current.weekly.control_point != comparison.weekly.control_point
+if current.weekly.control_point != comparison_weekly.control_point
   self.control_point = "1"
 end
 # •	Mt1 -4 and other
-if current.weekly.mt1 != comparison.weekly.mt1
+if current.weekly.mt1 != comparison_weekly.mt1
   self.mt1 = "1"
 end
-if current.weekly.mt2 != comparison.weekly.mt2
+if current.weekly.mt2 != comparison_weekly.mt2
   self.mt2 = "1"
 end
-if current.weekly.mt3 != comparison.weekly.mt3
+if current.weekly.mt3 != comparison_weekly.mt3
   self.mt3 = "1"
 end
-if current.weekly.mt4 != comparison.weekly.mt4
+if current.weekly.mt4 != comparison_weekly.mt4
   self.mt4 = "1"
 end
-if current.weekly.other != comparison.weekly.other
+if current.weekly.other != comparison_weekly.other
   self.other = "1"
 end
 # •	Single tracking
-if current.weekly.single_tracking != comparison.weekly.single_tracking
+if current.weekly.single_tracking != comparison_weekly.single_tracking
   self.single_tracking = "1"
 end
 # •	Shift
-if current.weekly.shift != comparison.weekly.shift
+if current.weekly.shift != comparison_weekly.shift
   self.shift = "1"
 end
 
 # •	Inacc track
-if current.weekly.inacc_track != comparison.weekly.inacc_track
+if current.weekly.inacc_track != comparison_weekly.inacc_track
   self.inacc_track = "1"
 end
 

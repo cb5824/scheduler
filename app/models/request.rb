@@ -137,7 +137,8 @@ class Request < ApplicationRecord
     end
   end
 
-  def update_weekly
+  def update_weekly(bypass = "no")
+    binding.pry
     starting_day = nil
     ending_day = nil
     starting_time = nil
@@ -336,8 +337,12 @@ class Request < ApplicationRecord
     @new_weekly.request = self
     # @new_weekly.save
     # self.pending.save
-    self.save
-    self.weekly.save
+    if bypass == "no"
+      self.save
+      self.weekly.save
+    else
+      return @new_weekly
+    end
     #
 
   end

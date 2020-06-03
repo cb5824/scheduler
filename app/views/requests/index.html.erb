@@ -252,7 +252,7 @@ Sun
 
             <div class="status_wrapper">
               <div class="status_half">
-                <% case request.approval1 %>
+                <% case request.approval.groupstatus(1) %>
                 <% when "pending" %>
                   <%= image_tag "tl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -261,7 +261,7 @@ Sun
                   <%= image_tag "tl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval2 %>
+                <% case request.approval.groupstatus(2) %>
                 <% when "pending" %>
                   <%= image_tag "tr_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -272,7 +272,7 @@ Sun
 
               </div>
               <div class="status_half">
-                <% case request.approval3 %>
+                <% case request.approval.groupstatus(3) %>
                 <% when "pending" %>
                   <%= image_tag "bl_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -281,7 +281,7 @@ Sun
                   <%= image_tag "bl_green.png", class: "status_icon", alt: "Pending" %>
                 <% end %>
 
-                <% case request.approval4 %>
+                <% case request.approval.groupstatus(4) %>
                 <% when "pending" %>
                   <%= image_tag "br_yellow.png", class: "status_icon", alt: "Pending" %>
                 <% when "rejected" %>
@@ -294,45 +294,45 @@ Sun
 
 
       </td>
-      <td><%= counter %></td>
-      <td class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
-      <td class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
-      <td class="<% if request.pending["mile_post"] == "1" %>changed<% end %>"><%= request.weekly.mile_post %></td>
-      <td class="<% if request.pending["control_point"] == "1" %>changed<% end %>"><%= request.weekly.control_point %></td>
-      <td class="<% if request.pending["mt1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["mt2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["mt3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["mt4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
-      <td class="<% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></td>
-      <td class="<% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></td>
-      <td class="<% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></td>
-      <td class="<% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></td>
-      <td class="<% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></td>
-      <td class="<% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></td>
-      <td class="<% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></td>
-      <td class="<% if request.pending["single_tracking"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["night_work"] == "1" %>changed<% end %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["shift"] == "1" %>changed<% end %>"><%= request.weekly.shift %></td>
-      <td class="<% if request.pending["taw"] == "1" %>changed<% end %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["form_b"] == "1" %>changed<% end %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["form_c"] == "1" %>changed<% end %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["track_and_time"] == "1" %>changed<% end %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["sswps"] == "1" %>changed<% end %>"><%= request.sswps %></td>
-      <td class="<% if request.pending["change_notices"] == "1" %>changed<% end %>"><%= request.change_notices %></td>
-      <td class="<% if request.pending["rwp"] == "1" %>changed<% end %>"><% if request.rwp == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["ocs"] == "1" %>changed<% end %>"><% if request.ocs == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["disturb"] == "1" %>changed<% end %>"><% if request.disturb == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["rrm"] == "1" %>changed<% end %>"><% if request.rrm == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["foul"] == "1" %>changed<% end %>"><% if request.foul == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["crossings"] == "1" %>changed<% end %>"><% if request.crossings == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["underground"] == "1" %>changed<% end %>"><% if request.underground == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="<% if request.pending["flagging"] == "1" %>changed<% end %>"><% if request.flagging == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td><%= request.created_at.strftime("%m/%d/%Y") %></td>
-      <td><%= request.updated_at.strftime("%m/%d/%Y") %></td>
-      <td><%= request.requestor_name %></td>
+      <td class="trigger_overlay"><%= counter %></td>
+      <td class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td class="trigger_overlay <% if request.pending["mile_post"] == "1" %>changed<% end %>"><%= request.weekly.mile_post %></td>
+      <td class="trigger_overlay <% if request.pending["control_point"] == "1" %>changed<% end %>"><%= request.weekly.control_point %></td>
+      <td class="trigger_overlay <% if request.pending["mt1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["mt2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["mt3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["mt4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td class="trigger_overlay <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["single_tracking"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["shift"] == "1" %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td class="trigger_overlay <% if request.pending["taw"] == "1" %>changed<% end %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["form_b"] == "1" %>changed<% end %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["form_c"] == "1" %>changed<% end %>"><% if request.weekly.form_c == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["track_and_time"] == "1" %>changed<% end %>"><% if request.weekly.track_and_time == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["sswps"] == "1" %>changed<% end %>"><%= request.sswps %></td>
+      <td class="trigger_overlay <% if request.pending["change_notices"] == "1" %>changed<% end %>"><%= request.change_notices %></td>
+      <td class="trigger_overlay <% if request.pending["rwp"] == "1" %>changed<% end %>"><% if request.rwp == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["ocs"] == "1" %>changed<% end %>"><% if request.ocs == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["disturb"] == "1" %>changed<% end %>"><% if request.disturb == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["rrm"] == "1" %>changed<% end %>"><% if request.rrm == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["foul"] == "1" %>changed<% end %>"><% if request.foul == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["crossings"] == "1" %>changed<% end %>"><% if request.crossings == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["underground"] == "1" %>changed<% end %>"><% if request.underground == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay <% if request.pending["flagging"] == "1" %>changed<% end %>"><% if request.flagging == "yes" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td class="trigger_overlay"><%= request.created_at.strftime("%m/%d/%Y") %></td>
+      <td class="trigger_overlay"><%= request.updated_at.strftime("%m/%d/%Y") %></td>
+      <td class="trigger_overlay"><%= request.requestor_name %></td>
     </tr>
     <% counter += 1 %>
   <% end %>
@@ -381,7 +381,7 @@ Sun
     <% @requests.each do |request| %>
        <% if request.mon == 1  || request.monday_hash["cancelled"] == "yes"%>
         <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
-          <td class="trigger_overlay reqstatus">
+          <td class="reqstatus">
             <div class="index_status hidden">
               <div class="approvals_bar_container">
                 <div class="approvals_bar_block <%= request.approval1 %>">
@@ -441,8 +441,7 @@ Sun
               </div>
         </td>
         <td class="trigger_overlay"><%= counter %></td>
-
-        <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
+        <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["monday_values"]["mp1"] == "1" || request.pending["monday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.monday_hash["mp1"]} - #{request.monday_hash["mp2"]}" %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["monday_values"]["cp1"] == "1" || request.pending["monday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.monday_hash["cp1"].to_i)} - #{request.parse_cp(request.monday_hash["cp2"].to_i)}" %></td>
@@ -575,29 +574,28 @@ Sun
               </div>
             </div>
       </td>
-      <td><%= counter %></td>
-
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["mp1"] == "1" || request.pending["tuesday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.tuesday_hash["mp1"]} - #{request.tuesday_hash["mp2"]}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["cp1"] == "1" || request.pending["tuesday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.tuesday_hash["cp1"].to_i)} - #{request.parse_cp(request.tuesday_hash["cp2"].to_i)}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["tue_workers"] == "1" %>class="changed"<% end %>><%= request.weekly.tue_workers %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["tuesday_values"]["b_time"] == "1" || request.pending["tuesday_values"]["b_location"] == "1"|| request.pending["tuesday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.tuesday_hash["b_time"]}\n#{request.tuesday_hash["b_location"]}\n#{request.tuesday_hash["b_name_number"]}" %></td>
-      <td data-href="<%= request_path(request) %>"class="<% if request.pending["tuesday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["start_time"] == "1" || request.pending["tuesday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.tuesday_values["taw"] == "1" %>class="changed"<% end %>><% if request.tuesday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.tuesday_values["form_b"] == "1" %>class="changed"<% end %>><% if request.tuesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.tuesday_values["form_c"] == "1" %>class="changed"<% end %>><% if request.tuesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.tuesday_values["track_and_time"] == "1" %>class="changed"<% end %>><% if request.tuesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["tuesday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"><div class="notes_content requestor_notes"><%= request.requestor_notes_tue %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_tue %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_tue %></div></td>
+      <td class="trigger_overlay"><%= counter %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["mp1"] == "1" || request.pending["tuesday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.tuesday_hash["mp1"]} - #{request.tuesday_hash["mp2"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["cp1"] == "1" || request.pending["tuesday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.tuesday_hash["cp1"].to_i)} - #{request.parse_cp(request.tuesday_hash["cp2"].to_i)}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tue_workers"] == "1" %>changed<% end %>"><%= request.weekly.tue_workers %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["tuesday_values"]["b_time"] == "1" || request.pending["tuesday_values"]["b_location"] == "1"|| request.pending["tuesday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.tuesday_hash["b_time"]}\n#{request.tuesday_hash["b_location"]}\n#{request.tuesday_hash["b_name_number"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["start_time"] == "1" || request.pending["tuesday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["taw"] == "1" %>changed<% end %>"><% if request.tuesday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["form_b"] == "1" %>changed<% end %>"><% if request.tuesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["form_c"] == "1" %>changed<% end %>"><% if request.tuesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.tuesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="tue" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_tue %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_tue %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_tue %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -708,29 +706,28 @@ Sun
               </div>
             </div>
       </td>
-      <td><%= counter %></td>
-
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["mp1"] == "1" || request.pending["wednesday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.wednesday_hash["mp1"]} - #{request.wednesday_hash["mp2"]}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["cp1"] == "1" || request.pending["wednesday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.wednesday_hash["cp1"].to_i)} - #{request.parse_cp(request.wednesday_hash["cp2"].to_i)}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["wed_workers"] == "1" %>class="changed"<% end %>><%= request.weekly.wed_workers %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["wednesday_values"]["b_time"] == "1" || request.pending["wednesday_values"]["b_location"] == "1"|| request.pending["wednesday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.wednesday_hash["b_time"]}\n#{request.wednesday_hash["b_location"]}\n#{request.wednesday_hash["b_name_number"]}" %></td>
-      <td data-href="<%= request_path(request) %>"class="<% if request.pending["wednesday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["start_time"] == "1" || request.pending["wednesday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.wednesday_values["taw"] == "1" %>class="changed"<% end %>><% if request.wednesday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.wednesday_values["form_b"] == "1" %>class="changed"<% end %>><% if request.wednesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.wednesday_values["form_c"] == "1" %>class="changed"<% end %>><% if request.wednesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.wednesday_values["track_and_time"] == "1" %>class="changed"<% end %>><% if request.wednesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["wednesday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"><div class="notes_content requestor_notes"><%= request.requestor_notes_wed %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_wed %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_wed %></div></td>
+      <td class="trigger_overlay"><%= counter %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["mp1"] == "1" || request.pending["wednesday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.wednesday_hash["mp1"]} - #{request.wednesday_hash["mp2"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["cp1"] == "1" || request.pending["wednesday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.wednesday_hash["cp1"].to_i)} - #{request.parse_cp(request.wednesday_hash["cp2"].to_i)}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wed_workers"] == "1" %>changed<% end %>"><%= request.weekly.wed_workers %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["wednesday_values"]["b_time"] == "1" || request.pending["wednesday_values"]["b_location"] == "1"|| request.pending["wednesday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.wednesday_hash["b_time"]}\n#{request.wednesday_hash["b_location"]}\n#{request.wednesday_hash["b_name_number"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["start_time"] == "1" || request.pending["wednesday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["taw"] == "1" %>changed<% end %>"><% if request.wednesday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["form_b"] == "1" %>changed<% end %>"><% if request.wednesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["form_c"] == "1" %>changed<% end %>"><% if request.wednesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.wednesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="wed" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_wed %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_wed %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_wed %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -841,29 +838,28 @@ Sun
               </div>
             </div>
       </td>
-      <td><%= counter %></td>
-
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["mp1"] == "1" || request.pending["thursday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.thursday_hash["mp1"]} - #{request.thursday_hash["mp2"]}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["cp1"] == "1" || request.pending["thursday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.thursday_hash["cp1"].to_i)} - #{request.parse_cp(request.thursday_hash["cp2"].to_i)}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["thu_workers"] == "1" %>class="changed"<% end %>><%= request.weekly.thu_workers %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["thursday_values"]["b_time"] == "1" || request.pending["thursday_values"]["b_location"] == "1"|| request.pending["thursday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.thursday_hash["b_time"]}\n#{request.thursday_hash["b_location"]}\n#{request.thursday_hash["b_name_number"]}" %></td>
-      <td data-href="<%= request_path(request) %>"class="<% if request.pending["thursday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["start_time"] == "1" || request.pending["thursday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.thursday_values["taw"] == "1" %>class="changed"<% end %>><% if request.thursday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.thursday_values["form_b"] == "1" %>class="changed"<% end %>><% if request.thursday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.thursday_values["form_c"] == "1" %>class="changed"<% end %>><% if request.thursday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.thursday_values["track_and_time"] == "1" %>class="changed"<% end %>><% if request.thursday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["thursday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"><div class="notes_content requestor_notes"><%= request.requestor_notes_thu %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_thu %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_thu %></div></td>
+      <td class="trigger_overlay"><%= counter %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["mp1"] == "1" || request.pending["thursday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.thursday_hash["mp1"]} - #{request.thursday_hash["mp2"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["cp1"] == "1" || request.pending["thursday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.thursday_hash["cp1"].to_i)} - #{request.parse_cp(request.thursday_hash["cp2"].to_i)}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thu_workers"] == "1" %>changed<% end %>"><%= request.weekly.thu_workers %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["thursday_values"]["b_time"] == "1" || request.pending["thursday_values"]["b_location"] == "1"|| request.pending["thursday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.thursday_hash["b_time"]}\n#{request.thursday_hash["b_location"]}\n#{request.thursday_hash["b_name_number"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["start_time"] == "1" || request.pending["thursday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["taw"] == "1" %>changed<% end %>"><% if request.thursday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["form_b"] == "1" %>changed<% end %>"><% if request.thursday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["form_c"] == "1" %>changed<% end %>"><% if request.thursday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.thursday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="thu" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_thu %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_thu %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_thu %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -974,29 +970,28 @@ Sun
               </div>
             </div>
       </td>
-      <td><%= counter %></td>
-
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["mp1"] == "1" || request.pending["friday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.friday_hash["mp1"]} - #{request.friday_hash["mp2"]}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["cp1"] == "1" || request.pending["friday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.friday_hash["cp1"].to_i)} - #{request.parse_cp(request.friday_hash["cp2"].to_i)}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["fri_workers"] == "1" %>class="changed"<% end %>><%= request.weekly.fri_workers %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["friday_values"]["b_time"] == "1" || request.pending["friday_values"]["b_location"] == "1"|| request.pending["friday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.friday_hash["b_time"]}\n#{request.friday_hash["b_location"]}\n#{request.friday_hash["b_name_number"]}" %></td>
-      <td data-href="<%= request_path(request) %>"class="<% if request.pending["friday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["start_time"] == "1" || request.pending["friday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.friday_values["taw"] == "1" %>class="changed"<% end %>><% if request.friday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.friday_values["form_b"] == "1" %>class="changed"<% end %>><% if request.friday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.friday_values["form_c"] == "1" %>class="changed"<% end %>><% if request.friday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.friday_values["track_and_time"] == "1" %>class="changed"<% end %>><% if request.friday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["friday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"><div class="notes_content requestor_notes"><%= request.requestor_notes_fri %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_fri %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_fri %></div></td>
+      <td class="trigger_overlay"><%= counter %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["mp1"] == "1" || request.pending["friday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.friday_hash["mp1"]} - #{request.friday_hash["mp2"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["cp1"] == "1" || request.pending["friday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.friday_hash["cp1"].to_i)} - #{request.parse_cp(request.friday_hash["cp2"].to_i)}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["fri_workers"] == "1" %>changed<% end %>"><%= request.weekly.fri_workers %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["friday_values"]["b_time"] == "1" || request.pending["friday_values"]["b_location"] == "1"|| request.pending["friday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.friday_hash["b_time"]}\n#{request.friday_hash["b_location"]}\n#{request.friday_hash["b_name_number"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["start_time"] == "1" || request.pending["friday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["taw"] == "1" %>changed<% end %>"><% if request.friday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["form_b"] == "1" %>changed<% end %>"><% if request.friday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["form_c"] == "1" %>changed<% end %>"><% if request.friday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.friday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="fri" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_fri %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_fri %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_fri %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -1107,29 +1102,28 @@ Sun
               </div>
             </div>
       </td>
-      <td><%= counter %></td>
-
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["mp1"] == "1" || request.pending["saturday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.saturday_hash["mp1"]} - #{request.saturday_hash["mp2"]}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["cp1"] == "1" || request.pending["saturday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.saturday_hash["cp1"].to_i)} - #{request.parse_cp(request.saturday_hash["cp2"].to_i)}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["sat_workers"] == "1" %>class="changed"<% end %>><%= request.weekly.sat_workers %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["saturday_values"]["b_time"] == "1" || request.pending["saturday_values"]["b_location"] == "1"|| request.pending["saturday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.saturday_hash["b_time"]}\n#{request.saturday_hash["b_location"]}\n#{request.saturday_hash["b_name_number"]}" %></td>
-      <td data-href="<%= request_path(request) %>"class="<% if request.pending["saturday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["start_time"] == "1" || request.pending["saturday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.saturday_values["taw"] == "1" %>class="changed"<% end %>><% if request.saturday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.saturday_values["form_b"] == "1" %>class="changed"<% end %>><% if request.saturday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.saturday_values["form_c"] == "1" %>class="changed"<% end %>><% if request.saturday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.saturday_values["track_and_time"] == "1" %>class="changed"<% end %>><% if request.saturday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["saturday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"><div class="notes_content requestor_notes"><%= request.requestor_notes_sat %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_sat %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_sat %></div></td>
+      <td class="trigger_overlay"><%= counter %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["mp1"] == "1" || request.pending["saturday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.saturday_hash["mp1"]} - #{request.saturday_hash["mp2"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["cp1"] == "1" || request.pending["saturday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.saturday_hash["cp1"].to_i)} - #{request.parse_cp(request.saturday_hash["cp2"].to_i)}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sat_workers"] == "1" %>changed<% end %>"><%= request.weekly.sat_workers %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["saturday_values"]["b_time"] == "1" || request.pending["saturday_values"]["b_location"] == "1"|| request.pending["saturday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.saturday_hash["b_time"]}\n#{request.saturday_hash["b_location"]}\n#{request.saturday_hash["b_name_number"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["start_time"] == "1" || request.pending["saturday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["taw"] == "1" %>changed<% end %>"><% if request.saturday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["form_b"] == "1" %>changed<% end %>"><% if request.saturday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["form_c"] == "1" %>changed<% end %>"><% if request.saturday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.saturday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="sat" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_sat %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_sat %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_sat %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -1239,29 +1233,28 @@ Sun
               </div>
             </div>
       </td>
-      <td><%= counter %></td>
-
-      <td data-href="<%= request_path(request) %>" class="<%= request.color %>"><a href="<%= request_path(request) %>" class="<%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></a></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["mp1"] == "1" || request.pending["sunday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.sunday_hash["mp1"]} - #{request.sunday_hash["mp2"]}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["cp1"] == "1" || request.pending["sunday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.sunday_hash["cp1"].to_i)} - #{request.parse_cp(request.sunday_hash["cp2"].to_i)}" %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
-      <td data-href="<%= request_path(request) %>" <% if request.pending["sun_workers"] == "1" %>class="changed"<% end %>><%= request.weekly.sun_workers %></td>
-      <td data-href="<%= request_path(request) %>" class="preserve-lines <% if request.pending["sunday_values"]["b_time"] == "1" || request.pending["sunday_values"]["b_location"] == "1"|| request.pending["sunday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.sunday_hash["b_time"]}\n#{request.sunday_hash["b_location"]}\n#{request.sunday_hash["b_name_number"]}" %></td>
-      <td data-href="<%= request_path(request) %>"class="<% if request.pending["sunday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["start_time"] == "1" || request.pending["sunday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.sunday_values["taw"] == "1" %>class="changed"<% end %>><% if request.sunday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.sunday_values["form_b"] == "1" %>class="changed"<% end %>><% if request.sunday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.sunday_values["form_c"] == "1" %>class="changed"<% end %>><% if request.sunday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"  <% if request.pending.sunday_values["track_and_time"] == "1" %>class="changed"<% end %>><% if request.sunday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="<% if request.pending["sunday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>"><div class="notes_content requestor_notes"><%= request.requestor_notes_sun %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_sun %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_sun %></div></td>
+      <td class="trigger_overlay"><%= counter %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <%= request.color %>"><%= request.requestor_project %><br><%= request.requestor_work_directive %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["contractor"] == "1" %>changed<% end %>"><%= request.contractor %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["mp1"] == "1" || request.pending["sunday_values"]["mp2"] == "1"  %>changed<% end %>"><%= "#{request.sunday_hash["mp1"]} - #{request.sunday_hash["mp2"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["cp1"] == "1" || request.pending["sunday_values"]["cp2"] == "1" %>changed<% end %>"><%= "#{request.parse_cp(request.sunday_hash["cp1"].to_i)} - #{request.parse_cp(request.sunday_hash["cp2"].to_i)}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["MT1"] == "1" %>changed<% end %>"><% if request.weekly.mt1 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["MT2"] == "1" %>changed<% end %>"><% if request.weekly.mt2 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["MT3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["MT4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sun_workers"] == "1" %>changed<% end %>"><%= request.weekly.sun_workers %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["sunday_values"]["b_time"] == "1" || request.pending["sunday_values"]["b_location"] == "1"|| request.pending["sunday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.sunday_hash["b_time"]}\n#{request.sunday_hash["b_location"]}\n#{request.sunday_hash["b_name_number"]}" %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["start_time"] == "1" || request.pending["sunday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["taw"] == "1" %>changed<% end %>"><% if request.sunday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["form_b"] == "1" %>changed<% end %>"><% if request.sunday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["form_c"] == "1" %>changed<% end %>"><% if request.sunday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.sunday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="sun" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_sun %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_sun %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_sun %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>

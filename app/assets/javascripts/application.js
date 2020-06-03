@@ -32,6 +32,8 @@ $("td > a").on("click",function(e){
 });
 
 $(".notes_tab").on("click", function(){
+  $('#notesOverlay').hide();
+
   $( ".notes_tab" ).each(function() {
     $( this ).removeClass( "active" );
     $( this ).addClass( "inactive" );
@@ -1203,6 +1205,7 @@ if ($('#SunData').length > 0){
 
   $('.savenotes').on('click', (event) =>{
     event.preventDefault();
+    $('#notesOverlay').hide();
     $("#ajax_alert").html("Saving notes...");
     $("#ajax_alert").css({display: 'block'});
 
@@ -1228,6 +1231,7 @@ if ($('#SunData').length > 0){
     });
 
     request.done(() => {
+      $('#notesOverlay').hide();
       $("#ajax_alert").html("Notes saved");
       setTimeout(closealert, 2000);
       last_clicked.html(notes);
