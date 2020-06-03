@@ -138,7 +138,6 @@ class Request < ApplicationRecord
   end
 
   def update_weekly(bypass = "no")
-    binding.pry
     starting_day = nil
     ending_day = nil
     starting_time = nil
