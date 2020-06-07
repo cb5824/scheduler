@@ -34,7 +34,6 @@ class Api::V1::ApprovalsController < ApplicationController
     when "none"
       group << current_user.approval_group
     end
-
     group.each do |g|
       case g
       when 1
@@ -75,54 +74,54 @@ class Api::V1::ApprovalsController < ApplicationController
         if days[4] == "true" && @request.fri == 1
           @request.approval.group_2_fri = status
         end
-        if days[4] == "true" && @request.sat == 1
+        if days[5] == "true" && @request.sat == 1
           @request.approval.group_2_sat = status
         end
-        if days[4] == "true" && @request.sun == 1
+        if days[6] == "true" && @request.sun == 1
           @request.approval.group_2_sun = status
         end
       when 3
-        if days[4] == "true" && @request.mon == 1
+        if days[0] == "true" && @request.mon == 1
           @request.approval.group_3_mon = status
         end
-        if days[4] == "true" && @request.tue == 1
+        if days[1] == "true" && @request.tue == 1
           @request.approval.group_3_tue = status
         end
-        if days[4] == "true" && @request.wed == 1
+        if days[2] == "true" && @request.wed == 1
           @request.approval.group_3_wed = status
         end
-        if days[4] == "true" && @request.thu == 1
+        if days[3] == "true" && @request.thu == 1
           @request.approval.group_3_thu = status
         end
         if days[4] == "true" && @request.fri == 1
           @request.approval.group_3_fri = status
         end
-        if days[4] == "true" && @request.sat == 1
+        if days[5] == "true" && @request.sat == 1
           @request.approval.group_3_sat = status
         end
-        if days[4] == "true" && @request.sun == 1
+        if days[6] == "true" && @request.sun == 1
           @request.approval.group_3_sun = status
         end
       when 4
-        if days[4] == "true" && @request.mon == 1
+        if days[0] == "true" && @request.mon == 1
           @request.approval.group_4_mon = status
         end
-        if days[4] == "true" && @request.tue == 1
+        if days[1] == "true" && @request.tue == 1
           @request.approval.group_4_tue = status
         end
-        if days[4] == "true" && @request.wed == 1
+        if days[2] == "true" && @request.wed == 1
           @request.approval.group_4_wed = status
         end
-        if days[4] == "true" && @request.thu == 1
+        if days[3] == "true" && @request.thu == 1
           @request.approval.group_4_thu = status
         end
         if days[4] == "true" && @request.fri == 1
           @request.approval.group_4_fri = status
         end
-        if days[4] == "true" && @request.sat == 1
+        if days[5] == "true" && @request.sat == 1
           @request.approval.group_4_sat = status
         end
-        if days[4] == "true" && @request.sun == 1
+        if days[6] == "true" && @request.sun == 1
           @request.approval.group_4_sun = status
         end
       end

@@ -1405,7 +1405,6 @@ $('.group_approve').on('click', (event) =>{
 
 $('.superadmin_approve').on('click', (event) =>{
   event.preventDefault();
-
   let req = $(event.target).data("req");
   let address = "/api/v1/approvals/" + req;
   let change = "approve_select";
