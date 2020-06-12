@@ -96,22 +96,17 @@ class RequestsController < ApplicationController
         ['Shared Maintainer', 'sM']]
 
   def index
-    # if params["week"] && params["year"]
-    #   @thisweek = params["week"]
-    #   @thisyear = params["year"]
-    # elsif params["filter_week"] && params["filter_year"]
-    #   @thisweek = params["filter_week"]
-    #   @thisyear = params["filter_year"]
-    # else
-    #   @thisweek = Date.today.cweek
-    #   @thisyear = Date.today.cwyear
-    # end
+
     setweek
     @user = current_user
 
     @requests = Request.where(nil)
-    filtering_params(params).each do |key, value|
-      @requests = @requests.public_send("filter_by_#{key}", value) if value.present?
+    if filtering_params(params).keys.length == 0
+      @requests = Request.where(year: @year, week: @week)
+    else
+      filtering_params(params).each do |key, value|
+        @requests = @requests.public_send("filter_by_#{key}", value) if value.present?
+      end
     end
     respond_to do |format|
       format.xlsx {

@@ -1,3 +1,210 @@
+<div id="filter_container">
+  <div class="filter_block">
+    <div class="filter_header">
+      Location
+    </div>
+    <div class="filter_line">
+      <div class="filter_legend">
+        Yes | No
+      </div>
+    </div>
+    <div class="filter_line">
+      MT1:
+      <%= radio_button_tag "mt1", "yes" %>
+      <%= radio_button_tag "mt1", "no" %>
+    </div>
+    <div class="filter_line">
+      MT2:
+      <%= radio_button_tag "mt2", "yes" %>
+      <%= radio_button_tag "mt2", "no" %>
+    </div>
+    <div class="filter_line">
+      MT3:
+      <%= radio_button_tag "mt3", "yes" %>
+      <%= radio_button_tag "mt3", "no" %>
+    </div>
+    <div class="filter_line">
+      MT4:
+      <%= radio_button_tag "mt4", "yes" %>
+      <%= radio_button_tag "mt4", "no" %>
+    </div>
+    <div class="filter_line">
+      Other:
+      <%= radio_button_tag "other", "yes" %>
+      <%= radio_button_tag "other", "no" %>
+    </div>
+  </div>
+
+  <div class="filter_block">
+    <div class="filter_header">
+      Night Work
+    </div>
+    <div class="filter_line">
+      <div class="filter_legend">
+        Yes | No
+      </div>
+    </div>
+    <div class="filter_line">
+      <%= radio_button_tag "night_work", "yes" %>
+      <%= radio_button_tag "night_work", "no" %>
+    </div>
+  </div>
+
+  <div class="filter_block">
+    <div class="filter_header">
+      Single Tracking
+    </div>
+    <div class="filter_line">
+      <div class="filter_legend">
+        Yes | No
+      </div>
+    </div>
+    <div class="filter_line">
+      <%= radio_button_tag "single_tracking", "yes" %>
+      <%= radio_button_tag "single_tracking", "no" %>
+    </div>
+  </div>
+
+  <div class="filter_block">
+    <div class="filter_header">
+      Protection
+    </div>
+    <div class="filter_line">
+      <div class="filter_legend">
+        Yes | No
+      </div>
+    </div>
+    <div class="filter_line">
+      TAW:
+      <%= radio_button_tag "taw", "yes" %>
+      <%= radio_button_tag "taw", "no" %>
+    </div>
+    <div class="filter_line">
+      Form B:
+      <%= radio_button_tag "form_b", "yes" %>
+      <%= radio_button_tag "form_b", "no" %>
+    </div>
+    <div class="filter_line">
+      Form C:
+      <%= radio_button_tag "form_c", "yes" %>
+      <%= radio_button_tag "form_c", "no" %>
+    </div>
+    <div class="filter_line">
+      T & T:
+      <%= radio_button_tag "track_and_time", "yes" %>
+      <%= radio_button_tag "track_and_time", "no" %>
+    </div>
+    <div class="filter_line">
+      Inacc Track:
+      <%= radio_button_tag "inacc_track", "yes" %>
+      <%= radio_button_tag "inacc_track", "no" %>
+    </div>
+  </div>
+
+  <div class="filter_block">
+    <div class="filter_header">
+      Other
+    </div>
+    <div class="filter_line">
+      <div class="filter_legend">
+        Yes | No
+      </div>
+    </div>
+    <div class="filter_line">
+      RWP:
+      <%= radio_button_tag "rwp", "yes" %>
+      <%= radio_button_tag "rwp", "no" %>
+    </div>
+    <div class="filter_line">
+      OCS:
+      <%= radio_button_tag "ocs", "yes" %>
+      <%= radio_button_tag "ocs", "no" %>
+    </div>
+    <div class="filter_line">
+      Disturb Track:
+      <%= radio_button_tag "disturb", "yes" %>
+      <%= radio_button_tag "disturb", "no" %>
+    </div>
+    <div class="filter_line">
+      RRM on Track:
+      <%= radio_button_tag "rrm", "yes" %>
+      <%= radio_button_tag "rrm", "no" %>
+    </div>
+    <div class="filter_line">
+      Foul Track:
+      <%= radio_button_tag "foul", "yes" %>
+      <%= radio_button_tag "foul", "no" %>
+    </div>
+    <div class="filter_line">
+      Disable Crossings:
+      <%= radio_button_tag "crossings", "yes" %>
+      <%= radio_button_tag "crossings", "no" %>
+    </div>
+    <div class="filter_line">
+      Underground:
+      <%= radio_button_tag "underground", "yes" %>
+      <%= radio_button_tag "underground", "no" %>
+    </div>
+    <div class="filter_line">
+      Flagging:
+      <%= radio_button_tag "flagging", "yes" %>
+      <%= radio_button_tag "flagging", "no" %>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+<%= label_tag(:contractor, "Contractor name:") %>
+<%= text_field_tag "contractor", params["contractor"] %>
+<%= label_tag(:night_work, "Night Work:") %>
+<%= select_tag "night_work", options_for_select([ "", ["yes", "1"], ["no", "0"] ], params["night_work"]) %>
+<%= label_tag(:single_tracking, "Single Tracking:") %>
+<%= select_tag "single_tracking", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["single_tracking"]) %>
+<%= label_tag(:mt1, "MT1:") %>
+<%= select_tag "mt1", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["mt1"]) %>
+<%= label_tag(:mt2, "MT2:") %>
+<%= select_tag "mt2", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["mt2"]) %>
+<%= label_tag(:mt3, "MT3:") %>
+<%= select_tag "mt3", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["mt3"]) %>
+<%= label_tag(:mt4, "MT4:") %>
+<%= select_tag "mt4", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["mt4"]) %>
+<%= label_tag(:other, "Other:") %>
+<%= select_tag "other", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["other"]) %>
+<%= label_tag(:taw, "TAW:") %>
+<%= select_tag "taw", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["taw"]) %>
+<%= label_tag(:form_b, "Form B:") %>
+<%= select_tag "form_b", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["form_b"]) %>
+<%= label_tag(:form_c, "Form C:") %>
+<%= select_tag "form_c", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["form_c"]) %>
+<%= label_tag(:track_and_time, "Track and Time:") %>
+<%= select_tag "track_and_time", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["track_and_time"]) %>
+<%= label_tag(:inacc_track, "Inaccessable Track:") %>
+<%= select_tag "inacc_track", options_for_select([ "", ["yes", "true"], ["no", "false"] ], params["inacc_track"]) %>
+<%= label_tag(:rwp, "RWP:") %>
+<%= select_tag "rwp", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["rwp"]) %>
+<%= label_tag(:ocs, "OCS:") %>
+<%= select_tag "ocs", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["ocs"]) %>
+<%= label_tag(:disturb, "Disturb Track:") %>
+<%= select_tag "disturb", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["disturb"]) %>
+<%= label_tag(:rrm, "RRM on Track:") %>
+<%= select_tag "rrm", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["rrm"]) %>
+<%= label_tag(:foul, "Fould Track:") %>
+<%= select_tag "foul", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["foul"]) %>
+<%= label_tag(:crossings, "Disable/Affect Crossings:") %>
+<%= select_tag "crossings", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["crossings"]) %>
+<%= label_tag(:underground, "Underground Work:") %>
+<%= select_tag "underground", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["underground"]) %>
+<%= label_tag(:flagging, "Crossing Flagging:") %>
+<%= select_tag "flagging", options_for_select([ "", ["yes", "yes"], ["no", "no"] ], params["flagging"]) %>
+
+
 <div class="form_block_container">
   <h3>Right To Work Request Form</h3>
   <div class="form_block">
