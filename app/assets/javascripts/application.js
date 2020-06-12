@@ -1440,6 +1440,17 @@ $('.superadmin_approve').on('click', (event) =>{
  });
 });
 
+$("#left_arrow").click(function() {
+  $('#left_arrow').hide();
+  $('#down_arrow').show();
+  $('#filter_container').show();
+});
+
+$("#down_arrow").click(function() {
+  $('#down_arrow').hide();
+  $('#left_arrow').show();
+  $('#filter_container').hide();
+});
 
 
 });

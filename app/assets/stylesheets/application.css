@@ -722,10 +722,12 @@ th.rotated > div{
   cursor: pointer;
   border: 1px solid #767676;
   background-color: #efefef;
-  padding: 5px;
+  padding: 1px 6px;
   text-decoration: none;
   color: #000000;
-  border-radius: 5px;
+  font: 400 13.3333px Arial;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 .fakebutton:hover{
@@ -777,8 +779,10 @@ th.rotated > div{
   cursor: pointer;
 }
 
-#filter_container{
+#filter_container, #down_arrow{
+  display: none;
 }
+
 
 .filter_block{
   background-color: #d0e4f5;

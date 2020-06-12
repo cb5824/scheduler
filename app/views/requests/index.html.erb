@@ -34,6 +34,8 @@
 
 
 <br>
+<div>Advanced Filter Options <%= image_tag "left_arrow.png", id: "left_arrow",alt: "expand" %><%= image_tag "down_arrow.png", id: "down_arrow", alt: "retract" %></div>
+<br>
 <div id="filter_container">
   <div class="filter_block">
     <div class="filter_header">
@@ -192,12 +194,10 @@
 
 </div>
     <%= submit_tag("Filter") %>
+    <%= link_to "Clear Filters", requests_path, class: "fakebutton" %>
 
 <% end %>
-  <%= link_to "Clear Filters", requests_path %>
 
-  <br>
-  <br>
   <br>
 <%=
   link_to 'Download as Excel',
@@ -205,8 +205,7 @@
 %>
 <br>
 <br>
-<br>
-<br>
+
 
 
 <div class="daytab active" data-displaytab="week">
