@@ -16,7 +16,7 @@
  html, body { margin: 0; padding: 0; }
 
  #dash_main{
-   background: url("https://picsum.photos/id/392/5580/3720") no-repeat fixed center / cover;
+   background: url("ReadyToGoAtSF.jpg") no-repeat fixed center / cover;
    position: flex;
    border: 100px solid transparent;
    min-height: 800px;
@@ -275,20 +275,29 @@ body{
 
 table.requests_table {
   border: 1px solid #1D2CD2;
-  background-color: #EEEEEE;
+  background-color: #bedaef;
   text-align: center;
   border-collapse: collapse;
 }
 table.requests_table td{
-  border: 1px solid #AAAAAA;
+  border: 1px solid #808080;
   padding: 3px 0px;
 }
 table.requests_table tbody td {
   font-size: 13px;
 }
 table.requests_table tr:nth-child(even) {
-  background: #D0E4F5;
+  background: #a6b2bb;
 }
+
+table.requests_table tr:nth-child(even).night_work_line{
+  background: #c5d14f;
+}
+
+table.requests_table tr:nth-child(odd).night_work_line{
+  background: #f0f0cc
+}
+
 table.requests_table thead {
   background: #7289DA;
   background: -moz-linear-gradient(top, #95a6e3 0%, #8094dd 66%, #7289DA 100%);
@@ -429,12 +438,13 @@ table.requests_table tfoot .links a{
 }
 
 .cancelled_day{
-  background-image: linear-gradient(45deg, #666 25%, transparent 25%),
-  linear-gradient(-45deg, #666 25%, transparent 25%),
+  background-image: linear-gradient(45deg, #666 25%, transparent 75%),
+  linear-gradient(-45deg, #666 25%, transparent 75%),
   linear-gradient(45deg, transparent 75%, #666 75%),
   linear-gradient(-45deg, transparent 75%, #666 75%) !important;
   background-size: 2px 2px !important;
   background-position: 0 0, 1px 0, 1px -1px, 0px 1px !important;
+  color: #5d5d5d;
 }
 
 .changed{
@@ -453,6 +463,17 @@ table.requests_table tfoot .links a{
 
 .form_nav{
   text-align: center;
+}
+
+#form_nav_container{
+  display: inline-flex;
+  width: 900px;
+  justify-content: space-between;
+}
+
+.notes_content{
+  text-align: left;
+  padding-left: 5px;
 }
 
 .red{
@@ -622,7 +643,12 @@ th.rotated > div{
   position: absolute;
   z-index: 10000;
   opacity: 0.95;
-  justify-content: center;
+  color: #ffffff
+}
+
+#divOverlay div{
+  display: inline-flex;
+  align-items: center;
 }
 
 #notesOverlay {
@@ -641,7 +667,14 @@ th.rotated > div{
   position: relative;
 }
 
-.closeoverlay, .closeNotesOverlay{
+.closeoverlay{
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.closeNotesOverlay{
   width: 10px;
   height: 10px;
   cursor: pointer;
@@ -673,12 +706,28 @@ th.rotated > div{
 .overlay_actions{
   display: flex;
   align-items: center;
+  width: 178px;
+  padding-left: 10px;
 }
 
-.superoverlay_actions{
-  display: inline-flex;
-  align-items: center;
-  margin-right: 10px;
+.overlay_emulate{
+  width: 330px;
+  justify-content: center;
+}
+
+#overlay_approvals{
+  width: 1000px;
+  padding-left: 10px;
+}
+
+#overlay_approvals select{
+  width: 154px;
+}
+
+.overlay_day_box{
+  display: flex;
+  flex-direction: column;
+  width: 34px;
 }
 
 .superoverlay_button_container{
@@ -692,6 +741,12 @@ th.rotated > div{
 .superoverlay_button_container button{
   width: 130px;
 }
+
+#new_status{
+  margin-right: 20px;
+}
+
+
 
 .superoverlay_button{
   margin-left: 5px;
@@ -815,4 +870,8 @@ th.rotated > div{
 .filter_legend{
   padding-right: 7px;
   padding-top: 2px;
+}
+
+.index_top_container{
+  padding-left: 20px;
 }

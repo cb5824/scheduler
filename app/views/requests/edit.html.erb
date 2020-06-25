@@ -4,8 +4,15 @@
 <br>
 
 <div class="form_nav">
-  <%= link_to 'Back to Details', request_path(@request), class: "form_nav_link" %>
-  <%= link_to 'Discard Changes', edit_request_path(@request), class: "form_nav_link" %>
+  <div id="form_nav_container">
+  <div>
+    <%= link_to 'Back to Details', request_path(@request), class: "form_nav_link" %>
+    <%= link_to 'Discard Changes', edit_request_path(@request), class: "form_nav_link" %>
+  </div>
+  <div>
+    <%= link_to 'Cancel Full Request', edit_request_path(@request), class: "form_nav_link" %>
+  </div>
+</div>
 </div>
 <br>
 <br>

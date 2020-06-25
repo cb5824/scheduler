@@ -1,211 +1,217 @@
 <div id="ajax_alert" >Test test test</div>
 
-<% if @user != nil %>
-  <% if @user.role == 'admin' %>
-    <div class="control_panel">
-      <a href="<%= profiles_path %>">Users</a>
-      <br>
-      <a href='<%= requests_path %>'>Requests</a>
-    </div>
-  <% elsif @user.role == 'inspector' %>
-  <% else %>
-    <div class="control_panel">
-      <a href="<%= new_request_path %>">New Request Form</a>
-    </div>
-  <% end %>
-<% end %>
+<div class="index_top_container">
 
-<h4>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h4>
+  <h4>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h4>
 
-<%= form_tag(requests_path, method: "get") do %>
-  <% if params["week"] %>
-    <%= hidden_field_tag("filter_week", value = params["week"]) %>
-    <%= hidden_field_tag("filter_year", value = params["year"]) %>
-  <% else %>
-    <%= hidden_field_tag("filter_week", value = params["filter_week"]) %>
-    <%= hidden_field_tag("filter_year", value = params["filter_year"]) %>
-  <% end %>
+  <%= form_tag(requests_path, method: "get") do %>
+    <% if params["week"] %>
+      <%= hidden_field_tag("filter_week", value = params["week"]) %>
+      <%= hidden_field_tag("filter_year", value = params["year"]) %>
+    <% else %>
+      <%= hidden_field_tag("filter_week", value = params["filter_week"]) %>
+      <%= hidden_field_tag("filter_year", value = params["filter_year"]) %>
+    <% end %>
 
-  <%= label_tag(:year, "Year:") %>
-  <%= number_field_tag(:year, @thisyear) %>
-  <%= label_tag(:week, "Week:") %>
-  <%= number_field_tag(:week, @thisweek) %>
+    <%= label_tag(:year, "Year:") %>
+    <%= number_field_tag(:year, @thisyear) %>
+    <%= label_tag(:week, "Week:") %>
+    <%= number_field_tag(:week, @thisweek) %>
 
 
 
-<br>
-<div>Advanced Filter Options <%= image_tag "left_arrow.png", id: "left_arrow",alt: "expand" %><%= image_tag "down_arrow.png", id: "down_arrow", alt: "retract" %></div>
-<br>
-<div id="filter_container">
-  <div class="filter_block">
-    <div class="filter_header">
-      Location
-    </div>
-    <div class="filter_line">
-      <div class="filter_legend">
-        Yes | No
-      </div>
-    </div>
-    <div class="filter_line">
-      MT1:
-      <%= radio_button_tag "mt1", "true" %>
-      <%= radio_button_tag "mt1", "false" %>
-    </div>
-    <div class="filter_line">
-      MT2:
-      <%= radio_button_tag "mt2", "true" %>
-      <%= radio_button_tag "mt2", "false" %>
-    </div>
-    <div class="filter_line">
-      MT3:
-      <%= radio_button_tag "mt3", "true" %>
-      <%= radio_button_tag "mt3", "false" %>
-    </div>
-    <div class="filter_line">
-      MT4:
-      <%= radio_button_tag "mt4", "true" %>
-      <%= radio_button_tag "mt4", "false" %>
-    </div>
-    <div class="filter_line">
-      Other:
-      <%= radio_button_tag "other", "true" %>
-      <%= radio_button_tag "other", "false" %>
-    </div>
-  </div>
-
-  <div class="filter_block">
-    <div class="filter_header">
-      Night Work
-    </div>
-    <div class="filter_line">
-      <div class="filter_legend">
-        Yes | No
-      </div>
-    </div>
-    <div class="filter_line">
-      <%= radio_button_tag "night_work", "1" %>
-      <%= radio_button_tag "night_work", "0" %>
-    </div>
-  </div>
-
-  <div class="filter_block">
-    <div class="filter_header">
-      Single Tracking
-    </div>
-    <div class="filter_line">
-      <div class="filter_legend">
-        Yes | No
-      </div>
-    </div>
-    <div class="filter_line">
-      <%= radio_button_tag "single_tracking", "true" %>
-      <%= radio_button_tag "single_tracking", "false" %>
-    </div>
-  </div>
-
-  <div class="filter_block">
-    <div class="filter_header">
-      Protection
-    </div>
-    <div class="filter_line">
-      <div class="filter_legend">
-        Yes | No
-      </div>
-    </div>
-    <div class="filter_line">
-      TAW:
-      <%= radio_button_tag "taw", "true" %>
-      <%= radio_button_tag "taw", "false" %>
-    </div>
-    <div class="filter_line">
-      Form B:
-      <%= radio_button_tag "form_b", "true" %>
-      <%= radio_button_tag "form_b", "false" %>
-    </div>
-    <div class="filter_line">
-      Form C:
-      <%= radio_button_tag "form_c", "true" %>
-      <%= radio_button_tag "form_c", "false" %>
-    </div>
-    <div class="filter_line">
-      T & T:
-      <%= radio_button_tag "track_and_time", "true" %>
-      <%= radio_button_tag "track_and_time", "false" %>
-    </div>
-    <div class="filter_line">
-      Inacc Track:
-      <%= radio_button_tag "inacc_track", "true" %>
-      <%= radio_button_tag "inacc_track", "false" %>
-    </div>
-  </div>
-
-  <div class="filter_block">
-    <div class="filter_header">
-      Other
-    </div>
-    <div class="filter_line">
-      <div class="filter_legend">
-        Yes | No
-      </div>
-    </div>
-    <div class="filter_line">
-      RWP:
-      <%= radio_button_tag "rwp", "yes" %>
-      <%= radio_button_tag "rwp", "no" %>
-    </div>
-    <div class="filter_line">
-      OCS:
-      <%= radio_button_tag "ocs", "yes" %>
-      <%= radio_button_tag "ocs", "no" %>
-    </div>
-    <div class="filter_line">
-      Disturb Track:
-      <%= radio_button_tag "disturb", "yes" %>
-      <%= radio_button_tag "disturb", "no" %>
-    </div>
-    <div class="filter_line">
-      RRM on Track:
-      <%= radio_button_tag "rrm", "yes" %>
-      <%= radio_button_tag "rrm", "no" %>
-    </div>
-    <div class="filter_line">
-      Foul Track:
-      <%= radio_button_tag "foul", "yes" %>
-      <%= radio_button_tag "foul", "no" %>
-    </div>
-    <div class="filter_line">
-      Disable Crossings:
-      <%= radio_button_tag "crossings", "yes" %>
-      <%= radio_button_tag "crossings", "no" %>
-    </div>
-    <div class="filter_line">
-      Underground:
-      <%= radio_button_tag "underground", "yes" %>
-      <%= radio_button_tag "underground", "no" %>
-    </div>
-    <div class="filter_line">
-      Flagging:
-      <%= radio_button_tag "flagging", "yes" %>
-      <%= radio_button_tag "flagging", "no" %>
-    </div>
-  </div>
-
-
-
-</div>
-    <%= submit_tag("Filter") %>
-    <%= link_to "Clear Filters", requests_path, class: "fakebutton" %>
-
-<% end %>
-
+  <div class="inlineblock">Advanced Filter Options <%= image_tag "left_arrow.png", id: "left_arrow",alt: "expand" %><%= image_tag "down_arrow.png", id: "down_arrow", alt: "retract" %></div>
   <br>
-<%=
-  link_to 'Download as Excel',
-  requests_path(format: :xlsx)
-%>
-<br>
-<br>
+  <div id="filter_container">
+    <div class="filter_block">
+      <div class="filter_header">
+        Location
+      </div>
+      <div class="filter_line">
+        <div class="filter_legend">
+          Yes | No
+        </div>
+      </div>
+      <div class="filter_line">
+        MT1:
+        <%= radio_button_tag "mt1", "true" %>
+        <%= radio_button_tag "mt1", "false" %>
+      </div>
+      <div class="filter_line">
+        MT2:
+        <%= radio_button_tag "mt2", "true" %>
+        <%= radio_button_tag "mt2", "false" %>
+      </div>
+      <div class="filter_line">
+        MT3:
+        <%= radio_button_tag "mt3", "true" %>
+        <%= radio_button_tag "mt3", "false" %>
+      </div>
+      <div class="filter_line">
+        MT4:
+        <%= radio_button_tag "mt4", "true" %>
+        <%= radio_button_tag "mt4", "false" %>
+      </div>
+      <div class="filter_line">
+        Other:
+        <%= radio_button_tag "other", "true" %>
+        <%= radio_button_tag "other", "false" %>
+      </div>
+    </div>
 
+    <div class="filter_block">
+      <div class="filter_header">
+        Night Work
+      </div>
+      <div class="filter_line">
+        <div class="filter_legend">
+          Yes | No
+        </div>
+      </div>
+      <div class="filter_line">
+        <%= radio_button_tag "night_work", "1" %>
+        <%= radio_button_tag "night_work", "0" %>
+      </div>
+    </div>
+
+    <div class="filter_block">
+      <div class="filter_header">
+        Single Tracking
+      </div>
+      <div class="filter_line">
+        <div class="filter_legend">
+          Yes | No
+        </div>
+      </div>
+      <div class="filter_line">
+        <%= radio_button_tag "single_tracking", "true" %>
+        <%= radio_button_tag "single_tracking", "false" %>
+      </div>
+    </div>
+
+    <div class="filter_block">
+      <div class="filter_header">
+        Protection
+      </div>
+      <div class="filter_line">
+        <div class="filter_legend">
+          Yes | No
+        </div>
+      </div>
+      <div class="filter_line">
+        TAW:
+        <%= radio_button_tag "taw", "true" %>
+        <%= radio_button_tag "taw", "false" %>
+      </div>
+      <div class="filter_line">
+        Form B:
+        <%= radio_button_tag "form_b", "true" %>
+        <%= radio_button_tag "form_b", "false" %>
+      </div>
+      <div class="filter_line">
+        Form C:
+        <%= radio_button_tag "form_c", "true" %>
+        <%= radio_button_tag "form_c", "false" %>
+      </div>
+      <div class="filter_line">
+        T & T:
+        <%= radio_button_tag "track_and_time", "true" %>
+        <%= radio_button_tag "track_and_time", "false" %>
+      </div>
+      <div class="filter_line">
+        Inacc Track:
+        <%= radio_button_tag "inacc_track", "true" %>
+        <%= radio_button_tag "inacc_track", "false" %>
+      </div>
+    </div>
+
+    <div class="filter_block">
+      <div class="filter_header">
+        Other
+      </div>
+      <div class="filter_line">
+        <div class="filter_legend">
+          Yes | No
+        </div>
+      </div>
+      <div class="filter_line">
+        RWP:
+        <%= radio_button_tag "rwp", "yes" %>
+        <%= radio_button_tag "rwp", "no" %>
+      </div>
+      <div class="filter_line">
+        OCS:
+        <%= radio_button_tag "ocs", "yes" %>
+        <%= radio_button_tag "ocs", "no" %>
+      </div>
+      <div class="filter_line">
+        Disturb Track:
+        <%= radio_button_tag "disturb", "yes" %>
+        <%= radio_button_tag "disturb", "no" %>
+      </div>
+      <div class="filter_line">
+        RRM on Track:
+        <%= radio_button_tag "rrm", "yes" %>
+        <%= radio_button_tag "rrm", "no" %>
+      </div>
+      <div class="filter_line">
+        Foul Track:
+        <%= radio_button_tag "foul", "yes" %>
+        <%= radio_button_tag "foul", "no" %>
+      </div>
+      <div class="filter_line">
+        Disable Crossings:
+        <%= radio_button_tag "crossings", "yes" %>
+        <%= radio_button_tag "crossings", "no" %>
+      </div>
+      <div class="filter_line">
+        Underground:
+        <%= radio_button_tag "underground", "yes" %>
+        <%= radio_button_tag "underground", "no" %>
+      </div>
+      <div class="filter_line">
+        Flagging:
+        <%= radio_button_tag "flagging", "yes" %>
+        <%= radio_button_tag "flagging", "no" %>
+      </div>
+    </div>
+
+    <div class="filter_block">
+      <div class="filter_header">
+        Status
+      </div>
+      <div class="filter_line">
+        <div class="filter_legend">
+          Yes | No
+        </div>
+      </div>
+      <div class="filter_line">
+        Hide Cancelled:
+        <%= radio_button_tag "hide_cancelled", "true" %>
+        <%= radio_button_tag "hide_cancelled", "false" %>
+      </div>
+      <div class="filter_line">
+        Approved Only:
+        <%= radio_button_tag "approved_only", "true" %>
+        <%= radio_button_tag "approved_only", "false" %>
+      </div>
+    </div>
+
+
+  </div>
+      <%= submit_tag("Filter") %>
+      <%= link_to "Clear Filters", requests_path, class: "fakebutton" %>
+
+  <% end %>
+
+    <br>
+  <%=
+    link_to 'Download as Excel',
+    requests_path(format: :xlsx)
+  %>
+  <br>
+  <br>
+</div>
 
 
 <div class="daytab active" data-displaytab="week">
@@ -236,14 +242,11 @@ Sun
   <div id="divOverlay">
     <div class="overlay_actions">
       <%= image_tag "red_x.png", class: "closeoverlay", alt: "Pending" %>
-      <button type="button" class="showpage overlay_button">Request Details</button>
+      <button type="button" class="showpage overlay_button">Details</button>
       <button type="button" class="editrequest overlay_button">Edit</button>
-      <% if @user.role != "user" %>
-        <div class="daily_approve overlay_button">Approve/Reject Days &#9660;</div>
-      <% end %>
     </div>
-    <div class="superoverlay">
-      <div class="superoverlay_actions">
+    <div class="overlay_emulate">
+      <div>
         <% if @user.role == "superadmin" %>
           <label for="emulate">Admin group to emulate:</label>
           <select id="emulate">
@@ -254,28 +257,53 @@ Sun
             <option value="all">All Groups</option>
           </select>
         <% end %>
-        <button type="button" class="superoverlay_button" data-change="approve_all">Approve All</button>
-        <button type="button" class="superoverlay_button" data-change="reject_all">Reject All</button>
-        <label for="mon_check">Mon</label>
-        <input type="checkbox" id="mon_check" name="mon_check" value="mon_check"> |
-        <label for="tue_check">Tue</label>
-        <input type="checkbox" id="tue_check" name="tue_check" value="tue_check"> |
-        <label for="wed_check">Wed</label>
-        <input type="checkbox" id="wed_check" name="wed_check" value="wed_check"> |
-        <label for="thu_check">Thu</label>
-        <input type="checkbox" id="thu_check" name="thu_check" value="thu_check"> |
-        <label for="fri_check">Fri</label>
-        <input type="checkbox" id="fri_check" name="fri_check" value="fri_check"> |
-        <label for="sat_check">Sat</label>
-        <input type="checkbox" id="sat_check" name="sat_check" value="sat_check"> |
-        <label for="sun_check">Sun</label>
-        <input type="checkbox" id="sun_check" name="sun_check" value="sun_check">
-        <div class="superoverlay_button_container">
-        <button class="superoverlay_button" data-change="approve_select">Approve Selected</button>
-        <button class="superoverlay_button" data-change="reject_select">Reject Selected</button>
         </div>
       </div>
-      <div class="shrinkoverlay">Back &#9650;</div>
+      <div id="overlay_approvals">
+        <% if @user.role != "user" %>
+          <label for="new_status">Change to:</label>
+          <select id="new_status">
+            <% if @user.role == "admin" || @user.role == "superadmin" %>
+            <option value="1">Approved</option>
+            <option value="2">Rejected</option>
+            <option value="3">Pending</option>
+            <% end %>
+            <option value="4">Cancelled</option>
+            <option value="5">Reinstated</option>
+
+          </select>
+          <div class="overlay_day_box">
+            <label for="mon_check">Mon</label>
+            <input type="checkbox" id="mon_check" name="mon_check" value="mon_check">
+          </div>
+          <div class="overlay_day_box">
+            <label for="tue_check">Tue</label>
+            <input type="checkbox" id="tue_check" name="tue_check" value="tue_check">
+          </div>
+          <div class="overlay_day_box">
+            <label for="wed_check">Wed</label>
+            <input type="checkbox" id="wed_check" name="wed_check" value="wed_check">
+          </div>
+            <div class="overlay_day_box">
+            <label for="thu_check">Thu</label>
+            <input type="checkbox" id="thu_check" name="thu_check" value="thu_check">
+          </div>
+            <div class="overlay_day_box">
+            <label for="fri_check">Fri</label>
+            <input type="checkbox" id="fri_check" name="fri_check" value="fri_check">
+          </div>
+            <div class="overlay_day_box">
+            <label for="sat_check">Sat</label>
+            <input type="checkbox" id="sat_check" name="sat_check" value="sat_check">
+          </div>
+            <div class="overlay_day_box">
+            <label for="sun_check">Sun</label>
+            <input type="checkbox" id="sun_check" name="sun_check" value="sun_check">
+          </div>
+          <button class="superoverlay_button">Change All</button>
+          <button class="superoverlay_button">Change Selected</button>
+          <% end %>
+      </div>
     </div>
   </div>
 
@@ -302,7 +330,6 @@ Sun
           <th rowspan="2"><div class="wlarge">Description of Work</th>
           <th colspan="7"><div>Support Allocation</th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
           <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
           <th colspan="5"><div>Protection</th>
           <th rowspan="2" class="wmedium"><div>Associated SSWPs</th>
@@ -314,7 +341,7 @@ Sun
           <th rowspan="2" class="rotated trflex"><div class="tallheader">RMM Off Track?</div></th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Disable/Affect Crossings?</div></th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Underground Work Required?</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Crossing Glagging or Traffic</div></th>
+          <th rowspan="2" class="rotated trflex"><div class="tallheader">Crossing Flagging or Traffic</div></th>
           <th colspan="3"><div>Submittal Details</th>
         </tr>
         <tr>
@@ -345,7 +372,7 @@ Sun
       <tbody>
 <% counter = 1 %>
   <% @requests.each do |request| %>
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -428,7 +455,6 @@ Sun
       <td class="trigger_overlay <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.pending["single_tracking"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>"><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.pending["shift"] == "1" %>changed<% end %>"><%= request.weekly.shift %></td>
       <td class="trigger_overlay <% if request.pending["taw"] == "1" %>changed<% end %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.pending["form_b"] == "1" %>changed<% end %>"><% if request.weekly.form_b == true %><%= "\u2713" %><% else %>-<% end %></td>
@@ -470,7 +496,6 @@ Sun
             <th><div>Support Allocation</th>
             <th rowspan="2" class="briefing_details">Briefing Details</th>
             <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-            <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
             <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
             <th colspan="5"><div>Protection</th>
             <th rowspan="2" class="notes"><div class="notes_wrapper"><div class="notes_title">Notes</div><div class="notes_tab_container"><div class="notes_tab active" data-notetype=".requestor_notes" data-daytable="#monday_table">Requestor</div><div class="notes_tab inactive" data-notetype=".admin_notes" data-daytable="#monday_table">Admin</div><div class="notes_tab inactive" data-notetype=".inspector_notes" data-daytable="#monday_table">Inspector</div></div></div></th>
@@ -495,7 +520,7 @@ Sun
           <% counter = 1 %>
     <% @requests.each do |request| %>
        <% if request.mon == 1  || request.monday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+        <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
           <td class="reqstatus">
             <div class="index_status hidden">
               <div class="approvals_bar_container">
@@ -569,14 +594,13 @@ Sun
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["mon_workers"] == "1" %>changed<% end %>"><%= request.weekly.mon_workers %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["monday_values"]["b_time"] == "1" || request.pending["monday_values"]["b_location"] == "1"|| request.pending["monday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.monday_hash["b_time"]}\n#{request.monday_hash["b_location"]}\n#{request.monday_hash["b_name_number"]}" %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["monday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-        <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["monday_values"]["start_time"] == "1" || request.pending["monday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.monday_values["taw"] == "1" %>changed<% end %>"><% if request.monday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.monday_values["form_b"] == "1" %>changed<% end %>"><% if request.monday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.monday_values["form_c"] == "1" %>changed<% end %>"><% if request.monday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.monday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.monday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
         <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["monday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-        <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="mon" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_mon %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_mon %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_mon %></div></td>
+        <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="mon" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content preserve-lines requestor_notes"><%= request.requestor_notes_mon %></div><div class="notes_content preserve-lines admin_notes hidden"><%= request.admin_notes_mon %></div><div class="notes_content preserve-lines inspector_notes hidden"><%= request.inspector_notes_mon %></div></td>
       </tr>
       <% counter += 1 %>
       <% end %>
@@ -602,7 +626,6 @@ Sun
           <th><div>Support Allocation</th>
           <th rowspan="2" class="briefing_details">Briefing Details</th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
           <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
           <th colspan="5"><div>Protection</th>
           <th rowspan="2" class="notes"><div class="notes_wrapper"><div class="notes_title">Notes</div><div class="notes_tab_container"><div class="notes_tab active" data-notetype=".requestor_notes" data-daytable="#tuesday_table">Requestor</div><div class="notes_tab inactive" data-notetype=".admin_notes" data-daytable="#tuesday_table">Admin</div><div class="notes_tab inactive" data-notetype=".inspector_notes" data-daytable="#tuesday_table">Inspector</div></div></div></th>
@@ -628,7 +651,7 @@ Sun
   <% @requests.each do |request| %>
     <% if request.tue == 1  || request.tuesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -703,14 +726,13 @@ Sun
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tue_workers"] == "1" %>changed<% end %>"><%= request.weekly.tue_workers %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["tuesday_values"]["b_time"] == "1" || request.pending["tuesday_values"]["b_location"] == "1"|| request.pending["tuesday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.tuesday_hash["b_time"]}\n#{request.tuesday_hash["b_location"]}\n#{request.tuesday_hash["b_name_number"]}" %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["start_time"] == "1" || request.pending["tuesday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["taw"] == "1" %>changed<% end %>"><% if request.tuesday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["form_b"] == "1" %>changed<% end %>"><% if request.tuesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["form_c"] == "1" %>changed<% end %>"><% if request.tuesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.tuesday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.tuesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["tuesday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="tue" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_tue %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_tue %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_tue %></div></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="tue" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content preserve-lines requestor_notes"><%= request.requestor_notes_tue %></div><div class="notes_content preserve-lines admin_notes hidden"><%= request.admin_notes_tue %></div><div class="notes_content preserve-lines inspector_notes hidden"><%= request.inspector_notes_tue %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -734,7 +756,6 @@ Sun
           <th><div>Support Allocation</th>
           <th rowspan="2" class="briefing_details">Briefing Details</th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
           <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
           <th colspan="5"><div>Protection</th>
           <th rowspan="2" class="notes"><div class="notes_wrapper"><div class="notes_title">Notes</div><div class="notes_tab_container"><div class="notes_tab active" data-notetype=".requestor_notes" data-daytable="#wednesday_table">Requestor</div><div class="notes_tab inactive" data-notetype=".admin_notes" data-daytable="#wednesday_table">Admin</div><div class="notes_tab inactive" data-notetype=".inspector_notes" data-daytable="#wednesday_table">Inspector</div></div></div></th>
@@ -760,7 +781,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.wed == 1  || request.wednesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -835,14 +856,13 @@ Sun
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wed_workers"] == "1" %>changed<% end %>"><%= request.weekly.wed_workers %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["wednesday_values"]["b_time"] == "1" || request.pending["wednesday_values"]["b_location"] == "1"|| request.pending["wednesday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.wednesday_hash["b_time"]}\n#{request.wednesday_hash["b_location"]}\n#{request.wednesday_hash["b_name_number"]}" %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["start_time"] == "1" || request.pending["wednesday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["taw"] == "1" %>changed<% end %>"><% if request.wednesday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["form_b"] == "1" %>changed<% end %>"><% if request.wednesday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["form_c"] == "1" %>changed<% end %>"><% if request.wednesday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.wednesday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.wednesday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["wednesday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="wed" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_wed %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_wed %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_wed %></div></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="wed" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content preserve-lines requestor_notes"><%= request.requestor_notes_wed %></div><div class="notes_content preserve-lines admin_notes hidden"><%= request.admin_notes_wed %></div><div class="notes_content preserve-lines inspector_notes hidden"><%= request.inspector_notes_wed %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -866,7 +886,6 @@ Sun
           <th><div>Support Allocation</th>
           <th rowspan="2" class="briefing_details">Briefing Details</th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
           <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
           <th colspan="5"><div>Protection</th>
           <th rowspan="2" class="notes"><div class="notes_wrapper"><div class="notes_title">Notes</div><div class="notes_tab_container"><div class="notes_tab active" data-notetype=".requestor_notes" data-daytable="#thursday_table">Requestor</div><div class="notes_tab inactive" data-notetype=".admin_notes" data-daytable="#thursday_table">Admin</div><div class="notes_tab inactive" data-notetype=".inspector_notes" data-daytable="#thursday_table">Inspector</div></div></div></th>
@@ -892,7 +911,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.thu == 1  || request.thursday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -967,14 +986,13 @@ Sun
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thu_workers"] == "1" %>changed<% end %>"><%= request.weekly.thu_workers %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["thursday_values"]["b_time"] == "1" || request.pending["thursday_values"]["b_location"] == "1"|| request.pending["thursday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.thursday_hash["b_time"]}\n#{request.thursday_hash["b_location"]}\n#{request.thursday_hash["b_name_number"]}" %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["start_time"] == "1" || request.pending["thursday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["taw"] == "1" %>changed<% end %>"><% if request.thursday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["form_b"] == "1" %>changed<% end %>"><% if request.thursday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["form_c"] == "1" %>changed<% end %>"><% if request.thursday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.thursday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.thursday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["thursday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="thu" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_thu %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_thu %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_thu %></div></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="thu" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content preserve-lines requestor_notes"><%= request.requestor_notes_thu %></div><div class="notes_content preserve-lines admin_notes hidden"><%= request.admin_notes_thu %></div><div class="notes_content preserve-lines inspector_notes hidden"><%= request.inspector_notes_thu %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -998,7 +1016,6 @@ Sun
           <th><div>Support Allocation</th>
           <th rowspan="2" class="briefing_details">Briefing Details</th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
           <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
           <th colspan="5"><div>Protection</th>
           <th rowspan="2" class="notes"><div class="notes_wrapper"><div class="notes_title">Notes</div><div class="notes_tab_container"><div class="notes_tab active" data-notetype=".requestor_notes" data-daytable="#friday_table">Requestor</div><div class="notes_tab inactive" data-notetype=".admin_notes" data-daytable="#friday_table">Admin</div><div class="notes_tab inactive" data-notetype=".inspector_notes" data-daytable="#friday_table">Inspector</div></div></div></th>
@@ -1024,7 +1041,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.fri == 1  || request.friday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1099,14 +1116,13 @@ Sun
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["fri_workers"] == "1" %>changed<% end %>"><%= request.weekly.fri_workers %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["friday_values"]["b_time"] == "1" || request.pending["friday_values"]["b_location"] == "1"|| request.pending["friday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.friday_hash["b_time"]}\n#{request.friday_hash["b_location"]}\n#{request.friday_hash["b_name_number"]}" %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["start_time"] == "1" || request.pending["friday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["taw"] == "1" %>changed<% end %>"><% if request.friday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["form_b"] == "1" %>changed<% end %>"><% if request.friday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["form_c"] == "1" %>changed<% end %>"><% if request.friday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.friday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.friday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["friday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="fri" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_fri %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_fri %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_fri %></div></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="fri" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content preserve-lines requestor_notes"><%= request.requestor_notes_fri %></div><div class="notes_content preserve-lines admin_notes hidden"><%= request.admin_notes_fri %></div><div class="notes_content preserve-lines inspector_notes hidden"><%= request.inspector_notes_fri %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -1130,7 +1146,6 @@ Sun
           <th><div>Support Allocation</th>
           <th rowspan="2" class="briefing_details">Briefing Details</th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
           <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
           <th colspan="5"><div>Protection</th>
           <th rowspan="2" class="notes"><div class="notes_wrapper"><div class="notes_title">Notes</div><div class="notes_tab_container"><div class="notes_tab active" data-notetype=".requestor_notes" data-daytable="#saturday_table">Requestor</div><div class="notes_tab inactive" data-notetype=".admin_notes" data-daytable="#saturday_table">Admin</div><div class="notes_tab inactive" data-notetype=".inspector_notes" data-daytable="#saturday_table">Inspector</div></div></div></th>
@@ -1156,7 +1171,7 @@ Sun
   <% @requests.each do |request| %>
   <% if request.sat == 1  || request.saturday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1231,14 +1246,13 @@ Sun
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sat_workers"] == "1" %>changed<% end %>"><%= request.weekly.sat_workers %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["saturday_values"]["b_time"] == "1" || request.pending["saturday_values"]["b_location"] == "1"|| request.pending["saturday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.saturday_hash["b_time"]}\n#{request.saturday_hash["b_location"]}\n#{request.saturday_hash["b_name_number"]}" %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["start_time"] == "1" || request.pending["saturday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["taw"] == "1" %>changed<% end %>"><% if request.saturday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["form_b"] == "1" %>changed<% end %>"><% if request.saturday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["form_c"] == "1" %>changed<% end %>"><% if request.saturday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.saturday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.saturday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["saturday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="sat" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_sat %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_sat %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_sat %></div></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="sat" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content preserve-lines requestor_notes"><%= request.requestor_notes_sat %></div><div class="notes_content preserve-lines admin_notes hidden"><%= request.admin_notes_sat %></div><div class="notes_content preserve-lines inspector_notes hidden"><%= request.inspector_notes_sat %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>
@@ -1262,7 +1276,6 @@ Sun
           <th><div>Support Allocation</th>
           <th rowspan="2" class="briefing_details">Briefing Details</th>
           <th rowspan="2" class="rotated trflex"><div class="tallheader">Single Tracking</div></th>
-          <th rowspan="2" class="rotated trflex"><div class="tallheader">Night Work</div></th>
           <th rowspan="2" class="shift"><div>Shift (24 hr)</th>
           <th colspan="5"><div>Protection</th>
           <th rowspan="2" class="notes"><div class="notes_wrapper"><div class="notes_title">Notes</div><div class="notes_tab_container"><div class="notes_tab active" data-notetype=".requestor_notes" data-daytable="#sunday_table">Requestor</div><div class="notes_tab inactive" data-notetype=".admin_notes" data-daytable="#sunday_table">Admin</div><div class="notes_tab inactive" data-notetype=".inspector_notes" data-daytable="#sunday_table">Inspector</div></div></div></th>
@@ -1287,7 +1300,7 @@ Sun
         <% counter = 1 %>
   <% @requests.each do |request| %>
   <% if request.sun == 1  || request.sunday_hash["cancelled"] == "yes"%>
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1362,14 +1375,13 @@ Sun
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sun_workers"] == "1" %>changed<% end %>"><%= request.weekly.sun_workers %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay preserve-lines <% if request.pending["sunday_values"]["b_time"] == "1" || request.pending["sunday_values"]["b_location"] == "1"|| request.pending["sunday_values"]["b_name_number"] == "1" %>changed<% end %>"><%= "#{request.sunday_hash["b_time"]}\n#{request.sunday_hash["b_location"]}\n#{request.sunday_hash["b_name_number"]}" %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["single_track"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["night_work"] == "1" %>changed<% end %>" <% if request.pending["night_work"] == "1" %>class="changed"<% end %>><% if request.night_work == 1 %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["start_time"] == "1" || request.pending["sunday_values"]["end_time"] == "1"  %>changed<% end %>"><%= request.weekly.shift %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["taw"] == "1" %>changed<% end %>"><% if request.sunday_hash["taw"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["form_b"] == "1" %>changed<% end %>"><% if request.sunday_hash["form_b"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["form_c"] == "1" %>changed<% end %>"><% if request.sunday_hash["form_c"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending.sunday_values["track_and_time"] == "1" %>changed<% end %>"><% if request.sunday_hash["track_and_time"] == "1" %><%= "\u2713" %><% else %>-<% end %></td>
       <td data-href="<%= request_path(request) %>" class="trigger_overlay <% if request.pending["sunday_values"]["inacc_track"] == "1" %>changed<% end %>"><% if request.weekly.inacc_track == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="sun" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content requestor_notes"><%= request.requestor_notes_sun %></div><div class="notes_content admin_notes hidden"><%= request.admin_notes_sun %></div><div class="notes_content inspector_notes hidden"><%= request.inspector_notes_sun %></div></td>
+      <td data-href="<%= request_path(request) %>" data-reqnum="<%= request.id %>" data-day="sun" data-address="<%= api_v1_request_path(request) %>" class="notes_cell"><div class="notes_content preserve-lines requestor_notes"><%= request.requestor_notes_sun %></div><div class="notes_content preserve-lines admin_notes hidden"><%= request.admin_notes_sun %></div><div class="notes_content preserve-lines inspector_notes hidden"><%= request.inspector_notes_sun %></div></td>
     </tr>
     <% counter += 1 %>
     <% end %>

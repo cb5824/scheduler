@@ -16,7 +16,7 @@ FactoryBot.define do
     fri {1}
     sat {0}
     sun {0}
-    night_work {1}
+    night_work {0}
     sequence(:title) {|n| "Test job #{n}"}
     sswps {"dunno"}
     change_notices {"still dunno"}
