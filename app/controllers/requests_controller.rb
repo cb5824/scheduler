@@ -102,12 +102,17 @@ class RequestsController < ApplicationController
 
     @requests = Request.where(nil)
     if filtering_params(params).keys.length == 0
-      @requests = Request.where(year: @year, week: @week)
+      @requests = Request.where(year: @thisyear, week: @thisweek)
     else
       filtering_params(params).each do |key, value|
         @requests = @requests.public_send("filter_by_#{key}", value) if value.present?
       end
     end
+
+    @approved_only = (params["approved_only"] == "true")
+    @hide_cancelled = (params["hide_cancelled"] == "true")
+
+
     respond_to do |format|
       format.xlsx {
         response.headers[
@@ -116,6 +121,7 @@ class RequestsController < ApplicationController
       }
       format.html { render :index }
     end
+
   end
 
   def new

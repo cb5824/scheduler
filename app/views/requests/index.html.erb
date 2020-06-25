@@ -214,7 +214,7 @@
 </div>
 
 
-<div class="daytab active" data-displaytab="week">
+<div class="daytab active" id="first_tab" data-displaytab="week">
 Week
 </div>
 <div class="daytab inactive" data-displaytab="mon">
@@ -316,7 +316,7 @@ Sun
 
   </div>
 
-<div class="wrapper">
+<div class="wrapper margin_wrapper">
 <div id="weekly_table" class="displaytable">
 
     <table class="requests_table">
@@ -372,6 +372,15 @@ Sun
       <tbody>
 <% counter = 1 %>
   <% @requests.each do |request| %>
+    <% include = "true" %>
+    <% if @hide_cancelled == true && request.cancelled == 1 %>
+      <% include = "false" %>
+    <% end %>
+    <% if @approved_only == true && request.approved? != true %>
+      <% include = "false" %>
+    <% end %>
+    <% if include == "true" %>
+
       <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
@@ -476,6 +485,7 @@ Sun
       <td class="trigger_overlay"><%= request.requestor_name %></td>
     </tr>
     <% counter += 1 %>
+    <% end %>
   <% end %>
   </tbody>
 
@@ -519,8 +529,18 @@ Sun
         <tbody>
           <% counter = 1 %>
     <% @requests.each do |request| %>
+
+    <% include = "true" %>
+    <% if @hide_cancelled == true && (request.cancelled == 1 || request.monday_hash["cancelled"] == "yes") %>
+      <% include = "false" %>
+    <% end %>
+    <% if @approved_only == true && request.approval.day_approved?("mon") != true %>
+      <% include = "false" %>
+    <% end %>
+    <% if include == "true" %>
+
        <% if request.mon == 1  || request.monday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+        <tr class="hover_row <% if request.cancelled == 1 || request.monday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
           <td class="reqstatus">
             <div class="index_status hidden">
               <div class="approvals_bar_container">
@@ -604,7 +624,7 @@ Sun
       </tr>
       <% counter += 1 %>
       <% end %>
-
+      <% end %>
   <% end %>
   </tbody>
 
@@ -649,9 +669,19 @@ Sun
       <tbody>
         <% counter = 1 %>
   <% @requests.each do |request| %>
+
+  <% include = "true" %>
+  <% if @hide_cancelled == true && (request.cancelled == 1 || request.tuesday_hash["cancelled"] == "yes") %>
+    <% include = "false" %>
+  <% end %>
+  <% if @approved_only == true && request.approval.day_approved?("tue") != true %>
+    <% include = "false" %>
+  <% end %>
+  <% if include == "true" %>
+
     <% if request.tue == 1  || request.tuesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.tuesday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -736,7 +766,7 @@ Sun
     </tr>
     <% counter += 1 %>
     <% end %>
-
+    <% end %>
 <% end %>
 </tbody>
 
@@ -779,9 +809,18 @@ Sun
       <tbody>
         <% counter = 1 %>
   <% @requests.each do |request| %>
+  <% include = "true" %>
+  <% if @hide_cancelled == true && (request.cancelled == 1 || request.wednesday_hash["cancelled"] == "yes") %>
+    <% include = "false" %>
+  <% end %>
+  <% if @approved_only == true && request.approval.day_approved?("wed") != true %>
+    <% include = "false" %>
+  <% end %>
+  <% if include == "true" %>
+
   <% if request.wed == 1  || request.wednesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.wednesday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -866,7 +905,7 @@ Sun
     </tr>
     <% counter += 1 %>
     <% end %>
-
+    <% end %>
 <% end %>
 </tbody>
 
@@ -909,9 +948,19 @@ Sun
       <tbody>
         <% counter = 1 %>
   <% @requests.each do |request| %>
+
+  <% include = "true" %>
+  <% if @hide_cancelled == true && (request.cancelled == 1 || request.thursday_hash["cancelled"] == "yes") %>
+    <% include = "false" %>
+  <% end %>
+  <% if @approved_only == true && request.approval.day_approved?("thu") != true %>
+    <% include = "false" %>
+  <% end %>
+  <% if include == "true" %>
+
   <% if request.thu == 1  || request.thursday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.thursday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -996,7 +1045,7 @@ Sun
     </tr>
     <% counter += 1 %>
     <% end %>
-
+    <% end %>
 <% end %>
 </tbody>
 
@@ -1039,9 +1088,19 @@ Sun
       <tbody>
         <% counter = 1 %>
   <% @requests.each do |request| %>
+
+  <% include = "true" %>
+  <% if @hide_cancelled == true && (request.cancelled == 1 || request.friday_hash["cancelled"] == "yes") %>
+    <% include = "false" %>
+  <% end %>
+  <% if @approved_only == true && request.approval.day_approved?("fri") != true %>
+    <% include = "false" %>
+  <% end %>
+  <% if include == "true" %>
+
   <% if request.fri == 1  || request.friday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.friday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1126,7 +1185,7 @@ Sun
     </tr>
     <% counter += 1 %>
     <% end %>
-
+    <% end %>
 <% end %>
 </tbody>
 
@@ -1169,9 +1228,19 @@ Sun
       <tbody>
         <% counter = 1 %>
   <% @requests.each do |request| %>
+
+  <% include = "true" %>
+  <% if @hide_cancelled == true && (request.cancelled == 1 || request.saturday_hash["cancelled"] == "yes") %>
+    <% include = "false" %>
+  <% end %>
+  <% if @approved_only == true && request.approval.day_approved?("sat") != true %>
+    <% include = "false" %>
+  <% end %>
+  <% if include == "true" %>
+
   <% if request.sat == 1  || request.saturday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.saturday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1256,7 +1325,7 @@ Sun
     </tr>
     <% counter += 1 %>
     <% end %>
-
+    <% end %>
 <% end %>
 </tbody>
 
@@ -1299,8 +1368,18 @@ Sun
       <tbody>
         <% counter = 1 %>
   <% @requests.each do |request| %>
+
+  <% include = "true" %>
+  <% if @hide_cancelled == true && (request.cancelled == 1 || request.sunday_hash["cancelled"] == "yes") %>
+    <% include = "false" %>
+  <% end %>
+  <% if @approved_only == true && request.approval.day_approved?("sun") != true %>
+    <% include = "false" %>
+  <% end %>
+  <% if include == "true" %>
+
   <% if request.sun == 1  || request.sunday_hash["cancelled"] == "yes"%>
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.sunday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1385,7 +1464,7 @@ Sun
     </tr>
     <% counter += 1 %>
     <% end %>
-
+    <% end %>
 <% end %>
 </tbody>
 

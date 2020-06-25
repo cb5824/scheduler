@@ -145,4 +145,24 @@ class Approval < ApplicationRecord
 
   end
 
+  def day_approved?(day)
+    approved = nil
+    case day
+    when "mon"
+      approved = (self.group_1_mon == "approved" && self.group_2_mon == "approved" && self.group_3_mon == "approved" && self.group_4_mon == "approved")
+    when "tue"
+      approved = (self.group_1_tue == "approved" && self.group_2_tue == "approved" && self.group_3_tue == "approved" && self.group_4_tue == "approved")
+    when "wed"
+      approved = (self.group_1_wed == "approved" && self.group_2_wed == "approved" && self.group_3_wed == "approved" && self.group_4_wed == "approved")
+    when "thu"
+      approved = (self.group_1_thu == "approved" && self.group_2_thu == "approved" && self.group_3_thu == "approved" && self.group_4_thu == "approved")
+    when "fri"
+      approved = (self.group_1_fri == "approved" && self.group_2_fri == "approved" && self.group_3_fri == "approved" && self.group_4_fri == "approved")
+    when "sat"
+      approved = (self.group_1_sat == "approved" && self.group_2_sat == "approved" && self.group_3_sat == "approved" && self.group_4_sat == "approved")
+    when "sun"
+      approved = (self.group_1_sun == "approved" && self.group_2_sun == "approved" && self.group_3_sun == "approved" && self.group_4_sun == "approved")
+    end
+    return approved
+  end
 end

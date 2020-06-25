@@ -2,172 +2,174 @@
 <h1 class="<%= @request.color %>"><%= @request.title %></h1>
 <h3 class="<%= @request.color %>">  Week <%= @request.week %>, <%= @request.year %></h3>
 </div>
-
-<%= link_to 'Edit Request', edit_request_path(@request), class: "fakebutton" %>
-<%= link_to 'Copy Request', new_request_path(:copyfrom => @request.id), class: "fakebutton" %>
-<a href="#" class="fakebutton">Cancel Days</a>
-<br>
-
-<% @request.attachments.each do |attachment| %>
-<div class="level">
-  <%= link_to attachment.filename, rails_blob_path(attachment, only_path: true) %>
-</div>
-<% end %>
-
-<h3 class="underline">Current Approval Status</h3>
-<div class = "inlineblock">
-  <ul class="showstatus">
-    <li><div class="day_header">Monday:</div>
-      <div class="approval_summary">
-        <div class="approvals_bar_container">
-          <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_1_mon %><% else %>not_scheduled<% end %>">1</div>
-          <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_2_mon %><% else %>not_scheduled<% end %>">2</div>
-          <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_3_mon %><% else %>not_scheduled<% end %>">3</div>
-          <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_4_mon %><% else %>not_scheduled<% end %>">4</div>
-        </div>
-        <% if @request.mon == 1 %>
-          <div class="status_text <%= @request.daystatus(@request.approval.group_1_mon, @request.approval.group_2_mon, @request.approval.group_3_mon, @request.approval.group_4_mon) %>"><%= @request.daystatus(@request.approval.group_1_mon, @request.approval.group_2_mon, @request.approval.group_3_mon, @request.approval.group_4_mon).capitalize %></div>
-        <% else %>
-          <div class="status_text not_scheduled">No work Scheduled</div>
-        <% end %>
-      </div>
-    </li>
-    <li><div class="day_header">Tuesday:</div>
-      <div class="approval_summary">
-        <div class="approvals_bar_container">
-          <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_1_tue %><% else %>not_scheduled<% end %>">1</div>
-          <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_2_tue %><% else %>not_scheduled<% end %>">2</div>
-          <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_3_tue %><% else %>not_scheduled<% end %>">3</div>
-          <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_4_tue %><% else %>not_scheduled<% end %>">4</div>
-        </div>
-        <% if @request.tue == 1 %>
-          <div class="status_text <%= @request.daystatus(@request.approval.group_1_tue, @request.approval.group_2_tue, @request.approval.group_3_tue, @request.approval.group_4_tue) %>"><%= @request.daystatus(@request.approval.group_1_tue, @request.approval.group_2_tue, @request.approval.group_3_tue, @request.approval.group_4_tue).capitalize %></div>
-        <% else %>
-          <div class="status_text not_scheduled">No work Scheduled</div>
-        <% end %>
-      </div>
-    </li>
-    <li><div class="day_header">Wednesday:</div>
-      <div class="approval_summary">
-        <div class="approvals_bar_container">
-          <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_1_wed %><% else %>not_scheduled<% end %>">1</div>
-          <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_2_wed %><% else %>not_scheduled<% end %>">2</div>
-          <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_3_wed %><% else %>not_scheduled<% end %>">3</div>
-          <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_4_wed %><% else %>not_scheduled<% end %>">4</div>
-        </div>
-        <% if @request.wed == 1 %>
-          <div class="status_text <%= @request.daystatus(@request.approval.group_1_wed, @request.approval.group_2_wed, @request.approval.group_3_wed, @request.approval.group_4_wed) %>"><%= @request.daystatus(@request.approval.group_1_wed, @request.approval.group_2_wed, @request.approval.group_3_wed, @request.approval.group_4_wed).capitalize %></div>
-        <% else %>
-          <div class="status_text not_scheduled">No work Scheduled</div>
-        <% end %>
-      </div>
-    </li>
-    <li><div class="day_header">Thursday:</div>
-      <div class="approval_summary">
-        <div class="approvals_bar_container">
-          <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_1_thu %><% else %>not_scheduled<% end %>">1</div>
-          <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_2_thu %><% else %>not_scheduled<% end %>">2</div>
-          <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_3_thu %><% else %>not_scheduled<% end %>">3</div>
-          <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_4_thu %><% else %>not_scheduled<% end %>">4</div>
-        </div>
-        <% if @request.thu == 1 %>
-          <div class="status_text <%= @request.daystatus(@request.approval.group_1_thu, @request.approval.group_2_thu, @request.approval.group_3_thu, @request.approval.group_4_thu) %>"><%= @request.daystatus(@request.approval.group_1_thu, @request.approval.group_2_thu, @request.approval.group_3_thu, @request.approval.group_4_thu).capitalize %></div>
-        <% else %>
-          <div class="status_text not_scheduled">No work Scheduled</div>
-        <% end %>
-      </div>
-    </li>
-    <li><div class="day_header">Friday:</div>
-      <div class="approval_summary">
-        <div class="approvals_bar_container">
-          <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_1_fri %><% else %>not_scheduled<% end %>">1</div>
-          <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_2_fri %><% else %>not_scheduled<% end %>">2</div>
-          <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_3_fri %><% else %>not_scheduled<% end %>">3</div>
-          <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_4_fri %><% else %>not_scheduled<% end %>">4</div>
-        </div>
-        <% if @request.fri == 1 %>
-          <div class="status_text <%= @request.daystatus(@request.approval.group_1_fri, @request.approval.group_2_fri, @request.approval.group_3_fri, @request.approval.group_4_fri) %>"><%= @request.daystatus(@request.approval.group_1_fri, @request.approval.group_2_fri, @request.approval.group_3_fri, @request.approval.group_4_fri).capitalize %></div>
-        <% else %>
-          <div class="status_text not_scheduled">No work Scheduled</div>
-        <% end %>
-      </div>
-    </li>
-    <li><div class="day_header">Saturday:</div>
-      <div class="approval_summary">
-        <div class="approvals_bar_container">
-          <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_1_sat %><% else %>not_scheduled<% end %>">1</div>
-          <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_2_sat %><% else %>not_scheduled<% end %>">2</div>
-          <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_3_sat %><% else %>not_scheduled<% end %>">3</div>
-          <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_4_sat %><% else %>not_scheduled<% end %>">4</div>
-        </div>
-        <% if @request.sat == 1 %>
-          <div class="status_text <%= @request.daystatus(@request.approval.group_1_sat, @request.approval.group_2_sat, @request.approval.group_3_sat, @request.approval.group_4_sat) %>"><%= @request.daystatus(@request.approval.group_1_sat, @request.approval.group_2_sat, @request.approval.group_3_sat, @request.approval.group_4_sat).capitalize %></div>
-        <% else %>
-          <div class="status_text not_scheduled">No work Scheduled</div>
-        <% end %>
-      </div>
-    </li>
-    <li><div class="day_header">Sunday:</div>
-      <div class="approval_summary">
-        <div class="approvals_bar_container">
-          <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_1_sun %><% else %>not_scheduled<% end %>">1</div>
-          <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_2_sun %><% else %>not_scheduled<% end %>">2</div>
-          <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_3_sun %><% else %>not_scheduled<% end %>">3</div>
-          <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_4_sun %><% else %>not_scheduled<% end %>">4</div>
-        </div>
-        <% if @request.sun == 1 %>
-          <div class="status_text <%= @request.daystatus(@request.approval.group_1_sun, @request.approval.group_2_sun, @request.approval.group_3_sun, @request.approval.group_4_sun) %>"><%= @request.daystatus(@request.approval.group_1_sun, @request.approval.group_2_sun, @request.approval.group_3_sun, @request.approval.group_4_sun).capitalize %></div>
-        <% else %>
-          <div class="status_text not_scheduled">No work Scheduled</div>
-        <% end %>
-      </div>
-    </li>
-  </ul>
-</div>
-<% if @user.role == "superadmin" %>
-  <div class="superadmin_buttons">
-    <div>
-      <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="0" data-mon="true">Approve all groups</button>
-    </div>
-    <div>
-      <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="1" data-tue="true">Approve all groups</button>
-    </div>
-    <div>
-      <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="2" data-wed="true">Approve all groups</button>
-    </div>
-    <div>
-      <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="3" data-thu="true">Approve all groups</button>
-    </div>
-    <div>
-      <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="4" data-fri="true">Approve all groups</button>
-    </div>
-    <div>
-      <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="5" data-sat="true">Approve all groups</button>
-    </div>
-    <div>
-      <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="6" data-sun="true">Approve all groups</button>
-    </div>
-  </div>
-<% end %>
-  <br>
-  <div>
-    Approve all days for group:
-    <% if @user.approval_group == 1 || @user.role == "superadmin" %>
-    <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="1">1</button>
-    <% end %>
-    <% if @user.approval_group == 2 || @user.role == "superadmin" %>
-    <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="2">2</button>
-    <% end %>
-    <% if @user.approval_group == 3 || @user.role == "superadmin" %>
-    <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="3">3</button>
-    <% end %>
-    <% if @user.approval_group == 4 || @user.role == "superadmin" %>
-    <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="4">4</button>
-    <% end %>
-
-  </div>
+<div class="margin_wrapper"
+  <%= link_to 'Edit Request', edit_request_path(@request), class: "fakebutton" %>
+  <%= link_to 'Copy Request', new_request_path(:copyfrom => @request.id), class: "fakebutton" %>
+  <a href="#" class="fakebutton">Cancel Days</a>
   <br>
 
-  <h1>Notes</h1>
+  <% @request.attachments.each do |attachment| %>
+  <div class="level">
+    <%= link_to attachment.filename, rails_blob_path(attachment, only_path: true) %>
+  </div>
+  <% end %>
 
-  <h1>Change Log</h1>
+  <h3 class="underline">Current Approval Status</h3>
+  <div class = "inlineblock">
+    <ul class="showstatus">
+      <li><div class="day_header">Monday:</div>
+        <div class="approval_summary">
+          <div class="approvals_bar_container">
+            <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_1_mon %><% else %>not_scheduled<% end %>">1</div>
+            <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_2_mon %><% else %>not_scheduled<% end %>">2</div>
+            <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_3_mon %><% else %>not_scheduled<% end %>">3</div>
+            <div class="approvals_bar_block <% if @request.mon == 1 %><%= @request.approval.group_4_mon %><% else %>not_scheduled<% end %>">4</div>
+          </div>
+          <% if @request.mon == 1 %>
+            <div class="status_text <%= @request.daystatus(@request.approval.group_1_mon, @request.approval.group_2_mon, @request.approval.group_3_mon, @request.approval.group_4_mon) %>"><%= @request.daystatus(@request.approval.group_1_mon, @request.approval.group_2_mon, @request.approval.group_3_mon, @request.approval.group_4_mon).capitalize %></div>
+          <% else %>
+            <div class="status_text not_scheduled">No work Scheduled</div>
+          <% end %>
+        </div>
+      </li>
+      <li><div class="day_header">Tuesday:</div>
+        <div class="approval_summary">
+          <div class="approvals_bar_container">
+            <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_1_tue %><% else %>not_scheduled<% end %>">1</div>
+            <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_2_tue %><% else %>not_scheduled<% end %>">2</div>
+            <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_3_tue %><% else %>not_scheduled<% end %>">3</div>
+            <div class="approvals_bar_block <% if @request.tue == 1 %><%= @request.approval.group_4_tue %><% else %>not_scheduled<% end %>">4</div>
+          </div>
+          <% if @request.tue == 1 %>
+            <div class="status_text <%= @request.daystatus(@request.approval.group_1_tue, @request.approval.group_2_tue, @request.approval.group_3_tue, @request.approval.group_4_tue) %>"><%= @request.daystatus(@request.approval.group_1_tue, @request.approval.group_2_tue, @request.approval.group_3_tue, @request.approval.group_4_tue).capitalize %></div>
+          <% else %>
+            <div class="status_text not_scheduled">No work Scheduled</div>
+          <% end %>
+        </div>
+      </li>
+      <li><div class="day_header">Wednesday:</div>
+        <div class="approval_summary">
+          <div class="approvals_bar_container">
+            <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_1_wed %><% else %>not_scheduled<% end %>">1</div>
+            <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_2_wed %><% else %>not_scheduled<% end %>">2</div>
+            <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_3_wed %><% else %>not_scheduled<% end %>">3</div>
+            <div class="approvals_bar_block <% if @request.wed == 1 %><%= @request.approval.group_4_wed %><% else %>not_scheduled<% end %>">4</div>
+          </div>
+          <% if @request.wed == 1 %>
+            <div class="status_text <%= @request.daystatus(@request.approval.group_1_wed, @request.approval.group_2_wed, @request.approval.group_3_wed, @request.approval.group_4_wed) %>"><%= @request.daystatus(@request.approval.group_1_wed, @request.approval.group_2_wed, @request.approval.group_3_wed, @request.approval.group_4_wed).capitalize %></div>
+          <% else %>
+            <div class="status_text not_scheduled">No work Scheduled</div>
+          <% end %>
+        </div>
+      </li>
+      <li><div class="day_header">Thursday:</div>
+        <div class="approval_summary">
+          <div class="approvals_bar_container">
+            <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_1_thu %><% else %>not_scheduled<% end %>">1</div>
+            <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_2_thu %><% else %>not_scheduled<% end %>">2</div>
+            <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_3_thu %><% else %>not_scheduled<% end %>">3</div>
+            <div class="approvals_bar_block <% if @request.thu == 1 %><%= @request.approval.group_4_thu %><% else %>not_scheduled<% end %>">4</div>
+          </div>
+          <% if @request.thu == 1 %>
+            <div class="status_text <%= @request.daystatus(@request.approval.group_1_thu, @request.approval.group_2_thu, @request.approval.group_3_thu, @request.approval.group_4_thu) %>"><%= @request.daystatus(@request.approval.group_1_thu, @request.approval.group_2_thu, @request.approval.group_3_thu, @request.approval.group_4_thu).capitalize %></div>
+          <% else %>
+            <div class="status_text not_scheduled">No work Scheduled</div>
+          <% end %>
+        </div>
+      </li>
+      <li><div class="day_header">Friday:</div>
+        <div class="approval_summary">
+          <div class="approvals_bar_container">
+            <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_1_fri %><% else %>not_scheduled<% end %>">1</div>
+            <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_2_fri %><% else %>not_scheduled<% end %>">2</div>
+            <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_3_fri %><% else %>not_scheduled<% end %>">3</div>
+            <div class="approvals_bar_block <% if @request.fri == 1 %><%= @request.approval.group_4_fri %><% else %>not_scheduled<% end %>">4</div>
+          </div>
+          <% if @request.fri == 1 %>
+            <div class="status_text <%= @request.daystatus(@request.approval.group_1_fri, @request.approval.group_2_fri, @request.approval.group_3_fri, @request.approval.group_4_fri) %>"><%= @request.daystatus(@request.approval.group_1_fri, @request.approval.group_2_fri, @request.approval.group_3_fri, @request.approval.group_4_fri).capitalize %></div>
+          <% else %>
+            <div class="status_text not_scheduled">No work Scheduled</div>
+          <% end %>
+        </div>
+      </li>
+      <li><div class="day_header">Saturday:</div>
+        <div class="approval_summary">
+          <div class="approvals_bar_container">
+            <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_1_sat %><% else %>not_scheduled<% end %>">1</div>
+            <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_2_sat %><% else %>not_scheduled<% end %>">2</div>
+            <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_3_sat %><% else %>not_scheduled<% end %>">3</div>
+            <div class="approvals_bar_block <% if @request.sat == 1 %><%= @request.approval.group_4_sat %><% else %>not_scheduled<% end %>">4</div>
+          </div>
+          <% if @request.sat == 1 %>
+            <div class="status_text <%= @request.daystatus(@request.approval.group_1_sat, @request.approval.group_2_sat, @request.approval.group_3_sat, @request.approval.group_4_sat) %>"><%= @request.daystatus(@request.approval.group_1_sat, @request.approval.group_2_sat, @request.approval.group_3_sat, @request.approval.group_4_sat).capitalize %></div>
+          <% else %>
+            <div class="status_text not_scheduled">No work Scheduled</div>
+          <% end %>
+        </div>
+      </li>
+      <li><div class="day_header">Sunday:</div>
+        <div class="approval_summary">
+          <div class="approvals_bar_container">
+            <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_1_sun %><% else %>not_scheduled<% end %>">1</div>
+            <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_2_sun %><% else %>not_scheduled<% end %>">2</div>
+            <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_3_sun %><% else %>not_scheduled<% end %>">3</div>
+            <div class="approvals_bar_block <% if @request.sun == 1 %><%= @request.approval.group_4_sun %><% else %>not_scheduled<% end %>">4</div>
+          </div>
+          <% if @request.sun == 1 %>
+            <div class="status_text <%= @request.daystatus(@request.approval.group_1_sun, @request.approval.group_2_sun, @request.approval.group_3_sun, @request.approval.group_4_sun) %>"><%= @request.daystatus(@request.approval.group_1_sun, @request.approval.group_2_sun, @request.approval.group_3_sun, @request.approval.group_4_sun).capitalize %></div>
+          <% else %>
+            <div class="status_text not_scheduled">No work Scheduled</div>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <% if @user.role == "superadmin" %>
+    <div class="superadmin_buttons">
+      <div>
+        <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="0" data-mon="true">Approve all groups</button>
+      </div>
+      <div>
+        <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="1" data-tue="true">Approve all groups</button>
+      </div>
+      <div>
+        <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="2" data-wed="true">Approve all groups</button>
+      </div>
+      <div>
+        <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="3" data-thu="true">Approve all groups</button>
+      </div>
+      <div>
+        <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="4" data-fri="true">Approve all groups</button>
+      </div>
+      <div>
+        <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="5" data-sat="true">Approve all groups</button>
+      </div>
+      <div>
+        <button type="button" class="superadmin_approve" data-req="<%= @request.id %>" data-day="6" data-sun="true">Approve all groups</button>
+      </div>
+    </div>
+  <% end %>
+    <br>
+    <div id="approve_all_for_group">
+      Approve all days for group:
+      <div>
+      <% if @user.approval_group == 1 || @user.role == "superadmin" %>
+      <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="1">1</button>
+      <% end %>
+      <% if @user.approval_group == 2 || @user.role == "superadmin" %>
+      <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="2">2</button>
+      <% end %>
+      <% if @user.approval_group == 3 || @user.role == "superadmin" %>
+      <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="3">3</button>
+      <% end %>
+      <% if @user.approval_group == 4 || @user.role == "superadmin" %>
+      <button type="button" class="group_approve" data-req="<%= @request.id %>" data-group="4">4</button>
+      <% end %>
+      </div>
+    </div>
+    <br>
+
+    <h1>Notes</h1>
+
+    <h1>Change Log</h1>
+</div>

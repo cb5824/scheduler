@@ -405,4 +405,8 @@ class Request < ApplicationRecord
     CP_ARRAY.rassoc(num)[0]
   end
 
+  def approved?
+    self.approval.groupstatus(1) == "approved" && self.approval.groupstatus(2) == "approved" && self.approval.groupstatus(3) == "approved" && self.approval.groupstatus(4) == "approved"
+  end
+
 end
