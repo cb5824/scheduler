@@ -10,8 +10,8 @@
     <%= link_to 'Discard Changes', edit_request_path(@request), class: "form_nav_link" %>
   </div>
   <div>
-    <%= link_to 'Cancel Full Request', edit_request_path(@request), class: "form_nav_link" %>
-  </div>
+<%= link_to 'Cancel Request', request_cancel_path(@request), method: :put, data: { confirm: 'This request will be cancelled. Proceed?' }, class: "form_nav_link" %>
+</div>
 </div>
 </div>
 <br>

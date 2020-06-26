@@ -132,6 +132,27 @@ class RequestsController < ApplicationController
     if params[:copyfrom]
       temp = Request.where(id: params[:copyfrom])[0]
       @request = temp.dup
+      if @request.monday_hash["cancelled"] == "yes"
+        @request.monday_hash = {}
+      end
+      if @request.tuesday_hash["cancelled"] == "yes"
+        @request.tuesday_hash = {}
+      end
+      if @request.wednesday_hash["cancelled"] == "yes"
+        @request.wednesday_hash = {}
+      end
+      if @request.thursday_hash["cancelled"] == "yes"
+        @request.thursday_hash = {}
+      end
+      if @request.friday_hash["cancelled"] == "yes"
+        @request.friday_hash = {}
+      end
+      if @request.saturday_hash["cancelled"] == "yes"
+        @request.saturday_hash = {}
+      end
+      if @request.sunday_hash["cancelled"] == "yes"
+        @request.sunday_hash = {}
+      end
     else
       @request = Request.new
     end
@@ -232,6 +253,13 @@ end
     else
       @request2.sunday_hash["cancelled"] = "no"
     end
+    if (@request2.mon == 0 && @request2.tue == 0 && @request2.wed == 0 && @request2.thu == 0 && @request2.fri == 0 && @request2.sat == 0 && @request2.sun == 0)
+      binding.pry
+      @request.cancelled = 1
+      @request.save
+    else
+
+
     @request.generate_changelog(@request2, @user)
     @request.pending.change(@request2)
     @request.pending.save
@@ -250,15 +278,16 @@ end
       @request.saturday_hash["cancelled"] = @request2.saturday_hash["cancelled"]
       @request.sunday_hash["cancelled"] = @request2.sunday_hash["cancelled"]
 
-      @request.pending.change(@request2)
-      @request.update_weekly
-      @request.weekly.save
-      @request.save
+        @request.pending.change(@request2)
+        @request.update_weekly
+        @request.weekly.save
+        @request.save
     if request_params[:attachments]
       @request.attachments.attach(request_params[:attachments])
     end
     @request.pending.save
     flash[:notice] = "Request updated. Status changed to Pending Approval!"
+  end
     redirect_to @request
   end
 

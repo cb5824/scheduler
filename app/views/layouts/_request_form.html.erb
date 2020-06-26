@@ -1080,7 +1080,7 @@
         <% if @action == 'edit' && @request.expired? && @user.role != 'superadmin' %>
           <p>Cannot save edits to expired/completed requests</p>
         <% else %>
-          <% if @request.cancelled == 0 %>
+          <% if @request.cancelled == 0 || params["copyfrom"] != nil %>
             <p>By clicking submit button, I verify that blah blah blah…</p>
             <input type="submit" value="Submit Request">
           <% else %>
