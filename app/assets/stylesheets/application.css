@@ -911,3 +911,9 @@ input[type=number] {
 .time_frame{
   justify-content: end;
 }
+
+.test{
+  overflow : scroll;
+  width: 2000px;
+  height: 800px;
+}

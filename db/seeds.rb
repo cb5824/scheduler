@@ -22,7 +22,7 @@ user.save!
   FactoryBot.create(:user)
 end
 
-10.times do
+50.times do
    FactoryBot.create(:request)
 end
 

@@ -96,7 +96,6 @@ class RequestsController < ApplicationController
         ['Shared Maintainer', 'sM']]
 
   def index
-
     setweek
     @user = current_user
     @requests = Request.where(nil)

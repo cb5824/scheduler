@@ -16,7 +16,8 @@ FactoryBot.define do
     fri {1}
     sat {0}
     sun {0}
-    night_work {0}
+    color {["color_ffffff", "color_ff1100", "color_f2bb07", "color_fc9d0f", "color_bf7e1d", "color_531199", "color_249ee0", "color_24290f", "color_187d3f", "color_0a5cad", "color_e30eca"].sample}
+    night_work {[0, 1].sample}
     sequence(:title) {|n| "Test job #{n}"}
     sswps {"dunno"}
     change_notices {"still dunno"}
