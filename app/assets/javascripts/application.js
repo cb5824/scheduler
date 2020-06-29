@@ -13,19 +13,19 @@
 //= require rails-ujs
 //= require_tree .
 //= require jquery
-//= require jquery_ujs
 var last_clicked;
 $( document ).ready(function() {
 
   let startcolor = $('#request_color').val();
   $('#request_color').removeClass();
   $('#request_color').addClass(startcolor);
-
-
-// $('*[data-href]').on("click",function(){
-//   window.location = $(this).data('href');
-//   return false;
-// });
+  let current_color = $("#user_default_color").data("current");
+  $("#user_default_color").val(current_color);
+  $("#user_default_color").addClass(current_color);
+  if ($("#user_default_color").val() !== undefined) {
+    $('#request_color').val(current_color);
+    $('#request_color').addClass(current_color);
+  }
 
 $("td > a").on("click",function(e){
   e.stopPropagation();
@@ -822,11 +822,20 @@ $(".copy_day").on("click", function(){
 
 });
 
+
+
+$('#user_default_color').on('change', (event) =>{
+  let color = $('#user_default_color').val();
+  $('#user_default_color').removeClass();
+  $('#user_default_color').addClass(color);
+});
+
 $('#request_color').on('change', (event) =>{
   let color = $('#request_color').val();
   $('#request_color').removeClass();
   $('#request_color').addClass(color);
 });
+
 
 $('#request_mon').on('change', (event) =>{
   $('#monday_block').toggleClass("hidden", this.checked);

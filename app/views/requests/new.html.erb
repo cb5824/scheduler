@@ -1,9 +1,9 @@
 <%= form_for @request do |f| %>
 <br>
 <br>
-
+<input type="hidden" name="user_default_color" id="user_default_color" data-current="<%= @user.default_color %>" value="">
 <div class="form_nav">
-  <%= link_to 'Reset Form', new_request_path, class: "form_nav_link" %>
+  <%= link_to 'Reset Form', new_request_path, class: "form_nav_link", data: {confirm: "All unsaved changes will be lost. Proceed?"} %>
 </div>
 <br>
 <br>

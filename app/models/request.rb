@@ -319,9 +319,17 @@ class Request < ApplicationRecord
     @new_weekly.sun_workers = sun_workers
     @new_weekly.start = "#{starting_day}: #{starting_time}"
     @new_weekly.end = "#{ending_day}: #{ending_time}"
-    @new_weekly.mile_post = "#{mile_post.min} - #{mile_post.max}"
-    @new_weekly.control_point = "#{(CP_ARRAY.rassoc(control_point.min))[0]} - #{(CP_ARRAY.rassoc(control_point.max))[0]}"
-    @new_weekly.shift = "#{starting_times_array.min} - #{ending_times_array.max}"
+    @new_weekly.mile_post = "#{mile_post.min} -\n#{mile_post.max}"
+    shift_start = starting_times_array.min.to_s
+    if shift_start.length == 3
+      shift_start = "0" + shift_start
+    end
+    shift_end = ending_times_array.min.to_s
+    if shift_end.length == 3
+      shift_end = "0" + shift_end
+    end
+    @new_weekly.control_point = "#{(CP_ARRAY.rassoc(control_point.min))[0]} -\n#{(CP_ARRAY.rassoc(control_point.max))[0]}"
+    @new_weekly.shift = "#{shift_start} -\n#{shift_end}"
     @new_weekly.taw = taw
     @new_weekly.form_b = formb
     @new_weekly.form_c = formc

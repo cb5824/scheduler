@@ -99,7 +99,6 @@ class RequestsController < ApplicationController
 
     setweek
     @user = current_user
-
     @requests = Request.where(nil)
     if filtering_params(params).keys.length == 0
       @requests = Request.where(year: @thisyear, week: @thisweek)
@@ -121,6 +120,7 @@ class RequestsController < ApplicationController
       }
       format.html { render :index }
     end
+
 
   end
 
@@ -254,7 +254,6 @@ end
       @request2.sunday_hash["cancelled"] = "no"
     end
     if (@request2.mon == 0 && @request2.tue == 0 && @request2.wed == 0 && @request2.thu == 0 && @request2.fri == 0 && @request2.sat == 0 && @request2.sun == 0)
-      binding.pry
       @request.cancelled = 1
       @request.save
     else
