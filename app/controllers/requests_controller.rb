@@ -108,6 +108,8 @@ class RequestsController < ApplicationController
       end
     end
 
+    @requests = @requests.sort_by{ |r| [r.color, r.night_work, r.created_at]}
+
     @approved_only = (params["approved_only"] == "true")
     @hide_cancelled = (params["hide_cancelled"] == "true")
 
