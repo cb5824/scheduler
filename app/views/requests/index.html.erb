@@ -61,17 +61,18 @@
 
     <div class="filter_block">
       <div class="filter_header">
-        Night Work
+        Time Frame
       </div>
       <div class="filter_line">
         <div class="filter_legend">
-          Yes | No
+          Day | Night | Both
         </div>
       </div>
-      <div class="filter_line">
-        <%= radio_button_tag "night_work", "1" %>
+      <div class="filter_line time_frame">
         <%= radio_button_tag "night_work", "0" %>
-      </div>
+        <%= radio_button_tag "night_work", "1" %>
+        <%= radio_button_tag "nisei", "2" %>
+  </div>
     </div>
 
     <div class="filter_block">

@@ -893,3 +893,21 @@ th.rotated > div{
 #approve_all_for_group div button{
   width: 50px;
 }
+
+.index_top_container #year, .index_top_container #week{
+  width: 35px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.time_frame{
+  justify-content: end;
+}

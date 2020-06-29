@@ -185,10 +185,10 @@ class Request < ApplicationRecord
       ending_times_array << (day[1]["end_time"].delete ":").to_i
     end
     if day[1]["mp1"] != "" && day[1]["cancelled"] != "yes"
-      mile_post << (day[1]["mp1"]).to_i
+      mile_post << (day[1]["mp1"]).to_f
     end
     if day[1]["mp2"] != "" && day[1]["cancelled"] != "yes"
-      mile_post << (day[1]["mp2"]).to_i
+      mile_post << (day[1]["mp2"]).to_f
     end
     if day[0] != 0 && day[1]["cancelled"] != "yes"
       control_point << (day[1]["cp1"]).to_i
