@@ -127,13 +127,8 @@ class Request < ApplicationRecord
   end
 
   def approval_check
-    if self.approval1 == "rejected" || self.approval2 == "rejected" || self.approval3 == "rejected" || self.approval4 == "rejected"
-      self.update_attribute(:status, 'rejected')
-    elsif self.approval1 == "approved" && self.approval2 == "approved" && self.approval3 == "approved" && self.approval4 == "approved"
-      self.update_attribute(:status, 'approved')
+    if self.approved? == true
       self.pending.clear
-    else
-      self.update_attribute(:status, 'pending')
     end
   end
 
@@ -407,6 +402,16 @@ class Request < ApplicationRecord
       return false
     end
 
+  end
+
+  def active_days
+    days = []
+    [[self.mon, "mon"], [self.tue, "tue"], [self.wed, "wed"], [self.thu, "thu"], [self.fri, "fri"], [self.sat, "sat"], [self.sun, "sun"], ].each do |d|
+      if d[0] == 1
+        days << d[1]
+      end
+    end
+    return days
   end
 
   def parse_cp(num)

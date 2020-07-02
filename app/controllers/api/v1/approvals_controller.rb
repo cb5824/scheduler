@@ -127,6 +127,7 @@ class Api::V1::ApprovalsController < ApplicationController
       end
     end
     @request.approval.save
+    @request.approval_check
   end
 
 end

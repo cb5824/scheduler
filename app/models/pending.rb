@@ -102,6 +102,46 @@ if current.change_notices != comparison.change_notices
   self.change_notices = "1"
 end
 #
+if current.rwp != comparison.rwp
+  self.rwp = "1"
+end
+if current.ocs != comparison.ocs
+  self.ocs = "1"
+end
+if current.disturb != comparison.disturb
+  self.disturb = "1"
+end
+if current.rrm != comparison.rrm
+  self.rrm = "1"
+end
+if current.foul != comparison.foul
+  self.foul = "1"
+end
+if current.crossings != comparison.crossings
+  self.crossings = "1"
+end
+if current.underground != comparison.underground
+  self.underground = "1"
+end
+if current.flagging != comparison.flagging
+  self.flagging = "1"
+end
+if current.requestor_email != comparison.requestor_email
+  self.requestor_email = "1"
+end
+if current.requestor_phone != comparison.requestor_phone
+  self.requestor_phone = "1"
+end
+if current.requestor_work_directive != comparison.requestor_work_directive
+  self.requestor_work_directive = "1"
+end
+if current.year != comparison.year
+  self.year = "1"
+end
+if current.week != comparison.week
+  self.week = "1"
+end
+
 
 
     [[current.monday_hash, comparison.monday_hash], [current.tuesday_hash, comparison.tuesday_hash], [current.wednesday_hash, comparison.wednesday_hash], [current.thursday_hash, comparison.thursday_hash], [current.friday_hash, comparison.friday_hash], [current.saturday_hash, comparison.saturday_hash], [current.sunday_hash, comparison.sunday_hash]].each_with_index do |day, index|
@@ -221,6 +261,119 @@ end
       end
     end
     self.save
+  end
+
+  def set_pending(group, days)
+    case group
+    when 1
+      days.each do |d|
+        case d
+        when "mon"
+          self.request.approval.update_attribute(:group_1_mon, 'pending')
+        when "tue"
+          self.request.approval.update_attribute(:group_1_tue, 'pending')
+        when "wed"
+          self.request.approval.update_attribute(:group_1_wed, 'pending')
+        when "thu"
+          self.request.approval.update_attribute(:group_1_thu, 'pending')
+        when "fri"
+          self.request.approval.update_attribute(:group_1_fri, 'pending')
+        when "sat"
+          self.request.approval.update_attribute(:group_1_sat, 'pending')
+        when "sun"
+          self.request.approval.update_attribute(:group_1_sun, 'pending')
+        end
+      end
+    when 2
+      days.each do |d|
+        case d
+        when "mon"
+          self.request.approval.update_attribute(:group_2_mon, 'pending')
+        when "tue"
+          self.request.approval.update_attribute(:group_2_tue, 'pending')
+        when "wed"
+          self.request.approval.update_attribute(:group_2_wed, 'pending')
+        when "thu"
+          self.request.approval.update_attribute(:group_2_thu, 'pending')
+        when "fri"
+          self.request.approval.update_attribute(:group_2_fri, 'pending')
+        when "sat"
+          self.request.approval.update_attribute(:group_2_sat, 'pending')
+        when "sun"
+          self.request.approval.update_attribute(:group_2_sun, 'pending')
+        end
+      end
+    when 3
+      days.each do |d|
+        case d
+        when "mon"
+          self.request.approval.update_attribute(:group_3_mon, 'pending')
+        when "tue"
+          self.request.approval.update_attribute(:group_3_tue, 'pending')
+        when "wed"
+          self.request.approval.update_attribute(:group_3_wed, 'pending')
+        when "thu"
+          self.request.approval.update_attribute(:group_3_thu, 'pending')
+        when "fri"
+          self.request.approval.update_attribute(:group_3_fri, 'pending')
+        when "sat"
+          self.request.approval.update_attribute(:group_3_sat, 'pending')
+        when "sun"
+          self.request.approval.update_attribute(:group_3_sun, 'pending')
+        end
+      end
+    when 4
+      days.each do |d|
+        case d
+        when "mon"
+          self.request.approval.update_attribute(:group_4_mon, 'pending')
+        when "tue"
+          self.request.approval.update_attribute(:group_4_tue, 'pending')
+        when "wed"
+          self.request.approval.update_attribute(:group_4_wed, 'pending')
+        when "thu"
+          self.request.approval.update_attribute(:group_4_thu, 'pending')
+        when "fri"
+          self.request.approval.update_attribute(:group_4_fri, 'pending')
+        when "sat"
+          self.request.approval.update_attribute(:group_4_sat, 'pending')
+        when "sun"
+          self.request.approval.update_attribute(:group_4_sun, 'pending')
+        end
+      end
+    end
+  end
+
+  def update_approval_groups
+    [self.project, self.title, self.contractor, self.description, self.night_work, self.requestor_name, self.requestor_email, self.requestor_phone, self.requestor_work_directive, self.color, self.year, self.week, self.sswps, self.change_notices, self.rwp, self.ocs, self.disturb, self.rrm, self.foul, self.crossings, self.underground, self.flagging].each do |attribute|
+      if attribute == "1"
+        set_pending(1, self.request.active_days)
+        set_pending(2, self.request.active_days)
+        set_pending(4, self.request.active_days)
+      end
+    end
+    [self.mon, self.tue, self.wed, self.thu, self.fri, self.sat, self.sun].each do |attribute|
+      if attribute == "1"
+        set_pending(1, self.request.active_days)
+        set_pending(2, self.request.active_days)
+        set_pending(3, self.request.active_days)
+        set_pending(4, self.request.active_days)
+      end
+    end
+    [[self.monday_values, "mon"], [self.tuesday_values, "tue"], [self.wednesday_values, "wed"], [self.thursday_values, "thu"], [self.friday_values, "fri"], [self.saturday_values, "sat"], [self.sunday_values, "sun"]].each do |day|
+      if day[0]["b_time"] == "1" || day[0]["b_location"] == "1" || day[0]["b_name_number"] == "1" || day[0]["worker_primary"] == "1" || day[0]["worker_secondary1"] == "1" || day[0]["worker_secondary2"] == "1" || day[0]["worker_secondary3"] == "1" || day[0]["worker_secondary4"] == "1" || day[0]["worker_secondary5"] == "1"
+        set_pending(2, [day[1]])
+        set_pending(3, [day[1]])
+        set_pending(4, [day[1]])
+      end
+    end
+    [[self.monday_values, "mon"], [self.tuesday_values, "tue"], [self.wednesday_values, "wed"], [self.thursday_values, "thu"], [self.friday_values, "fri"], [self.saturday_values, "sat"], [self.sunday_values, "sun"]].each do |day|
+      if day[0]["start_time"] == "1" || day[0]["end_time"] == "1" || day[0]["cp1"] == "1" || day[0]["cp2"] == "1" || day[0]["mp1"] == "1" || day[0]["mp2"] == "1" || day[0]["MT1"] == "1" || day[0]["MT2"] == "1" || day[0]["MT3"] == "1" || day[0]["MT4"] == "1" || day[0]["other"]
+        set_pending(2, [day[1]])
+        set_pending(4, [day[1]])
+      end
+    end
+
   end
 
 end

@@ -268,7 +268,6 @@ end
       @request.update_attributes(request_params)
     else
       @request.update_attributes(request_params)
-      @request.update_attribute(:status, 'pending')
     end
       @request.monday_hash["cancelled"] = @request2.monday_hash["cancelled"]
       @request.tuesday_hash["cancelled"] = @request2.tuesday_hash["cancelled"]
@@ -279,6 +278,7 @@ end
       @request.sunday_hash["cancelled"] = @request2.sunday_hash["cancelled"]
 
         @request.pending.change(@request2)
+        @request.pending.update_approval_groups
         @request.update_weekly
         @request.weekly.save
         @request.save
@@ -286,7 +286,7 @@ end
       @request.attachments.attach(request_params[:attachments])
     end
     @request.pending.save
-    flash[:notice] = "Request updated. Status changed to Pending Approval!"
+    flash[:notice] = "Request updated."
   end
     redirect_to @request
   end

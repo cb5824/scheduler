@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_224656) do
+ActiveRecord::Schema.define(version: 2020_06_30_014636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -137,6 +137,22 @@ ActiveRecord::Schema.define(version: 2020_06_28_224656) do
     t.string "inacc_track", default: "0", null: false
     t.string "sswps", default: "0", null: false
     t.string "shift", default: "0", null: false
+    t.string "change_notices", default: "0", null: false
+    t.string "rwp", default: "0", null: false
+    t.string "ocs", default: "0", null: false
+    t.string "disturb", default: "0", null: false
+    t.string "rrm", default: "0", null: false
+    t.string "foul", default: "0", null: false
+    t.string "crossings", default: "0", null: false
+    t.string "underground", default: "0", null: false
+    t.string "flagging", default: "0", null: false
+    t.string "requestor_email", default: "0", null: false
+    t.string "requestor_name", default: "0", null: false
+    t.string "color", default: "0", null: false
+    t.string "requestor_phone", default: "0", null: false
+    t.string "requestor_work_directive", default: "0", null: false
+    t.string "year", default: "0", null: false
+    t.string "week", default: "0", null: false
     t.index ["request_id"], name: "index_pendings_on_request_id"
   end
 
