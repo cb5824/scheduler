@@ -5,7 +5,7 @@ FactoryBot.define do
     password_confirmation {'password'}
     sequence(:name) {|n| "Test User #{n}"}
     phone {'5552220213'}
-    sequence(:company) {|n| "Test Company #{n}"}
+    sequence(:company) {"TASI: Track"}
     role {"user"}
     approval_group {0}
   end

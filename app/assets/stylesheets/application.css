@@ -281,7 +281,7 @@ table.requests_table {
 }
 table.requests_table td{
   border: 1px solid #808080;
-  padding: 3px 0px;
+  /* padding: 3px 0px; */
 }
 table.requests_table tbody td {
   font-size: 13px;
@@ -516,6 +516,10 @@ table.requests_table tfoot .links a{
 textarea, .preserve-lines{
   white-space: pre-wrap;
   text-align: left;
+}
+
+td.preserve-lines{
+  padding-left: 5px;
 }
 
 .index_status{
@@ -916,4 +920,11 @@ input[type=number] {
   overflow : scroll;
   width: 2000px;
   height: 800px;
+}
+
+.request_title{
+  text-decoration: underline;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 0px;
 }

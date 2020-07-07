@@ -1298,10 +1298,38 @@ $('.trigger_overlay').on("click", function() {
    return false;
  });
 
-$('.editrequest').on("click",function(){
+ $('.copyrequest').on("click",function(){
+  window.location = "/requests/new?copyfrom=" + $('#divOverlay').data('reqnum');
+   return false;
+ });
 
- window.location = "/requests/" + $('#divOverlay').data('reqnum') + "/edit";
-  return false;
+
+$('#editrequest').on("click",function(){
+
+  event.preventDefault();
+  $("#ajax_alert").html("Authorizing...");
+  $("#ajax_alert").css({display: 'block'});
+
+  let req = $('#divOverlay').data('reqnum');
+  let address = "/api/v1/requests/" + req;
+  let intention = "request body";
+
+  let request = $.ajax({
+    method: 'GET',
+    data: {intention: intention},
+    url: address
+  });
+
+  request.done((response) => {
+    if (response === true) {
+      window.location = "/requests/" + $('#divOverlay').data('reqnum') + "/edit";
+       return false;
+    } else {
+      $("#ajax_alert").html("Cannot edit requests for other contractors.");
+      setTimeout(closealert, 2000);
+    }
+ });
+
 });
 
 $('.daily_approve').on("click",function(){
@@ -1322,7 +1350,8 @@ $('.superoverlay_button').on('click', (event) =>{
 
   let req = $('#divOverlay').data('reqnum');
   let address = "/api/v1/approvals/" + req;
-  let change = $(event.target).data("change");
+  let scope = $(event.target).data("scope");
+  let change = $("#new_status").val();
   let mon = $("#mon_check").prop("checked");
   let tue = $("#tue_check").prop("checked");
   let wed = $("#wed_check").prop("checked");
@@ -1338,7 +1367,7 @@ $('.superoverlay_button').on('click', (event) =>{
 
   let request = $.ajax({
     method: 'PATCH',
-    data: {change: change, mon: mon, tue: tue, wed: wed, thu: thu, fri: fri, sat: sat, sun: sun, emulate: emulate},
+    data: {scope: scope, change: change, mon: mon, tue: tue, wed: wed, thu: thu, fri: fri, sat: sat, sun: sun, emulate: emulate},
     url: address
   });
 
@@ -1361,28 +1390,47 @@ $('.notes_content').on("click", function() {
       var type = "inspector";
     }
     var target_cell = $(event.target).parent()[0];
-    $('#notesOverlay').data("reqnum", target_cell.dataset.reqnum);
+event.preventDefault();
+let req = target_cell.dataset.reqnum;
+let address = "/api/v1/requests/" + req;
+let intention = "notes";
 
-    var bottomWidth = $(target_cell).css('width');
-    var bottomHeight = $(target_cell).css('height');
-    var rowPos = $(target_cell).offset();
-    bottomTop = rowPos.top;
-    bottomLeft = rowPos.left;
-    $('#divOverlay').hide();
-    $(".superoverlay").css({height: "0%"});
-    $('#notesOverlay').data("reqnum", target_cell.dataset.reqnum);
-    $('#notesOverlay').data("day", target_cell.dataset.day);
-    $('#notesOverlay').data("address", target_cell.dataset.address);
-    $('#notesOverlay').css({
-      position: 'absolute',
-      top: bottomTop,
-      left: bottomLeft,
-      height: bottomHeight,
-      display: "flex"
-    });
-    $("#notes_workspace").children("textarea").val(initial);
-    $("#notes_workspace").children("textarea").data("type", type);
-    $("#notesOverlay").animate({height: "200px"});
+let request = $.ajax({
+  method: 'GET',
+  data: {intention: intention, type: type},
+  url: address
+});
+
+  request.done((response) => {
+    if (response === true) {
+      $('#notesOverlay').data("reqnum", target_cell.dataset.reqnum);
+      var bottomWidth = $(target_cell).css('width');
+      var bottomHeight = $(target_cell).css('height');
+      var rowPos = $(target_cell).offset();
+      bottomTop = rowPos.top;
+      bottomLeft = rowPos.left;
+      $('#divOverlay').hide();
+      $(".superoverlay").css({height: "0%"});
+      $('#notesOverlay').data("reqnum", target_cell.dataset.reqnum);
+      $('#notesOverlay').data("day", target_cell.dataset.day);
+      $('#notesOverlay').data("address", target_cell.dataset.address);
+      $('#notesOverlay').css({
+        position: 'absolute',
+        top: bottomTop,
+        left: bottomLeft,
+        height: bottomHeight,
+        display: "flex"
+      });
+      $("#notes_workspace").children("textarea").val(initial);
+      $("#notes_workspace").children("textarea").data("type", type);
+      $("#notesOverlay").animate({height: "200px"});
+    } else {
+      $("#ajax_alert").html("test NOT AUTHORIZED");
+      setTimeout(closealert, 2000);
+  }
+});
+
+
 });
 
 $('.group_approve').on('click', (event) =>{

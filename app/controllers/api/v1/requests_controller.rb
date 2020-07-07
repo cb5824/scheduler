@@ -60,5 +60,29 @@ class Api::V1::RequestsController < ApplicationController
     @request.save
   end
 
+  def show
+    @request = Request.where(id: params[:id])[0]
+    if params["intention"] == "request body"
+      if current_user.role == 'user'
+        response = (@request.contractor == current_user.company)
+      else
+        response = true
+      end
+    elsif params["intention"] == "notes"
+      if current_user.role == 'user' && params["type"] == "requestor"
+        response = (@request.contractor == current_user.company)
+      elsif current_user.role == 'admin' && (params["type"] == "admin" || params["type"] == "inspector")
+        response = true
+      elsif current_user.role == 'inspector' && params["type"] == "inspector"
+        response = true
+      elsif current_user.role == 'superadmin'
+        response = true
+      else
+        response = false
+      end
+    end
+    render json: response
+  end
+
 
 end

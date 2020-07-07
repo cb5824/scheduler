@@ -183,7 +183,7 @@ end
       @request.approval.save
       @request.pending = Pending.new
       @request.pending.save
-      redirect_to root_path, notice: 'Request was saved successfully'
+      redirect_to action: "index", notice: 'Request was saved successfully', week: "#{@request.week}", year: "#{@request.year}"
     else
       @errors = @request.errors.full_messages
       render action: 'new'

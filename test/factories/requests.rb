@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :request do
     year {Time.now.year}
     week {Date.today.cweek}
-    contractor {'tasi_track'}
+    contractor {'TASI: Track'}
     sequence(:description) {|n| "This is a description of test job #{n}"}
     sequence(:requestor_name) {|n| "Test Name #{n}"}
     sequence(:requestor_email) {|n| "person#{n}@example.com"}

@@ -2,10 +2,10 @@
 <h1 class="<%= @request.color %>"><%= @request.title %></h1>
 <h3 class="<%= @request.color %>">  Week <%= @request.week %>, <%= @request.year %></h3>
 </div>
-<div class="margin_wrapper"
+<div class="margin_wrapper">
   <%= link_to 'Edit Request', edit_request_path(@request), class: "fakebutton" %>
   <%= link_to 'Copy Request', new_request_path(:copyfrom => @request.id), class: "fakebutton" %>
-  <a href="#" class="fakebutton">Cancel Days</a>
+  <!-- <a href="#" class="fakebutton">Cancel Days</a> -->
   <br>
 
   <% @request.attachments.each do |attachment| %>
@@ -169,7 +169,7 @@
     </div>
     <br>
 
-    <h1>Notes</h1>
+    <!-- <h1>Notes</h1> -->
 
-    <h1>Change Log</h1>
+    <!-- <h1>Change Log</h1> -->
 </div>

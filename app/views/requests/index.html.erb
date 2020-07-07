@@ -2,8 +2,10 @@
 
 <div class="index_top_container">
 
-  <h4>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h4>
-
+  <h2>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h2>
+  <button type="button" name="forward">placeholder Forward one week</button>
+  <button type="button" name="current">placeholder current week</button>
+  <button type="button" name="back">placeholder back one week</button>
   <%= form_tag(requests_path, method: "get") do %>
     <% if params["week"] %>
       <%= hidden_field_tag("filter_week", value = params["week"]) %>
@@ -244,7 +246,8 @@ Sun
     <div class="overlay_actions">
       <%= image_tag "red_x.png", class: "closeoverlay", alt: "Pending" %>
       <button type="button" class="showpage overlay_button">Details</button>
-      <button type="button" class="editrequest overlay_button">Edit</button>
+      <button type="button" class="overlay_button" id="editrequest">Edit</button>
+      <button type="button" class="copyrequest overlay_button">Copy</button>
     </div>
     <div class="overlay_emulate">
       <div>
@@ -261,7 +264,7 @@ Sun
         </div>
       </div>
       <div id="overlay_approvals">
-        <% if @user.role != "user" %>
+        <% if @user.role != "inspector" %>
           <label for="new_status">Change to:</label>
           <select id="new_status">
             <% if @user.role == "admin" || @user.role == "superadmin" %>
@@ -301,8 +304,8 @@ Sun
             <label for="sun_check">Sun</label>
             <input type="checkbox" id="sun_check" name="sun_check" value="sun_check">
           </div>
-          <button class="superoverlay_button">Change All</button>
-          <button class="superoverlay_button">Change Selected</button>
+          <button class="superoverlay_button" data-scope="all">Change All</button>
+          <button class="superoverlay_button" data-scope="select">Change Selected</button>
           <% end %>
       </div>
     </div>
@@ -353,13 +356,13 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Mon\n#{Date.commercial(@thisyear, @thisweek, 1).month}/#{Date.commercial(@thisyear, @thisweek, 1).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Tue\n#{Date.commercial(@thisyear, @thisweek, 2).month}/#{Date.commercial(@thisyear, @thisweek, 2).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Wed\n#{Date.commercial(@thisyear, @thisweek, 3).month}/#{Date.commercial(@thisyear, @thisweek, 3).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Thu\n#{Date.commercial(@thisyear, @thisweek, 4).month}/#{Date.commercial(@thisyear, @thisweek, 4).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Fri\n#{Date.commercial(@thisyear, @thisweek, 5).month}/#{Date.commercial(@thisyear, @thisweek, 5).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Sat\n#{Date.commercial(@thisyear, @thisweek, 6).month}/#{Date.commercial(@thisyear, @thisweek, 6).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Sun\n#{Date.commercial(@thisyear, @thisweek, 7).month}/#{Date.commercial(@thisyear, @thisweek, 7).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Mon\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Tue\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Wed\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Thu\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Fri\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Sat\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Sun\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -456,7 +459,7 @@ Sun
       <td class="trigger_overlay <% if request.pending["mt3"] == "1" %>changed<% end %>"><% if request.weekly.mt3 == true %><%= "\u2713" %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.pending["mt4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.pending["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
-      <td class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><%= request.description %></td>
+      <td class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><p class="request_title"><%= request.title %></p><%= request.description %></td>
       <td class="trigger_overlay <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></td>
@@ -519,7 +522,7 @@ Sun
             <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
             <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
             <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-            <th class="wsmall preserve-lines"><%= "Mon\n#{Date.commercial(@thisyear, @thisweek, 1).month}/#{Date.commercial(@thisyear, @thisweek, 1).day}"%></th>
+            <th class="wsmall preserve-lines"><%= "Mon\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).day}"%></th>
             <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
             <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
             <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -659,7 +662,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Tue\n#{Date.commercial(@thisyear, @thisweek, 2).month}/#{Date.commercial(@thisyear, @thisweek, 2).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Tue\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -799,7 +802,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Wed\n#{Date.commercial(@thisyear, @thisweek, 3).month}/#{Date.commercial(@thisyear, @thisweek, 3).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Wed\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -938,7 +941,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Thu\n#{Date.commercial(@thisyear, @thisweek, 4).month}/#{Date.commercial(@thisyear, @thisweek, 4).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Thu\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -1078,7 +1081,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Fri\n#{Date.commercial(@thisyear, @thisweek, 5).month}/#{Date.commercial(@thisyear, @thisweek, 5).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Fri\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -1218,7 +1221,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Sat\n#{Date.commercial(@thisyear, @thisweek, 6).month}/#{Date.commercial(@thisyear, @thisweek, 6).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Sat\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -1358,7 +1361,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Sun\n#{Date.commercial(@thisyear, @thisweek, 7).month}/#{Date.commercial(@thisyear, @thisweek, 7).day}"%></th>
+          <th class="wsmall preserve-lines"><%= "Sun\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
