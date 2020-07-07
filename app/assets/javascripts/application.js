@@ -1265,7 +1265,12 @@ $(".index_status").on("mouseleave",function(e){
 });
 
 $('.trigger_overlay').on("click", function() {
+    if ($(event.target).hasClass("request_title") === true) {
+      var target_row = $(event.target).parent().parent()[0];
+    } else {
+
     var target_row = $(event.target).parent()[0];
+  }
     var bottomWidth = $(target_row).css('width');
     var bottomHeight = $(target_row).css('height');
     var rowPos = $(target_row).offset();
