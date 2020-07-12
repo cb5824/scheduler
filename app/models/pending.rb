@@ -220,8 +220,8 @@ end
       if day[0]["b_location"] != day[1]["b_location"]
         self.parse_day(index, "b_location")
       end
-      if day[0]["b_name_number"] != day[1]["b_name_number"]
-        self.parse_day(index, "b_name_number")
+      if day[0]["onsite_name"] != day[1]["onsite_name"]
+        self.parse_day(index, "onsite_name")
       end
 
     end
@@ -361,7 +361,7 @@ end
       end
     end
     [[self.monday_values, "mon"], [self.tuesday_values, "tue"], [self.wednesday_values, "wed"], [self.thursday_values, "thu"], [self.friday_values, "fri"], [self.saturday_values, "sat"], [self.sunday_values, "sun"]].each do |day|
-      if day[0]["b_time"] == "1" || day[0]["b_location"] == "1" || day[0]["b_name_number"] == "1" || day[0]["worker_primary"] == "1" || day[0]["worker_secondary1"] == "1" || day[0]["worker_secondary2"] == "1" || day[0]["worker_secondary3"] == "1" || day[0]["worker_secondary4"] == "1" || day[0]["worker_secondary5"] == "1"
+      if day[0]["b_time"] == "1" || day[0]["b_location"] == "1" || day[0]["onsite_name"] == "1" || day[0]["onsite_number"] == "1" || day[0]["worker_primary"] == "1" || day[0]["worker_secondary1"] == "1" || day[0]["worker_secondary2"] == "1" || day[0]["worker_secondary3"] == "1" || day[0]["worker_secondary4"] == "1" || day[0]["worker_secondary5"] == "1"
         set_pending(2, [day[1]])
         set_pending(3, [day[1]])
         set_pending(4, [day[1]])
