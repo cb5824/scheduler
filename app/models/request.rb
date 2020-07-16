@@ -12,6 +12,8 @@ class Request < ApplicationRecord
   scope :filter_by_week, -> (week) { where week: week }
   scope :filter_by_year, -> (year) { where year: year }
   scope :filter_by_single_tracking, -> (single_tracking) { joins(:weekly).where("single_tracking = ?", single_tracking)}
+
+  # `scope :by_weekly, -> (field, value) { joins(:weekly).where("? = ?", field, value}`
   scope :filter_by_mt1, -> (mt1) { joins(:weekly).where("mt1 = ?", mt1)}
   scope :filter_by_mt2, -> (mt2) { joins(:weekly).where("mt2 = ?", mt2)}
   scope :filter_by_mt3, -> (mt3) { joins(:weekly).where("mt3 = ?", mt3)}
@@ -31,7 +33,7 @@ class Request < ApplicationRecord
   scope :filter_by_underground, -> (underground) { joins(:weekly).where("underground = ?", underground)}
   scope :filter_by_flagging, -> (flagging) { joins(:weekly).where("flagging = ?", flagging)}
 
-
+  # Duped from the conroller, no?
   CP_ARRAY = [['N.L. CP 4th', 1],
         ['S.L. CP 4th', 2],
         ['N.L. CP Common', 3],
@@ -104,6 +106,20 @@ class Request < ApplicationRecord
   end
 
   def generate_changelog(temp_request, user)
+    # .tap is cool here.
+    # Changelog.create(
+    #  user: user,
+    #  request: self,
+    # ).tap do |change_log|
+    #  self.attributes.keys.each do |k|
+      #   if self[k] != temp_request[k] && ["approval1", "approval2", "approval3", "approval4"].include?(k) == false
+      #     new_changelog.old_values[k] = self[k]
+      #     new_changelog.new_values[k] = temp_request[k]
+      #   end
+    #   end
+    # end
+
+    # Basically lets you do this all in one pass, which is nice.
     new_changelog = Changelog.new
     new_changelog.user_id = user.id
     new_changelog.request = self
@@ -118,6 +134,7 @@ class Request < ApplicationRecord
   end
 
   def generate_approval_log(user, old_status, new_status)
+    # Changelog.create(user: user, old_valus: { status: old_status}), etc.
     new_changelog = Changelog.new
     new_changelog.user_id = user.id
     new_changelog[:old_values]["status"] = old_status

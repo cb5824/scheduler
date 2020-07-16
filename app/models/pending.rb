@@ -1,4 +1,7 @@
 class Pending < ApplicationRecord
+  # I wonder whether you really, really need this.
+  # Or maybe it's doing something different than a Request or Approval. It seems like
+  # it has more functionality.
   has_one :request
 
   def change(comparison)
@@ -53,98 +56,107 @@ class Pending < ApplicationRecord
       self.night_work = "1"
     end
 
-# •	Mile post
-if current.weekly.mile_post != comparison_weekly.mile_post
-  self.mile_post = "1"
-end
+    # •	Mile post
+    if current.weekly.mile_post != comparison_weekly.mile_post
+      self.mile_post = "1"
+    end
 
-# •	Cp
-if current.weekly.control_point != comparison_weekly.control_point
-  self.control_point = "1"
-end
-# •	Mt1 -4 and other
-if current.weekly.mt1 != comparison_weekly.mt1
-  self.mt1 = "1"
-end
-if current.weekly.mt2 != comparison_weekly.mt2
-  self.mt2 = "1"
-end
-if current.weekly.mt3 != comparison_weekly.mt3
-  self.mt3 = "1"
-end
-if current.weekly.mt4 != comparison_weekly.mt4
-  self.mt4 = "1"
-end
-if current.weekly.other != comparison_weekly.other
-  self.other = "1"
-end
-# •	Single tracking
-if current.weekly.single_tracking != comparison_weekly.single_tracking
-  self.single_tracking = "1"
-end
-# •	Shift
-if current.weekly.shift != comparison_weekly.shift
-  self.shift = "1"
-end
+    # •	Cp
+    if current.weekly.control_point != comparison_weekly.control_point
+      self.control_point = "1"
+    end
+    # •	Mt1 -4 and other
+    if current.weekly.mt1 != comparison_weekly.mt1
+      self.mt1 = "1"
+    end
+    if current.weekly.mt2 != comparison_weekly.mt2
+      self.mt2 = "1"
+    end
+    if current.weekly.mt3 != comparison_weekly.mt3
+      self.mt3 = "1"
+    end
+    if current.weekly.mt4 != comparison_weekly.mt4
+      self.mt4 = "1"
+    end
+    if current.weekly.other != comparison_weekly.other
+      self.other = "1"
+    end
+    # •	Single tracking
+    if current.weekly.single_tracking != comparison_weekly.single_tracking
+      self.single_tracking = "1"
+    end
+    # •	Shift
+    if current.weekly.shift != comparison_weekly.shift
+      self.shift = "1"
+    end
 
-# •	Inacc track
-if current.weekly.inacc_track != comparison_weekly.inacc_track
-  self.inacc_track = "1"
-end
+    # •	Inacc track
+    if current.weekly.inacc_track != comparison_weekly.inacc_track
+      self.inacc_track = "1"
+    end
 
-# •	Sswps
-if current.sswps != comparison.sswps
-  self.sswps = "1"
-end
+    # •	Sswps
+    if current.sswps != comparison.sswps
+      self.sswps = "1"
+    end
 
-# •	Change notices
-if current.change_notices != comparison.change_notices
-  self.change_notices = "1"
-end
-#
-if current.rwp != comparison.rwp
-  self.rwp = "1"
-end
-if current.ocs != comparison.ocs
-  self.ocs = "1"
-end
-if current.disturb != comparison.disturb
-  self.disturb = "1"
-end
-if current.rrm != comparison.rrm
-  self.rrm = "1"
-end
-if current.foul != comparison.foul
-  self.foul = "1"
-end
-if current.crossings != comparison.crossings
-  self.crossings = "1"
-end
-if current.underground != comparison.underground
-  self.underground = "1"
-end
-if current.flagging != comparison.flagging
-  self.flagging = "1"
-end
-if current.requestor_email != comparison.requestor_email
-  self.requestor_email = "1"
-end
-if current.requestor_phone != comparison.requestor_phone
-  self.requestor_phone = "1"
-end
-if current.requestor_work_directive != comparison.requestor_work_directive
-  self.requestor_work_directive = "1"
-end
-if current.year != comparison.year
-  self.year = "1"
-end
-if current.week != comparison.week
-  self.week = "1"
-end
+    # •	Change notices
+    if current.change_notices != comparison.change_notices
+      self.change_notices = "1"
+    end
+    #
+    if current.rwp != comparison.rwp
+      self.rwp = "1"
+    end
+    if current.ocs != comparison.ocs
+      self.ocs = "1"
+    end
+    if current.disturb != comparison.disturb
+      self.disturb = "1"
+    end
+    if current.rrm != comparison.rrm
+      self.rrm = "1"
+    end
+    if current.foul != comparison.foul
+      self.foul = "1"
+    end
+    if current.crossings != comparison.crossings
+      self.crossings = "1"
+    end
+    if current.underground != comparison.underground
+      self.underground = "1"
+    end
+    if current.flagging != comparison.flagging
+      self.flagging = "1"
+    end
+    if current.requestor_email != comparison.requestor_email
+      self.requestor_email = "1"
+    end
+    if current.requestor_phone != comparison.requestor_phone
+      self.requestor_phone = "1"
+    end
+    if current.requestor_work_directive != comparison.requestor_work_directive
+      self.requestor_work_directive = "1"
+    end
+    if current.year != comparison.year
+      self.year = "1"
+    end
+    if current.week != comparison.week
+      self.week = "1"
+    end
 
-
-
-    [[current.monday_hash, comparison.monday_hash], [current.tuesday_hash, comparison.tuesday_hash], [current.wednesday_hash, comparison.wednesday_hash], [current.thursday_hash, comparison.thursday_hash], [current.friday_hash, comparison.friday_hash], [current.saturday_hash, comparison.saturday_hash], [current.sunday_hash, comparison.sunday_hash]].each_with_index do |day, index|
+    # Only cleaned this up so I could look at it w/o scrolling.
+    [
+      [current.monday_hash, comparison.monday_hash],
+      [current.tuesday_hash, comparison.tuesday_hash],
+      [current.wednesday_hash, comparison.wednesday_hash],
+      [current.thursday_hash, comparison.thursday_hash],
+      [current.friday_hash, comparison.friday_hash],
+      [current.saturday_hash, comparison.saturday_hash],
+      [current.sunday_hash, comparison.sunday_hash]
+    ].each_with_index do |day, index|
+      # There's probably a way to tighten this up. You're calling the same method
+      # here, so wouldn't you be able to use iteration to shorten this method call?
       if day[0]["MT1"] != day[1]["MT1"]
         self.parse_day(index, "MT1")
       end
@@ -251,8 +263,7 @@ end
 
   end
 
-  def clear
-
+  def clear 
     self.attributes.each do |attr|
       if attr[1].class == String && attr[0] != "request_id" && attr[0] != "id"
         self[attr[0]] = "0"

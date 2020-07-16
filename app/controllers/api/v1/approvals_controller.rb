@@ -5,6 +5,7 @@ class Api::V1::ApprovalsController < ApplicationController
     days = []
     status = ""
     group = []
+    # if you convert this
     if params["scope"] == "all"
       days = ["true", "true", "true", "true", "true", "true", "true"]
     elsif params["scope"] == "select"
@@ -30,6 +31,9 @@ class Api::V1::ApprovalsController < ApplicationController
       when "4"
         group << 4
       when "all"
+        # group = group + [1,2,3,4] does it, it's a good operator.
+        # or group.push[1,2,3,4]
+        
         group << 1
         group << 2
         group << 3

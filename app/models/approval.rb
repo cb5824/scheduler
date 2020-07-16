@@ -1,6 +1,5 @@
 class Approval < ApplicationRecord
-    has_one :request
-
+  has_one :request
 
   def groupstatus(group)
 
@@ -8,6 +7,8 @@ class Approval < ApplicationRecord
     days = []
     status = []
 
+    # See where yr going here, but this is a situation where adding these things
+    # to a boolean or status-based DB column dries the SHIT out of your code.
     if comparison.mon == 1
       days << "true"
     else
@@ -43,7 +44,6 @@ class Approval < ApplicationRecord
     else
       days << "false"
     end
-
 
     case group
     when 1
@@ -147,6 +147,9 @@ class Approval < ApplicationRecord
 
   def day_approved?(day)
     approved = nil
+
+    # reading this, i almost think you need like an ApprovalGroup join table?
+    # So you could just do `approval_groups.all?(&:approved?)` for this method.
     case day
     when "mon"
       approved = (self.group_1_mon == "approved" && self.group_2_mon == "approved" && self.group_3_mon == "approved" && self.group_4_mon == "approved")

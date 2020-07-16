@@ -10,7 +10,11 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    # Just do a .find if that's what you wanna do, triggering an error is a good thing!
     @user = User.where(id: params[:id])[0]
+
+    # Since you're using a static string value, you could define strong params and
+    # then reject anything that matches no_change (IF YOU WANT).
     if params[:updates][:new_role] != 'no_change'
       @user.role = params[:updates][:new_role]
     end

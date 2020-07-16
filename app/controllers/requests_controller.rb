@@ -1,5 +1,14 @@
 class RequestsController < ApplicationController
+  # Alright, time for that Real Shit.
+
   before_action :authenticate_user!
+
+  # I like putting constants in Models and Services. There's a whole philosophy
+  # surrounding slim-as-hell controllers, and the main point is that it's easier
+  # to control your code when you're giving config options to the basic models
+  # and classes. Like, moving that complexity into a model tells you when you might
+  # need another class, if that makes sense.
+
   COLOR_ARRAY = [["#ffffff", "color_ffffff"],
     ["#ff1100", "color_ff1100"],
     ["#f2bb07", "color_f2bb07"],
@@ -96,19 +105,35 @@ class RequestsController < ApplicationController
         ['Shared Maintainer', 'sM']]
 
   def index
+    # FUCKIN' UNDERSCORES, MY BUD.
     setweek
     @user = current_user
+
+    # Do you need this? You've got an immediate fix for requests that don't have any
+    # params right below it.
     @requests = Request.where(nil)
+
+    # .present? is your friend here, it's shorter than checking .length == 0.
     if filtering_params(params).keys.length == 0
       @requests = Request.where(year: @thisyear, week: @thisweek)
     else
       filtering_params(params).each do |key, value|
+        # Nice use of public send here. That's a great way to use some meta-
+        # programming features in Ruby.
         @requests = @requests.public_send("filter_by_#{key}", value) if value.present?
       end
     end
 
+    # I LOVE SCOPES. They let you run these orderings as part of your SQL call.
+    # It's rad, because it's almost always faster.
+
+    # You'd want to add something like a .order(:color, :night_work, :created_at)
+    # to whatever ActiveRecord calls you're using to look this up.
     @requests = @requests.sort_by{ |r| [r.color, r.night_work, r.created_at]}
 
+    # consider whether you wanna run these as before_actions. They don't have much to do
+    # with the specific behavior of this controller, so you could just define
+    # like a :set_conditions method that grabs these values out of the params.
     @approved_only = (params["approved_only"] == "true")
     @hide_cancelled = (params["hide_cancelled"] == "true")
 
@@ -130,9 +155,22 @@ class RequestsController < ApplicationController
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
     @color_options = COLOR_ARRAY
+
+    # underscoooooooooreeeeee iiiiiiit
     if params[:copyfrom]
+      # see the .find note, causing explosions is gr8.
       temp = Request.where(id: params[:copyfrom])[0]
+
+      # I was reading below, and not understanding, but I think I get this.
+      # It's so you can just quickly clone data from a different record?
       @request = temp.dup
+
+      # Okay, this is a thing where I think you could tweak your DB stuff and
+      # reap some code benefits. I'm going to add notes to the model in a moment.
+
+      # BUT this is a boolean, y'know? I think your abstraction for Request should
+      # be able to treat it as such.
+
       if @request.monday_hash["cancelled"] == "yes"
         @request.monday_hash = {}
       end
@@ -161,11 +199,19 @@ class RequestsController < ApplicationController
     @request.requestor_email = current_user.email
     @request.requestor_phone = current_user.phone
     @request.contractor = current_user.company
-end
+  end
 
   def create
+    # I'd suggest using a before action to set this here.
+    # That lets you run another one for attachments, because it's KINDA different.
+
+    # so just like before_action :set_request, on: :create
+    # and then a before_action :attach_files, on: :create
+
     @request = Request.new(request_params)
     @request.user = current_user
+
+    # A DB default column means you don't need to assign these.
     @request.monday_hash["cancelled"] = "no"
     @request.tuesday_hash["cancelled"] = "no"
     @request.wednesday_hash["cancelled"] = "no"
@@ -173,16 +219,25 @@ end
     @request.friday_hash["cancelled"] = "no"
     @request.saturday_hash["cancelled"] = "no"
     @request.sunday_hash["cancelled"] = "no"
+
     if request_params[:attachments]
       @request.attachments.attach(request_params[:attachments])
     end
+
     if @request.save
+
+      # This all makes sense, but feels like something that should go into a
+      # model method. It's about data management, right? If it's dealing with
+      # a model needing to keep track of it's data after something saves, IMO
+      # it's easier to figure it out if it's in a file that includes the
+      # association.
       @request.update_weekly
       @request.weekly.save
       @request.approval = Approval.new
       @request.approval.save
       @request.pending = Pending.new
       @request.pending.save
+
       redirect_to action: "index", notice: 'Request was saved successfully', week: "#{@request.week}", year: "#{@request.year}"
     else
       @errors = @request.errors.full_messages
@@ -192,7 +247,11 @@ end
 
   def show
     @request = Request.where(id: params[:id])[0]
+
+    # Feels like you're doing this a lot, consider adding it to application_controller.
     @user = current_user
+
+    # SCOPES. Do it in SQL, it's faster.
     @entries = @request.changelogs.sort_by { |entry| entry.created_at }
     @notes = @request.notes.sort_by { |entry| entry.created_at }
   end
@@ -201,6 +260,9 @@ end
     @action = "edit"
     @request = Request.where(id: params[:id])[0]
     @user = current_user
+
+    # Have not looked at the view yet, but static lookup tables are a good way of
+    # being able to manage this stuff.
     @cp_options = CP_ARRAY
     @worker_options = WORKER_ARRAY
     @color_options = COLOR_ARRAY
@@ -213,6 +275,10 @@ end
     @worker_options = WORKER_ARRAY
     @color_options = COLOR_ARRAY
 
+    # Interesting. Looks to me like you're comparing the persisted record to the new data,
+    # And using the params to structure it to allow for method-based comparisons.
+    # It makes sense, but couldn't you do the same deal by comparing @request directly
+    # to the params, rather than going through another initialization pass?
     @request2 = Request.new(request_params)
     @request2[:id] = @request[:id]
     @request2[:created_at] = @request[:created_at]
@@ -264,29 +330,40 @@ end
     @request.pending.change(@request2)
     @request.pending.save
 
+    # Date fields solve this when they're on DB columns. That means you can put
+    # them into drop-downs, and don't need to fuck around with strings.
     if  ["admin_notes_mon", "admin_notes_tue", "admin_notes_wed", "admin_notes_thu", "admin_notes_fri", "admin_notes_sat", "admin_notes_sun"].any? {|note| (@request.attributes.to_a - @request2.attributes.to_a).map(&:first).include?(note)}
       @request.update_attributes(request_params)
     else
       @request.update_attributes(request_params)
     end
-      @request.monday_hash["cancelled"] = @request2.monday_hash["cancelled"]
-      @request.tuesday_hash["cancelled"] = @request2.tuesday_hash["cancelled"]
-      @request.wednesday_hash["cancelled"] = @request2.wednesday_hash["cancelled"]
-      @request.thursday_hash["cancelled"] = @request2.thursday_hash["cancelled"]
-      @request.friday_hash["cancelled"] = @request2.friday_hash["cancelled"]
-      @request.saturday_hash["cancelled"] = @request2.saturday_hash["cancelled"]
-      @request.sunday_hash["cancelled"] = @request2.sunday_hash["cancelled"]
 
-        @request.pending.change(@request2)
-        @request.pending.update_approval_groups
-        @request.update_weekly
-        @request.weekly.save
-        @request.save
+    # This is why you prolly want to compare against params. You could just say
+    # "equal what i was sent."
+    @request.monday_hash["cancelled"] = @request2.monday_hash["cancelled"]
+    @request.tuesday_hash["cancelled"] = @request2.tuesday_hash["cancelled"]
+    @request.wednesday_hash["cancelled"] = @request2.wednesday_hash["cancelled"]
+    @request.thursday_hash["cancelled"] = @request2.thursday_hash["cancelled"]
+    @request.friday_hash["cancelled"] = @request2.friday_hash["cancelled"]
+    @request.saturday_hash["cancelled"] = @request2.saturday_hash["cancelled"]
+    @request.sunday_hash["cancelled"] = @request2.sunday_hash["cancelled"]
+
+    @request.pending.change(@request2)
+    # Something else that could go into a method.
+    @request.pending.update_approval_groups
+    @request.update_weekly
+    @request.weekly.save
+    @request.save
+
+    # Before filter strikes again! You can define this once and just do it
+    # in the same way unless it super needs to be different.
     if request_params[:attachments]
       @request.attachments.attach(request_params[:attachments])
     end
+
     @request.pending.save
     flash[:notice] = "Request updated."
+  # this looks like a syntax error, but IDK what it should be.
   end
     redirect_to @request
   end
@@ -294,6 +371,9 @@ end
   def approve
     @request = Request.find(params[:request_id])
     @user = current_user
+
+    # enums! you can just say `old_status = @request.statuses[@user.approval_group]`
+    # I think!
     if @user.approval_group == 1
       old_status = @request.approval1
     elsif   @user.approval_group == 2
@@ -303,6 +383,21 @@ end
     elsif   @user.approval_group == 4
       old_status = @request.approval4
     end
+
+    # This could all be one method.
+    # def set_approval_status(status)
+    #   if @user.approval_group == 1
+    #     @request.update_attribute(:approval1, status)
+    #   elsif   @user.approval_group == 2
+    #     @request.update_attribute(:approval2, status)
+    #   elsif   @user.approval_group == 3
+    #     @request.update_attribute(:approval3, status)
+    #   elsif   @user.approval_group == 4
+    #     @request.update_attribute(:approval4, status)
+    #   end
+    #   flash[:notice] = set_flash_notice(status) with some more conditional statements.
+    # end
+
     if params[:new_status] == 'approved'
       if @user.approval_group == 1
         @request.update_attribute(:approval1, 'approved')
@@ -362,6 +457,8 @@ end
   end
 
   def setweek
+    # strong params should shorten this
+    # could also maybe do @this_week = params['week'] || params['filter_week'] || Date.today.cweek
     if params["week"] && params["year"]
       @thisweek = params["week"]
       @thisyear = params["year"]
