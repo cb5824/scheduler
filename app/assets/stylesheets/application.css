@@ -692,7 +692,7 @@ th.rotated > div{
 .overlay_actions{
   display: flex;
   align-items: center;
-  width: 178px;
+  width: 250px;
   padding-left: 10px;
 }
 
@@ -909,4 +909,16 @@ input[type=number] {
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 0px;
+}
+
+button, input[type=submit]{
+  cursor: pointer;
+}
+
+.form_action_header{
+  text-align: center;
+}
+
+tr.cancelled_day img{
+  opacity: 0.5;
 }

@@ -6,6 +6,9 @@
   <%= link_to 'Reset Form', new_request_path, class: "form_nav_link", data: {confirm: "All unsaved changes will be lost. Proceed?"} %>
 </div>
 <br>
+<% if @copied_from != nil %>
+<div class="form_action_header"><h2>Copying From Request "<%= @copied_from.title %>"</h2></div>
+<% end %>
 <br>
 
 <%= render "layouts/request_form", f: f %>

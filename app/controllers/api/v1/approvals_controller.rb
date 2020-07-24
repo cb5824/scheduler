@@ -192,6 +192,9 @@ class Api::V1::ApprovalsController < ApplicationController
         end
       end
     end
+    if (@request.mon == 0 || @request.monday_hash["cancelled"] == "yes") && (@request.tue == 0 || @request.tuesday_hash["cancelled"] == "yes") && (@request.wed == 0 || @request.wednesday_hash["cancelled"] == "yes") && (@request.thu == 0 || @request.thursday_hash["cancelled"] == "yes") && (@request.fri == 0 || @request.friday_hash["cancelled"] == "yes") && (@request.sat == 0 || @request.saturday_hash["cancelled"] == "yes") && (@request.sun == 0 || @request.sunday_hash["cancelled"] == "yes")
+      @request.cancelled = 1
+    end
     @request.approval.save
     @request.approval_check
     @request.save

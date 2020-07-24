@@ -131,8 +131,8 @@ class RequestsController < ApplicationController
     @worker_options = WORKER_ARRAY
     @color_options = COLOR_ARRAY
     if params[:copyfrom]
-      temp = Request.where(id: params[:copyfrom])[0]
-      @request = temp.dup
+      @copied_from = Request.where(id: params[:copyfrom])[0]
+      @request = @copied_from.dup
       if @request.monday_hash["cancelled"] == "yes"
         @request.monday_hash = {}
       end
