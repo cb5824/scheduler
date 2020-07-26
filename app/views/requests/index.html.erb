@@ -243,7 +243,7 @@ Sat
 Sun
 </div>
 
-  <div id="divOverlay">
+  <div id="divOverlay" data-reqnum="test">
     <div class="overlay_actions">
       <%= image_tag "red_x.png", class: "closeoverlay", alt: "Pending" %>
       <button type="button" class="showpage overlay_button">Details</button>
@@ -274,8 +274,7 @@ Sun
             <option value="3">Pending</option>
             <% end %>
             <option value="4">Cancelled</option>
-            <option value="5">Reinstated</option>
-
+            <option value="5" id="reinstate_option">Reinstated</option>
           </select>
           <div class="overlay_day_box">
             <label for="mon_check">Mon</label>
@@ -461,13 +460,13 @@ Sun
       <td class="trigger_overlay <% if request.pending["mt4"] == "1" %>changed<% end %>"><% if request.weekly.mt4 == true %><%= "\u2713" %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.pending["other"] == "1" %>changed<% end %>"><% if request.weekly.other == true %><%= "\u2713" %><% else %>-<% end %></td>
       <td class="trigger_overlay preserve-lines <% if request.pending["description"] == "1" %>changed<% end %>"><p class="request_title"><%= request.title %></p><%= request.description %></td>
-      <td class="trigger_overlay <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></td>
-      <td class="trigger_overlay <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></td>
-      <td class="trigger_overlay <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></td>
-      <td class="trigger_overlay <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></td>
-      <td class="trigger_overlay <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></td>
-      <td class="trigger_overlay <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></td>
-      <td class="trigger_overlay <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay mon_workers <% if request.monday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["mon_workers"] == "1" %> changed<% end %>"><% if request.weekly.mon_workers != "none" %><%= request.weekly.mon_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay tue_workers <% if request.tuesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["tue_workers"] == "1" %> changed<% end %>"><% if request.weekly.tue_workers != "none" %><%= request.weekly.tue_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay wed_workers <% if request.wednesday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["wed_workers"] == "1" %> changed<% end %>"><% if request.weekly.wed_workers != "none" %><%= request.weekly.wed_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay thu_workers <% if request.thursday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["thu_workers"] == "1" %> changed<% end %>"><% if request.weekly.thu_workers != "none" %><%= request.weekly.thu_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay fri_workers <% if request.friday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["fri_workers"] == "1" %> changed<% end %>"><% if request.weekly.fri_workers != "none" %><%= request.weekly.fri_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay sat_workers <% if request.saturday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sat_workers"] == "1" %> changed<% end %>"><% if request.weekly.sat_workers != "none" %><%= request.weekly.sat_workers %><% else %>-<% end %></td>
+      <td class="trigger_overlay sun_workers <% if request.sunday_hash["cancelled"] == "yes" || request.cancelled == 1 %>cancelled_day<% end %><% if request.pending["sun_workers"] == "1" %> changed<% end %>"><% if request.weekly.sun_workers != "none" %><%= request.weekly.sun_workers %><% else %>-<% end %></td>
       <td class="trigger_overlay <% if request.pending["single_tracking"] == "1" %>changed<% end %>"><% if request.weekly.single_tracking == true %><%= "\u2713" %><% else %>-<% end %></td>
       <td class="trigger_overlay preserve-lines <% if request.pending["shift"] == "1" %>changed<% end %>"><%= request.weekly.shift %></td>
       <td class="trigger_overlay <% if request.pending["taw"] == "1" %>changed<% end %>"><% if request.weekly.taw == true %><%= "\u2713" %><% else %>-<% end %></td>

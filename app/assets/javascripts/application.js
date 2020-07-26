@@ -1271,6 +1271,51 @@ $('.trigger_overlay').on("click", function() {
 
     var target_row = $(event.target).parent()[0];
   }
+    if ($(target_row).children(".mon_workers").first().text() != "-") {
+      $("#mon_check").attr("disabled", false);
+    } else {
+      $("#mon_check").attr("disabled", true);
+    }
+    if ($(target_row).children(".tue_workers").first().text() != "-") {
+      $("#tue_check").attr("disabled", false);
+    } else {
+      $("#tue_check").attr("disabled", true);
+    }
+    if ($(target_row).children(".wed_workers").first().text() != "-") {
+      $("#wed_check").attr("disabled", false);
+    } else {
+      $("#wed_check").attr("disabled", true);
+    }
+    if ($(target_row).children(".thu_workers").first().text() != "-") {
+      $("#thu_check").attr("disabled", false);
+    } else {
+      $("#thu_check").attr("disabled", true);
+    }
+    if ($(target_row).children(".fri_workers").first().text() != "-") {
+      $("#fri_check").attr("disabled", false);
+    } else {
+      $("#fri_check").attr("disabled", true);
+    }
+    if ($(target_row).children(".sat_workers").first().text() != "-") {
+      $("#sat_check").attr("disabled", false);
+    } else {
+      $("#sat_check").attr("disabled", true);
+    }
+    if ($(target_row).children(".sun_workers").first().text() != "-") {
+      $("#sun_check").attr("disabled", false);
+    } else {
+      $("#sun_check").attr("disabled", true);
+    }
+    if (target_row.classList.contains("cancelled_day")) {
+      if ($("#reinstate_option")[0] === undefined) {
+        $("#new_status").append("<option value=\"5\" id=\"reinstate_option\">Reinstated</option>");
+      }
+    } else {
+      if ($("#reinstate_option")[0] != undefined) {
+        $("option").remove("#reinstate_option");
+      }
+    }
+
     var bottomWidth = $(target_row).css('width');
     var bottomHeight = $(target_row).css('height');
     var rowPos = $(target_row).offset();
@@ -1287,7 +1332,11 @@ $('.trigger_overlay').on("click", function() {
       height: bottomHeight,
       display: "flex"
     });
-
+    $(".overlay_day_box").each(function(){
+      $(this).children("input").first().prop("checked", false);
+    });
+    $("#new_status").val(1);
+    $("#emulate").val(1);
 });
 
  $(".closeoverlay").click(function() {
@@ -1379,6 +1428,7 @@ $('.superoverlay_button').on('click', (event) =>{
   request.done(() => {
     $("#ajax_alert").html("Updates to request saved");
     setTimeout(closealert, 2000);
+    $('#divOverlay').hide();
  });
 });
 

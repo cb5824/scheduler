@@ -145,6 +145,38 @@ class Approval < ApplicationRecord
 
   end
 
+  def reset_approvals
+    self.group_1_mon = "pending"
+    self.group_1_tue = "pending"
+    self.group_1_wed = "pending"
+    self.group_1_thu = "pending"
+    self.group_1_fri = "pending"
+    self.group_1_sat = "pending"
+    self.group_1_sun = "pending"
+    self.group_2_mon = "pending"
+    self.group_2_tue = "pending"
+    self.group_2_wed = "pending"
+    self.group_2_thu = "pending"
+    self.group_2_fri = "pending"
+    self.group_2_sat = "pending"
+    self.group_2_sun = "pending"
+    self.group_3_mon = "pending"
+    self.group_3_tue = "pending"
+    self.group_3_wed = "pending"
+    self.group_3_thu = "pending"
+    self.group_3_fri = "pending"
+    self.group_3_sat = "pending"
+    self.group_3_sun = "pending"
+    self.group_4_mon = "pending"
+    self.group_4_tue = "pending"
+    self.group_4_wed = "pending"
+    self.group_4_thu = "pending"
+    self.group_4_fri = "pending"
+    self.group_4_sat = "pending"
+    self.group_4_sun = "pending"
+    self.save
+  end
+
   def day_approved?(day)
     approved = nil
     case day

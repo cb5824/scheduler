@@ -168,6 +168,7 @@ class Api::V1::ApprovalsController < ApplicationController
         @request.friday_hash["cancelled"] = "no"
         @request.saturday_hash["cancelled"] = "no"
         @request.sunday_hash["cancelled"] = "no"
+        @request.approval.reset_approvals
       else
         if days[0] == "true"
           @request.monday_hash["cancelled"] = "no"
