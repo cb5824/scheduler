@@ -1,0 +1,15 @@
+<h1>Temporary Superadmin Dashboard</h1>
+<br>
+<h3>Current Contractors</h3>
+<ul>
+  <% @contractors.each do |c| %>
+    <li><%= c.name %></li>
+  <% end %>
+</ul>
+<br>
+<h3>Add new contractor</h3>
+<%= form_for :contractor do |f| %>
+New contractor name: <%= f.text_field :name %>
+<br>
+<%= f.submit %>
+<% end %>

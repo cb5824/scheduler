@@ -356,13 +356,13 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Mon\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Tue\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Wed\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Thu\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Fri\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Sat\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).day}"%></th>
-          <th class="wsmall preserve-lines"><%= "Sun\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 1 %>current_day<% end %>"><%= "Mon\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 2 %>current_day<% end %>"><%= "Tue\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 3 %>current_day<% end %>"><%= "Wed\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 4 %>current_day<% end %>"><%= "Thu\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 5 %>current_day<% end %>"><%= "Fri\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 6 %>current_day<% end %>"><%= "Sat\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 7 %>current_day<% end %>"><%= "Sun\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -522,7 +522,7 @@ Sun
             <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
             <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
             <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-            <th class="wsmall preserve-lines"><%= "Mon\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).day}"%></th>
+            <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 1 %>current_day<% end %>"><%= "Mon\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 1).day}"%></th>
             <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
             <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
             <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -662,7 +662,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Tue\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 2 %>current_day<% end %>"><%= "Tue\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 2).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -802,7 +802,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Wed\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 3 %>current_day<% end %>"><%= "Wed\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 3).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -941,7 +941,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Thu\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 4 %>current_day<% end %>"><%= "Thu\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 4).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -1081,7 +1081,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Fri\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 5 %>current_day<% end %>"><%= "Fri\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 5).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -1221,7 +1221,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Sat\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 6 %>current_day<% end %>"><%= "Sat\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 6).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>
@@ -1361,7 +1361,7 @@ Sun
           <th class="rotated"><div class="smallheader wverysmall">MT3</div></th>
           <th class="rotated"><div class="smallheader wverysmall">MT4</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Other</div></th>
-          <th class="wsmall preserve-lines"><%= "Sun\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).day}"%></th>
+          <th class="wsmall preserve-lines <% if @thisweek.to_i == Time.zone.now.to_datetime.cweek && @thisyear.to_i == Time.zone.now.to_datetime.cwyear && Time.zone.now.to_datetime.cwday == 7 %>current_day<% end %>"><%= "Sun\n#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).month}/#{Date.commercial(@thisyear.to_i, @thisweek.to_i, 7).day}"%></th>
           <th class="rotated"><div class="smallheader wverysmall">TAW</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form B</div></th>
           <th class="rotated"><div class="smallheader wverysmall">Form C</div></th>

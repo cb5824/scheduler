@@ -138,24 +138,31 @@ class Api::V1::ApprovalsController < ApplicationController
       else
         if days[0] == "true" && @request.mon == 1
           @request.monday_hash["cancelled"] = "yes"
+          @request.update_attribute(:mon, 0)
         end
         if days[1] == "true" && @request.tue == 1
           @request.tuesday_hash["cancelled"] = "yes"
+          @request.update_attribute(:tue, 0)
         end
         if days[2] == "true" && @request.wed == 1
           @request.wednesday_hash["cancelled"] = "yes"
+          @request.update_attribute(:wed, 0)
         end
         if days[3] == "true" && @request.thu == 1
           @request.thursday_hash["cancelled"] = "yes"
+          @request.update_attribute(:thu, 0)
         end
         if days[4] == "true" && @request.fri == 1
           @request.friday_hash["cancelled"] = "yes"
+          @request.update_attribute(:fri, 0)
         end
         if days[5] == "true" && @request.sat == 1
           @request.saturday_hash["cancelled"] = "yes"
+          @request.update_attribute(:sat, 0)
         end
         if days[6] == "true" && @request.sun == 1
           @request.sunday_hash["cancelled"] = "yes"
+          @request.update_attribute(:sun, 0)
         end
       end
     elsif params["change"] == "5"

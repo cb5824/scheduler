@@ -122,7 +122,6 @@ class RequestsController < ApplicationController
       format.html { render :index }
     end
 
-
   end
 
   def new
@@ -369,9 +368,10 @@ end
       @thisweek = params["filter_week"]
       @thisyear = params["filter_year"]
     else
-      @thisweek = Date.today.cweek
-      @thisyear = Date.today.cwyear
+      @thisweek = Time.zone.now.to_datetime.cweek
+      @thisyear = Time.zone.now.to_datetime.cwyear
     end
+    @today = Time.zone.now.to_datetime.cwday
   end
 
   def filtering_params(params)

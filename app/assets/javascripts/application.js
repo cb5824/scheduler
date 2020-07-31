@@ -918,7 +918,9 @@ if ($('#MonData').length > 0){
 }
 
 if ($('#TueData').length > 0){
+  if ($('#TueData').attr('data-cancelled') === 'no') {
     $('#tuesday_block').removeClass("hidden");
+  }
     $('#request_tuesday_hash_start_time').val($('#TueData').attr('data-start'));
     $('#request_tuesday_hash_end_time').val($('#TueData').attr('data-end'));
     $('#request_tuesday_hash_cp1').val($('#TueData').attr('data-cp1'));
@@ -967,7 +969,9 @@ if ($('#TueData').length > 0){
 }
 
 if ($('#WedData').length > 0){
+  if ($('#WedData').attr('data-cancelled') === 'no') {
     $('#wednesday_block').removeClass("hidden");
+  }
     $('#request_wednesday_hash_start_time').val($('#WedData').attr('data-start'));
     $('#request_wednesday_hash_end_time').val($('#WedData').attr('data-end'));
     $('#request_wednesday_hash_cp1').val($('#WedData').attr('data-cp1'));
@@ -1016,7 +1020,9 @@ if ($('#WedData').length > 0){
 }
 
 if ($('#ThuData').length > 0){
+  if ($('#ThuData').attr('data-cancelled') === 'no') {
     $('#thursday_block').removeClass("hidden");
+  }
     $('#request_thursday_hash_start_time').val($('#ThuData').attr('data-start'));
     $('#request_thursday_hash_end_time').val($('#ThuData').attr('data-end'));
     $('#request_thursday_hash_cp1').val($('#ThuData').attr('data-cp1'));
@@ -1065,7 +1071,9 @@ if ($('#ThuData').length > 0){
 }
 
 if ($('#FriData').length > 0){
+  if ($('#FriData').attr('data-cancelled') === 'no') {
     $('#friday_block').removeClass("hidden");
+  }
     $('#request_friday_hash_start_time').val($('#FriData').attr('data-start'));
     $('#request_friday_hash_end_time').val($('#FriData').attr('data-end'));
     $('#request_friday_hash_cp1').val($('#FriData').attr('data-cp1'));
@@ -1114,7 +1122,9 @@ if ($('#FriData').length > 0){
 }
 
 if ($('#SatData').length > 0){
+  if ($('#SatData').attr('data-cancelled') === 'no') {
     $('#saturday_block').removeClass("hidden");
+  }
     $('#request_saturday_hash_start_time').val($('#SatData').attr('data-start'));
     $('#request_saturday_hash_end_time').val($('#SatData').attr('data-end'));
     $('#request_saturday_hash_cp1').val($('#SatData').attr('data-cp1'));
@@ -1164,7 +1174,9 @@ if ($('#SatData').length > 0){
 
 if ($('#SunData').length > 0){
 
+  if ($('#SunData').attr('data-cancelled') === 'no') {
     $('#sunday_block').removeClass("hidden");
+  }
     $('#request_sunday_hash_start_time').val($('#SunData').attr('data-start'));
     $('#request_sunday_hash_end_time').val($('#SunData').attr('data-end'));
     $('#request_sunday_hash_cp1').val($('#SunData').attr('data-cp1'));

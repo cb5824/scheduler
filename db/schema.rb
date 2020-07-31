@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_014636) do
+ActiveRecord::Schema.define(version: 2020_07_31_002020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -80,6 +80,10 @@ ActiveRecord::Schema.define(version: 2020_06_30_014636) do
     t.string "comments", default: "-"
     t.index ["request_id"], name: "index_changelogs_on_request_id"
     t.index ["user_id"], name: "index_changelogs_on_user_id"
+  end
+
+  create_table "contractors", force: :cascade do |t|
+    t.string "name", null: false
   end
 
   create_table "notes", force: :cascade do |t|

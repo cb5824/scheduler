@@ -18,6 +18,40 @@ user.save!
 user = User.create! :name => 'Inspector', :email => 'inspector@testemail.com', :password => 'password', :password_confirmation => 'password', :phone => '5555555555', :role => 'inspector', :company => 'admin', :approval_group => 4
 user.save!
 
+contractor = Contractor.create! :name => 'TASI: Station Maintenance'
+contractor.save!
+
+contractor = Contractor.create! :name => 'TASI: Track'
+contractor.save!
+contractor = Contractor.create! :name => 'TASI: Comms'
+contractor.save!
+contractor = Contractor.create! :name => 'TASI: Radio'
+contractor.save!
+contractor = Contractor.create! :name => 'TASI: Signal'
+contractor.save!
+contractor = Contractor.create! :name => 'TASI: Capital Project Support'
+contractor.save!
+contractor = Contractor.create! :name => 'SDJV'
+contractor.save!
+contractor = Contractor.create! :name => 'Proven Management Inc.'
+contractor.save!
+contractor = Contractor.create! :name => 'Third Party'
+contractor.save!
+contractor = Contractor.create! :name => 'Wabtec'
+contractor.save!
+contractor = Contractor.create! :name => 'BBII'
+contractor.save!
+contractor = Contractor.create! :name => 'RSE'
+contractor.save!
+contractor = Contractor.create! :name => 'MRS'
+contractor.save!
+contractor = Contractor.create! :name => 'Drill Tech'
+contractor.save!
+contractor = Contractor.create! :name => 'NorCal'
+contractor.save!
+contractor = Contractor.create! :name => 'PTCC'
+contractor.save!
+
 5.times do
   FactoryBot.create(:user)
 end

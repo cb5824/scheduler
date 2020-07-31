@@ -16,7 +16,10 @@
   <div class="field">
     <%= f.label :company, 'Company/Organization' %><br />
     <select name="user[company]">
-      <option value="TASI: Station Maintenance">TASI: Station Maintenance</option>
+      <% Contractor.all.each do |c| %>
+      <option value="<%= c.name %>"><%= c.name %></option>
+      <% end %>
+      <!-- <option value="TASI: Station Maintenance">TASI: Station Maintenance</option>
       <option value="TASI: Track">TASI: Track</option>
       <option value="TASI: Comms">TASI: Comms</option>
       <option value="TASI: Radio">TASI: Radio</option>
@@ -31,7 +34,7 @@
       <option value="MRS">MRS</option>
       <option value="Drill Tech">Drill Tech</option>
       <option value="NorCal">NorCal</option>
-      <option value="PTCC">PTCC</option>
+      <option value="PTCC">PTCC</option> -->
     </select><br>
 
   </div>

@@ -922,3 +922,7 @@ button, input[type=submit]{
 tr.cancelled_day img{
   opacity: 0.5;
 }
+
+.current_day{
+  background-color: #ffffff
+}

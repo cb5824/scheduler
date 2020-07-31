@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :requests
   resources :profiles
   resources :changelogs
+  resources :contractors
 
   resources :requests do
     resources :changelogs
