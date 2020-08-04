@@ -2,24 +2,29 @@ wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "Weekly") do |sheet|
 
-def project_color(workbook, backgroundcolor, textcolor)
-workbook.styles.add_style(fg_color: textcolor, bg_color: backgroundcolor);
-end
+  def normal_cell(workbook, background, textcolor = "000000")
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+  end
 
-def night_work_color(workbook, backgroundcolor)
-workbook.styles.add_style(bg_color: backgroundcolor);
-end
+  def boolean_cell(workbook, background, value)
+    if value == "=CHAR(252)"
+      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+    else
+      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+    end
+  end
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+  def rotated_header(workbook)
+    workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+  end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Type/Description of work", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, normal_header, rotated_header, rotated_header, rotated_header]
+  def normal_header(workbook)
+    workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+  end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil, nil, 5, 5, 5
+  sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Associated SSWPs", "Associated CNs", "RWP Training Complete?", "OCS De-Energize?", "Disturb Track?", "RMM On Track?", "RMM Off Track?", "Disable/Affect Crossings?", "Underground Work Required?", "Crossing Flagging or Traffic?", "Date Submitted", "Last Edited", "Submitted By"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+  sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 6, 6, 6, 6, 6, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 4, 4, 4, 4, 4, 4, 4, 4, 15, 15, 15
   entry_count = 1
 
   @requests.each do |request|
@@ -64,26 +69,157 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       nwcolor = "ffffff"
     end
 
-    timeframe = request.weekly.start + " - " + request.weekly.end
+    milepost = request.monday_hash["mp1"].to_s + " - " + request.monday_hash["mp2"].to_s
+    controlpoint = request.monday_hash["cp1"].to_s + " - " + request.monday_hash["cp2"].to_s
+    timeframe = "#{request.monday_hash["start_time"]} - #{request.monday_hash["end_time"]}"
 
-    sheet.add_row [entry_count, request.requestor_project, request.contractor, request.description, request.weekly.mon_workers, request.weekly.tue_workers, request.weekly.wed_workers, request.weekly.thu_workers, request.weekly.fri_workers, request.weekly.sat_workers, request.weekly.sun_workers, request.night_work, timeframe, request.weekly.taw, request.weekly.form_b, request.weekly.form_c, request.weekly.track_and_time], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+    if request.weekly.mt1 == true
+      mt1 = "=CHAR(252)"
+    else
+      mt1 = "-"
+    end
+
+    if request.weekly.mt2 == true
+      mt2 = "=CHAR(252)"
+    else
+      mt2 = "-"
+    end
+
+    if request.weekly.mt3 == true
+      mt3 = "=CHAR(252)"
+    else
+      mt3 = "-"
+    end
+
+    if request.weekly.mt4 == true
+      mt4 = "=CHAR(252)"
+    else
+      mt4 = "-"
+    end
+
+    if request.weekly.other == true
+      other = "=CHAR(252)"
+    else
+      other = "-"
+    end
+
+    if request.weekly.single_tracking == TRUE
+      single_tracking = "=CHAR(252)"
+    else
+      single_tracking = "-"
+    end
+
+    if request.weekly.taw == TRUE
+      taw = "=CHAR(252)"
+    else
+      taw = "-"
+    end
+
+    if request.weekly.form_b == TRUE
+      form_b = "=CHAR(252)"
+    else
+      form_b = "-"
+    end
+
+    if request.weekly.form_c == TRUE
+      form_c = "=CHAR(252)"
+    else
+      form_c = "-"
+    end
+
+    if request.weekly.track_and_time == TRUE
+      track_and_time = "=CHAR(252)"
+    else
+      track_and_time = "-"
+    end
+
+    if request.weekly.inacc_track == TRUE
+      inacc_track = "=CHAR(252)"
+    else
+      inacc_track = "-"
+    end
+
+    if request.rwp == "yes"
+      rwp = "=CHAR(252)"
+    else
+      rwp = "-"
+    end
+
+    if request.ocs == "yes"
+      ocs = "=CHAR(252)"
+    else
+      ocs = "-"
+    end
+
+    if request.disturb == "yes"
+      disturb = "=CHAR(252)"
+    else
+      disturb = "-"
+    end
+
+    if request.rrm == "yes"
+      rrm = "=CHAR(252)"
+    else
+      rrm = "-"
+    end
+
+    if request.foul == "yes"
+      foul = "=CHAR(252)"
+    else
+      foul = "-"
+    end
+
+    if request.crossings == "yes"
+      crossings = "=CHAR(252)"
+    else
+      crossings = "-"
+    end
+
+    if request.underground == "yes"
+      underground = "=CHAR(252)"
+    else
+      underground = "-"
+    end
+
+    if request.flagging == "yes"
+      flagging = "=CHAR(252)"
+    else
+      flagging = "-"
+    end
+
+
+    sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.mon_workers, request.weekly.tue_workers, request.weekly.wed_workers, request.weekly.thu_workers, request.weekly.fri_workers, request.weekly.sat_workers, request.weekly.sun_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.sswps, request.change_notices, rwp, ocs, disturb, rrm, foul, crossings, underground, flagging, request.created_at.strftime("%m/%d/%Y"), request.updated_at.strftime("%m/%d/%Y"), request.requestor_name], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b),  boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, rwp), boolean_cell(wb, nwcolor, ocs), boolean_cell(wb, nwcolor, disturb), boolean_cell(wb, nwcolor, rrm), boolean_cell(wb, nwcolor, foul), boolean_cell(wb, nwcolor, crossings), boolean_cell(wb, nwcolor, underground), boolean_cell(wb, nwcolor, flagging), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
     entry_count += 1
+
   end
 end
 
 wb.add_worksheet(name: "Mon") do |sheet|
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+def normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
+def boolean_cell(workbook, background, value)
+  if value == "=CHAR(252)"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  else
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+  end
+end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
-  entry_count = 1
+def rotated_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+end
+
+def normal_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+end
+
+sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "MON", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Requestor Notes", "Inspector Notes", "Admin Notes"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
+entry_count = 1
 
   @requests.each do |request|
 
@@ -134,27 +270,107 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.monday_hash["cp1"].to_s + " - " + request.monday_hash["cp2"].to_s
       timeframe = "#{request.monday_hash["start_time"]} - #{request.monday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.monday_hash["MT1"], request.monday_hash["MT2"], request.monday_hash["MT3"], request.monday_hash["MT4"], request.description, request.night_work, timeframe, request.monday_hash["taw"], request.monday_hash["form_b"], request.monday_hash["form_c"], request.monday_hash["track_and_time"], "", "", "", request.admin_notes_mon, request.inspector_notes_mon], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      if request.monday_hash["MT1"] == "1"
+        mt1 = "=CHAR(252)"
+      else
+        mt1 = "-"
+      end
+
+      if request.monday_hash["MT2"] == "1"
+        mt2 = "=CHAR(252)"
+      else
+        mt2 = "-"
+      end
+
+      if request.monday_hash["MT3"] == "1"
+        mt3 = "=CHAR(252)"
+      else
+        mt3 = "-"
+      end
+
+      if request.monday_hash["MT4"] == "1"
+        mt4 = "=CHAR(252)"
+      else
+        mt4 = "-"
+      end
+
+      if request.monday_hash["other"] == "1"
+        other = "=CHAR(252)"
+      else
+        other = "-"
+      end
+
+      if request.monday_hash["single_tracking"] == "1"
+        single_tracking = "=CHAR(252)"
+      else
+        single_tracking = "-"
+      end
+
+      if request.monday_hash["taw"] == "1"
+        taw = "=CHAR(252)"
+      else
+        taw = "-"
+      end
+
+      if request.monday_hash["form_b"] == "1"
+        form_b = "=CHAR(252)"
+      else
+        form_b = "-"
+      end
+
+      if request.monday_hash["form_c"] == "1"
+        form_c = "=CHAR(252)"
+      else
+        form_c = "-"
+      end
+
+      if request.monday_hash["track_and_time"] == "1"
+        track_and_time = "=CHAR(252)"
+      else
+        track_and_time = "-"
+      end
+
+      if request.monday_hash["inacc_track"] == "1"
+        inacc_track = "=CHAR(252)"
+      else
+        inacc_track = "-"
+      end
+
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.mon_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_mon, request.inspector_notes_mon, request.admin_notes_mon], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+
       entry_count += 1
-
-
     end
   end
+
 end
+
 
 wb.add_worksheet(name: "Tue") do |sheet|
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+def normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
+def boolean_cell(workbook, background, value)
+  if value == "=CHAR(252)"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  else
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+  end
+end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
-  entry_count = 1
+def rotated_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+end
+
+def normal_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+end
+
+sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "TUE", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Requestor Notes", "Inspector Notes", "Admin Notes"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
+entry_count = 1
 
   @requests.each do |request|
 
@@ -205,27 +421,106 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.tuesday_hash["cp1"].to_s + " - " + request.tuesday_hash["cp2"].to_s
       timeframe = "#{request.tuesday_hash["start_time"]} - #{request.tuesday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.tuesday_hash["MT1"], request.tuesday_hash["MT2"], request.tuesday_hash["MT3"], request.tuesday_hash["MT4"], request.description, request.night_work, timeframe, request.tuesday_hash["taw"], request.tuesday_hash["form_b"], request.tuesday_hash["form_c"], request.tuesday_hash["track_and_time"], "", "", "", request.admin_notes_tue, request.inspector_notes_tue], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      if request.tuesday_hash["MT1"] == "1"
+        mt1 = "=CHAR(252)"
+      else
+        mt1 = "-"
+      end
+
+      if request.tuesday_hash["MT2"] == "1"
+        mt2 = "=CHAR(252)"
+      else
+        mt2 = "-"
+      end
+
+      if request.tuesday_hash["MT3"] == "1"
+        mt3 = "=CHAR(252)"
+      else
+        mt3 = "-"
+      end
+
+      if request.tuesday_hash["MT4"] == "1"
+        mt4 = "=CHAR(252)"
+      else
+        mt4 = "-"
+      end
+
+      if request.tuesday_hash["other"] == "1"
+        other = "=CHAR(252)"
+      else
+        other = "-"
+      end
+
+      if request.tuesday_hash["single_tracking"] == "1"
+        single_tracking = "=CHAR(252)"
+      else
+        single_tracking = "-"
+      end
+
+      if request.tuesday_hash["taw"] == "1"
+        taw = "=CHAR(252)"
+      else
+        taw = "-"
+      end
+
+      if request.tuesday_hash["form_b"] == "1"
+        form_b = "=CHAR(252)"
+      else
+        form_b = "-"
+      end
+
+      if request.tuesday_hash["form_c"] == "1"
+        form_c = "=CHAR(252)"
+      else
+        form_c = "-"
+      end
+
+      if request.tuesday_hash["track_and_time"] == "1"
+        track_and_time = "=CHAR(252)"
+      else
+        track_and_time = "-"
+      end
+
+      if request.tuesday_hash["inacc_track"] == "1"
+        inacc_track = "=CHAR(252)"
+      else
+        inacc_track = "-"
+      end
+
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.tue_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_tue, request.inspector_notes_tue, request.admin_notes_tue], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+
       entry_count += 1
-
-
     end
   end
+
 end
 
 wb.add_worksheet(name: "Wed") do |sheet|
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+def normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
+def boolean_cell(workbook, background, value)
+  if value == "=CHAR(252)"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  else
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+  end
+end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
-  entry_count = 1
+def rotated_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+end
+
+def normal_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+end
+
+sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "WED", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Requestor Notes", "Inspector Notes", "Admin Notes"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
+entry_count = 1
 
   @requests.each do |request|
 
@@ -276,27 +571,106 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.wednesday_hash["cp1"].to_s + " - " + request.wednesday_hash["cp2"].to_s
       timeframe = "#{request.wednesday_hash["start_time"]} - #{request.wednesday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.wednesday_hash["MT1"], request.wednesday_hash["MT2"], request.wednesday_hash["MT3"], request.wednesday_hash["MT4"], request.description, request.night_work, timeframe, request.wednesday_hash["taw"], request.wednesday_hash["form_b"], request.wednesday_hash["form_c"], request.wednesday_hash["track_and_time"], "", "", "", request.admin_notes_wed, request.inspector_notes_wed], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      if request.wednesday_hash["MT1"] == "1"
+        mt1 = "=CHAR(252)"
+      else
+        mt1 = "-"
+      end
+
+      if request.wednesday_hash["MT2"] == "1"
+        mt2 = "=CHAR(252)"
+      else
+        mt2 = "-"
+      end
+
+      if request.wednesday_hash["MT3"] == "1"
+        mt3 = "=CHAR(252)"
+      else
+        mt3 = "-"
+      end
+
+      if request.wednesday_hash["MT4"] == "1"
+        mt4 = "=CHAR(252)"
+      else
+        mt4 = "-"
+      end
+
+      if request.wednesday_hash["other"] == "1"
+        other = "=CHAR(252)"
+      else
+        other = "-"
+      end
+
+      if request.wednesday_hash["single_tracking"] == "1"
+        single_tracking = "=CHAR(252)"
+      else
+        single_tracking = "-"
+      end
+
+      if request.wednesday_hash["taw"] == "1"
+        taw = "=CHAR(252)"
+      else
+        taw = "-"
+      end
+
+      if request.wednesday_hash["form_b"] == "1"
+        form_b = "=CHAR(252)"
+      else
+        form_b = "-"
+      end
+
+      if request.wednesday_hash["form_c"] == "1"
+        form_c = "=CHAR(252)"
+      else
+        form_c = "-"
+      end
+
+      if request.wednesday_hash["track_and_time"] == "1"
+        track_and_time = "=CHAR(252)"
+      else
+        track_and_time = "-"
+      end
+
+      if request.wednesday_hash["inacc_track"] == "1"
+        inacc_track = "=CHAR(252)"
+      else
+        inacc_track = "-"
+      end
+
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.wed_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_wed, request.inspector_notes_wed, request.admin_notes_wed], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+
       entry_count += 1
-
-
     end
   end
+
 end
 
 wb.add_worksheet(name: "Thu") do |sheet|
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+def normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
+def boolean_cell(workbook, background, value)
+  if value == "=CHAR(252)"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  else
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+  end
+end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
-  entry_count = 1
+def rotated_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+end
+
+def normal_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+end
+
+sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "THU", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Requestor Notes", "Inspector Notes", "Admin Notes"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
+entry_count = 1
 
   @requests.each do |request|
 
@@ -347,27 +721,106 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.thursday_hash["cp1"].to_s + " - " + request.thursday_hash["cp2"].to_s
       timeframe = "#{request.thursday_hash["start_time"]} - #{request.thursday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.thursday_hash["MT1"], request.thursday_hash["MT2"], request.thursday_hash["MT3"], request.thursday_hash["MT4"], request.description, request.night_work, timeframe, request.thursday_hash["taw"], request.thursday_hash["form_b"], request.thursday_hash["form_c"], request.thursday_hash["track_and_time"], "", "", "", request.admin_notes_thu, request.inspector_notes_thu], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      if request.thursday_hash["MT1"] == "1"
+        mt1 = "=CHAR(252)"
+      else
+        mt1 = "-"
+      end
+
+      if request.thursday_hash["MT2"] == "1"
+        mt2 = "=CHAR(252)"
+      else
+        mt2 = "-"
+      end
+
+      if request.thursday_hash["MT3"] == "1"
+        mt3 = "=CHAR(252)"
+      else
+        mt3 = "-"
+      end
+
+      if request.thursday_hash["MT4"] == "1"
+        mt4 = "=CHAR(252)"
+      else
+        mt4 = "-"
+      end
+
+      if request.thursday_hash["other"] == "1"
+        other = "=CHAR(252)"
+      else
+        other = "-"
+      end
+
+      if request.thursday_hash["single_tracking"] == "1"
+        single_tracking = "=CHAR(252)"
+      else
+        single_tracking = "-"
+      end
+
+      if request.thursday_hash["taw"] == "1"
+        taw = "=CHAR(252)"
+      else
+        taw = "-"
+      end
+
+      if request.thursday_hash["form_b"] == "1"
+        form_b = "=CHAR(252)"
+      else
+        form_b = "-"
+      end
+
+      if request.thursday_hash["form_c"] == "1"
+        form_c = "=CHAR(252)"
+      else
+        form_c = "-"
+      end
+
+      if request.thursday_hash["track_and_time"] == "1"
+        track_and_time = "=CHAR(252)"
+      else
+        track_and_time = "-"
+      end
+
+      if request.thursday_hash["inacc_track"] == "1"
+        inacc_track = "=CHAR(252)"
+      else
+        inacc_track = "-"
+      end
+
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.thu_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_thu, request.inspector_notes_thu, request.admin_notes_thu], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+
       entry_count += 1
-
-
     end
   end
+
 end
 
 wb.add_worksheet(name: "Fri") do |sheet|
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+def normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
+def boolean_cell(workbook, background, value)
+  if value == "=CHAR(252)"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  else
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+  end
+end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
-  entry_count = 1
+def rotated_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+end
+
+def normal_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+end
+
+sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "FRI", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Requestor Notes", "Inspector Notes", "Admin Notes"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
+entry_count = 1
 
   @requests.each do |request|
 
@@ -418,27 +871,106 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.friday_hash["cp1"].to_s + " - " + request.friday_hash["cp2"].to_s
       timeframe = "#{request.friday_hash["start_time"]} - #{request.friday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.friday_hash["MT1"], request.friday_hash["MT2"], request.friday_hash["MT3"], request.friday_hash["MT4"], request.description, request.night_work, timeframe, request.friday_hash["taw"], request.friday_hash["form_b"], request.friday_hash["form_c"], request.friday_hash["track_and_time"], "", "", "", request.admin_notes_fri, request.inspector_notes_fri], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      if request.friday_hash["MT1"] == "1"
+        mt1 = "=CHAR(252)"
+      else
+        mt1 = "-"
+      end
+
+      if request.friday_hash["MT2"] == "1"
+        mt2 = "=CHAR(252)"
+      else
+        mt2 = "-"
+      end
+
+      if request.friday_hash["MT3"] == "1"
+        mt3 = "=CHAR(252)"
+      else
+        mt3 = "-"
+      end
+
+      if request.friday_hash["MT4"] == "1"
+        mt4 = "=CHAR(252)"
+      else
+        mt4 = "-"
+      end
+
+      if request.friday_hash["other"] == "1"
+        other = "=CHAR(252)"
+      else
+        other = "-"
+      end
+
+      if request.friday_hash["single_tracking"] == "1"
+        single_tracking = "=CHAR(252)"
+      else
+        single_tracking = "-"
+      end
+
+      if request.friday_hash["taw"] == "1"
+        taw = "=CHAR(252)"
+      else
+        taw = "-"
+      end
+
+      if request.friday_hash["form_b"] == "1"
+        form_b = "=CHAR(252)"
+      else
+        form_b = "-"
+      end
+
+      if request.friday_hash["form_c"] == "1"
+        form_c = "=CHAR(252)"
+      else
+        form_c = "-"
+      end
+
+      if request.friday_hash["track_and_time"] == "1"
+        track_and_time = "=CHAR(252)"
+      else
+        track_and_time = "-"
+      end
+
+      if request.friday_hash["inacc_track"] == "1"
+        inacc_track = "=CHAR(252)"
+      else
+        inacc_track = "-"
+      end
+
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.fri_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_fri, request.inspector_notes_fri, request.admin_notes_fri], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+
       entry_count += 1
-
-
     end
   end
+
 end
 
 wb.add_worksheet(name: "Sat") do |sheet|
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+def normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
+def boolean_cell(workbook, background, value)
+  if value == "=CHAR(252)"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  else
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+  end
+end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
-  entry_count = 1
+def rotated_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+end
+
+def normal_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+end
+
+sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "SAT", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Requestor Notes", "Inspector Notes", "Admin Notes"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
+entry_count = 1
 
   @requests.each do |request|
 
@@ -489,27 +1021,106 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.saturday_hash["cp1"].to_s + " - " + request.saturday_hash["cp2"].to_s
       timeframe = "#{request.saturday_hash["start_time"]} - #{request.saturday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.saturday_hash["MT1"], request.saturday_hash["MT2"], request.saturday_hash["MT3"], request.saturday_hash["MT4"], request.description, request.night_work, timeframe, request.saturday_hash["taw"], request.saturday_hash["form_b"], request.saturday_hash["form_c"], request.saturday_hash["track_and_time"], "", "", "", request.admin_notes_sat, request.inspector_notes_sat], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      if request.saturday_hash["MT1"] == "1"
+        mt1 = "=CHAR(252)"
+      else
+        mt1 = "-"
+      end
+
+      if request.saturday_hash["MT2"] == "1"
+        mt2 = "=CHAR(252)"
+      else
+        mt2 = "-"
+      end
+
+      if request.saturday_hash["MT3"] == "1"
+        mt3 = "=CHAR(252)"
+      else
+        mt3 = "-"
+      end
+
+      if request.saturday_hash["MT4"] == "1"
+        mt4 = "=CHAR(252)"
+      else
+        mt4 = "-"
+      end
+
+      if request.saturday_hash["other"] == "1"
+        other = "=CHAR(252)"
+      else
+        other = "-"
+      end
+
+      if request.saturday_hash["single_tracking"] == "1"
+        single_tracking = "=CHAR(252)"
+      else
+        single_tracking = "-"
+      end
+
+      if request.saturday_hash["taw"] == "1"
+        taw = "=CHAR(252)"
+      else
+        taw = "-"
+      end
+
+      if request.saturday_hash["form_b"] == "1"
+        form_b = "=CHAR(252)"
+      else
+        form_b = "-"
+      end
+
+      if request.saturday_hash["form_c"] == "1"
+        form_c = "=CHAR(252)"
+      else
+        form_c = "-"
+      end
+
+      if request.saturday_hash["track_and_time"] == "1"
+        track_and_time = "=CHAR(252)"
+      else
+        track_and_time = "-"
+      end
+
+      if request.saturday_hash["inacc_track"] == "1"
+        inacc_track = "=CHAR(252)"
+      else
+        inacc_track = "-"
+      end
+
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.sat_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_sat, request.inspector_notes_sat, request.admin_notes_sat], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+
       entry_count += 1
-
-
     end
   end
+
 end
 
 wb.add_worksheet(name: "Sun") do |sheet|
 
-normal_header = wb.styles.add_style(b: true)
-rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90})
+def normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+end
 
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row
-  sheet.add_row ["Line #", "Project", "Contractor", "Mile Post", "Location/Control Points", "MT1", "MT2", "MT2", "MT3", "Type/Description of work", "Night Work", "24 Hour Shift", "TAW", "Form B", "Form C", "Track & Time", "Notes", "Work Plan #", "Request Info", "Admin Notes", "Inspector Notes"], style: [rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, normal_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header, rotated_header]
+def boolean_cell(workbook, background, value)
+  if value == "=CHAR(252)"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  else
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+  end
+end
 
-  sheet.column_widths 1, 1, nil, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 5, 5, 5, 5, 5
-  entry_count = 1
+def rotated_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true, :textRotation => 90}, :b => true, :sz => 10
+end
+
+def normal_header(workbook)
+  workbook.styles.add_style :alignment => {:wrap_text => true}, :b => true, :sz => 10
+end
+
+sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", "MT1", "MT2", "MT3", "MT4", "Other", "Description of Work", "SUN", "Single Tracking", "Shift", "TAW", "Form B", "Form C", "T&T", "Inacc Track", "Requestor Notes", "Inspector Notes", "Admin Notes"], style: [rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), rotated_header(wb), normal_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), rotated_header(wb), normal_header(wb), normal_header(wb), normal_header(wb)], height: 150)
+
+sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
+entry_count = 1
 
   @requests.each do |request|
 
@@ -560,10 +1171,76 @@ rotated_header = wb.styles.add_style(b: true, :alignment => {:textRotation => 90
       controlpoint = request.sunday_hash["cp1"].to_s + " - " + request.sunday_hash["cp2"].to_s
       timeframe = "#{request.sunday_hash["start_time"]} - #{request.sunday_hash["end_time"]}"
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, request.sunday_hash["MT1"], request.sunday_hash["MT2"], request.sunday_hash["MT3"], request.sunday_hash["MT4"], request.description, request.night_work, timeframe, request.sunday_hash["taw"], request.sunday_hash["form_b"], request.sunday_hash["form_c"], request.sunday_hash["track_and_time"], "", "", "", request.admin_notes_sun, request.inspector_notes_sun], style: [project_color(wb, backgroundcolor, textcolor), project_color(wb, backgroundcolor, textcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor), night_work_color(wb, nwcolor)]
+      if request.sunday_hash["MT1"] == "1"
+        mt1 = "=CHAR(252)"
+      else
+        mt1 = "-"
+      end
+
+      if request.sunday_hash["MT2"] == "1"
+        mt2 = "=CHAR(252)"
+      else
+        mt2 = "-"
+      end
+
+      if request.sunday_hash["MT3"] == "1"
+        mt3 = "=CHAR(252)"
+      else
+        mt3 = "-"
+      end
+
+      if request.sunday_hash["MT4"] == "1"
+        mt4 = "=CHAR(252)"
+      else
+        mt4 = "-"
+      end
+
+      if request.sunday_hash["other"] == "1"
+        other = "=CHAR(252)"
+      else
+        other = "-"
+      end
+
+      if request.sunday_hash["single_tracking"] == "1"
+        single_tracking = "=CHAR(252)"
+      else
+        single_tracking = "-"
+      end
+
+      if request.sunday_hash["taw"] == "1"
+        taw = "=CHAR(252)"
+      else
+        taw = "-"
+      end
+
+      if request.sunday_hash["form_b"] == "1"
+        form_b = "=CHAR(252)"
+      else
+        form_b = "-"
+      end
+
+      if request.sunday_hash["form_c"] == "1"
+        form_c = "=CHAR(252)"
+      else
+        form_c = "-"
+      end
+
+      if request.sunday_hash["track_and_time"] == "1"
+        track_and_time = "=CHAR(252)"
+      else
+        track_and_time = "-"
+      end
+
+      if request.sunday_hash["inacc_track"] == "1"
+        inacc_track = "=CHAR(252)"
+      else
+        inacc_track = "-"
+      end
+
+      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.sun_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_sun, request.inspector_notes_sun, request.admin_notes_sun], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+
       entry_count += 1
-
-
     end
   end
+
 end

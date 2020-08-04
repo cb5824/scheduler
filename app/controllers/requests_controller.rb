@@ -75,7 +75,7 @@ class RequestsController < ApplicationController
         ['N.L. CP Lick', 61],
         ['S.L. CP Lick', 62]]
 
-  WORKER_ARRAY = [['', 'none'],
+  WORKER_ARRAY = [['', '-'],
         ['Ambassador', 'A'],
         ['Blue Flag', 'B'],
         ['Signal Tech', 'E'],

@@ -231,7 +231,7 @@ class Request < ApplicationRecord
 
     temp_workers = day[1]["worker_primary"]
     [day[1]["worker_secondary1"], day[1]["worker_secondary2"], day[1]["worker_secondary3"], day[1]["worker_secondary4"], day[1]["worker_secondary5"]].each do |worker|
-      if worker != "none"
+      if worker != "-"
         temp_workers += ", #{worker}"
       end
     end
