@@ -77,7 +77,7 @@ class RequestsController < ApplicationController
 
   WORKER_ARRAY = [['', '-'],
         ['Ambassador', 'A'],
-        ['Blue Flag', 'B'],
+        ['Blue Flag/Mechanical', 'B'],
         ['Signal Tech', 'E'],
         ['Signal Inspector', 'S'],
         ['Maintainer', 'M'],
@@ -91,7 +91,7 @@ class RequestsController < ApplicationController
         ['Flagger (RWIC)', 'X'],
         ['Track Inspector', 'Y'],
         ['Stabilizer', 'Z'],
-        ['Shared Flagger', 'sX'],
+        ['Shared Flagger (RWIC)', 'sX'],
         ['Shared Watchman', 'sW'],
         ['Shared Maintainer', 'sM']]
 
@@ -287,7 +287,7 @@ end
     @request.pending.save
     flash[:notice] = "Request updated."
   end
-    redirect_to @request
+    redirect_to action: "index"
   end
 
   def approve

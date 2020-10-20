@@ -839,24 +839,248 @@ $('#request_color').on('change', (event) =>{
 
 $('#request_mon').on('change', (event) =>{
   $('#monday_block').toggleClass("hidden", this.checked);
+  if ($('#copied_request')[0] !== undefined) {
+    $('#request_monday_hash_start_time').val('');
+    $('#request_monday_hash_end_time').val('');
+    $('#request_monday_hash_cp1').val('');
+    $('#request_monday_hash_cp2').val('');
+    $('#request_monday_hash_mp1').val('');
+    $('#request_monday_hash_mp2').val('');
+    $( "#request_monday_hash_MT1" ).prop( "checked", false );
+    $( "#request_monday_hash_MT2" ).prop( "checked", false );
+    $( "#request_monday_hash_MT3" ).prop( "checked", false );
+    $( "#request_monday_hash_MT4" ).prop( "checked", false );
+    $( "#request_monday_hash_taw" ).prop( "checked", false );
+    $( "#request_monday_hash_form_b" ).prop( "checked", false );
+    $( "#request_monday_hash_form_c" ).prop( "checked", false );
+    $( "#request_monday_hash_track_and_time" ).prop( "checked", false );
+    $( "#request_monday_hash_other" ).prop( "checked", false );
+    $( "#request_monday_hash_inacc_track" ).prop( "checked", false );
+    $( "#request_monday_hash_single_track_single" ).prop( "checked", false );
+    $( "#request_monday_hash_single_track_multi" ).prop( "checked", false );
+    $('#request_monday_hash_worker_primary').val('-');
+    $('#request_monday_hash_worker_secondary1').val('-');
+    $('#request_monday_hash_worker_secondary2').val('-');
+    $('#request_monday_hash_worker_secondary3').val('-');
+    $('#request_monday_hash_worker_secondary4').val('-');
+    $('#request_monday_hash_worker_secondary5').val('-');
+    $('#request_monday_hash_b_time').val('');
+    $('#request_monday_hash_b_location').val('');
+    $('#request_monday_hash_onsite_name').val('');
+    $('#request_requestor_notes_mon').val('');
+    $('#request_admin_notes_mon').val('');
+    $('#request_inspector_notes_mon').val('');
+  }
 });
 $('#request_tue').on('change', (event) =>{
   $('#tuesday_block').toggleClass("hidden", this.checked);
+  if ($('#copied_request')[0] !== undefined) {
+    $('#request_tuesday_hash_start_time').val('');
+    $('#request_tuesday_hash_end_time').val('');
+    $('#request_tuesday_hash_cp1').val('');
+    $('#request_tuesday_hash_cp2').val('');
+    $('#request_tuesday_hash_mp1').val('');
+    $('#request_tuesday_hash_mp2').val('');
+    $( "#request_tuesday_hash_MT1" ).prop( "checked", false );
+    $( "#request_tuesday_hash_MT2" ).prop( "checked", false );
+    $( "#request_tuesday_hash_MT3" ).prop( "checked", false );
+    $( "#request_tuesday_hash_MT4" ).prop( "checked", false );
+    $( "#request_tuesday_hash_taw" ).prop( "checked", false );
+    $( "#request_tuesday_hash_form_b" ).prop( "checked", false );
+    $( "#request_tuesday_hash_form_c" ).prop( "checked", false );
+    $( "#request_tuesday_hash_track_and_time" ).prop( "checked", false );
+    $( "#request_tuesday_hash_other" ).prop( "checked", false );
+    $( "#request_tuesday_hash_inacc_track" ).prop( "checked", false );
+    $( "#request_tuesday_hash_single_track_single" ).prop( "checked", false );
+    $( "#request_tuesday_hash_single_track_multi" ).prop( "checked", false );
+    $('#request_tuesday_hash_worker_primary').val('-');
+    $('#request_tuesday_hash_worker_secondary1').val('-');
+    $('#request_tuesday_hash_worker_secondary2').val('-');
+    $('#request_tuesday_hash_worker_secondary3').val('-');
+    $('#request_tuesday_hash_worker_secondary4').val('-');
+    $('#request_tuesday_hash_worker_secondary5').val('-');
+    $('#request_tuesday_hash_b_time').val('');
+    $('#request_tuesday_hash_b_location').val('');
+    $('#request_tuesday_hash_onsite_name').val('');
+    $('#request_requestor_notes_tue').val('');
+    $('#request_admin_notes_tue').val('');
+    $('#request_inspector_notes_tue').val('');
+  }
 });
 $('#request_wed').on('change', (event) =>{
   $('#wednesday_block').toggleClass("hidden", this.checked);
+  if ($('#copied_request')[0] !== undefined) {
+    $('#request_wednesday_hash_start_time').val('');
+    $('#request_wednesday_hash_end_time').val('');
+    $('#request_wednesday_hash_cp1').val('');
+    $('#request_wednesday_hash_cp2').val('');
+    $('#request_wednesday_hash_mp1').val('');
+    $('#request_wednesday_hash_mp2').val('');
+    $( "#request_wednesday_hash_MT1" ).prop( "checked", false );
+    $( "#request_wednesday_hash_MT2" ).prop( "checked", false );
+    $( "#request_wednesday_hash_MT3" ).prop( "checked", false );
+    $( "#request_wednesday_hash_MT4" ).prop( "checked", false );
+    $( "#request_wednesday_hash_taw" ).prop( "checked", false );
+    $( "#request_wednesday_hash_form_b" ).prop( "checked", false );
+    $( "#request_wednesday_hash_form_c" ).prop( "checked", false );
+    $( "#request_wednesday_hash_track_and_time" ).prop( "checked", false );
+    $( "#request_wednesday_hash_other" ).prop( "checked", false );
+    $( "#request_wednesday_hash_inacc_track" ).prop( "checked", false );
+    $( "#request_wednesday_hash_single_track_single" ).prop( "checked", false );
+    $( "#request_wednesday_hash_single_track_multi" ).prop( "checked", false );
+    $('#request_wednesday_hash_worker_primary').val('-');
+    $('#request_wednesday_hash_worker_secondary1').val('-');
+    $('#request_wednesday_hash_worker_secondary2').val('-');
+    $('#request_wednesday_hash_worker_secondary3').val('-');
+    $('#request_wednesday_hash_worker_secondary4').val('-');
+    $('#request_wednesday_hash_worker_secondary5').val('-');
+    $('#request_wednesday_hash_b_time').val('');
+    $('#request_wednesday_hash_b_location').val('');
+    $('#request_wednesday_hash_onsite_name').val('');
+    $('#request_requestor_notes_wed').val('');
+    $('#request_admin_notes_wed').val('');
+    $('#request_inspector_notes_wed').val('');
+  }
 });
 $('#request_thu').on('change', (event) =>{
   $('#thursday_block').toggleClass("hidden", this.checked);
+  if ($('#copied_request')[0] !== undefined) {
+    $('#request_thursday_hash_start_time').val('');
+    $('#request_thursday_hash_end_time').val('');
+    $('#request_thursday_hash_cp1').val('');
+    $('#request_thursday_hash_cp2').val('');
+    $('#request_thursday_hash_mp1').val('');
+    $('#request_thursday_hash_mp2').val('');
+    $( "#request_thursday_hash_MT1" ).prop( "checked", false );
+    $( "#request_thursday_hash_MT2" ).prop( "checked", false );
+    $( "#request_thursday_hash_MT3" ).prop( "checked", false );
+    $( "#request_thursday_hash_MT4" ).prop( "checked", false );
+    $( "#request_thursday_hash_taw" ).prop( "checked", false );
+    $( "#request_thursday_hash_form_b" ).prop( "checked", false );
+    $( "#request_thursday_hash_form_c" ).prop( "checked", false );
+    $( "#request_thursday_hash_track_and_time" ).prop( "checked", false );
+    $( "#request_thursday_hash_other" ).prop( "checked", false );
+    $( "#request_thursday_hash_inacc_track" ).prop( "checked", false );
+    $( "#request_thursday_hash_single_track_single" ).prop( "checked", false );
+    $( "#request_thursday_hash_single_track_multi" ).prop( "checked", false );
+    $('#request_thursday_hash_worker_primary').val('-');
+    $('#request_thursday_hash_worker_secondary1').val('-');
+    $('#request_thursday_hash_worker_secondary2').val('-');
+    $('#request_thursday_hash_worker_secondary3').val('-');
+    $('#request_thursday_hash_worker_secondary4').val('-');
+    $('#request_thursday_hash_worker_secondary5').val('-');
+    $('#request_thursday_hash_b_time').val('');
+    $('#request_thursday_hash_b_location').val('');
+    $('#request_thursday_hash_onsite_name').val('');
+    $('#request_requestor_notes_thu').val('');
+    $('#request_admin_notes_thu').val('');
+    $('#request_inspector_notes_thu').val('');
+  }
 });
 $('#request_fri').on('change', (event) =>{
   $('#friday_block').toggleClass("hidden", this.checked);
+  if ($('#copied_request')[0] !== undefined) {
+    $('#request_friday_hash_start_time').val('');
+    $('#request_friday_hash_end_time').val('');
+    $('#request_friday_hash_cp1').val('');
+    $('#request_friday_hash_cp2').val('');
+    $('#request_friday_hash_mp1').val('');
+    $('#request_friday_hash_mp2').val('');
+    $( "#request_friday_hash_MT1" ).prop( "checked", false );
+    $( "#request_friday_hash_MT2" ).prop( "checked", false );
+    $( "#request_friday_hash_MT3" ).prop( "checked", false );
+    $( "#request_friday_hash_MT4" ).prop( "checked", false );
+    $( "#request_friday_hash_taw" ).prop( "checked", false );
+    $( "#request_friday_hash_form_b" ).prop( "checked", false );
+    $( "#request_friday_hash_form_c" ).prop( "checked", false );
+    $( "#request_friday_hash_track_and_time" ).prop( "checked", false );
+    $( "#request_friday_hash_other" ).prop( "checked", false );
+    $( "#request_friday_hash_inacc_track" ).prop( "checked", false );
+    $( "#request_friday_hash_single_track_single" ).prop( "checked", false );
+    $( "#request_friday_hash_single_track_multi" ).prop( "checked", false );
+    $('#request_friday_hash_worker_primary').val('-');
+    $('#request_friday_hash_worker_secondary1').val('-');
+    $('#request_friday_hash_worker_secondary2').val('-');
+    $('#request_friday_hash_worker_secondary3').val('-');
+    $('#request_friday_hash_worker_secondary4').val('-');
+    $('#request_friday_hash_worker_secondary5').val('-');
+    $('#request_friday_hash_b_time').val('');
+    $('#request_friday_hash_b_location').val('');
+    $('#request_friday_hash_onsite_name').val('');
+    $('#request_requestor_notes_fri').val('');
+    $('#request_admin_notes_fri').val('');
+    $('#request_inspector_notes_fri').val('');
+  }
 });
 $('#request_sat').on('change', (event) =>{
   $('#saturday_block').toggleClass("hidden", this.checked);
+  if ($('#copied_request')[0] !== undefined) {
+    $('#request_saturday_hash_start_time').val('');
+    $('#request_saturday_hash_end_time').val('');
+    $('#request_saturday_hash_cp1').val('');
+    $('#request_saturday_hash_cp2').val('');
+    $('#request_saturday_hash_mp1').val('');
+    $('#request_saturday_hash_mp2').val('');
+    $( "#request_saturday_hash_MT1" ).prop( "checked", false );
+    $( "#request_saturday_hash_MT2" ).prop( "checked", false );
+    $( "#request_saturday_hash_MT3" ).prop( "checked", false );
+    $( "#request_saturday_hash_MT4" ).prop( "checked", false );
+    $( "#request_saturday_hash_taw" ).prop( "checked", false );
+    $( "#request_saturday_hash_form_b" ).prop( "checked", false );
+    $( "#request_saturday_hash_form_c" ).prop( "checked", false );
+    $( "#request_saturday_hash_track_and_time" ).prop( "checked", false );
+    $( "#request_saturday_hash_other" ).prop( "checked", false );
+    $( "#request_saturday_hash_inacc_track" ).prop( "checked", false );
+    $( "#request_saturday_hash_single_track_single" ).prop( "checked", false );
+    $( "#request_saturday_hash_single_track_multi" ).prop( "checked", false );
+    $('#request_saturday_hash_worker_primary').val('-');
+    $('#request_saturday_hash_worker_secondary1').val('-');
+    $('#request_saturday_hash_worker_secondary2').val('-');
+    $('#request_saturday_hash_worker_secondary3').val('-');
+    $('#request_saturday_hash_worker_secondary4').val('-');
+    $('#request_saturday_hash_worker_secondary5').val('-');
+    $('#request_saturday_hash_b_time').val('');
+    $('#request_saturday_hash_b_location').val('');
+    $('#request_saturday_hash_onsite_name').val('');
+    $('#request_requestor_notes_sat').val('');
+    $('#request_admin_notes_sat').val('');
+    $('#request_inspector_notes_sat').val('');
+  }
 });
 $('#request_sun').on('change', (event) =>{
   $('#sunday_block').toggleClass("hidden", this.checked);
+  if ($('#copied_request')[0] !== undefined) {
+    $('#request_sunday_hash_start_time').val('');
+    $('#request_sunday_hash_end_time').val('');
+    $('#request_sunday_hash_cp1').val('');
+    $('#request_sunday_hash_cp2').val('');
+    $('#request_sunday_hash_mp1').val('');
+    $('#request_sunday_hash_mp2').val('');
+    $( "#request_sunday_hash_MT1" ).prop( "checked", false );
+    $( "#request_sunday_hash_MT2" ).prop( "checked", false );
+    $( "#request_sunday_hash_MT3" ).prop( "checked", false );
+    $( "#request_sunday_hash_MT4" ).prop( "checked", false );
+    $( "#request_sunday_hash_taw" ).prop( "checked", false );
+    $( "#request_sunday_hash_form_b" ).prop( "checked", false );
+    $( "#request_sunday_hash_form_c" ).prop( "checked", false );
+    $( "#request_sunday_hash_track_and_time" ).prop( "checked", false );
+    $( "#request_sunday_hash_other" ).prop( "checked", false );
+    $( "#request_sunday_hash_inacc_track" ).prop( "checked", false );
+    $( "#request_sunday_hash_single_track_single" ).prop( "checked", false );
+    $( "#request_sunday_hash_single_track_multi" ).prop( "checked", false );
+    $('#request_sunday_hash_worker_primary').val('-');
+    $('#request_sunday_hash_worker_secondary1').val('-');
+    $('#request_sunday_hash_worker_secondary2').val('-');
+    $('#request_sunday_hash_worker_secondary3').val('-');
+    $('#request_sunday_hash_worker_secondary4').val('-');
+    $('#request_sunday_hash_worker_secondary5').val('-');
+    $('#request_sunday_hash_b_time').val('');
+    $('#request_sunday_hash_b_location').val('');
+    $('#request_sunday_hash_onsite_name').val('');
+    $('#request_requestor_notes_sun').val('');
+    $('#request_admin_notes_sun').val('');
+    $('#request_inspector_notes_sun').val('');
+  }
 });
 
 if ($('#MonData').length > 0){

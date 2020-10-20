@@ -215,10 +215,10 @@ class Request < ApplicationRecord
         taw = true
     end
     if day[1]["form_b"] == "1" && day[1]["cancelled"] != "yes"
-        form_b = true
+        formb = true
     end
     if day[1]["form_c"] == "1" && day[1]["cancelled"] != "yes"
-        form_c = true
+        formc = true
     end
     if day[1]["track_and_time"] == "1" && day[1]["cancelled"] != "yes"
         tandt = true

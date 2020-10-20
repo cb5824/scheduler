@@ -8,6 +8,8 @@
 <br>
 <% if @copied_from != nil %>
 <div class="form_action_header"><h2>Copying From Request "<%= @copied_from.title %>"</h2></div>
+<div id="copied_request" class="hidden">true</div>
+<%= hidden_field_tag("copied", value = true) %>
 <% end %>
 <br>
 
