@@ -838,6 +838,7 @@ th.rotated > div{
   justify-content: flex-end;
   font-size: 12px;
   padding-left: 5px;
+  align-items: center;
 }
 
 .filter_line input{
@@ -925,4 +926,40 @@ tr.cancelled_day img{
 
 .current_day{
   background-color: #ffffff
+}
+
+.filter_bar{
+  width: 40px;
+  height: 20px;
+  background-color: black;
+  display: inline-flex;
+  border: 1px solid black;
+  border-radius: 25px;
+  overflow: hidden;
+
+}
+
+.filter_bar_block{
+  height: 20px;
+  width: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.green_block{
+  background-color: #24f35c;
+}
+
+.red_block{
+  background-color: #f5311b;
+}
+
+.neutral_block{
+  background-color: #ffffff;
+}
+
+.deselected{
+  opacity: 0.4;
 }

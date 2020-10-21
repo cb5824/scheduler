@@ -1800,5 +1800,22 @@ $("#down_arrow").click(function() {
   $('#filter_container').hide();
 });
 
+$(".filter_bar_block").click(function(){
+  let newFilterStatus = "all";
+  if ($(this).hasClass("deselected") === false) {
+    $(this).addClass("deselected");
+  } else {
+    if ($(this).hasClass("green_block") === true) {
+      newFilterStatus = $(this).parent().siblings("input").data("positive");
+    } else {
+      newFilterStatus = $(this).parent().siblings("input").data("negative");
+    }
+    $(this).removeClass( "deselected" );
+    $(this).siblings().each(function() {
+      $(this).addClass("deselected");
+    });
+  }
+  $(this).parent().siblings("input").val(newFilterStatus);
+});
 
 });

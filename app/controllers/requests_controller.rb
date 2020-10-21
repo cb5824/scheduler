@@ -109,9 +109,10 @@ class RequestsController < ApplicationController
 
     @requests = @requests.sort_by{ |r| [r.color, r.night_work, r.created_at]}
 
-    @approved_only = (params["approved_only"] == "true")
-    @hide_cancelled = (params["hide_cancelled"] == "true")
-
+    @show_approved = (params["show_approved"] == "true" || params["show_approved"] == nil || (params["show_approved"] == "all" && params["show_pending"] == "all" && params["show_rejected"] == "all" && params["show_cancelled"] == "all") )
+    @show_pending = (params["show_pending"] == "true" || params["show_pending"] == nil || (params["show_approved"] == "all" && params["show_pending"] == "all" && params["show_rejected"] == "all" && params["show_cancelled"] == "all"))
+    @show_cancelled = (params["show_cancelled"] == "true" || params["show_cancelled"] == nil || (params["show_approved"] == "all" && params["show_pending"] == "all" && params["show_rejected"] == "all" && params["show_cancelled"] == "all"))
+    @show_rejected = (params["show_rejected"] == "true" || params["show_rejected"] == nil || (params["show_approved"] == "all" && params["show_pending"] == "all" && params["show_rejected"] == "all" && params["show_cancelled"] == "all"))
 
     respond_to do |format|
       format.xlsx {
@@ -374,8 +375,26 @@ end
     @today = Time.zone.now.to_datetime.cwday
   end
 
+  # def includes_all?(object, array)
+  #   included = true
+  #   array.each do |match|
+  #     if !(object.include?(match))
+  #       included = false
+  #     end
+  #   end
+  #   binding.pry
+  #   included
+  # end
+
   def filtering_params(params)
-    params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year)
+    # binding.pry
+    # testvar = params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year)
+
+    # includes_all?(testvar, ["mt1", "mt2"])
+    # binding.pry
+    # testvar
+    filters = params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year)
+    filters.reject{|key, value| value == "all" }
   end
 
   def request_params

@@ -428,4 +428,12 @@ class Request < ApplicationRecord
     self.approval.groupstatus(1) == "approved" && self.approval.groupstatus(2) == "approved" && self.approval.groupstatus(3) == "approved" && self.approval.groupstatus(4) == "approved"
   end
 
+  def pending?
+    (self.approval.groupstatus(1) == "pending" || self.approval.groupstatus(2) == "pending" || self.approval.groupstatus(3) == "pending" || self.approval.groupstatus(4) == "pending") && self.rejected? == false
+  end
+
+  def rejected?
+    self.approval.groupstatus(1) == "rejected" || self.approval.groupstatus(2) == "rejected" || self.approval.groupstatus(3) == "rejected" || self.approval.groupstatus(4) == "rejected"
+  end
+
 end

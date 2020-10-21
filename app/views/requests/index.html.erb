@@ -31,34 +31,66 @@
         Location
       </div>
       <div class="filter_line">
-        <div class="filter_legend">
-          Yes | No
-        </div>
       </div>
       <div class="filter_line">
         MT1:
-        <%= radio_button_tag "mt1", "true" %>
-        <%= radio_button_tag "mt1", "false" %>
+        <%= hidden_field_tag("mt1", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         MT2:
-        <%= radio_button_tag "mt2", "true" %>
-        <%= radio_button_tag "mt2", "false" %>
+        <%= hidden_field_tag("mt2", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         MT3:
-        <%= radio_button_tag "mt3", "true" %>
-        <%= radio_button_tag "mt3", "false" %>
+        <%= hidden_field_tag("mt3", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         MT4:
-        <%= radio_button_tag "mt4", "true" %>
-        <%= radio_button_tag "mt4", "false" %>
+        <%= hidden_field_tag("mt4", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Other:
-        <%= radio_button_tag "other", "true" %>
-        <%= radio_button_tag "other", "false" %>
+        <%= hidden_field_tag("other", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -66,15 +98,17 @@
       <div class="filter_header">
         Time Frame
       </div>
-      <div class="filter_line">
-        <div class="filter_legend">
-          Day | Night | Both
-        </div>
-      </div>
       <div class="filter_line time_frame">
-        <%= radio_button_tag "night_work", "0" %>
-        <%= radio_button_tag "night_work", "1" %>
-        <%= radio_button_tag "nisei", "2" %>
+        Night work:
+        <%= hidden_field_tag("night_work", value = 'all', :data => { :positive => '1', :negative => '0' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
   </div>
     </div>
 
@@ -83,13 +117,18 @@
         Single Tracking
       </div>
       <div class="filter_line">
-        <div class="filter_legend">
-          Yes | No
-        </div>
       </div>
       <div class="filter_line">
-        <%= radio_button_tag "single_tracking", "true" %>
-        <%= radio_button_tag "single_tracking", "false" %>
+        Single Track:
+        <%= hidden_field_tag("single_tracking", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -98,34 +137,66 @@
         Protection
       </div>
       <div class="filter_line">
-        <div class="filter_legend">
-          Yes | No
-        </div>
       </div>
       <div class="filter_line">
         TAW:
-        <%= radio_button_tag "taw", "true" %>
-        <%= radio_button_tag "taw", "false" %>
+        <%= hidden_field_tag("taw", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Form B:
-        <%= radio_button_tag "form_b", "true" %>
-        <%= radio_button_tag "form_b", "false" %>
+        <%= hidden_field_tag("form_b", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Form C:
-        <%= radio_button_tag "form_c", "true" %>
-        <%= radio_button_tag "form_c", "false" %>
+        <%= hidden_field_tag("form_c", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         T & T:
-        <%= radio_button_tag "track_and_time", "true" %>
-        <%= radio_button_tag "track_and_time", "false" %>
+        <%= hidden_field_tag("track_and_time", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Inacc Track:
-        <%= radio_button_tag "inacc_track", "true" %>
-        <%= radio_button_tag "inacc_track", "false" %>
+        <%= hidden_field_tag("inacc_track", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -134,49 +205,102 @@
         Other
       </div>
       <div class="filter_line">
-        <div class="filter_legend">
-          Yes | No
-        </div>
       </div>
       <div class="filter_line">
         RWP:
-        <%= radio_button_tag "rwp", "yes" %>
-        <%= radio_button_tag "rwp", "no" %>
+        <%= hidden_field_tag("rwp", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         OCS:
-        <%= radio_button_tag "ocs", "yes" %>
-        <%= radio_button_tag "ocs", "no" %>
+        <%= hidden_field_tag("ocs", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Disturb Track:
-        <%= radio_button_tag "disturb", "yes" %>
-        <%= radio_button_tag "disturb", "no" %>
+        <%= hidden_field_tag("disturb", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         RRM on Track:
-        <%= radio_button_tag "rrm", "yes" %>
-        <%= radio_button_tag "rrm", "no" %>
+        <%= hidden_field_tag("rrm", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Foul Track:
-        <%= radio_button_tag "foul", "yes" %>
-        <%= radio_button_tag "foul", "no" %>
+        <%= hidden_field_tag("foul", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Disable Crossings:
-        <%= radio_button_tag "crossings", "yes" %>
-        <%= radio_button_tag "crossings", "no" %>
+        <%= hidden_field_tag("crossings", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Underground:
-        <%= radio_button_tag "underground", "yes" %>
-        <%= radio_button_tag "underground", "no" %>
+        <%= hidden_field_tag("underground", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
         Flagging:
-        <%= radio_button_tag "flagging", "yes" %>
-        <%= radio_button_tag "flagging", "no" %>
+        <%= hidden_field_tag("flagging", value = 'all', :data => { :positive => 'yes', :negative => 'no' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -185,26 +309,62 @@
         Status
       </div>
       <div class="filter_line">
-        <div class="filter_legend">
-          Yes | No
+      </div>
+      <div class="filter_line">
+        Cancelled:
+        <%= hidden_field_tag("show_cancelled", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
         </div>
       </div>
       <div class="filter_line">
-        Hide Cancelled:
-        <%= radio_button_tag "hide_cancelled", "true" %>
-        <%= radio_button_tag "hide_cancelled", "false" %>
+        Approved:
+        <%= hidden_field_tag("show_approved", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
       <div class="filter_line">
-        Approved Only:
-        <%= radio_button_tag "approved_only", "true" %>
-        <%= radio_button_tag "approved_only", "false" %>
+        Pending:
+        <%= hidden_field_tag("show_pending", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
       </div>
+      <div class="filter_line">
+        Rejected:
+        <%= hidden_field_tag("show_rejected", value = 'all', :data => { :positive => 'true', :negative => 'false' }) %>
+        <div class="filter_bar">
+          <div class="filter_bar_block green_block deselected">
+            <%= "\u2713" %>
+          </div>
+          <div class="filter_bar_block red_block deselected">
+            <%= "\u0058" %>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 
   </div>
       <%= submit_tag("Filter") %>
-      <%= link_to "Clear Filters", requests_path, class: "fakebutton" %>
+      <%= link_to "Clear Filters", requests_path(:year => @thisyear, :week => @thisweek), class: "fakebutton" %>
 
   <% end %>
 
@@ -377,14 +537,10 @@ Sun
 <% counter = 1 %>
   <% @requests.each do |request| %>
     <% include = "true" %>
-    <% if @hide_cancelled == true && request.cancelled == 1 %>
-      <% include = "false" %>
-    <% end %>
-    <% if @approved_only == true && request.approved? != true %>
+    <% if (@show_cancelled == false && request.cancelled == 1) || (request.cancelled == 0 && ((@show_approved == false && request.approved? == true) || (@show_rejected == false && request.rejected? == true) || (@show_pending == false && request.pending? == true))) %>
       <% include = "false" %>
     <% end %>
     <% if include == "true" %>
-
       <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
@@ -535,7 +691,7 @@ Sun
     <% @requests.each do |request| %>
 
     <% include = "true" %>
-    <% if @hide_cancelled == true && (request.cancelled == 1 || request.monday_hash["cancelled"] == "yes") %>
+    <% if @show_cancelled == false && (request.cancelled == 1 || request.monday_hash["cancelled"] == "yes") %>
       <% include = "false" %>
     <% end %>
     <% if @approved_only == true && request.approval.day_approved?("mon") != true %>
@@ -675,7 +831,7 @@ Sun
   <% @requests.each do |request| %>
 
   <% include = "true" %>
-  <% if @hide_cancelled == true && (request.cancelled == 1 || request.tuesday_hash["cancelled"] == "yes") %>
+  <% if @show_cancelled == false && (request.cancelled == 1 || request.tuesday_hash["cancelled"] == "yes") %>
     <% include = "false" %>
   <% end %>
   <% if @approved_only == true && request.approval.day_approved?("tue") != true %>
@@ -814,7 +970,7 @@ Sun
         <% counter = 1 %>
   <% @requests.each do |request| %>
   <% include = "true" %>
-  <% if @hide_cancelled == true && (request.cancelled == 1 || request.wednesday_hash["cancelled"] == "yes") %>
+  <% if @show_cancelled == false && (request.cancelled == 1 || request.wednesday_hash["cancelled"] == "yes") %>
     <% include = "false" %>
   <% end %>
   <% if @approved_only == true && request.approval.day_approved?("wed") != true %>
@@ -954,7 +1110,7 @@ Sun
   <% @requests.each do |request| %>
 
   <% include = "true" %>
-  <% if @hide_cancelled == true && (request.cancelled == 1 || request.thursday_hash["cancelled"] == "yes") %>
+  <% if @show_cancelled == false && (request.cancelled == 1 || request.thursday_hash["cancelled"] == "yes") %>
     <% include = "false" %>
   <% end %>
   <% if @approved_only == true && request.approval.day_approved?("thu") != true %>
@@ -1094,7 +1250,7 @@ Sun
   <% @requests.each do |request| %>
 
   <% include = "true" %>
-  <% if @hide_cancelled == true && (request.cancelled == 1 || request.friday_hash["cancelled"] == "yes") %>
+  <% if @show_cancelled == false && (request.cancelled == 1 || request.friday_hash["cancelled"] == "yes") %>
     <% include = "false" %>
   <% end %>
   <% if @approved_only == true && request.approval.day_approved?("fri") != true %>
@@ -1234,7 +1390,7 @@ Sun
   <% @requests.each do |request| %>
 
   <% include = "true" %>
-  <% if @hide_cancelled == true && (request.cancelled == 1 || request.saturday_hash["cancelled"] == "yes") %>
+  <% if @show_cancelled == false && (request.cancelled == 1 || request.saturday_hash["cancelled"] == "yes") %>
     <% include = "false" %>
   <% end %>
   <% if @approved_only == true && request.approval.day_approved?("sat") != true %>
@@ -1374,7 +1530,7 @@ Sun
   <% @requests.each do |request| %>
 
   <% include = "true" %>
-  <% if @hide_cancelled == true && (request.cancelled == 1 || request.sunday_hash["cancelled"] == "yes") %>
+  <% if @show_cancelled == false && (request.cancelled == 1 || request.sunday_hash["cancelled"] == "yes") %>
     <% include = "false" %>
   <% end %>
   <% if @approved_only == true && request.approval.day_approved?("sun") != true %>
