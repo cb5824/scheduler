@@ -1818,4 +1818,6 @@ $(".filter_bar_block").click(function(){
   $(this).parent().siblings("input").val(newFilterStatus);
 });
 
+
+
 });
