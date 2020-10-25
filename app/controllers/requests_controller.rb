@@ -99,13 +99,23 @@ class RequestsController < ApplicationController
     setweek
     @user = current_user
     @requests = Request.where(nil)
+    status_filters = ["show_cancelled", "show_approved", "show_pending", "show_rejected"]
     if filtering_params(params).keys.length == 0
       @requests = Request.where(year: @thisyear, week: @thisweek)
     else
       filtering_params(params).each do |key, value|
-        @requests = @requests.public_send("filter_by_#{key}", value) if value.present?
+        if status_filters.include?(key)
+          status_filters.delete(key)
+        else
+          @requests = @requests.public_send("filter_by_#{key}", value) if value.present?
+        end
+      end
+      if status_filters.length != 4
+        status_filters.each do |status|
+          @requests = @requests.public_send("filter_by_#{status}", false)
       end
     end
+  end
 
     @requests = @requests.sort_by{ |r| [r.color, r.night_work, r.created_at]}
 
@@ -113,14 +123,13 @@ class RequestsController < ApplicationController
     @show_pending = (params["show_pending"] == "true" || params["show_pending"] == nil || (params["show_approved"] == "all" && params["show_pending"] == "all" && params["show_rejected"] == "all" && params["show_cancelled"] == "all"))
     @show_cancelled = (params["show_cancelled"] == "true" || params["show_cancelled"] == nil || (params["show_approved"] == "all" && params["show_pending"] == "all" && params["show_rejected"] == "all" && params["show_cancelled"] == "all"))
     @show_rejected = (params["show_rejected"] == "true" || params["show_rejected"] == nil || (params["show_approved"] == "all" && params["show_pending"] == "all" && params["show_rejected"] == "all" && params["show_cancelled"] == "all"))
-
     respond_to do |format|
       format.xlsx {
         response.headers[
           'Content-Disposition'
         ] = "attachment; filename=Requests.xlsx"
       }
-      format.html { render :index }
+      format.html { render :index, imaparam: "you sure are bud" }
     end
 
   end
@@ -393,11 +402,11 @@ end
     # includes_all?(testvar, ["mt1", "mt2"])
     # binding.pry
     # testvar
-    filters = params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year)
+    filters = params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year, :show_cancelled, :show_approved, :show_pending, :show_rejected)
     filters.reject{|key, value| value == "all" }
   end
 
   def request_params
-    params.require(:request).permit(:year, :week, :start_time, :end_time, :cp1, :mp1, :cp2, :mp2, :contractor, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :description, :single_track, :requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :night_work, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :status, :approval1, :approval2, :approval3, :approval4, :archived, :color, :admin_notes_mon, :admin_notes_tue, :admin_notes_wed, :admin_notes_thu, :admin_notes_fri, :admin_notes_sat, :admin_notes_sun, :requestor_notes_mon, :requestor_notes_tue, :requestor_notes_wed, :requestor_notes_thu, :requestor_notes_fri, :requestor_notes_sat, :requestor_notes_sun, :inspector_notes_mon, :inspector_notes_tue, :inspector_notes_wed, :inspector_notes_thu, :inspector_notes_fri, :inspector_notes_sat, :inspector_notes_sun, :monday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled],:tuesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :wednesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :thursday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :friday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :saturday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :sunday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], attachments: [])
+    params.require(:request).permit(:year, :week, :start_time, :end_time, :cp1, :mp1, :cp2, :mp2, :contractor, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :worker_secondary6, :worker_secondary7, :worker_secondary8, :worker_secondary9, :description, :single_track, :requestor_name, :requestor_email, :requestor_phone, :requestor_project, :requestor_work_directive, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :night_work, :MT1, :MT2, :MT3, :MT4, :taw, :form_b, :form_c, :track_and_time, :title, :sswps, :change_notices, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :late_reason, :rush_reason, :change_reason, :status, :approval1, :approval2, :approval3, :approval4, :archived, :color, :admin_notes_mon, :admin_notes_tue, :admin_notes_wed, :admin_notes_thu, :admin_notes_fri, :admin_notes_sat, :admin_notes_sun, :requestor_notes_mon, :requestor_notes_tue, :requestor_notes_wed, :requestor_notes_thu, :requestor_notes_fri, :requestor_notes_sat, :requestor_notes_sun, :inspector_notes_mon, :inspector_notes_tue, :inspector_notes_wed, :inspector_notes_thu, :inspector_notes_fri, :inspector_notes_sat, :inspector_notes_sun, :monday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :worker_secondary6, :worker_secondary7, :worker_secondary8, :worker_secondary9, :cancelled],:tuesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :worker_secondary6, :worker_secondary7, :worker_secondary8, :worker_secondary9, :cancelled], :wednesday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :worker_secondary6, :worker_secondary7, :worker_secondary8, :worker_secondary9, :cancelled], :thursday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :worker_secondary6, :worker_secondary7, :worker_secondary8, :worker_secondary9, :cancelled], :friday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :worker_secondary6, :worker_secondary7, :worker_secondary8, :worker_secondary9, :cancelled], :saturday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :cancelled], :sunday_hash => [:start_time, :end_time, :cp1, :cp2, :mp1, :mp2, :MT1, :MT2, :MT3, :MT4, :other, :inacc_track, :b_time, :b_location, :onsite_name, :onsite_number, :taw, :form_b, :form_c, :track_and_time, :single_track, :worker_primary, :worker_secondary1, :worker_secondary2, :worker_secondary3, :worker_secondary4, :worker_secondary5, :worker_secondary6, :worker_secondary7, :worker_secondary8, :worker_secondary9, :cancelled], attachments: [])
   end
 end

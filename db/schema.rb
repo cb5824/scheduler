@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_31_002020) do
+ActiveRecord::Schema.define(version: 2020_10_25_015034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -277,6 +277,9 @@ ActiveRecord::Schema.define(version: 2020_07_31_002020) do
     t.string "control_point"
     t.string "shift"
     t.boolean "single_tracking"
+    t.boolean "pending", default: true, null: false
+    t.boolean "approved", default: false, null: false
+    t.boolean "rejected", default: false, null: false
     t.index ["request_id"], name: "index_weeklies_on_request_id"
   end
 

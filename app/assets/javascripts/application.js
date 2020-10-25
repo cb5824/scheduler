@@ -153,6 +153,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_monday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_monday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_monday_hash_worker_secondary5")[0].value;
+      secondary6 = $("#request_monday_hash_worker_secondary6")[0].value;
+      secondary7 = $("#request_monday_hash_worker_secondary7")[0].value;
+      secondary8 = $("#request_monday_hash_worker_secondary8")[0].value;
+      secondary9 = $("#request_monday_hash_worker_secondary9")[0].value;
 
       b_time = $("#request_monday_hash_b_time")[0].value;
       b_location = $("#request_monday_hash_b_location")[0].value;
@@ -197,6 +201,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_tuesday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_tuesday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_tuesday_hash_worker_secondary5")[0].value;
+      secondary5 = $("#request_tuesday_hash_worker_secondary6")[0].value;
+      secondary5 = $("#request_tuesday_hash_worker_secondary7")[0].value;
+      secondary5 = $("#request_tuesday_hash_worker_secondary8")[0].value;
+      secondary5 = $("#request_tuesday_hash_worker_secondary9")[0].value;
 
       b_time = $("#request_tuesday_hash_b_time")[0].value;
       b_location = $("#request_tuesday_hash_b_location")[0].value;
@@ -241,6 +249,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_wednesday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_wednesday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_wednesday_hash_worker_secondary5")[0].value;
+      secondary6 = $("#request_wednesday_hash_worker_secondary6")[0].value;
+      secondary7 = $("#request_wednesday_hash_worker_secondary7")[0].value;
+      secondary8 = $("#request_wednesday_hash_worker_secondary8")[0].value;
+      secondary9 = $("#request_wednesday_hash_worker_secondary9")[0].value;
 
       b_time = $("#request_wednesday_hash_b_time")[0].value;
       b_location = $("#request_wednesday_hash_b_location")[0].value;
@@ -285,6 +297,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_thursday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_thursday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_thursday_hash_worker_secondary5")[0].value;
+      secondary6 = $("#request_thursday_hash_worker_secondary6")[0].value;
+      secondary7 = $("#request_thursday_hash_worker_secondary7")[0].value;
+      secondary8 = $("#request_thursday_hash_worker_secondary8")[0].value;
+      secondary9 = $("#request_thursday_hash_worker_secondary9")[0].value;
 
       b_time = $("#request_thursday_hash_b_time")[0].value;
       b_location = $("#request_thursday_hash_b_location")[0].value;
@@ -329,6 +345,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_friday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_friday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_friday_hash_worker_secondary5")[0].value;
+      secondary6 = $("#request_friday_hash_worker_secondary6")[0].value;
+      secondary7 = $("#request_friday_hash_worker_secondary7")[0].value;
+      secondary8 = $("#request_friday_hash_worker_secondary8")[0].value;
+      secondary9 = $("#request_friday_hash_worker_secondary9")[0].value;
 
       b_time = $("#request_friday_hash_b_time")[0].value;
       b_location = $("#request_friday_hash_b_location")[0].value;
@@ -373,6 +393,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_saturday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_saturday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_saturday_hash_worker_secondary5")[0].value;
+      secondary6 = $("#request_saturday_hash_worker_secondary6")[0].value;
+      secondary7 = $("#request_saturday_hash_worker_secondary7")[0].value;
+      secondary8 = $("#request_saturday_hash_worker_secondary8")[0].value;
+      secondary9 = $("#request_saturday_hash_worker_secondary9")[0].value;
 
       b_time = $("#request_saturday_hash_b_time")[0].value;
       b_location = $("#request_saturday_hash_b_location")[0].value;
@@ -417,6 +441,10 @@ $(".copy_day").on("click", function(){
       secondary3 = $("#request_sunday_hash_worker_secondary3")[0].value;
       secondary4 = $("#request_sunday_hash_worker_secondary4")[0].value;
       secondary5 = $("#request_sunday_hash_worker_secondary5")[0].value;
+      secondary6 = $("#request_sunday_hash_worker_secondary6")[0].value;
+      secondary7 = $("#request_sunday_hash_worker_secondary7")[0].value;
+      secondary8 = $("#request_sunday_hash_worker_secondary8")[0].value;
+      secondary9 = $("#request_sunday_hash_worker_secondary9")[0].value;
 
       b_time = $("#request_sunday_hash_b_time")[0].value;
       b_location = $("#request_sunday_hash_b_location")[0].value;
@@ -475,6 +503,10 @@ $(".copy_day").on("click", function(){
       $("#request_monday_hash_worker_secondary3").val(secondary3);
       $("#request_monday_hash_worker_secondary4").val(secondary4);
       $("#request_monday_hash_worker_secondary5").val(secondary5);
+      $("#request_monday_hash_worker_secondary6").val(secondary6);
+      $("#request_monday_hash_worker_secondary7").val(secondary7);
+      $("#request_monday_hash_worker_secondary8").val(secondary8);
+      $("#request_monday_hash_worker_secondary9").val(secondary9);
 
       $("#request_monday_hash_b_time").val(b_time);
       $("#request_monday_hash_b_location").val(b_location);
@@ -531,6 +563,10 @@ $(".copy_day").on("click", function(){
       $("#request_tuesday_hash_worker_secondary3").val(secondary3);
       $("#request_tuesday_hash_worker_secondary4").val(secondary4);
       $("#request_tuesday_hash_worker_secondary5").val(secondary5);
+      $("#request_tuesday_hash_worker_secondary6").val(secondary6);
+      $("#request_tuesday_hash_worker_secondary7").val(secondary7);
+      $("#request_tuesday_hash_worker_secondary8").val(secondary8);
+      $("#request_tuesday_hash_worker_secondary9").val(secondary9);
 
       $("#request_tuesday_hash_b_time").val(b_time);
       $("#request_tuesday_hash_b_location").val(b_location);
@@ -587,6 +623,10 @@ $(".copy_day").on("click", function(){
       $("#request_wednesday_hash_worker_secondary3").val(secondary3);
       $("#request_wednesday_hash_worker_secondary4").val(secondary4);
       $("#request_wednesday_hash_worker_secondary5").val(secondary5);
+      $("#request_wednesday_hash_worker_secondary6").val(secondary6);
+      $("#request_wednesday_hash_worker_secondary7").val(secondary7);
+      $("#request_wednesday_hash_worker_secondary8").val(secondary8);
+      $("#request_wednesday_hash_worker_secondary9").val(secondary9);
 
       $("#request_wednesday_hash_b_time").val(b_time);
       $("#request_wednesday_hash_b_location").val(b_location);
@@ -643,6 +683,10 @@ $(".copy_day").on("click", function(){
       $("#request_thursday_hash_worker_secondary3").val(secondary3);
       $("#request_thursday_hash_worker_secondary4").val(secondary4);
       $("#request_thursday_hash_worker_secondary5").val(secondary5);
+      $("#request_thursday_hash_worker_secondary6").val(secondary6);
+      $("#request_thursday_hash_worker_secondary7").val(secondary7);
+      $("#request_thursday_hash_worker_secondary8").val(secondary8);
+      $("#request_thursday_hash_worker_secondary9").val(secondary9);
 
       $("#request_thursday_hash_b_time").val(b_time);
       $("#request_thursday_hash_b_location").val(b_location);
@@ -699,6 +743,10 @@ $(".copy_day").on("click", function(){
       $("#request_friday_hash_worker_secondary3").val(secondary3);
       $("#request_friday_hash_worker_secondary4").val(secondary4);
       $("#request_friday_hash_worker_secondary5").val(secondary5);
+      $("#request_friday_hash_worker_secondary6").val(secondary6);
+      $("#request_friday_hash_worker_secondary7").val(secondary7);
+      $("#request_friday_hash_worker_secondary8").val(secondary8);
+      $("#request_friday_hash_worker_secondary9").val(secondary9);
 
       $("#request_friday_hash_b_time").val(b_time);
       $("#request_friday_hash_b_location").val(b_location);
@@ -756,6 +804,10 @@ $(".copy_day").on("click", function(){
       $("#request_saturday_hash_worker_secondary3").val(secondary3);
       $("#request_saturday_hash_worker_secondary4").val(secondary4);
       $("#request_saturday_hash_worker_secondary5").val(secondary5);
+      $("#request_saturday_hash_worker_secondary6").val(secondary6);
+      $("#request_saturday_hash_worker_secondary7").val(secondary7);
+      $("#request_saturday_hash_worker_secondary8").val(secondary8);
+      $("#request_saturday_hash_worker_secondary9").val(secondary9);
 
       $("#request_saturday_hash_b_time").val(b_time);
       $("#request_saturday_hash_b_location").val(b_location);
@@ -813,6 +865,10 @@ $(".copy_day").on("click", function(){
       $("#request_sunday_hash_worker_secondary3").val(secondary3);
       $("#request_sunday_hash_worker_secondary4").val(secondary4);
       $("#request_sunday_hash_worker_secondary5").val(secondary5);
+      $("#request_sunday_hash_worker_secondary6").val(secondary6);
+      $("#request_sunday_hash_worker_secondary7").val(secondary7);
+      $("#request_sunday_hash_worker_secondary8").val(secondary8);
+      $("#request_sunday_hash_worker_secondary9").val(secondary9);
 
       $("#request_sunday_hash_b_time").val(b_time);
       $("#request_sunday_hash_b_location").val(b_location);
@@ -864,6 +920,10 @@ $('#request_mon').on('change', (event) =>{
     $('#request_monday_hash_worker_secondary3').val('-');
     $('#request_monday_hash_worker_secondary4').val('-');
     $('#request_monday_hash_worker_secondary5').val('-');
+    $('#request_monday_hash_worker_secondary6').val('-');
+    $('#request_monday_hash_worker_secondary7').val('-');
+    $('#request_monday_hash_worker_secondary8').val('-');
+    $('#request_monday_hash_worker_secondary9').val('-');
     $('#request_monday_hash_b_time').val('');
     $('#request_monday_hash_b_location').val('');
     $('#request_monday_hash_onsite_name').val('');
@@ -899,6 +959,10 @@ $('#request_tue').on('change', (event) =>{
     $('#request_tuesday_hash_worker_secondary3').val('-');
     $('#request_tuesday_hash_worker_secondary4').val('-');
     $('#request_tuesday_hash_worker_secondary5').val('-');
+    $('#request_tuesday_hash_worker_secondary6').val('-');
+    $('#request_tuesday_hash_worker_secondary7').val('-');
+    $('#request_tuesday_hash_worker_secondary8').val('-');
+    $('#request_tuesday_hash_worker_secondary9').val('-');
     $('#request_tuesday_hash_b_time').val('');
     $('#request_tuesday_hash_b_location').val('');
     $('#request_tuesday_hash_onsite_name').val('');
@@ -934,6 +998,10 @@ $('#request_wed').on('change', (event) =>{
     $('#request_wednesday_hash_worker_secondary3').val('-');
     $('#request_wednesday_hash_worker_secondary4').val('-');
     $('#request_wednesday_hash_worker_secondary5').val('-');
+    $('#request_wednesday_hash_worker_secondary6').val('-');
+    $('#request_wednesday_hash_worker_secondary7').val('-');
+    $('#request_wednesday_hash_worker_secondary8').val('-');
+    $('#request_wednesday_hash_worker_secondary9').val('-');
     $('#request_wednesday_hash_b_time').val('');
     $('#request_wednesday_hash_b_location').val('');
     $('#request_wednesday_hash_onsite_name').val('');
@@ -969,6 +1037,10 @@ $('#request_thu').on('change', (event) =>{
     $('#request_thursday_hash_worker_secondary3').val('-');
     $('#request_thursday_hash_worker_secondary4').val('-');
     $('#request_thursday_hash_worker_secondary5').val('-');
+    $('#request_thursday_hash_worker_secondary6').val('-');
+    $('#request_thursday_hash_worker_secondary7').val('-');
+    $('#request_thursday_hash_worker_secondary8').val('-');
+    $('#request_thursday_hash_worker_secondary9').val('-');
     $('#request_thursday_hash_b_time').val('');
     $('#request_thursday_hash_b_location').val('');
     $('#request_thursday_hash_onsite_name').val('');
@@ -1004,6 +1076,10 @@ $('#request_fri').on('change', (event) =>{
     $('#request_friday_hash_worker_secondary3').val('-');
     $('#request_friday_hash_worker_secondary4').val('-');
     $('#request_friday_hash_worker_secondary5').val('-');
+    $('#request_friday_hash_worker_secondary6').val('-');
+    $('#request_friday_hash_worker_secondary7').val('-');
+    $('#request_friday_hash_worker_secondary8').val('-');
+    $('#request_friday_hash_worker_secondary9').val('-');
     $('#request_friday_hash_b_time').val('');
     $('#request_friday_hash_b_location').val('');
     $('#request_friday_hash_onsite_name').val('');
@@ -1039,6 +1115,10 @@ $('#request_sat').on('change', (event) =>{
     $('#request_saturday_hash_worker_secondary3').val('-');
     $('#request_saturday_hash_worker_secondary4').val('-');
     $('#request_saturday_hash_worker_secondary5').val('-');
+    $('#request_saturday_hash_worker_secondary6').val('-');
+    $('#request_saturday_hash_worker_secondary7').val('-');
+    $('#request_saturday_hash_worker_secondary8').val('-');
+    $('#request_saturday_hash_worker_secondary9').val('-');
     $('#request_saturday_hash_b_time').val('');
     $('#request_saturday_hash_b_location').val('');
     $('#request_saturday_hash_onsite_name').val('');
@@ -1074,6 +1154,10 @@ $('#request_sun').on('change', (event) =>{
     $('#request_sunday_hash_worker_secondary3').val('-');
     $('#request_sunday_hash_worker_secondary4').val('-');
     $('#request_sunday_hash_worker_secondary5').val('-');
+    $('#request_sunday_hash_worker_secondary6').val('-');
+    $('#request_sunday_hash_worker_secondary7').val('-');
+    $('#request_sunday_hash_worker_secondary8').val('-');
+    $('#request_sunday_hash_worker_secondary9').val('-');
     $('#request_sunday_hash_b_time').val('');
     $('#request_sunday_hash_b_location').val('');
     $('#request_sunday_hash_onsite_name').val('');
@@ -1134,6 +1218,10 @@ if ($('#MonData').length > 0){
     $('#request_monday_hash_worker_secondary3').val($('#MonData').attr('data-worker_secondary3'));
     $('#request_monday_hash_worker_secondary4').val($('#MonData').attr('data-worker_secondary4'));
     $('#request_monday_hash_worker_secondary5').val($('#MonData').attr('data-worker_secondary5'));
+    $('#request_monday_hash_worker_secondary6').val($('#MonData').attr('data-worker_secondary6'));
+    $('#request_monday_hash_worker_secondary7').val($('#MonData').attr('data-worker_secondary7'));
+    $('#request_monday_hash_worker_secondary8').val($('#MonData').attr('data-worker_secondary8'));
+    $('#request_monday_hash_worker_secondary9').val($('#MonData').attr('data-worker_secondary9'));
 
     $('#request_monday_hash_b_time').val($('#MonData').attr('data-btime'));
     $('#request_monday_hash_b_location').val($('#MonData').attr('data-blocation'));
@@ -1186,6 +1274,10 @@ if ($('#TueData').length > 0){
     $('#request_tuesday_hash_worker_secondary3').val($('#TueData').attr('data-worker_secondary3'));
     $('#request_tuesday_hash_worker_secondary4').val($('#TueData').attr('data-worker_secondary4'));
     $('#request_tuesday_hash_worker_secondary5').val($('#TueData').attr('data-worker_secondary5'));
+    $('#request_tuesday_hash_worker_secondary6').val($('#TueData').attr('data-worker_secondary6'));
+    $('#request_tuesday_hash_worker_secondary7').val($('#TueData').attr('data-worker_secondary7'));
+    $('#request_tuesday_hash_worker_secondary8').val($('#TueData').attr('data-worker_secondary8'));
+    $('#request_tuesday_hash_worker_secondary9').val($('#TueData').attr('data-worker_secondary9'));
 
     $('#request_tuesday_hash_b_time').val($('#TueData').attr('data-btime'));
     $('#request_tuesday_hash_b_location').val($('#TueData').attr('data-blocation'));
@@ -1237,6 +1329,10 @@ if ($('#WedData').length > 0){
     $('#request_wednesday_hash_worker_secondary3').val($('#WedData').attr('data-worker_secondary3'));
     $('#request_wednesday_hash_worker_secondary4').val($('#WedData').attr('data-worker_secondary4'));
     $('#request_wednesday_hash_worker_secondary5').val($('#WedData').attr('data-worker_secondary5'));
+    $('#request_wednesday_hash_worker_secondary6').val($('#WedData').attr('data-worker_secondary6'));
+    $('#request_wednesday_hash_worker_secondary7').val($('#WedData').attr('data-worker_secondary7'));
+    $('#request_wednesday_hash_worker_secondary8').val($('#WedData').attr('data-worker_secondary8'));
+    $('#request_wednesday_hash_worker_secondary9').val($('#WedData').attr('data-worker_secondary9'));
 
     $('#request_wednesday_hash_b_time').val($('#WedData').attr('data-btime'));
     $('#request_wednesday_hash_b_location').val($('#WedData').attr('data-blocation'));
@@ -1288,6 +1384,10 @@ if ($('#ThuData').length > 0){
     $('#request_thursday_hash_worker_secondary3').val($('#ThuData').attr('data-worker_secondary3'));
     $('#request_thursday_hash_worker_secondary4').val($('#ThuData').attr('data-worker_secondary4'));
     $('#request_thursday_hash_worker_secondary5').val($('#ThuData').attr('data-worker_secondary5'));
+    $('#request_thursday_hash_worker_secondary6').val($('#ThuData').attr('data-worker_secondary6'));
+    $('#request_thursday_hash_worker_secondary7').val($('#ThuData').attr('data-worker_secondary7'));
+    $('#request_thursday_hash_worker_secondary8').val($('#ThuData').attr('data-worker_secondary8'));
+    $('#request_thursday_hash_worker_secondary9').val($('#ThuData').attr('data-worker_secondary9'));
 
     $('#request_thursday_hash_b_time').val($('#ThuData').attr('data-btime'));
     $('#request_thursday_hash_b_location').val($('#ThuData').attr('data-blocation'));
@@ -1339,6 +1439,10 @@ if ($('#FriData').length > 0){
     $('#request_friday_hash_worker_secondary3').val($('#FriData').attr('data-worker_secondary3'));
     $('#request_friday_hash_worker_secondary4').val($('#FriData').attr('data-worker_secondary4'));
     $('#request_friday_hash_worker_secondary5').val($('#FriData').attr('data-worker_secondary5'));
+    $('#request_friday_hash_worker_secondary6').val($('#FriData').attr('data-worker_secondary6'));
+    $('#request_friday_hash_worker_secondary7').val($('#FriData').attr('data-worker_secondary7'));
+    $('#request_friday_hash_worker_secondary8').val($('#FriData').attr('data-worker_secondary8'));
+    $('#request_friday_hash_worker_secondary9').val($('#FriData').attr('data-worker_secondary9'));
 
     $('#request_friday_hash_b_time').val($('#FriData').attr('data-btime'));
     $('#request_friday_hash_b_location').val($('#FriData').attr('data-blocation'));
@@ -1390,6 +1494,10 @@ if ($('#SatData').length > 0){
     $('#request_saturday_hash_worker_secondary3').val($('#SatData').attr('data-worker_secondary3'));
     $('#request_saturday_hash_worker_secondary4').val($('#SatData').attr('data-worker_secondary4'));
     $('#request_saturday_hash_worker_secondary5').val($('#SatData').attr('data-worker_secondary5'));
+    $('#request_saturday_hash_worker_secondary6').val($('#SatData').attr('data-worker_secondary6'));
+    $('#request_saturday_hash_worker_secondary7').val($('#SatData').attr('data-worker_secondary7'));
+    $('#request_saturday_hash_worker_secondary8').val($('#SatData').attr('data-worker_secondary8'));
+    $('#request_saturday_hash_worker_secondary9').val($('#SatData').attr('data-worker_secondary9'));
 
     $('#request_saturday_hash_b_time').val($('#SatData').attr('data-btime'));
     $('#request_saturday_hash_b_location').val($('#SatData').attr('data-blocation'));
@@ -1442,6 +1550,10 @@ if ($('#SunData').length > 0){
     $('#request_sunday_hash_worker_secondary3').val($('#SunData').attr('data-worker_secondary3'));
     $('#request_sunday_hash_worker_secondary4').val($('#SunData').attr('data-worker_secondary4'));
     $('#request_sunday_hash_worker_secondary5').val($('#SunData').attr('data-worker_secondary5'));
+    $('#request_sunday_hash_worker_secondary6').val($('#SunData').attr('data-worker_secondary6'));
+    $('#request_sunday_hash_worker_secondary7').val($('#SunData').attr('data-worker_secondary7'));
+    $('#request_sunday_hash_worker_secondary8').val($('#SunData').attr('data-worker_secondary8'));
+    $('#request_sunday_hash_worker_secondary9').val($('#SunData').attr('data-worker_secondary9'));
 
     $('#request_sunday_hash_b_time').val($('#SunData').attr('data-btime'));
     $('#request_sunday_hash_b_location').val($('#SunData').attr('data-blocation'));

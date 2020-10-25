@@ -211,6 +211,18 @@ end
       if day[0]["worker_secondary5"] != day[1]["worker_secondary5"]
         self.parse_day(index, "worker_secondary5")
       end
+      if day[0]["worker_secondary6"] != day[1]["worker_secondary6"]
+        self.parse_day(index, "worker_secondary6")
+      end
+      if day[0]["worker_secondary7"] != day[1]["worker_secondary7"]
+        self.parse_day(index, "worker_secondary7")
+      end
+      if day[0]["worker_secondary8"] != day[1]["worker_secondary8"]
+        self.parse_day(index, "worker_secondary8")
+      end
+      if day[0]["worker_secondary9"] != day[1]["worker_secondary9"]
+        self.parse_day(index, "worker_secondary9")
+      end
       if day[0]["inacc_track"] != day[1]["inacc_track"]
         self.parse_day(index, "inacc_track")
       end

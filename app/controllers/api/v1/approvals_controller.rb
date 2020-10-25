@@ -206,6 +206,7 @@ class Api::V1::ApprovalsController < ApplicationController
     @request.approval.save
     @request.approval_check
     @request.save
+    @request.update_weekly
   end
 
 end

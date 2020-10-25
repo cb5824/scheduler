@@ -8,10 +8,17 @@ class Request < ApplicationRecord
   has_one :approval
 
 
+  scope :filter_by_show_cancelled, -> (hide) {  where cancelled: 0 }
+  scope :filter_by_show_pending, -> (hide) {  joins(:weekly).where("pending = ?", false) }
+  scope :filter_by_show_approved, -> (hide) {  joins(:weekly).where("approved = ?", false) }
+  scope :filter_by_show_rejected, -> (hide) {  joins(:weekly).where("rejected = ?", false) }
+
   scope :filter_by_night_work, -> (night_work) { where night_work: night_work }
+  scope :filter_by_day_work, -> (day_work) { where night_work: 0 }
   scope :filter_by_week, -> (week) { where week: week }
   scope :filter_by_year, -> (year) { where year: year }
   scope :filter_by_single_tracking, -> (single_tracking) { joins(:weekly).where("single_tracking = ?", single_tracking)}
+  scope :filter_by_no_single_tracking, -> (no_single_tracking) { joins(:weekly).where("single_tracking = ?", false)}
   scope :filter_by_mt1, -> (mt1) { joins(:weekly).where("mt1 = ?", mt1)}
   scope :filter_by_mt2, -> (mt2) { joins(:weekly).where("mt2 = ?", mt2)}
   scope :filter_by_mt3, -> (mt3) { joins(:weekly).where("mt3 = ?", mt3)}
@@ -230,7 +237,7 @@ class Request < ApplicationRecord
 
 
     temp_workers = day[1]["worker_primary"]
-    [day[1]["worker_secondary1"], day[1]["worker_secondary2"], day[1]["worker_secondary3"], day[1]["worker_secondary4"], day[1]["worker_secondary5"]].each do |worker|
+    [day[1]["worker_secondary1"], day[1]["worker_secondary2"], day[1]["worker_secondary3"], day[1]["worker_secondary4"], day[1]["worker_secondary5"], day[1]["worker_secondary6"], day[1]["worker_secondary7"], day[1]["worker_secondary8"], day[1]["worker_secondary9"]].each do |worker|
       if worker != "-"
         temp_workers += ", #{worker}"
       end
@@ -304,7 +311,6 @@ class Request < ApplicationRecord
         self.pending.track_and_time = "1"
       end
     end
-
     @new_weekly.mon_workers = mon_workers
     @new_weekly.tue_workers = tue_workers
     @new_weekly.wed_workers = wed_workers
@@ -337,6 +343,16 @@ class Request < ApplicationRecord
     @new_weekly.mt4 = mt4
     @new_weekly.other = other
     @new_weekly.request = self
+    if self.approval != nil
+      @new_weekly.approved = self.approved?
+      @new_weekly.rejected = self.rejected?
+      @new_weekly.pending = self.pending?
+    else
+      @new_weekly.approved = false
+      @new_weekly.rejected = false
+      @new_weekly.pending = true
+    end
+
     # @new_weekly.save
     # self.pending.save
     if bypass == "no"
@@ -425,15 +441,15 @@ class Request < ApplicationRecord
   end
 
   def approved?
-    self.approval.groupstatus(1) == "approved" && self.approval.groupstatus(2) == "approved" && self.approval.groupstatus(3) == "approved" && self.approval.groupstatus(4) == "approved"
+    (self.approval.groupstatus(1) == "approved" && self.approval.groupstatus(2) == "approved" && self.approval.groupstatus(3) == "approved" && self.approval.groupstatus(4) == "approved") && self.cancelled == 0
   end
 
   def pending?
-    (self.approval.groupstatus(1) == "pending" || self.approval.groupstatus(2) == "pending" || self.approval.groupstatus(3) == "pending" || self.approval.groupstatus(4) == "pending") && self.rejected? == false
+    (self.approval.groupstatus(1) == "pending" || self.approval.groupstatus(2) == "pending" || self.approval.groupstatus(3) == "pending" || self.approval.groupstatus(4) == "pending") && self.rejected? == false && self.cancelled == 0
   end
 
   def rejected?
-    self.approval.groupstatus(1) == "rejected" || self.approval.groupstatus(2) == "rejected" || self.approval.groupstatus(3) == "rejected" || self.approval.groupstatus(4) == "rejected"
+    (self.approval.groupstatus(1) == "rejected" || self.approval.groupstatus(2) == "rejected" || self.approval.groupstatus(3) == "rejected" || self.approval.groupstatus(4) == "rejected") && self.cancelled == 0
   end
 
 end

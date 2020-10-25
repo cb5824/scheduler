@@ -104,7 +104,7 @@
   padding-left: 10px;
 }
 
-#request_worker_secondary1, #request_worker_secondary2, #request_worker_secondary3, #request_worker_secondary4, #request_worker_secondary5{
+#request_worker_secondary1, #request_worker_secondary2, #request_worker_secondary3, #request_worker_secondary4, #request_worker_secondary5, #request_worker_secondary6, #request_worker_secondary7, #request_worker_secondary8, #request_worker_secondary9{
   text-overflow: ellipsis;
   width: 140px;
 }
