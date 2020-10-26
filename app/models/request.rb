@@ -169,7 +169,6 @@ class Request < ApplicationRecord
 
   [[self.mon, self.monday_hash, "Mon"], [self.tue, self.tuesday_hash, "Tue"], [self.wed, self.wednesday_hash, "Wed"], [self.thu, self.thursday_hash, "Thu"], [self.fri, self.friday_hash, "Fri"], [self.sat, self.saturday_hash, "Sat"], [self.sun, self.sunday_hash, "Sun"]].each do |day|
 
-
     if day[1]["start_time"] != "" && starting_time == nil && day[1]["cancelled"] != "yes"
       starting_time = day[1]["start_time"]
       starting_day = day[2]
@@ -286,6 +285,7 @@ class Request < ApplicationRecord
       if comparison.fri_workers != fri_workers
         self.pending.fri_workers = "1"
       end
+
       if comparison.sat_workers != sat_workers
         self.pending.sat_workers = "1"
       end
@@ -376,49 +376,8 @@ class Request < ApplicationRecord
   end
 
   def expired?
-    thisyear = Time.now.year
-    thisweek = Date.today.cweek
-    # timenow = (Time.zone.now.strftime("%H:%M").delete ":").to_i
-    #
-    # case self.weekly.end[0..2]
-    # when "Mon"
-    #   finalday = 1
-    #   finaldaytime = (self.monday_hash["end_time"].delete ":").to_i
-    # when "Tue"
-    #   finalday = 2
-    #   finaldaytime = (self.tuesday_hash["end_time"].delete ":").to_i
-    # when "Wed"
-    #   finalday = 3
-    #   finaldaytime = (self.wednesday_hash["end_time"].delete ":").to_i
-    # when "Thu"
-    #   finalday = 4
-    #   finaldaytime = (self.thursday_hash["end_time"].delete ":").to_i
-    # when "Fri"
-    #   finalday = 5
-    #   finaldaytime = (self.friday_hash["end_time"].delete ":").to_i
-    # when "Sat"
-    #   finalday = 6
-    #   finaldaytime = (self.saturday_hash["end_time"].delete ":").to_i
-    # when "Sun"
-    #   finalday = 0
-    #   finaldaytime = (self.sunday_hash["end_time"].delete ":").to_i
-    # end
-    #
-    # if self.year <= thisyear
-    #   if self.week <= thisweek
-    #     if finalday <= Time.current.wday
-    #       timenow > finaldaytime
-    #     else
-    #       return false
-    #     end
-    #   else
-    #     return false
-    #   end
-    # else
-    #   return false
-    # end
-    #
-
+    thisyear = Time.zone.now.to_datetime.cwyear
+    thisweek = Time.zone.now.to_datetime.cweek
     if self.year <= thisyear
       self.week > thisweek
     else

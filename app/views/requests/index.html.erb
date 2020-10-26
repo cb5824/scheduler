@@ -2,10 +2,10 @@
 <div class="index_top_container">
 
   <h2>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h2>
-  <% if params["week"] %><% weekview = params["week"].to_i %><% else %><% weekview = Date.today.cweek %><% end %>
-  <%= link_to "back one week", requests_path(:week => (weekview -1), :year => Date.today.cwyear), class: "fakebutton" %>
-  <%= link_to "current week",requests_path(:week => Date.today.cweek, :year => Date.today.cwyear), class: "fakebutton" %>
-  <%= link_to "forward one week",requests_path(:week =>  (weekview +1), :year => Date.today.cwyear), class: "fakebutton" %>
+  <% if params["week"] %><% weekview = params["week"].to_i %><% else %><% weekview = Time.zone.now.to_datetime.cweek %><% end %>
+  <%= link_to "back one week", requests_path(:week => (weekview -1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
+  <%= link_to "current week",requests_path(:week => Time.zone.now.to_datetime.cweek, :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
+  <%= link_to "forward one week",requests_path(:week =>  (weekview +1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
 
   <%= form_tag(requests_path, method: "get") do %>
     <% if params["week"] %>
@@ -291,7 +291,7 @@
     <br>
   <%=
     link_to 'Download as Excel',
-    requests_path(format: :xlsx, filter_week: params["filter_week"], filter_year: params["filter_year"], year: params["year"], week: params["week"], mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"])
+    requests_path(format: :xlsx, filter_week: params["filter_week"], filter_year: params["filter_year"], year: params["year"], week: params["week"], mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: ["no_single_tracking"])
   %>
   <br>
   <br>

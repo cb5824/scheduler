@@ -1,7 +1,6 @@
 wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "Weekly") do |sheet|
-
   def normal_cell(workbook, background, textcolor = "000000")
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
   end
@@ -1243,4 +1242,35 @@ entry_count = 1
     end
   end
 
+end
+
+wb.add_worksheet(name: "Applied Filters") do |sheet|
+
+  def normal_cell(workbook, background, textcolor = "000000")
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
+  end
+
+  def boolean_cell(workbook, background, value)
+    if value == "=CHAR(252)"
+      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+    else
+      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
+    end
+  end
+
+
+
+  [["mt1", "MT1"], ["mt2", "MT2"], ["mt3", "MT3"], ["mt4", "MT4"], ["other", "Other"], ["night_work", "Night Work"], ["day_work", "Day Work"], ["single_tracking", "Single Tracking"], ["no_single_tracking", "Multi Tracking"], ["taw", "TAW"], ["form_b", "Form B"], ["form_c", "Form C"], ["track_and_time", "Track And Time"], ["inacc_track", "Inacc Track"], ["rwp", "RWP"], ["ocs", "OCS"], ["disturb", "Disturb Track"], ["rrm", "RRM on Track"], ["foul", "Foul Track"], ["crossings", "Disable Crossings"], ["underground", "Underground"], ["flagging", "Flagging"], ["show_cancelled", "Cancelled"], ["show_approved", "Approved"], ["show_pending", "Pending"], ["show_rejected", "Rejected"]].each do |pair|
+
+    filter_value = "-"
+    if params[pair[0]] != nil
+      filter_value = "=CHAR(252)"
+    end
+    sheet.add_row([pair[1], filter_value], style: [normal_cell(wb, "ffffff"), boolean_cell(wb, "ffffff", filter_value)])
+
+
+  end
+
+
+  sheet.column_widths 20, 5
 end
