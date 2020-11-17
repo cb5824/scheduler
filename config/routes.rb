@@ -22,12 +22,17 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :requests, only: [:index, :update, :show, :create]
+      resources :requests, only: [:index, :update, :show, :create, :destroy]
     end
   end
   namespace :api do
     namespace :v1 do
       resources :approvals, only: [:index, :update, :show, :create]
+    end
+  end
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: [:index, :update, :show, :create]
     end
   end
 

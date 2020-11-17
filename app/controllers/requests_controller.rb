@@ -78,22 +78,22 @@ class RequestsController < ApplicationController
   WORKER_ARRAY = [['', '-'],
         ['Ambassador', 'A'],
         ['Blue Flag/Mechanical', 'B'],
-        ['Signal Tech', 'E'],
-        ['Signal Inspector', 'S'],
-        ['Maintainer', 'M'],
+        ['Flagger (RWIC)', 'X'],
         ['No Protection Required', 'O'],
         ['Pilot', 'P'],
-        ['Test Train', 'Q'],
         ['Radio Tech', 'R'],
-        ['Work Train', 'T'],
-        ['UP Flagman', 'U'],
-        ['Watchman', 'W'],
-        ['Flagger (RWIC)', 'X'],
-        ['Track Inspector', 'Y'],
-        ['Stabilizer', 'Z'],
         ['Shared Flagger (RWIC)', 'sX'],
+        ['Shared Maintainer', 'sM'],
         ['Shared Watchman', 'sW'],
-        ['Shared Maintainer', 'sM']]
+        ['Signal Inspector', 'S'],
+        ['Signal Maintainer', 'M'],
+        ['Signal Tech', 'E'],
+        ['Stabilizer', 'Z'],
+        ['Test Train', 'Q'],
+        ['Track Inspector', 'Y'],
+        ['UP Flagger', 'U'],
+        ['Watchman/SGC', 'W'],
+        ['Work Train', 'T']]
 
   def index
     setweek
@@ -115,6 +115,17 @@ class RequestsController < ApplicationController
           @requests = @requests.public_send("filter_by_#{status}", false)
       end
     end
+    if params["night_work"] == "true" && params["day_work"] != "true"
+      @requests = @requests.public_send("filter_by_night_work", true)
+    elsif params["night_work"] != "true" && params["day_work"] == "true"
+      @requests = @requests.public_send("filter_by_day_work", true)
+    end
+    if params["single_tracking"] == "true" && params["no_single_tracking"] != "true"
+      @requests = @requests.public_send("filter_by_single_tracking", true)
+    elsif params["single_tracking"] != "true" && params["no_single_tracking"] == "true"
+      @requests = @requests.public_send("filter_by_no_single_tracking", true)
+    end
+
   end
 
     @requests = @requests.sort_by{ |r| [r.color, r.night_work, r.created_at]}
@@ -194,6 +205,11 @@ end
       @request.pending.save
       redirect_to action: "index", notice: 'Request was saved successfully', week: "#{@request.week}", year: "#{@request.year}"
     else
+      @user = current_user
+      @cp_options = CP_ARRAY
+      @worker_options = WORKER_ARRAY
+      @color_options = COLOR_ARRAY
+
       @errors = @request.errors.full_messages
       render action: 'new'
     end
@@ -402,7 +418,7 @@ end
     # includes_all?(testvar, ["mt1", "mt2"])
     # binding.pry
     # testvar
-    filters = params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year, :show_cancelled, :show_approved, :show_pending, :show_rejected)
+    filters = params.slice(:mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year, :show_cancelled, :show_approved, :show_pending, :show_rejected)
     filters.reject{|key, value| value == "all" }
   end
 

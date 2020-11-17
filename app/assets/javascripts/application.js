@@ -1734,6 +1734,47 @@ $('#editrequest').on("click",function(){
 
 });
 
+$('#deactivate_user').on("click",function(){
+
+  event.preventDefault();
+
+  let userid = $('#deactivate_user').data('userid');
+  let address = "/api/v1/profiles/" + userid;
+  let intention = "deactivate";
+
+  let request = $.ajax({
+    method: 'GET',
+    data: {intention: intention},
+    url: address
+  });
+
+  request.done((response) => {
+    location.reload();
+ });
+});
+
+
+$('#deleterequest').on("click",function(){
+
+  event.preventDefault();
+  $("#ajax_alert").html("Deleting...");
+  $("#ajax_alert").css({display: 'block'});
+
+  let req = $('#divOverlay').data('reqnum');
+  let address = "/api/v1/requests/" + req;
+  let intention = "delete";
+
+  let request = $.ajax({
+    method: 'DELETE',
+    data: {intention: intention},
+    url: address
+  });
+
+  request.done((response) => {
+    location.reload();
+ });
+});
+
 $('.daily_approve').on("click",function(){
   $(".superoverlay").animate({height: "100%"});
 });
@@ -1914,19 +1955,17 @@ $("#down_arrow").click(function() {
 
 $(".filter_bar_block").click(function(){
   let newFilterStatus = "all";
-  if ($(this).hasClass("deselected") === false) {
-    $(this).addClass("deselected");
-  } else {
     if ($(this).hasClass("green_block") === true) {
       newFilterStatus = $(this).parent().siblings("input").data("positive");
-    } else {
+    } else if ($(this).hasClass("red_block") === true) {
       newFilterStatus = $(this).parent().siblings("input").data("negative");
+    } else{
+      newFilterStatus = "all";
     }
     $(this).removeClass( "deselected" );
     $(this).siblings().each(function() {
       $(this).addClass("deselected");
     });
-  }
   $(this).parent().siblings("input").val(newFilterStatus);
 });
 

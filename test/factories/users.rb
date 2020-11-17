@@ -8,5 +8,6 @@ FactoryBot.define do
     sequence(:company) {"TASI: Track"}
     role {"user"}
     approval_group {0}
+    active {true}
   end
 end

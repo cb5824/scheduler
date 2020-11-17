@@ -84,5 +84,9 @@ class Api::V1::RequestsController < ApplicationController
     render json: response
   end
 
+  def destroy
+    @request = Request.where(id: params[:id])[0]
+    @request.destroy
+  end
 
 end

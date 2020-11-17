@@ -7,6 +7,32 @@ class Request < ApplicationRecord
   has_one :pending
   has_one :approval
 
+  validates :year, presence: {message: 'Year must not be blank'}
+  validates :week, presence: {message: 'Week must not be blank'}
+  validates :contractor, presence: {message: 'Company name must not be blank'}
+  validates :description, presence: {message: 'Description must not be blank'}
+  validates :requestor_name, presence: {message: 'Name must not be blank'}
+  validates :requestor_email, presence: {message: 'Email must not be blank'}
+  validates :requestor_phone, presence: {message: 'Phone number must not be blank'}
+  validates :requestor_project, presence: {message: 'Project must not be blank'}
+  validates :requestor_work_directive, presence: {message: 'Work directive must not be blank'}
+  validates :title, presence: {message: 'Job title must not be blank'}
+  validates :rwp, presence: {message: 'Please select yes or no regarding RWP certification'}
+  validates :ocs, presence: {message: 'Please select yes or no regarding OCS'}
+  validates :disturb, presence: {message: 'Please select yes or no regarding track disturbances'}
+  validates :rrm, presence: {message: 'Please select yes or no regarding RRM'}
+  validates :foul, presence: {message: 'Please select yes or no regarding fouling track'}
+  validates :crossings, presence: {message: 'Please select yes or no regarding disabled crossings'}
+  validates :underground, presence: {message: 'Please select yes or no regarding underground work'}
+  validates :flagging, presence: {message: 'Please select yes or no regarding traffic control'}
+
+  validate :mon_fields
+  validate :tue_fields
+  validate :wed_fields
+  validate :thu_fields
+  validate :fri_fields
+  validate :sat_fields
+  validate :sun_fields
 
   scope :filter_by_show_cancelled, -> (hide) {  where cancelled: 0 }
   scope :filter_by_show_pending, -> (hide) {  joins(:weekly).where("pending = ?", false) }
@@ -101,6 +127,76 @@ class Request < ApplicationRecord
         ['S.L. CP Michael', 60],
         ['N.L. CP Lick', 61],
         ['S.L. CP Lick', 62]]
+
+  def mon_fields
+    if mon ==1
+      [["worker_primary", "Primary worker"], ["start_time", "Start time"], ["end_time", "End time"], ["b_time", "Briefing start time"], ["b_location", "Briefing location"], ["onsite_name", "Onsite contact name"], ["onsite_number", "Onsite contact number"], ["single_track", "Single tracking"]].each do |field|
+        if monday_hash[field[0]] == "" || monday_hash[field[0]] == nil || monday_hash[field[0]] == "-"
+          errors.add(:mon, "#{field[1]} must be populated for Monday")
+        end
+      end
+    end
+  end
+
+  def tue_fields
+    if tue ==1
+      [["worker_primary", "Primary worker"], ["start_time", "Start time"], ["end_time", "End time"], ["b_time", "Briefing start time"], ["b_location", "Briefing location"], ["onsite_name", "Onsite contact name"], ["onsite_number", "Onsite contact number"], ["single_track", "Single tracking"]].each do |field|
+        if tuesday_hash[field[0]] == "" || tuesday_hash[field[0]] == nil || tuesday_hash[field[0]] == "-"
+          errors.add(:tue, "#{field[1]} must be populated for Tuesday")
+        end
+      end
+    end
+  end
+
+  def wed_fields
+    if wed ==1
+      [["worker_primary", "Primary worker"], ["start_time", "Start time"], ["end_time", "End time"], ["b_time", "Briefing start time"], ["b_location", "Briefing location"], ["onsite_name", "Onsite contact name"], ["onsite_number", "Onsite contact number"], ["single_track", "Single tracking"]].each do |field|
+        if wednesday_hash[field[0]] == "" || wednesday_hash[field[0]] == nil || wednesday_hash[field[0]] == "-"
+          errors.add(:wed, "#{field[1]} must be populated for Wednesday")
+        end
+      end
+    end
+  end
+
+  def thu_fields
+    if thu ==1
+      [["worker_primary", "Primary worker"], ["start_time", "Start time"], ["end_time", "End time"], ["b_time", "Briefing start time"], ["b_location", "Briefing location"], ["onsite_name", "Onsite contact name"], ["onsite_number", "Onsite contact number"], ["single_track", "Single tracking"]].each do |field|
+        if thursday_hash[field[0]] == "" || thursday_hash[field[0]] == nil || thursday_hash[field[0]] == "-"
+          errors.add(:thu, "#{field[1]} must be populated for Thursday")
+        end
+      end
+    end
+  end
+
+  def fri_fields
+    if fri ==1
+      [["worker_primary", "Primary worker"], ["start_time", "Start time"], ["end_time", "End time"], ["b_time", "Briefing start time"], ["b_location", "Briefing location"], ["onsite_name", "Onsite contact name"], ["onsite_number", "Onsite contact number"], ["single_track", "Single tracking"]].each do |field|
+        if friday_hash[field[0]] == "" || friday_hash[field[0]] == nil || friday_hash[field[0]] == "-"
+          errors.add(:fri, "#{field[1]} must be populated for Friday")
+        end
+      end
+    end
+  end
+
+  def sat_fields
+    if sat ==1
+      [["worker_primary", "Primary worker"], ["start_time", "Start time"], ["end_time", "End time"], ["b_time", "Briefing start time"], ["b_location", "Briefing location"], ["onsite_name", "Onsite contact name"], ["onsite_number", "Onsite contact number"], ["single_track", "Single tracking"]].each do |field|
+        if saturday_hash[field[0]] == "" || saturday_hash[field[0]] == nil || saturday_hash[field[0]] == "-"
+          errors.add(:sat, "#{field[1]} must be populated for Saturday")
+        end
+      end
+    end
+  end
+
+  def sun_fields
+    if sun ==1
+      [["worker_primary", "Primary worker"], ["start_time", "Start time"], ["end_time", "End time"], ["b_time", "Briefing start time"], ["b_location", "Briefing location"], ["onsite_name", "Onsite contact name"], ["onsite_number", "Onsite contact number"], ["single_track", "Single tracking"]].each do |field|
+        if sunday_hash[field[0]] == "" || sunday_hash[field[0]] == nil || sunday_hash[field[0]] == "-"
+          errors.add(:sun, "#{field[1]} must be populated for Sunday")
+        end
+      end
+    end
+  end
 
   def generate_note(user, text)
     new_note = Note.new

@@ -5,6 +5,7 @@
   <li>Company: <%= @user.company %></li>
   <li>Role: <%= @user.role %></li>
   <li>Approval Group: <%= @user.approval_group %></li>
+  <li>Status: <% if @user.active == true %>Active<% else %>Deactivated<% end %></li>
 
 </ul>
 
@@ -20,3 +21,5 @@
   <br>
   <input name="commit" type="submit" value="Update User" />
 </form>
+
+<button type="button" class="fakebutton" id="deactivate_user" data-userid="<%= @user.id %>"><% if @user.active == true %>Deactivate User<% else %>Re-activate User<% end %></button>
