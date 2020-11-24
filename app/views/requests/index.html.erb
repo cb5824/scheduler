@@ -1,28 +1,55 @@
 <div id="ajax_alert" >Test test test</div>
 <div class="index_top_container">
 
-  <h2>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h2>
+  <h1>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h1>
   <% if params["week"] %><% weekview = params["week"].to_i %><% else %><% weekview = Time.zone.now.to_datetime.cweek %><% end %>
 
   <%= form_tag(requests_path, method: "get") do %>
 
 
-  <%= link_to "back one week", requests_path(:week => (weekview -1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
-  <%= link_to "current week",requests_path(:week => Time.zone.now.to_datetime.cweek, :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
-  <%= link_to "forward one week",requests_path(:week =>  (weekview +1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
+
+<div id="line_sheet_header">
+  <div id="line_sheet_left">
+    <%= link_to "back one week", requests_path(:week => (weekview -1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
+    <%= link_to "current week",requests_path(:week => Time.zone.now.to_datetime.cweek, :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
+    <%= link_to "forward one week",requests_path(:week =>  (weekview +1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
+    <br>
+    <br>
+    <br>
     <% if params["week"] %>
-      <%= hidden_field_tag("filter_week", value = params["week"]) %>
-      <%= hidden_field_tag("filter_year", value = params["year"]) %>
+    <%= hidden_field_tag("filter_week", value = params["week"]) %>
+    <%= hidden_field_tag("filter_year", value = params["year"]) %>
     <% else %>
-      <%= hidden_field_tag("filter_week", value = params["filter_week"]) %>
-      <%= hidden_field_tag("filter_year", value = params["filter_year"]) %>
+    <%= hidden_field_tag("filter_week", value = params["filter_week"]) %>
+    <%= hidden_field_tag("filter_year", value = params["filter_year"]) %>
     <% end %>
 
     <%= label_tag(:year, "Year:") %>
     <%= number_field_tag(:year, @thisyear) %>
     <%= label_tag(:week, "Week:") %>
     <%= number_field_tag(:week, @thisweek) %>
+    <br>
+    <br>
+    <br>
+    <%=
+      link_to 'Download as Excel',
+      requests_path(format: :xlsx, filter_week: params["filter_week"], filter_year: params["filter_year"], year: params["year"], week: params["week"], mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: ["no_single_tracking"])
+    %>
 
+  </div>
+  <div id="line_sheet_center">
+    <% if @user.role == "admin" || @user.role == "superadmin" %>
+      <textarea name="news_feed" id="news_feed" rows="15" cols="75"><% if Newsfeed.all != [] %><%= Newsfeed.all[0].contents %><% end %></textarea>
+      <button type="button" name="news_update" id="news_update">Save</button>
+    <% else %>
+      <p id="news_display"><% if Newsfeed.all != [] %>** <%= Newsfeed.all[0].contents %> **<% end %></p>
+    <% end %>
+  </div>
+
+
+<div id="line_sheet_right">
+    <%= submit_tag("Filter") %>
+    <%= link_to "Clear Filters", requests_path(:year => @thisyear, :week => @thisweek), class: "fakebutton" %>
   <br>
   <div id="filter_container">
 
@@ -533,22 +560,11 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
-      <%= submit_tag("Filter") %>
-      <%= link_to "Clear Filters", requests_path(:year => @thisyear, :week => @thisweek), class: "fakebutton" %>
-
+  </div>
+  </div>
   <% end %>
 
-    <br>
-  <%=
-    link_to 'Download as Excel',
-    requests_path(format: :xlsx, filter_week: params["filter_week"], filter_year: params["filter_year"], year: params["year"], week: params["week"], mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: ["no_single_tracking"])
-  %>
-  <br>
-  <br>
 </div>
 
 
@@ -713,7 +729,7 @@ Sun
       <tbody>
 <% counter = 1 %>
   <% @requests.each do |request| %>
-      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -863,7 +879,7 @@ Sun
 
 
        <% if request.mon == 1  || request.monday_hash["cancelled"] == "yes"%>
-        <tr class="hover_row <% if request.cancelled == 1 || request.monday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+        <tr class="hover_row <% if request.cancelled == 1 || request.monday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
           <td class="reqstatus">
             <div class="index_status hidden">
               <div class="approvals_bar_container">
@@ -995,7 +1011,7 @@ Sun
 
     <% if request.tue == 1  || request.tuesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 || request.tuesday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.tuesday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1125,7 +1141,7 @@ Sun
 
   <% if request.wed == 1  || request.wednesday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 || request.wednesday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.wednesday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1256,7 +1272,7 @@ Sun
 
   <% if request.thu == 1  || request.thursday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 || request.thursday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.thursday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1387,7 +1403,7 @@ Sun
 
   <% if request.fri == 1  || request.friday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 || request.friday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.friday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1518,7 +1534,7 @@ Sun
 
   <% if request.sat == 1  || request.saturday_hash["cancelled"] == "yes"%>
 
-      <tr class="hover_row <% if request.cancelled == 1 || request.saturday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.saturday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">
@@ -1648,7 +1664,7 @@ Sun
 
 
   <% if request.sun == 1  || request.sunday_hash["cancelled"] == "yes"%>
-      <tr class="hover_row <% if request.cancelled == 1 || request.sunday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %>" data-reqnum="<%= request.id %>">
+      <tr class="hover_row <% if request.cancelled == 1 || request.sunday_hash["cancelled"] == "yes" %>cancelled_day<% end %> <% if request.night_work == 1 %>night_work_line<% end %> <% if request.id == @recent %>recent<% end %>" data-reqnum="<%= request.id %>">
         <td class="reqstatus">
           <div class="index_status hidden">
             <div class="approvals_bar_container">

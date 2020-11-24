@@ -35,6 +35,11 @@ Rails.application.routes.draw do
       resources :profiles, only: [:index, :update, :show, :create]
     end
   end
+  namespace :api do
+    namespace :v1 do
+      resources :newsfeeds, only: [:index, :update, :show, :create]
+    end
+  end
 
   root to: 'landing#index'
 

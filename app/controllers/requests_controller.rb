@@ -99,6 +99,11 @@ class RequestsController < ApplicationController
     setweek
     @user = current_user
     @requests = Request.where(nil)
+    if params["recent"] != nil
+      @recent = params["recent"].to_i
+    else
+      @recent = 0
+    end
     status_filters = ["show_cancelled", "show_approved", "show_pending", "show_rejected"]
     if filtering_params(params).keys.length == 0
       @requests = Request.where(year: @thisyear, week: @thisweek)
@@ -203,7 +208,7 @@ end
       @request.approval.save
       @request.pending = Pending.new
       @request.pending.save
-      redirect_to action: "index", notice: 'Request was saved successfully', week: "#{@request.week}", year: "#{@request.year}"
+      redirect_to action: "index", notice: 'Request was saved successfully', week: "#{@request.week}", year: "#{@request.year}", recent: @request.id
     else
       @user = current_user
       @cp_options = CP_ARRAY
@@ -313,7 +318,7 @@ end
     @request.pending.save
     flash[:notice] = "Request updated."
   end
-    redirect_to action: "index"
+    redirect_to action: "index", week: "#{@request.week}", year: "#{@request.year}", recent: @request.id
   end
 
   def approve
@@ -400,24 +405,8 @@ end
     @today = Time.zone.now.to_datetime.cwday
   end
 
-  # def includes_all?(object, array)
-  #   included = true
-  #   array.each do |match|
-  #     if !(object.include?(match))
-  #       included = false
-  #     end
-  #   end
-  #   binding.pry
-  #   included
-  # end
 
   def filtering_params(params)
-    # binding.pry
-    # testvar = params.slice(:night_work, :single_tracking, :mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year)
-
-    # includes_all?(testvar, ["mt1", "mt2"])
-    # binding.pry
-    # testvar
     filters = params.slice(:mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year, :show_cancelled, :show_approved, :show_pending, :show_rejected)
     filters.reject{|key, value| value == "all" }
   end

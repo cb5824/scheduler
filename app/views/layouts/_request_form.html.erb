@@ -159,8 +159,7 @@
       To cancel full request please use cancel request button at top of form.</p>
         </div>
       <% end %>
-
-      <div class="form_day_block <% if params["request"] %><% if params["request"]["mon"] != "1" %>hidden<% end %><% end %>" id="monday_block">
+      <div class="form_day_block <% if params["request"] %><% if params["request"]["mon"] != "1" %>hidden<% end %><% elsif params["request"] == nil %>hidden<% end %>" id="monday_block">
         <div class="form_block_line">
           <h4>Monday</h4>
         </div>
@@ -312,7 +311,7 @@
           </div>
         </div>
 
-        <div class="form_day_block <% if params["request"] %><% if params["request"]["tue"] != "1" %>hidden<% end %><% end %>" id="tuesday_block">
+        <div class="form_day_block <% if params["request"] %><% if params["request"]["tue"] != "1" %>hidden<% end %><% elsif params["request"] == nil %>hidden<% end %>" id="tuesday_block">
           <div class="form_block_line">
             <h4>Tuesday</h4>
           </div>
@@ -464,7 +463,7 @@
             </div>
           </div>
 
-          <div class="form_day_block <% if params["request"] %><% if params["request"]["wed"] != "1" %>hidden<% end %><% end %>" id="wednesday_block">
+          <div class="form_day_block <% if params["request"] %><% if params["request"]["wed"] != "1" %>hidden<% end %><% elsif params["request"] == nil %>hidden<% end %>" id="wednesday_block">
             <div class="form_block_line">
               <h4>Wednesday</h4>
             </div>
@@ -616,7 +615,7 @@
               </div>
             </div>
 
-            <div class="form_day_block <% if params["request"] %><% if params["request"]["thu"] != "1" %>hidden<% end %><% end %>" id="thursday_block">
+            <div class="form_day_block <% if params["request"] %><% if params["request"]["thu"] != "1" %>hidden<% end %><% elsif params["request"] == nil %>hidden<% end %>" id="thursday_block">
               <div class="form_block_line">
                 <h4>Thursday</h4>
               </div>
@@ -768,7 +767,7 @@
                 </div>
               </div>
 
-              <div class="form_day_block <% if params["request"] %><% if params["request"]["fri"] != "1" %>hidden<% end %><% end %>" id="friday_block">
+              <div class="form_day_block <% if params["request"] %><% if params["request"]["fri"] != "1" %>hidden<% end %><% elsif params["request"] == nil %>hidden<% end %>" id="friday_block">
                 <div class="form_block_line">
                   <h4>Friday</h4>
                 </div>
@@ -920,7 +919,7 @@
                   </div>
                 </div>
 
-                <div class="form_day_block <% if params["request"] %><% if params["request"]["sat"] != "1" %>hidden<% end %><% end %>" id="saturday_block">
+                <div class="form_day_block <% if params["request"] %><% if params["request"]["sat"] != "1" %>hidden<% end %><% elsif params["request"] == nil %>hidden<% end %>" id="saturday_block">
                   <div class="form_block_line">
                     <h4>Saturday</h4>
                   </div>
@@ -1072,7 +1071,7 @@
                     </div>
                   </div>
 
-                  <div class="form_day_block <% if params["request"] %><% if params["request"]["sun"] != "1" %>hidden<% end %><% end %>" id="sunday_block">
+                  <div class="form_day_block <% if params["request"] %><% if params["request"]["sun"] != "1" %>hidden<% end %><% elsif params["request"] == nil %>hidden<% end %>" id="sunday_block">
                     <div class="form_block_line">
                       <h4>Sunday</h4>
                     </div>
@@ -1267,6 +1266,6 @@
 
 <% [["MonData", @request.monday_hash], ["TueData", @request.tuesday_hash], ["WedData", @request.wednesday_hash], ["ThuData", @request.thursday_hash], ["FriData", @request.friday_hash], ["SatData", @request.saturday_hash], ["SunData", @request.sunday_hash]].each do |day| %>
   <% if day[1]["start_time"] != "" && day[1]["start_time"] != nil  %>
-    <input name="<%= day[0] %>" id="<%= day[0] %>" data-start="<%= day[1]["start_time"] %>" data-end="<%= day[1]["end_time"] %>" data-cp1="<%= day[1]["cp1"] %>" data-cp2="<%= day[1]["cp2"] %>" data-mp1="<%= day[1]["mp1"] %>" data-mp2="<%= day[1]["mp2"] %>" data-MT1="<%= day[1]["MT1"] %>" data-MT2="<%= day[1]["MT2"] %>" data-MT3="<%= day[1]["MT3"] %>" data-MT4="<%= day[1]["MT4"] %>" data-taw="<%= day[1]["taw"] %>" data-form_b="<%= day[1]["form_b"] %>" data-form_c="<%= day[1]["form_c"] %>" data-track_and_time="<%= day[1]["track_and_time"] %>"  data-single_track="<%= day[1]["single_track"] %>" data-worker_primary="<%= day[1]["worker_primary"] %>" data-worker_secondary1="<%= day[1]["worker_secondary1"] %>" data-worker_secondary2="<%= day[1]["worker_secondary2"] %>" data-worker_secondary3="<%= day[1]["worker_secondary3"] %>" data-worker_secondary4="<%= day[1]["worker_secondary4"] %>" data-worker_secondary5="<%= day[1]["worker_secondary5"] %>" data-worker_secondary6="<%= day[1]["worker_secondary6"] %>" data-worker_secondary7="<%= day[1]["worker_secondary7"] %>" data-worker_secondary8="<%= day[1]["worker_secondary8"] %>" data-worker_secondary9="<%= day[1]["worker_secondary9"] %>" data-cancelled="<%= day[1]["cancelled"] %>" data-other="<%= day[1]["other"] %>" data-inacc_track="<%= day[1]["inacc_track"] %>" data-btime="<%= day[1]["b_time"] %>" data-blocation="<%= day[1]["b_location"] %>" data-onsitename="<%= day[1]["onsite_name"] %>" type = hidden>
+    <input name="<%= day[0] %>" id="<%= day[0] %>" data-start="<%= day[1]["start_time"] %>" data-end="<%= day[1]["end_time"] %>" data-cp1="<%= day[1]["cp1"] %>" data-cp2="<%= day[1]["cp2"] %>" data-mp1="<%= day[1]["mp1"] %>" data-mp2="<%= day[1]["mp2"] %>" data-MT1="<%= day[1]["MT1"] %>" data-MT2="<%= day[1]["MT2"] %>" data-MT3="<%= day[1]["MT3"] %>" data-MT4="<%= day[1]["MT4"] %>" data-taw="<%= day[1]["taw"] %>" data-form_b="<%= day[1]["form_b"] %>" data-form_c="<%= day[1]["form_c"] %>" data-track_and_time="<%= day[1]["track_and_time"] %>"  data-single_track="<%= day[1]["single_track"] %>" data-worker_primary="<%= day[1]["worker_primary"] %>" data-worker_secondary1="<%= day[1]["worker_secondary1"] %>" data-worker_secondary2="<%= day[1]["worker_secondary2"] %>" data-worker_secondary3="<%= day[1]["worker_secondary3"] %>" data-worker_secondary4="<%= day[1]["worker_secondary4"] %>" data-worker_secondary5="<%= day[1]["worker_secondary5"] %>" data-worker_secondary6="<%= day[1]["worker_secondary6"] %>" data-worker_secondary7="<%= day[1]["worker_secondary7"] %>" data-worker_secondary8="<%= day[1]["worker_secondary8"] %>" data-worker_secondary9="<%= day[1]["worker_secondary9"] %>" data-cancelled="<%= day[1]["cancelled"] %>" data-other="<%= day[1]["other"] %>" data-inacc_track="<%= day[1]["inacc_track"] %>" data-btime="<%= day[1]["b_time"] %>" data-blocation="<%= day[1]["b_location"] %>" data-onsitename="<%= day[1]["onsite_name"] %>" data-onsitenumber="<%= day[1]["onsite_number"] %>" type = hidden>
   <% end %>
 <% end %>

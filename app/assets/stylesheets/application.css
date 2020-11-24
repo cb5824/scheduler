@@ -312,7 +312,6 @@ table.requests_table thead th {
   /* font-weight: bold; */
   /* color: #FFFFFF; */
   text-align: center;
-  border-left: 2px solid #D0E4F5;
 }
 table.requests_table thead th:first-child {
   border-left: none;
@@ -530,7 +529,9 @@ th.rotated > div{
 }
 
 .requests_table th{
-  border: 2px solid black;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
   font-size: 8px;
   font-family: Verdana, Geneva, sans-serif;
 }
@@ -864,6 +865,7 @@ th.rotated > div{
 
 .index_top_container{
   padding-left: 20px;
+  padding-right: 20px;
 }
 
 #approve_all_for_group{
@@ -997,7 +999,7 @@ tr.cancelled_day img{
   font-size: 15px;
   color: #a91d1d;
   text-align: left;
-  margin-left: 30%; 
+  margin-left: 30%;
 }
 
 .title_card li{
@@ -1026,4 +1028,45 @@ tr.cancelled_day img{
 
 .field_with_errors{
   display: contents;
+}
+
+#line_sheet_header{
+display: flex;
+align-items: flex-start;
+width: 1860px;
+justify-content: space-between;
+}
+
+#line_sheet_center{
+  width: 550px;
+  height: 250px;
+  display: inline-block;
+}
+
+#line_sheet_left{
+  display: inline-block;
+}
+
+#line_sheet_right{
+  display: inline-block;
+}
+
+#line_sheet_left .fakebutton{
+  margin-bottom: 50px;
+}
+
+#line_sheet_center button{
+  margin-left: 45%;
+}
+
+#news_display{
+  color: red;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.recent{
+  border: 2px solid red;
 }
