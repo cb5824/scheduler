@@ -17,9 +17,8 @@
       <% end %>
       <div id="account_overlay" class="hide">
         <% if user_signed_in? %>
-          <a class='nav_link' href='<%= profiles_path %>'>Users</a>
           <% if @user.role == "admin" || @user.role == "superadmin" %>
-
+          <a class='nav_link' href='<%= profiles_path %>'>Users</a>
           <% end %>
           <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete,  :class => "nav_link" %>
           <a class='nav_link' href='<%= edit_user_registration_path(current_user.id) %>'>My Account</a>
