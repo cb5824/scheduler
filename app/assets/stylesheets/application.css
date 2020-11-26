@@ -1070,3 +1070,30 @@ justify-content: space-between;
 .recent{
   border: 2px solid red;
 }
+
+#token_space, #superadmin_token_space{
+  background-color: azure;
+  width: 250px;
+  margin-left: 50px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#token_space{
+  height: 50px;
+}
+
+#superadmin_token_space{
+  flex-direction: column;
+}
+
+#superadmin_token_space ul{
+  padding-left: 0px;
+}
+
+#generate_token, #clear_signuptokens{
+  margin-left: 100px;
+  margin-top: 5px;
+}

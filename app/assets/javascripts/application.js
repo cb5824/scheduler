@@ -2013,4 +2013,20 @@ $('#news_update').on('click', (event) =>{
  });
 });
 
+
+$('#generate_token').on('click', (event) =>{
+  event.preventDefault();
+  let address = " /api/v1/signuptokens";
+
+  let request = $.ajax({
+    method: 'GET',
+    data: {},
+    url: address
+  });
+
+  request.done((response) => {
+    $('#token_space').html(response["new_code"]);
+ });
+});
+
 });

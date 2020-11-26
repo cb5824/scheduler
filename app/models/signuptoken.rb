@@ -1,0 +1,3 @@
+class Signuptoken < ApplicationRecord
+
+end

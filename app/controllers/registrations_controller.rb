@@ -14,4 +14,8 @@ class RegistrationsController < ApplicationController
     @user.save!
     render :show
   end
+
+  def new
+  end
+
 end

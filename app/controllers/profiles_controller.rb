@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-
+  before_action :authenticate_user!, except: [:new, :edit]
   def index
     @user = current_user
     @users = User.all
@@ -7,9 +7,12 @@ class ProfilesController < ApplicationController
 
   def show
     @user = User.where(id: params[:id])[0]
+    @logged_in_user = current_user
+
   end
 
   def update
+    @logged_in_user = current_user
     @user = User.where(id: params[:id])[0]
     if params[:updates][:new_role] != 'no_change'
       @user.role = params[:updates][:new_role]
@@ -22,6 +25,10 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-
+    binding.pry
   end
+
+  def new
+  end
+
 end

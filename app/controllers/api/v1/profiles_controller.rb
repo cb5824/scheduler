@@ -8,7 +8,7 @@ class Api::V1::ProfilesController < ApplicationController
     if target_user.active == true
       target_user.active = false
       target_user.save
-      sign_out(target_user)
+
     else
       target_user.active = true
       target_user.save

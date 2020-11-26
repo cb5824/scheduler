@@ -1,0 +1,7 @@
+
+<%= form_tag(edit_requests_path, method: "get") do %>
+  <%= label_tag(:year, "Year:") %>
+  <%= number_field_tag(:year, @thisyear) %>
+
+  <%= submit_tag("Filter") %>
+<% end %>
