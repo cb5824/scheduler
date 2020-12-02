@@ -293,7 +293,7 @@ end
 
       milepost = request.monday_hash["mp1"].to_f.to_s + " -\n" + request.monday_hash["mp2"].to_f.to_s
       controlpoint = "#{request.parse_cp(request.monday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.monday_hash["cp2"].to_i)}"
-      timeframe = "#{request.monday_hash["start_time"]} - #{request.monday_hash["end_time"]}"
+      timeframe = "#{request.monday_hash["start_time"]} -\n#{request.monday_hash["end_time"]}"
       description = "#{request.title}\n#{request.description}"
       project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
@@ -458,7 +458,7 @@ end
 
       milepost = request.tuesday_hash["mp1"].to_f.to_s + " -\n" + request.tuesday_hash["mp2"].to_f.to_s
       controlpoint = "#{request.parse_cp(request.tuesday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.tuesday_hash["cp2"].to_i)}"
-      timeframe = "#{request.tuesday_hash["start_time"]} - #{request.tuesday_hash["end_time"]}"
+      timeframe = "#{request.tuesday_hash["start_time"]} -\n#{request.tuesday_hash["end_time"]}"
       description = "#{request.title}\n#{request.description}"
       project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
@@ -622,7 +622,7 @@ end
 
       milepost = request.wednesday_hash["mp1"].to_f.to_s + " -\n" + request.wednesday_hash["mp2"].to_f.to_s
       controlpoint = "#{request.parse_cp(request.wednesday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.wednesday_hash["cp2"].to_i)}"
-      timeframe = "#{request.wednesday_hash["start_time"]} - #{request.wednesday_hash["end_time"]}"
+      timeframe = "#{request.wednesday_hash["start_time"]} -\n#{request.wednesday_hash["end_time"]}"
       description = "#{request.title}\n#{request.description}"
       project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
@@ -786,7 +786,7 @@ end
 
       milepost = request.thursday_hash["mp1"].to_f.to_s + " -\n" + request.thursday_hash["mp2"].to_f.to_s
       controlpoint = "#{request.parse_cp(request.thursday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.thursday_hash["cp2"].to_i)}"
-      timeframe = "#{request.thursday_hash["start_time"]} - #{request.thursday_hash["end_time"]}"
+      timeframe = "#{request.thursday_hash["start_time"]} -\n#{request.thursday_hash["end_time"]}"
       description = "#{request.title}\n#{request.description}"
       project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
@@ -950,7 +950,7 @@ end
 
       milepost = request.friday_hash["mp1"].to_f.to_s + " -\n" + request.friday_hash["mp2"].to_f.to_s
       controlpoint = "#{request.parse_cp(request.friday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.friday_hash["cp2"].to_i)}"
-      timeframe = "#{request.friday_hash["start_time"]} - #{request.friday_hash["end_time"]}"
+      timeframe = "#{request.friday_hash["start_time"]} -\n#{request.friday_hash["end_time"]}"
       description = "#{request.title}\n#{request.description}"
       project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
@@ -1114,7 +1114,7 @@ end
 
       milepost = request.saturday_hash["mp1"].to_f.to_s + " -\n" + request.saturday_hash["mp2"].to_f.to_s
       controlpoint = "#{request.parse_cp(request.saturday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.saturday_hash["cp2"].to_i)}"
-      timeframe = "#{request.saturday_hash["start_time"]} - #{request.saturday_hash["end_time"]}"
+      timeframe = "#{request.saturday_hash["start_time"]} -\n#{request.saturday_hash["end_time"]}"
       description = "#{request.title}\n#{request.description}"
       project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
@@ -1278,7 +1278,7 @@ end
 
       milepost = request.sunday_hash["mp1"].to_f.to_s + " -\n" + request.sunday_hash["mp2"].to_f.to_s
       controlpoint = "#{request.parse_cp(request.sunday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.sunday_hash["cp2"].to_i)}"
-      timeframe = "#{request.sunday_hash["start_time"]} - #{request.sunday_hash["end_time"]}"
+      timeframe = "#{request.sunday_hash["start_time"]} -\n#{request.sunday_hash["end_time"]}"
       description = "#{request.title}\n#{request.description}"
       project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
