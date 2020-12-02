@@ -2001,10 +2001,12 @@ $('#news_update').on('click', (event) =>{
   event.preventDefault();
   let text = $('#news_feed').val();
   let address = "/api/v1/newsfeeds";
+  let week = $("#news_feed").data("week");
+  let year = $("#news_feed").data("year");
 
   let request = $.ajax({
     method: 'GET',
-    data: {text: text},
+    data: {text: text, year: year, week: week},
     url: address
   });
 

@@ -25,7 +25,6 @@ class ProfilesController < ApplicationController
   end
 
   def edit
-    binding.pry
   end
 
   def new

@@ -1097,3 +1097,18 @@ justify-content: space-between;
   margin-left: 100px;
   margin-top: 5px;
 }
+
+.indent{
+  margin-left: 20px;
+}
+
+.user_line{
+  background-color: azure;
+  padding: 4px 5px 4px 5px;
+  width: 600px;
+  border-bottom: 1px dotted black;
+}
+
+.user_edit{
+  margin-right: 10px;
+}

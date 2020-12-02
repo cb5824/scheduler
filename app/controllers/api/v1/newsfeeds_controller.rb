@@ -10,13 +10,14 @@ class Api::V1::NewsfeedsController < ApplicationController
   end
 
   def index
-    binding.pry
-    if Newsfeed.all == []
+    if Newsfeed.where(week: params["week"], year: params["year"]) == []
       update = Newsfeed.new
     else
-      update = Newsfeed.all[0]
+      update = Newsfeed.where(week: params["week"], year: params["year"])[0]
     end
     update.contents = params["text"]
+    update.week = params["week"]
+    update.year = params["year"]
     update.save
   end
 

@@ -10,7 +10,6 @@
 <form action="/registrations/<%= @user.id %>" method="post">
   <input name="_method" type="hidden" value="patch" />
   <select name="updates[new_role]">
-    <% binding.pry %>
     <% if (current_user).role == "superadmin" %>
       <%= options_for_select([['Admin', 'admin'], ['User', 'user'], ['Investigator', 'investigator'], ['Superadmin', 'superadmin']]) %>
     <% else %>

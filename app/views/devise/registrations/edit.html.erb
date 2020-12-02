@@ -1,65 +1,62 @@
-<% if current_user.role == "superadmin" %>
-<%= link_to 'Superadmin Dashboard', contractors_path %>
-<% end %>
-
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-  <br>
-
-  <div class="field">
-    <label for="user_default_color">Default Color:</label>
-    <select name="user[default_color]" id="user_default_color" data-current="<%= @user.default_color %>">
-      <option class="color_ffffff" value="color_ffffff">#ffffff</option>
-      <option class="color_ff1100" value="color_ff1100">#ff1100</option>
-      <option class="color_f2bb07" value="color_f2bb07">#f2bb07</option>
-      <option class="color_fc9d0f" value="color_fc9d0f">#fc9d0f</option>
-      <option class="color_bf7e1d" value="color_bf7e1d">#bf7e1d</option>
-      <option class="color_531199" value="color_531199">#531199</option>
-      <option class="color_249ee0" value="color_249ee0">#249ee0</option>
-      <option class="color_24290f" value="color_24290f">#24290f</option>
-      <option class="color_187d3f" value="color_187d3f">#187d3f</option>
-      <option class="color_0a5cad" value="color_0a5cad">#0a5cad</option>
-      <option class="color_e30eca" value="color_e30eca">#e30eca</option>
-    </select>
-  </div>
-  <br>
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+<div class="indent">
+  <% if current_user.role == "superadmin" %>
+  <%= link_to 'Superadmin Dashboard', contractors_path %>
   <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+    <br>
+
+    <div class="field">
+      <label for="user_default_color">Default Color:</label>
+      <select name="user[default_color]" id="user_default_color" data-current="<%= @user.default_color %>">
+        <option class="color_ffffff" value="color_ffffff">#ffffff</option>
+        <option class="color_ff1100" value="color_ff1100">#ff1100</option>
+        <option class="color_f2bb07" value="color_f2bb07">#f2bb07</option>
+        <option class="color_fc9d0f" value="color_fc9d0f">#fc9d0f</option>
+        <option class="color_bf7e1d" value="color_bf7e1d">#bf7e1d</option>
+        <option class="color_531199" value="color_531199">#531199</option>
+        <option class="color_249ee0" value="color_249ee0">#249ee0</option>
+        <option class="color_24290f" value="color_24290f">#24290f</option>
+        <option class="color_187d3f" value="color_187d3f">#187d3f</option>
+        <option class="color_0a5cad" value="color_0a5cad">#0a5cad</option>
+        <option class="color_e30eca" value="color_e30eca">#e30eca</option>
+      </select>
+    </div>
+    <br>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
+    </div>
 
-<h3>Cancel my account</h3>
+    <div class="actions">
+      <%= f.submit "Update" %>
+    </div>
+  <% end %>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

@@ -22,7 +22,6 @@ class Api::V1::SignuptokensController < ApplicationController
   end
 
   def destroy
-    binding.pry
   end
 
 end

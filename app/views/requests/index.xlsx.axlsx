@@ -5,9 +5,13 @@ wb.add_worksheet(name: "Weekly") do |sheet|
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
   end
 
+  def center_normal_cell(workbook, background, textcolor = "000000")
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+  end
+
   def boolean_cell(workbook, background, value)
-    if value == "=CHAR(252)"
-      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+    if value == "\u{2714}"
+      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
     else
       workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
     end
@@ -25,6 +29,14 @@ wb.add_worksheet(name: "Weekly") do |sheet|
 
   sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 6, 6, 6, 6, 6, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 4, 4, 4, 4, 4, 4, 4, 4, 15, 15, 15
   entry_count = 1
+
+  sheet.sheet_view.pane do |pane|
+    pane.top_left_cell = "C2"
+    pane.state = :frozen_split
+    pane.y_split = 1
+    pane.x_split = 2
+    pane.active_pane = :bottom_right
+  end
 
   @requests.each do |request|
     if request.color == "color_ffffff"
@@ -68,126 +80,128 @@ wb.add_worksheet(name: "Weekly") do |sheet|
       nwcolor = "ffffff"
     end
 
-    milepost = request.monday_hash["mp1"].to_s + " - " + request.monday_hash["mp2"].to_s
-    controlpoint = request.monday_hash["cp1"].to_s + " - " + request.monday_hash["cp2"].to_s
-    timeframe = "#{request.monday_hash["start_time"]} - #{request.monday_hash["end_time"]}"
+    milepost = request.weekly.mile_post
+    controlpoint = "#{request.weekly.control_point}"
+    timeframe = "#{request.weekly.shift}"
+    description = "#{request.title}\n#{request.description}"
+    project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
     if request.weekly.mt1 == true
-      mt1 = "=CHAR(252)"
+      mt1 = "\u{2714}"
     else
       mt1 = "-"
     end
 
     if request.weekly.mt2 == true
-      mt2 = "=CHAR(252)"
+      mt2 = "\u{2714}"
     else
       mt2 = "-"
     end
 
     if request.weekly.mt3 == true
-      mt3 = "=CHAR(252)"
+      mt3 = "\u{2714}"
     else
       mt3 = "-"
     end
 
     if request.weekly.mt4 == true
-      mt4 = "=CHAR(252)"
+      mt4 = "\u{2714}"
     else
       mt4 = "-"
     end
 
     if request.weekly.other == true
-      other = "=CHAR(252)"
+      other = "\u{2714}"
     else
       other = "-"
     end
 
     if request.weekly.single_tracking == TRUE
-      single_tracking = "=CHAR(252)"
+      single_tracking = "\u{2714}"
     else
       single_tracking = "-"
     end
 
     if request.weekly.taw == TRUE
-      taw = "=CHAR(252)"
+      taw = "\u{2714}"
     else
       taw = "-"
     end
 
     if request.weekly.form_b == TRUE
-      form_b = "=CHAR(252)"
+      form_b = "\u{2714}"
     else
       form_b = "-"
     end
 
     if request.weekly.form_c == TRUE
-      form_c = "=CHAR(252)"
+      form_c = "\u{2714}"
     else
       form_c = "-"
     end
 
     if request.weekly.track_and_time == TRUE
-      track_and_time = "=CHAR(252)"
+      track_and_time = "\u{2714}"
     else
       track_and_time = "-"
     end
 
     if request.weekly.inacc_track == TRUE
-      inacc_track = "=CHAR(252)"
+      inacc_track = "\u{2714}"
     else
       inacc_track = "-"
     end
 
     if request.rwp == "yes"
-      rwp = "=CHAR(252)"
+      rwp = "\u{2714}"
     else
       rwp = "-"
     end
 
     if request.ocs == "yes"
-      ocs = "=CHAR(252)"
+      ocs = "\u{2714}"
     else
       ocs = "-"
     end
 
     if request.disturb == "yes"
-      disturb = "=CHAR(252)"
+      disturb = "\u{2714}"
     else
       disturb = "-"
     end
 
     if request.rrm == "yes"
-      rrm = "=CHAR(252)"
+      rrm = "\u{2714}"
     else
       rrm = "-"
     end
 
     if request.foul == "yes"
-      foul = "=CHAR(252)"
+      foul = "\u{2714}"
     else
       foul = "-"
     end
 
     if request.crossings == "yes"
-      crossings = "=CHAR(252)"
+      crossings = "\u{2714}"
     else
       crossings = "-"
     end
 
     if request.underground == "yes"
-      underground = "=CHAR(252)"
+      underground = "\u{2714}"
     else
       underground = "-"
     end
 
     if request.flagging == "yes"
-      flagging = "=CHAR(252)"
+      flagging = "\u{2714}"
     else
       flagging = "-"
     end
 
 
-    sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.mon_workers, request.weekly.tue_workers, request.weekly.wed_workers, request.weekly.thu_workers, request.weekly.fri_workers, request.weekly.sat_workers, request.weekly.sun_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.sswps, request.change_notices, rwp, ocs, disturb, rrm, foul, crossings, underground, flagging, request.created_at.strftime("%m/%d/%Y"), request.updated_at.strftime("%m/%d/%Y"), request.requestor_name], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b),  boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, rwp), boolean_cell(wb, nwcolor, ocs), boolean_cell(wb, nwcolor, disturb), boolean_cell(wb, nwcolor, rrm), boolean_cell(wb, nwcolor, foul), boolean_cell(wb, nwcolor, crossings), boolean_cell(wb, nwcolor, underground), boolean_cell(wb, nwcolor, flagging), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+    sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.mon_workers, request.weekly.tue_workers, request.weekly.wed_workers, request.weekly.thu_workers, request.weekly.fri_workers, request.weekly.sat_workers, request.weekly.sun_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.sswps, request.change_notices, rwp, ocs, disturb, rrm, foul, crossings, underground, flagging, request.created_at.strftime("%m/%d/%Y"), request.updated_at.strftime("%m/%d/%Y"), request.requestor_name], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b),  boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, rwp), boolean_cell(wb, nwcolor, ocs), boolean_cell(wb, nwcolor, disturb), boolean_cell(wb, nwcolor, rrm), boolean_cell(wb, nwcolor, foul), boolean_cell(wb, nwcolor, crossings), boolean_cell(wb, nwcolor, underground), boolean_cell(wb, nwcolor, flagging), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
     entry_count += 1
 
   end
@@ -199,9 +213,13 @@ def normal_cell(workbook, background, textcolor = "000000")
   workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
 end
 
+def center_normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+end
+
 def boolean_cell(workbook, background, value)
-  if value == "=CHAR(252)"
-    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  if value == "\u{2714}"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   else
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   end
@@ -219,6 +237,14 @@ sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", 
 
 sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
 entry_count = 1
+
+sheet.sheet_view.pane do |pane|
+  pane.top_left_cell = "C2"
+  pane.state = :frozen_split
+  pane.y_split = 1
+  pane.x_split = 2
+  pane.active_pane = :bottom_right
+end
 
   @requests.each do |request|
 
@@ -265,77 +291,79 @@ entry_count = 1
         nwcolor = "ffffff"
       end
 
-      milepost = request.monday_hash["mp1"].to_s + " - " + request.monday_hash["mp2"].to_s
-      controlpoint = request.monday_hash["cp1"].to_s + " - " + request.monday_hash["cp2"].to_s
+      milepost = request.monday_hash["mp1"].to_f.to_s + " -\n" + request.monday_hash["mp2"].to_f.to_s
+      controlpoint = "#{request.parse_cp(request.monday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.monday_hash["cp2"].to_i)}"
       timeframe = "#{request.monday_hash["start_time"]} - #{request.monday_hash["end_time"]}"
+      description = "#{request.title}\n#{request.description}"
+      project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
       if request.monday_hash["MT1"] == "1"
-        mt1 = "=CHAR(252)"
+        mt1 = "\u{2714}"
       else
         mt1 = "-"
       end
 
       if request.monday_hash["MT2"] == "1"
-        mt2 = "=CHAR(252)"
+        mt2 = "\u{2714}"
       else
         mt2 = "-"
       end
 
       if request.monday_hash["MT3"] == "1"
-        mt3 = "=CHAR(252)"
+        mt3 = "\u{2714}"
       else
         mt3 = "-"
       end
 
       if request.monday_hash["MT4"] == "1"
-        mt4 = "=CHAR(252)"
+        mt4 = "\u{2714}"
       else
         mt4 = "-"
       end
 
       if request.monday_hash["other"] == "1"
-        other = "=CHAR(252)"
+        other = "\u{2714}"
       else
         other = "-"
       end
 
       if request.monday_hash["single_tracking"] == "1"
-        single_tracking = "=CHAR(252)"
+        single_tracking = "\u{2714}"
       else
         single_tracking = "-"
       end
 
       if request.monday_hash["taw"] == "1"
-        taw = "=CHAR(252)"
+        taw = "\u{2714}"
       else
         taw = "-"
       end
 
       if request.monday_hash["form_b"] == "1"
-        form_b = "=CHAR(252)"
+        form_b = "\u{2714}"
       else
         form_b = "-"
       end
 
       if request.monday_hash["form_c"] == "1"
-        form_c = "=CHAR(252)"
+        form_c = "\u{2714}"
       else
         form_c = "-"
       end
 
       if request.monday_hash["track_and_time"] == "1"
-        track_and_time = "=CHAR(252)"
+        track_and_time = "\u{2714}"
       else
         track_and_time = "-"
       end
 
       if request.monday_hash["inacc_track"] == "1"
-        inacc_track = "=CHAR(252)"
+        inacc_track = "\u{2714}"
       else
         inacc_track = "-"
       end
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.mon_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_mon, request.inspector_notes_mon, request.admin_notes_mon], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+      sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.mon_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_mon, request.inspector_notes_mon, request.admin_notes_mon], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
 
       entry_count += 1
     end
@@ -350,9 +378,13 @@ def normal_cell(workbook, background, textcolor = "000000")
   workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
 end
 
+def center_normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+end
+
 def boolean_cell(workbook, background, value)
-  if value == "=CHAR(252)"
-    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  if value == "\u{2714}"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   else
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   end
@@ -370,6 +402,14 @@ sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", 
 
 sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
 entry_count = 1
+
+sheet.sheet_view.pane do |pane|
+  pane.top_left_cell = "C2"
+  pane.state = :frozen_split
+  pane.y_split = 1
+  pane.x_split = 2
+  pane.active_pane = :bottom_right
+end
 
   @requests.each do |request|
 
@@ -416,77 +456,79 @@ entry_count = 1
         nwcolor = "ffffff"
       end
 
-      milepost = request.tuesday_hash["mp1"].to_s + " - " + request.tuesday_hash["mp2"].to_s
-      controlpoint = request.tuesday_hash["cp1"].to_s + " - " + request.tuesday_hash["cp2"].to_s
+      milepost = request.tuesday_hash["mp1"].to_f.to_s + " -\n" + request.tuesday_hash["mp2"].to_f.to_s
+      controlpoint = "#{request.parse_cp(request.tuesday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.tuesday_hash["cp2"].to_i)}"
       timeframe = "#{request.tuesday_hash["start_time"]} - #{request.tuesday_hash["end_time"]}"
+      description = "#{request.title}\n#{request.description}"
+      project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
       if request.tuesday_hash["MT1"] == "1"
-        mt1 = "=CHAR(252)"
+        mt1 = "\u{2714}"
       else
         mt1 = "-"
       end
 
       if request.tuesday_hash["MT2"] == "1"
-        mt2 = "=CHAR(252)"
+        mt2 = "\u{2714}"
       else
         mt2 = "-"
       end
 
       if request.tuesday_hash["MT3"] == "1"
-        mt3 = "=CHAR(252)"
+        mt3 = "\u{2714}"
       else
         mt3 = "-"
       end
 
       if request.tuesday_hash["MT4"] == "1"
-        mt4 = "=CHAR(252)"
+        mt4 = "\u{2714}"
       else
         mt4 = "-"
       end
 
       if request.tuesday_hash["other"] == "1"
-        other = "=CHAR(252)"
+        other = "\u{2714}"
       else
         other = "-"
       end
 
       if request.tuesday_hash["single_tracking"] == "1"
-        single_tracking = "=CHAR(252)"
+        single_tracking = "\u{2714}"
       else
         single_tracking = "-"
       end
 
       if request.tuesday_hash["taw"] == "1"
-        taw = "=CHAR(252)"
+        taw = "\u{2714}"
       else
         taw = "-"
       end
 
       if request.tuesday_hash["form_b"] == "1"
-        form_b = "=CHAR(252)"
+        form_b = "\u{2714}"
       else
         form_b = "-"
       end
 
       if request.tuesday_hash["form_c"] == "1"
-        form_c = "=CHAR(252)"
+        form_c = "\u{2714}"
       else
         form_c = "-"
       end
 
       if request.tuesday_hash["track_and_time"] == "1"
-        track_and_time = "=CHAR(252)"
+        track_and_time = "\u{2714}"
       else
         track_and_time = "-"
       end
 
       if request.tuesday_hash["inacc_track"] == "1"
-        inacc_track = "=CHAR(252)"
+        inacc_track = "\u{2714}"
       else
         inacc_track = "-"
       end
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.tue_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_tue, request.inspector_notes_tue, request.admin_notes_tue], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+      sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.tue_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_tue, request.inspector_notes_tue, request.admin_notes_tue], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
 
       entry_count += 1
     end
@@ -500,9 +542,13 @@ def normal_cell(workbook, background, textcolor = "000000")
   workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
 end
 
+def center_normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+end
+
 def boolean_cell(workbook, background, value)
-  if value == "=CHAR(252)"
-    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  if value == "\u{2714}"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   else
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   end
@@ -520,6 +566,14 @@ sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", 
 
 sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
 entry_count = 1
+
+sheet.sheet_view.pane do |pane|
+  pane.top_left_cell = "C2"
+  pane.state = :frozen_split
+  pane.y_split = 1
+  pane.x_split = 2
+  pane.active_pane = :bottom_right
+end
 
   @requests.each do |request|
 
@@ -566,77 +620,79 @@ entry_count = 1
         nwcolor = "ffffff"
       end
 
-      milepost = request.wednesday_hash["mp1"].to_s + " - " + request.wednesday_hash["mp2"].to_s
-      controlpoint = request.wednesday_hash["cp1"].to_s + " - " + request.wednesday_hash["cp2"].to_s
+      milepost = request.wednesday_hash["mp1"].to_f.to_s + " -\n" + request.wednesday_hash["mp2"].to_f.to_s
+      controlpoint = "#{request.parse_cp(request.wednesday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.wednesday_hash["cp2"].to_i)}"
       timeframe = "#{request.wednesday_hash["start_time"]} - #{request.wednesday_hash["end_time"]}"
+      description = "#{request.title}\n#{request.description}"
+      project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
       if request.wednesday_hash["MT1"] == "1"
-        mt1 = "=CHAR(252)"
+        mt1 = "\u{2714}"
       else
         mt1 = "-"
       end
 
       if request.wednesday_hash["MT2"] == "1"
-        mt2 = "=CHAR(252)"
+        mt2 = "\u{2714}"
       else
         mt2 = "-"
       end
 
       if request.wednesday_hash["MT3"] == "1"
-        mt3 = "=CHAR(252)"
+        mt3 = "\u{2714}"
       else
         mt3 = "-"
       end
 
       if request.wednesday_hash["MT4"] == "1"
-        mt4 = "=CHAR(252)"
+        mt4 = "\u{2714}"
       else
         mt4 = "-"
       end
 
       if request.wednesday_hash["other"] == "1"
-        other = "=CHAR(252)"
+        other = "\u{2714}"
       else
         other = "-"
       end
 
       if request.wednesday_hash["single_tracking"] == "1"
-        single_tracking = "=CHAR(252)"
+        single_tracking = "\u{2714}"
       else
         single_tracking = "-"
       end
 
       if request.wednesday_hash["taw"] == "1"
-        taw = "=CHAR(252)"
+        taw = "\u{2714}"
       else
         taw = "-"
       end
 
       if request.wednesday_hash["form_b"] == "1"
-        form_b = "=CHAR(252)"
+        form_b = "\u{2714}"
       else
         form_b = "-"
       end
 
       if request.wednesday_hash["form_c"] == "1"
-        form_c = "=CHAR(252)"
+        form_c = "\u{2714}"
       else
         form_c = "-"
       end
 
       if request.wednesday_hash["track_and_time"] == "1"
-        track_and_time = "=CHAR(252)"
+        track_and_time = "\u{2714}"
       else
         track_and_time = "-"
       end
 
       if request.wednesday_hash["inacc_track"] == "1"
-        inacc_track = "=CHAR(252)"
+        inacc_track = "\u{2714}"
       else
         inacc_track = "-"
       end
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.wed_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_wed, request.inspector_notes_wed, request.admin_notes_wed], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+      sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.wed_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_wed, request.inspector_notes_wed, request.admin_notes_wed], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
 
       entry_count += 1
     end
@@ -650,9 +706,13 @@ def normal_cell(workbook, background, textcolor = "000000")
   workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
 end
 
+def center_normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+end
+
 def boolean_cell(workbook, background, value)
-  if value == "=CHAR(252)"
-    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  if value == "\u{2714}"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   else
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   end
@@ -670,6 +730,14 @@ sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", 
 
 sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
 entry_count = 1
+
+sheet.sheet_view.pane do |pane|
+  pane.top_left_cell = "C2"
+  pane.state = :frozen_split
+  pane.y_split = 1
+  pane.x_split = 2
+  pane.active_pane = :bottom_right
+end
 
   @requests.each do |request|
 
@@ -716,77 +784,79 @@ entry_count = 1
         nwcolor = "ffffff"
       end
 
-      milepost = request.thursday_hash["mp1"].to_s + " - " + request.thursday_hash["mp2"].to_s
-      controlpoint = request.thursday_hash["cp1"].to_s + " - " + request.thursday_hash["cp2"].to_s
+      milepost = request.thursday_hash["mp1"].to_f.to_s + " -\n" + request.thursday_hash["mp2"].to_f.to_s
+      controlpoint = "#{request.parse_cp(request.thursday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.thursday_hash["cp2"].to_i)}"
       timeframe = "#{request.thursday_hash["start_time"]} - #{request.thursday_hash["end_time"]}"
+      description = "#{request.title}\n#{request.description}"
+      project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
       if request.thursday_hash["MT1"] == "1"
-        mt1 = "=CHAR(252)"
+        mt1 = "\u{2714}"
       else
         mt1 = "-"
       end
 
       if request.thursday_hash["MT2"] == "1"
-        mt2 = "=CHAR(252)"
+        mt2 = "\u{2714}"
       else
         mt2 = "-"
       end
 
       if request.thursday_hash["MT3"] == "1"
-        mt3 = "=CHAR(252)"
+        mt3 = "\u{2714}"
       else
         mt3 = "-"
       end
 
       if request.thursday_hash["MT4"] == "1"
-        mt4 = "=CHAR(252)"
+        mt4 = "\u{2714}"
       else
         mt4 = "-"
       end
 
       if request.thursday_hash["other"] == "1"
-        other = "=CHAR(252)"
+        other = "\u{2714}"
       else
         other = "-"
       end
 
       if request.thursday_hash["single_tracking"] == "1"
-        single_tracking = "=CHAR(252)"
+        single_tracking = "\u{2714}"
       else
         single_tracking = "-"
       end
 
       if request.thursday_hash["taw"] == "1"
-        taw = "=CHAR(252)"
+        taw = "\u{2714}"
       else
         taw = "-"
       end
 
       if request.thursday_hash["form_b"] == "1"
-        form_b = "=CHAR(252)"
+        form_b = "\u{2714}"
       else
         form_b = "-"
       end
 
       if request.thursday_hash["form_c"] == "1"
-        form_c = "=CHAR(252)"
+        form_c = "\u{2714}"
       else
         form_c = "-"
       end
 
       if request.thursday_hash["track_and_time"] == "1"
-        track_and_time = "=CHAR(252)"
+        track_and_time = "\u{2714}"
       else
         track_and_time = "-"
       end
 
       if request.thursday_hash["inacc_track"] == "1"
-        inacc_track = "=CHAR(252)"
+        inacc_track = "\u{2714}"
       else
         inacc_track = "-"
       end
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.thu_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_thu, request.inspector_notes_thu, request.admin_notes_thu], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+      sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.thu_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_thu, request.inspector_notes_thu, request.admin_notes_thu], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
 
       entry_count += 1
     end
@@ -800,9 +870,13 @@ def normal_cell(workbook, background, textcolor = "000000")
   workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
 end
 
+def center_normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+end
+
 def boolean_cell(workbook, background, value)
-  if value == "=CHAR(252)"
-    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  if value == "\u{2714}"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   else
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   end
@@ -820,6 +894,14 @@ sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", 
 
 sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
 entry_count = 1
+
+sheet.sheet_view.pane do |pane|
+  pane.top_left_cell = "C2"
+  pane.state = :frozen_split
+  pane.y_split = 1
+  pane.x_split = 2
+  pane.active_pane = :bottom_right
+end
 
   @requests.each do |request|
 
@@ -866,77 +948,79 @@ entry_count = 1
         nwcolor = "ffffff"
       end
 
-      milepost = request.friday_hash["mp1"].to_s + " - " + request.friday_hash["mp2"].to_s
-      controlpoint = request.friday_hash["cp1"].to_s + " - " + request.friday_hash["cp2"].to_s
+      milepost = request.friday_hash["mp1"].to_f.to_s + " -\n" + request.friday_hash["mp2"].to_f.to_s
+      controlpoint = "#{request.parse_cp(request.friday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.friday_hash["cp2"].to_i)}"
       timeframe = "#{request.friday_hash["start_time"]} - #{request.friday_hash["end_time"]}"
+      description = "#{request.title}\n#{request.description}"
+      project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
       if request.friday_hash["MT1"] == "1"
-        mt1 = "=CHAR(252)"
+        mt1 = "\u{2714}"
       else
         mt1 = "-"
       end
 
       if request.friday_hash["MT2"] == "1"
-        mt2 = "=CHAR(252)"
+        mt2 = "\u{2714}"
       else
         mt2 = "-"
       end
 
       if request.friday_hash["MT3"] == "1"
-        mt3 = "=CHAR(252)"
+        mt3 = "\u{2714}"
       else
         mt3 = "-"
       end
 
       if request.friday_hash["MT4"] == "1"
-        mt4 = "=CHAR(252)"
+        mt4 = "\u{2714}"
       else
         mt4 = "-"
       end
 
       if request.friday_hash["other"] == "1"
-        other = "=CHAR(252)"
+        other = "\u{2714}"
       else
         other = "-"
       end
 
       if request.friday_hash["single_tracking"] == "1"
-        single_tracking = "=CHAR(252)"
+        single_tracking = "\u{2714}"
       else
         single_tracking = "-"
       end
 
       if request.friday_hash["taw"] == "1"
-        taw = "=CHAR(252)"
+        taw = "\u{2714}"
       else
         taw = "-"
       end
 
       if request.friday_hash["form_b"] == "1"
-        form_b = "=CHAR(252)"
+        form_b = "\u{2714}"
       else
         form_b = "-"
       end
 
       if request.friday_hash["form_c"] == "1"
-        form_c = "=CHAR(252)"
+        form_c = "\u{2714}"
       else
         form_c = "-"
       end
 
       if request.friday_hash["track_and_time"] == "1"
-        track_and_time = "=CHAR(252)"
+        track_and_time = "\u{2714}"
       else
         track_and_time = "-"
       end
 
       if request.friday_hash["inacc_track"] == "1"
-        inacc_track = "=CHAR(252)"
+        inacc_track = "\u{2714}"
       else
         inacc_track = "-"
       end
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.fri_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_fri, request.inspector_notes_fri, request.admin_notes_fri], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+      sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.fri_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_fri, request.inspector_notes_fri, request.admin_notes_fri], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
 
       entry_count += 1
     end
@@ -950,9 +1034,13 @@ def normal_cell(workbook, background, textcolor = "000000")
   workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
 end
 
+def center_normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+end
+
 def boolean_cell(workbook, background, value)
-  if value == "=CHAR(252)"
-    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  if value == "\u{2714}"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   else
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   end
@@ -970,6 +1058,14 @@ sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", 
 
 sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
 entry_count = 1
+
+sheet.sheet_view.pane do |pane|
+  pane.top_left_cell = "C2"
+  pane.state = :frozen_split
+  pane.y_split = 1
+  pane.x_split = 2
+  pane.active_pane = :bottom_right
+end
 
   @requests.each do |request|
 
@@ -1016,77 +1112,79 @@ entry_count = 1
         nwcolor = "ffffff"
       end
 
-      milepost = request.saturday_hash["mp1"].to_s + " - " + request.saturday_hash["mp2"].to_s
-      controlpoint = request.saturday_hash["cp1"].to_s + " - " + request.saturday_hash["cp2"].to_s
+      milepost = request.saturday_hash["mp1"].to_f.to_s + " -\n" + request.saturday_hash["mp2"].to_f.to_s
+      controlpoint = "#{request.parse_cp(request.saturday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.saturday_hash["cp2"].to_i)}"
       timeframe = "#{request.saturday_hash["start_time"]} - #{request.saturday_hash["end_time"]}"
+      description = "#{request.title}\n#{request.description}"
+      project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
       if request.saturday_hash["MT1"] == "1"
-        mt1 = "=CHAR(252)"
+        mt1 = "\u{2714}"
       else
         mt1 = "-"
       end
 
       if request.saturday_hash["MT2"] == "1"
-        mt2 = "=CHAR(252)"
+        mt2 = "\u{2714}"
       else
         mt2 = "-"
       end
 
       if request.saturday_hash["MT3"] == "1"
-        mt3 = "=CHAR(252)"
+        mt3 = "\u{2714}"
       else
         mt3 = "-"
       end
 
       if request.saturday_hash["MT4"] == "1"
-        mt4 = "=CHAR(252)"
+        mt4 = "\u{2714}"
       else
         mt4 = "-"
       end
 
       if request.saturday_hash["other"] == "1"
-        other = "=CHAR(252)"
+        other = "\u{2714}"
       else
         other = "-"
       end
 
       if request.saturday_hash["single_tracking"] == "1"
-        single_tracking = "=CHAR(252)"
+        single_tracking = "\u{2714}"
       else
         single_tracking = "-"
       end
 
       if request.saturday_hash["taw"] == "1"
-        taw = "=CHAR(252)"
+        taw = "\u{2714}"
       else
         taw = "-"
       end
 
       if request.saturday_hash["form_b"] == "1"
-        form_b = "=CHAR(252)"
+        form_b = "\u{2714}"
       else
         form_b = "-"
       end
 
       if request.saturday_hash["form_c"] == "1"
-        form_c = "=CHAR(252)"
+        form_c = "\u{2714}"
       else
         form_c = "-"
       end
 
       if request.saturday_hash["track_and_time"] == "1"
-        track_and_time = "=CHAR(252)"
+        track_and_time = "\u{2714}"
       else
         track_and_time = "-"
       end
 
       if request.saturday_hash["inacc_track"] == "1"
-        inacc_track = "=CHAR(252)"
+        inacc_track = "\u{2714}"
       else
         inacc_track = "-"
       end
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.sat_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_sat, request.inspector_notes_sat, request.admin_notes_sat], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+      sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.sat_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_sat, request.inspector_notes_sat, request.admin_notes_sat], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
 
       entry_count += 1
     end
@@ -1100,9 +1198,13 @@ def normal_cell(workbook, background, textcolor = "000000")
   workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true}, :sz => 10, :fg_color => textcolor
 end
 
+def center_normal_cell(workbook, background, textcolor = "000000")
+  workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :fg_color => textcolor
+end
+
 def boolean_cell(workbook, background, value)
-  if value == "=CHAR(252)"
-    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+  if value == "\u{2714}"
+    workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   else
     workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
   end
@@ -1120,6 +1222,14 @@ sheet.add_row(["Line #", "Project", "Contractor", "Mile Post", "Control Point", 
 
 sheet.column_widths 4, 15, 15, 15, 15, 4, 4, 4, 4, 4, 30, 6, 4, 15, 4, 4, 4, 4, 4, 20, 20, 20
 entry_count = 1
+
+sheet.sheet_view.pane do |pane|
+  pane.top_left_cell = "C2"
+  pane.state = :frozen_split
+  pane.y_split = 1
+  pane.x_split = 2
+  pane.active_pane = :bottom_right
+end
 
   @requests.each do |request|
 
@@ -1166,77 +1276,79 @@ entry_count = 1
         nwcolor = "ffffff"
       end
 
-      milepost = request.sunday_hash["mp1"].to_s + " - " + request.sunday_hash["mp2"].to_s
-      controlpoint = request.sunday_hash["cp1"].to_s + " - " + request.sunday_hash["cp2"].to_s
+      milepost = request.sunday_hash["mp1"].to_f.to_s + " -\n" + request.sunday_hash["mp2"].to_f.to_s
+      controlpoint = "#{request.parse_cp(request.sunday_hash["cp1"].to_i)} -\n#{request.parse_cp(request.sunday_hash["cp2"].to_i)}"
       timeframe = "#{request.sunday_hash["start_time"]} - #{request.sunday_hash["end_time"]}"
+      description = "#{request.title}\n#{request.description}"
+      project = "#{request.requestor_project}\n#{request.requestor_work_directive}"
 
       if request.sunday_hash["MT1"] == "1"
-        mt1 = "=CHAR(252)"
+        mt1 = "\u{2714}"
       else
         mt1 = "-"
       end
 
       if request.sunday_hash["MT2"] == "1"
-        mt2 = "=CHAR(252)"
+        mt2 = "\u{2714}"
       else
         mt2 = "-"
       end
 
       if request.sunday_hash["MT3"] == "1"
-        mt3 = "=CHAR(252)"
+        mt3 = "\u{2714}"
       else
         mt3 = "-"
       end
 
       if request.sunday_hash["MT4"] == "1"
-        mt4 = "=CHAR(252)"
+        mt4 = "\u{2714}"
       else
         mt4 = "-"
       end
 
       if request.sunday_hash["other"] == "1"
-        other = "=CHAR(252)"
+        other = "\u{2714}"
       else
         other = "-"
       end
 
       if request.sunday_hash["single_tracking"] == "1"
-        single_tracking = "=CHAR(252)"
+        single_tracking = "\u{2714}"
       else
         single_tracking = "-"
       end
 
       if request.sunday_hash["taw"] == "1"
-        taw = "=CHAR(252)"
+        taw = "\u{2714}"
       else
         taw = "-"
       end
 
       if request.sunday_hash["form_b"] == "1"
-        form_b = "=CHAR(252)"
+        form_b = "\u{2714}"
       else
         form_b = "-"
       end
 
       if request.sunday_hash["form_c"] == "1"
-        form_c = "=CHAR(252)"
+        form_c = "\u{2714}"
       else
         form_c = "-"
       end
 
       if request.sunday_hash["track_and_time"] == "1"
-        track_and_time = "=CHAR(252)"
+        track_and_time = "\u{2714}"
       else
         track_and_time = "-"
       end
 
       if request.sunday_hash["inacc_track"] == "1"
-        inacc_track = "=CHAR(252)"
+        inacc_track = "\u{2714}"
       else
         inacc_track = "-"
       end
 
-      sheet.add_row [entry_count, request.requestor_project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, request.description, request.weekly.sun_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_sun, request.inspector_notes_sun, request.admin_notes_sun], style: [normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
+      sheet.add_row [entry_count, project, request.contractor, milepost, controlpoint, mt1, mt2, mt3, mt4, other, description, request.weekly.sun_workers, single_tracking, timeframe, taw, form_b, form_c, track_and_time, inacc_track, request.requestor_notes_sun, request.inspector_notes_sun, request.admin_notes_sun], style: [center_normal_cell(wb, backgroundcolor, textcolor), center_normal_cell(wb, backgroundcolor, textcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, mt1), boolean_cell(wb, nwcolor, mt2), boolean_cell(wb, nwcolor, mt3), boolean_cell(wb, nwcolor, mt4), boolean_cell(wb, nwcolor, other), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, single_tracking), normal_cell(wb, nwcolor), boolean_cell(wb, nwcolor, taw), boolean_cell(wb, nwcolor, form_b), boolean_cell(wb, nwcolor, form_c), boolean_cell(wb, nwcolor, track_and_time), boolean_cell(wb, nwcolor, inacc_track), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor), normal_cell(wb, nwcolor)]
 
       entry_count += 1
     end
@@ -1251,8 +1363,8 @@ wb.add_worksheet(name: "Applied Filters") do |sheet|
   end
 
   def boolean_cell(workbook, background, value)
-    if value == "=CHAR(252)"
-      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10, :font_name => "Wingdings"
+    if value == "\u{2714}"
+      workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
     else
       workbook.styles.add_style :bg_color => background, :alignment => {:wrap_text => true, :horizontal => :center}, :sz => 10
     end
@@ -1263,8 +1375,14 @@ wb.add_worksheet(name: "Applied Filters") do |sheet|
   [["mt1", "MT1"], ["mt2", "MT2"], ["mt3", "MT3"], ["mt4", "MT4"], ["other", "Other"], ["night_work", "Night Work"], ["day_work", "Day Work"], ["single_tracking", "Single Tracking"], ["no_single_tracking", "Multi Tracking"], ["taw", "TAW"], ["form_b", "Form B"], ["form_c", "Form C"], ["track_and_time", "Track And Time"], ["inacc_track", "Inacc Track"], ["rwp", "RWP"], ["ocs", "OCS"], ["disturb", "Disturb Track"], ["rrm", "RRM on Track"], ["foul", "Foul Track"], ["crossings", "Disable Crossings"], ["underground", "Underground"], ["flagging", "Flagging"], ["show_cancelled", "Cancelled"], ["show_approved", "Approved"], ["show_pending", "Pending"], ["show_rejected", "Rejected"]].each do |pair|
 
     filter_value = "-"
-    if params[pair[0]] != nil
-      filter_value = "=CHAR(252)"
+    if params[pair[0]] == "Both"
+    filter_value = "All"
+    elsif params[pair[0]] == "true"
+    filter_value = "\u{2714}"
+    elsif params[pair[0]] == "false"
+    filter_value = "X"
+    elsif params[pair[0]] != nil
+      filter_value = "\u{2714}"
     end
     sheet.add_row([pair[1], filter_value], style: [normal_cell(wb, "ffffff"), boolean_cell(wb, "ffffff", filter_value)])
 

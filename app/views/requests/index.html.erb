@@ -33,16 +33,16 @@
     <br>
     <%=
       link_to 'Download as Excel',
-      requests_path(format: :xlsx, filter_week: params["filter_week"], filter_year: params["filter_year"], year: params["year"], week: params["week"], mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: ["no_single_tracking"])
+      requests_path(format: :xlsx, filter_week: params["filter_week"], filter_year: params["filter_year"], year: params["year"], week: params["week"], mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: params["no_single_tracking"])
     %>
 
   </div>
   <div id="line_sheet_center">
     <% if @user.role == "admin" || @user.role == "superadmin" %>
-      <textarea name="news_feed" id="news_feed" rows="15" cols="75"><% if Newsfeed.all != [] %><%= Newsfeed.all[0].contents %><% end %></textarea>
+      <textarea name="news_feed" id="news_feed" rows="15" cols="75" data-week="<%= @thisweek %>" data-year="<%= @thisyear %>"><% if Newsfeed.where(week: @thisweek, year: @thisyear) != [] %><%= Newsfeed.where(week: @thisweek, year: @thisyear)[0].contents %><% end %></textarea>
       <button type="button" name="news_update" id="news_update">Save</button>
     <% else %>
-      <p id="news_display"><% if Newsfeed.all != [] %>** <%= Newsfeed.all[0].contents %> **<% end %></p>
+      <p id="news_display"><% if Newsfeed.where(week: @thisweek, year: @thisyear) != [] %>** <%= Newsfeed.where(week: @thisweek, year: @thisyear)[0].contents %> **<% end %></p>
     <% end %>
   </div>
 

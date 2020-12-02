@@ -21,6 +21,6 @@
 
 <ul>
   <% @users.each do |user| %>
-    <li><a href="<%= profile_path(user) %>">Edit User Settings</a><%= user.name %>, <%= user.email %>, <%= user.phone %></li>
+    <li class="user_line"><a href="<%= profile_path(user) %>" class="fakebutton user_edit">Edit</a><%= user.name %>, <%= user.email %>, <%= user.phone %></li>
   <% end %>
 </ul>
