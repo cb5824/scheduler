@@ -1,34 +1,247 @@
 <div id="ajax_alert" >Test test test</div>
 <div class="index_top_container">
 
-  <h1>Showing requests for <%= @thisyear %>, week <%= @thisweek %></h1>
-  <% if params["week"] %><% weekview = params["week"].to_i %><% else %><% weekview = Time.zone.now.to_datetime.cweek %><% end %>
+  <% if params["mt1"] == "true" %>
+  <% mt1_flag = "true" %>
+  <% elsif params["mt1"] == "false" %>
+  <% mt1_flag = "false" %>
+  <% else %>
+  <% mt1_flag = "all" %>
+  <% end %>
 
-  <%= form_tag(requests_path, method: "get") do %>
+  <% if params["mt2"] == "true" %>
+  <% mt2_flag = "true" %>
+  <% elsif params["mt2"] == "false" %>
+  <% mt2_flag = "false" %>
+  <% else %>
+  <% mt2_flag = "all" %>
+  <% end %>
 
+  <% if params["mt3"] == "true" %>
+  <% mt3_flag = "true" %>
+  <% elsif params["mt3"] == "false" %>
+  <% mt3_flag = "false" %>
+  <% else %>
+  <% mt3_flag = "all" %>
+  <% end %>
+
+  <% if params["mt4"] == "true" %>
+  <% mt4_flag = "true" %>
+  <% elsif params["mt4"] == "false" %>
+  <% mt4_flag = "false" %>
+  <% else %>
+  <% mt4_flag = "all" %>
+  <% end %>
+
+  <% if params["other"] == "true" %>
+  <% other_flag = "true" %>
+  <% elsif params["other"] == "false" %>
+  <% other_flag = "false" %>
+  <% else %>
+  <% other_flag = "all" %>
+  <% end %>
+
+  <% if params["taw"] == "true" %>
+  <% taw_flag = "true" %>
+  <% elsif params["taw"] == "false" %>
+  <% taw_flag = "false" %>
+  <% else %>
+  <% taw_flag = "all" %>
+  <% end %>
+
+  <% if params["form_b"] == "true" %>
+  <% form_b_flag = "true" %>
+  <% elsif params["form_b"] == "false" %>
+  <% form_b_flag = "false" %>
+  <% else %>
+  <% form_b_flag = "all" %>
+  <% end %>
+
+  <% if params["form_c"] == "true" %>
+  <% form_c_flag = "true" %>
+  <% elsif params["form_c"] == "false" %>
+  <% form_c_flag = "false" %>
+  <% else %>
+  <% form_c_flag = "all" %>
+  <% end %>
+
+  <% if params["track_and_time"] == "true" %>
+  <% track_and_time_flag = "true" %>
+  <% elsif params["track_and_time"] == "false" %>
+  <% track_and_time_flag = "false" %>
+  <% else %>
+  <% track_and_time_flag = "all" %>
+  <% end %>
+
+  <% if params["inacc_track"] == "true" %>
+  <% inacc_track_flag = "true" %>
+  <% elsif params["inacc_track"] == "false" %>
+  <% inacc_track_flag = "false" %>
+  <% else %>
+  <% inacc_track_flag = "all" %>
+  <% end %>
+
+  <% if params["rwp"] == "yes" %>
+  <% rwp_flag = "yes" %>
+  <% elsif params["rwp"] == "no" %>
+  <% rwp_flag = "no" %>
+  <% else %>
+  <% rwp_flag = "all" %>
+  <% end %>
+
+  <% if params["ocs"] == "yes" %>
+  <% ocs_flag = "yes" %>
+  <% elsif params["ocs"] == "no" %>
+  <% ocs_flag = "no" %>
+  <% else %>
+  <% ocs_flag = "all" %>
+  <% end %>
+
+  <% if params["disturb"] == "yes" %>
+  <% disturb_flag = "yes" %>
+  <% elsif params["disturb"] == "no" %>
+  <% disturb_flag = "no" %>
+  <% else %>
+  <% disturb_flag = "all" %>
+  <% end %>
+
+  <% if params["rrm"] == "yes" %>
+  <% rrm_flag = "yes" %>
+  <% elsif params["rrm"] == "no" %>
+  <% rrm_flag = "no" %>
+  <% else %>
+  <% rrm_flag = "all" %>
+  <% end %>
+
+  <% if params["foul"] == "yes" %>
+  <% foul_flag = "yes" %>
+  <% elsif params["foul"] == "no" %>
+  <% foul_flag = "no" %>
+  <% else %>
+  <% foul_flag = "all" %>
+  <% end %>
+
+  <% if params["crossings"] == "yes" %>
+  <% crossings_flag = "yes" %>
+  <% elsif params["crossings"] == "no" %>
+  <% crossings_flag = "no" %>
+  <% else %>
+  <% crossings_flag = "all" %>
+  <% end %>
+
+  <% if params["underground"] == "yes" %>
+  <% underground_flag = "yes" %>
+  <% elsif params["underground"] == "no" %>
+  <% underground_flag = "no" %>
+  <% else %>
+  <% underground_flag = "all" %>
+  <% end %>
+
+  <% if params["flagging"] == "yes" %>
+  <% flagging_flag = "yes" %>
+  <% elsif params["flagging"] == "no" %>
+  <% flagging_flag = "no" %>
+  <% else %>
+  <% flagging_flag = "all" %>
+  <% end %>
+
+  <% if params["show_cancelled"] != nil %>
+  <% show_cancelled_flag = "true" %>
+  <% else %>
+  <% show_cancelled_flag = "false" %>
+  <% end %>
+
+  <% if params["show_approved"] != nil %>
+  <% show_approved_flag = "true" %>
+  <% else %>
+  <% show_approved_flag = "false" %>
+  <% end %>
+
+  <% if params["show_pending"] != nil %>
+  <% show_pending_flag = "true" %>
+  <% else %>
+  <% show_pending_flag = "false" %>
+  <% end %>
+
+  <% if params["show_rejected"] != nil %>
+  <% show_rejected_flag = "true" %>
+  <% else %>
+  <% show_rejected_flag = "false" %>
+  <% end %>
+
+  <% if params["night_work"] != nil %>
+  <% night_work_flag = "1" %>
+  <% else %>
+  <% night_work_flag = "0" %>
+  <% end %>
+
+  <% if params["day_work"] != nil %>
+  <% day_work_flag = "1" %>
+  <% else %>
+  <% day_work_flag = "0" %>
+  <% end %>
+
+  <% if params["single_tracking"] != nil %>
+  <% single_tracking_flag = "true" %>
+  <% else %>
+  <% single_tracking_flag = "false" %>
+  <% end %>
+
+  <% if params["no_single_tracking"] != nil %>
+  <% no_single_tracking_flag = "true" %>
+  <% else %>
+  <% no_single_tracking_flag = "false" %>
+  <% end %>
+
+
+  <% if params["week"] %><% weekview = params["week"].to_i %><% elsif params["filter_week"] %><% weekview = params["filter_week"].to_i %><% else %><% weekview = Time.zone.now.to_datetime.cweek %><% end %>
 
 
 <div id="line_sheet_header">
   <div id="line_sheet_left">
-    <%= link_to "back one week", requests_path(:week => (weekview -1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
-    <%= link_to "current week",requests_path(:week => Time.zone.now.to_datetime.cweek, :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
-    <%= link_to "forward one week",requests_path(:week =>  (weekview +1), :year => Time.zone.now.to_datetime.cwyear), class: "fakebutton" %>
+    <p id="timeframe_text">Showing requests for <%= @thisyear %>, week <%= @thisweek %></p>
+    <%= link_to "back one week", requests_path(:week => (weekview -1), :year => Time.zone.now.to_datetime.cwyear, mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: params["no_single_tracking"]), class: "fakebutton" %>
+    <%= link_to "current week",requests_path(:week => Time.zone.now.to_datetime.cweek, :year => Time.zone.now.to_datetime.cwyear, mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: params["no_single_tracking"]), class: "fakebutton" %>
+    <%= link_to "forward one week",requests_path(:week =>  (weekview +1), :year => Time.zone.now.to_datetime.cwyear, mt1: params["mt1"], mt2: params["mt2"], mt3: params["mt3"], mt4: params["mt4"], other: params["other"], night_work: params["night_work"], single_tracking: params["single_tracking"], taw: params["taw"], form_b: params["form_b"], form_c: params["form_c"], track_and_time: params["track_and_time"], inacc_track: params["inacc_track"], rwp: params["rwp"], ocs: params["ocs"], disturb: params["disturb"], rrm: params["rrm"], foul: params["foul"], crossings: params["crossings"], underground: params["underground"], flagging: params["flagging"], show_cancelled: params["show_cancelled"], show_approved: params["show_approved"], show_pending: params["show_pending"], show_rejected: params["show_rejected"], day_work: params["day_work"], no_single_tracking: params["no_single_tracking"]), class: "fakebutton" %>
     <br>
     <br>
-    <br>
-    <% if params["week"] %>
-    <%= hidden_field_tag("filter_week", value = params["week"]) %>
-    <%= hidden_field_tag("filter_year", value = params["year"]) %>
-    <% else %>
-    <%= hidden_field_tag("filter_week", value = params["filter_week"]) %>
-    <%= hidden_field_tag("filter_year", value = params["filter_year"]) %>
-    <% end %>
 
-    <%= label_tag(:year, "Year:") %>
-    <%= number_field_tag(:year, @thisyear) %>
-    <%= label_tag(:week, "Week:") %>
-    <%= number_field_tag(:week, @thisweek) %>
-    <br>
+
+    <%= form_tag(requests_path, method: "get") do %>
+      <%= submit_tag("Jump To:") %>
+      <%= label_tag(:year, "Year:") %>
+      <%= number_field_tag(:year, @thisyear, options= {min: 1}) %>
+      <%= label_tag(:week, "Week:") %>
+      <%= number_field_tag(:week, @thisweek, options= {min: 1, max: 53}) %>
+
+      <%= hidden_field_tag("mt1", value = mt1_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("mt2", value = mt2_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("mt3", value = mt3_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("mt4", value = mt4_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("other", value = other_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("taw", value = taw_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("form_b", value = form_b_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("form_c", value = form_c_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("track_and_time", value = track_and_time_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("inacc_track", value = inacc_track_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("rwp", value = rwp_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("ocs", value = ocs_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("disturb", value = disturb_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("rrm", value = rrm_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("foul", value = foul_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("crossings", value = crossings_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("underground", value = underground_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("flagging", value = flagging_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
+      <%= hidden_field_tag("show_cancelled", value = show_cancelled_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("show_approved", value = show_approved_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("show_pending", value = show_pending_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("show_rejected", value = show_rejected_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("night_work", value = night_work_flag, :data => { :positive => '1', :negative => '0' }) %>
+      <%= hidden_field_tag("day_work", value = day_work_flag, :data => { :positive => '1', :negative => '0' }) %>
+      <%= hidden_field_tag("single_tracking", value = single_tracking_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+      <%= hidden_field_tag("no_single_tracking", value = no_single_tracking_flag, :data => { :positive => 'true', :negative => 'false' }) %>
+
+    <% end %>
     <br>
     <br>
     <%=
@@ -42,13 +255,24 @@
       <textarea name="news_feed" id="news_feed" rows="15" cols="75" data-week="<%= @thisweek %>" data-year="<%= @thisyear %>"><% if Newsfeed.where(week: @thisweek, year: @thisyear) != [] %><%= Newsfeed.where(week: @thisweek, year: @thisyear)[0].contents %><% end %></textarea>
       <button type="button" name="news_update" id="news_update">Save</button>
     <% else %>
-      <p id="news_display"><% if Newsfeed.where(week: @thisweek, year: @thisyear) != [] %>** <%= Newsfeed.where(week: @thisweek, year: @thisyear)[0].contents %> **<% end %></p>
+      <p id="news_display" class="preserve-lines"><% if Newsfeed.where(week: @thisweek, year: @thisyear) != [] %> <%= Newsfeed.where(week: @thisweek, year: @thisyear)[0].contents %> <% end %></p>
     <% end %>
   </div>
 
 
 <div id="line_sheet_right">
-    <%= submit_tag("Filter") %>
+  <%= form_tag(requests_path, method: "get") do %>
+  <% if params["week"] %>
+  <%= hidden_field_tag("filter_week", value = params["week"]) %>
+  <%= hidden_field_tag("filter_year", value = params["year"]) %>
+  <% elsif params["filter_week"]%>
+  <%= hidden_field_tag("filter_week", value = params["filter_week"]) %>
+  <%= hidden_field_tag("filter_year", value = params["filter_year"]) %>
+  <% else %>
+  <%= hidden_field_tag("filter_week", value = @thisweek) %>
+  <%= hidden_field_tag("filter_year", value = @thisyear) %>
+  <% end %>
+    <%= submit_tag("Apply Filters") %>
     <%= link_to "Clear Filters", requests_path(:year => @thisyear, :week => @thisweek), class: "fakebutton" %>
   <br>
   <div id="filter_container">
@@ -148,13 +372,6 @@
       </div>
       <div class="filter_line">
         MT1:
-        <% if params["mt1"] == "true" %>
-        <% mt1_flag = "true" %>
-        <% elsif params["mt1"] == "false" %>
-        <% mt1_flag = "false" %>
-        <% else %>
-        <% mt1_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("mt1", value = mt1_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if mt1_flag != "true" %>deselected<% end %>">
@@ -170,13 +387,6 @@
       </div>
       <div class="filter_line">
         MT2:
-        <% if params["mt2"] == "true" %>
-        <% mt2_flag = "true" %>
-        <% elsif params["mt2"] == "false" %>
-        <% mt2_flag = "false" %>
-        <% else %>
-        <% mt2_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("mt2", value = mt2_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if mt2_flag != "true" %>deselected<% end %>">
@@ -192,13 +402,6 @@
       </div>
       <div class="filter_line">
         MT3:
-        <% if params["mt3"] == "true" %>
-        <% mt3_flag = "true" %>
-        <% elsif params["mt3"] == "false" %>
-        <% mt3_flag = "false" %>
-        <% else %>
-        <% mt3_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("mt3", value = mt3_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if mt3_flag != "true" %>deselected<% end %>">
@@ -214,13 +417,6 @@
       </div>
       <div class="filter_line">
         MT4:
-        <% if params["mt4"] == "true" %>
-        <% mt4_flag = "true" %>
-        <% elsif params["mt4"] == "false" %>
-        <% mt4_flag = "false" %>
-        <% else %>
-        <% mt4_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("mt4", value = mt4_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if mt4_flag != "true" %>deselected<% end %>">
@@ -236,13 +432,6 @@
       </div>
       <div class="filter_line">
         Other:
-        <% if params["other"] == "true" %>
-        <% other_flag = "true" %>
-        <% elsif params["other"] == "false" %>
-        <% other_flag = "false" %>
-        <% else %>
-        <% other_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("other", value = other_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if other_flag != "true" %>deselected<% end %>">
@@ -267,13 +456,6 @@
       </div>
       <div class="filter_line">
         TAW:
-        <% if params["taw"] == "true" %>
-        <% taw_flag = "true" %>
-        <% elsif params["taw"] == "false" %>
-        <% taw_flag = "false" %>
-        <% else %>
-        <% taw_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("taw", value = taw_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if taw_flag != "true" %>deselected<% end %>">
@@ -289,13 +471,6 @@
       </div>
       <div class="filter_line">
         Form B:
-        <% if params["form_b"] == "true" %>
-        <% form_b_flag = "true" %>
-        <% elsif params["form_b"] == "false" %>
-        <% form_b_flag = "false" %>
-        <% else %>
-        <% form_b_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("form_b", value = form_b_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if form_b_flag != "true" %>deselected<% end %>">
@@ -311,13 +486,6 @@
       </div>
       <div class="filter_line">
         Form C:
-        <% if params["form_c"] == "true" %>
-        <% form_c_flag = "true" %>
-        <% elsif params["form_c"] == "false" %>
-        <% form_c_flag = "false" %>
-        <% else %>
-        <% form_c_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("form_c", value = form_c_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if form_c_flag != "true" %>deselected<% end %>">
@@ -333,13 +501,6 @@
       </div>
       <div class="filter_line">
         T & T:
-        <% if params["track_and_time"] == "true" %>
-        <% track_and_time_flag = "true" %>
-        <% elsif params["track_and_time"] == "false" %>
-        <% track_and_time_flag = "false" %>
-        <% else %>
-        <% track_and_time_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("track_and_time", value = track_and_time_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if track_and_time_flag != "true" %>deselected<% end %>">
@@ -355,13 +516,6 @@
       </div>
       <div class="filter_line">
         Inacc Track:
-        <% if params["inacc_track"] == "true" %>
-        <% inacc_track_flag = "true" %>
-        <% elsif params["inacc_track"] == "false" %>
-        <% inacc_track_flag = "false" %>
-        <% else %>
-        <% inacc_track_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("inacc_track", value = inacc_track_flag, :data => { :positive => 'true', :negative => 'false' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if inacc_track_flag != "true" %>deselected<% end %>">
@@ -385,13 +539,6 @@
       </div>
       <div class="filter_line">
         RWP Cert:
-        <% if params["rwp"] == "yes" %>
-        <% rwp_flag = "yes" %>
-        <% elsif params["rwp"] == "no" %>
-        <% rwp_flag = "no" %>
-        <% else %>
-        <% rwp_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("rwp", value = rwp_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if rwp_flag != "yes" %>deselected<% end %>">
@@ -407,13 +554,6 @@
       </div>
       <div class="filter_line">
         OCS/25kV:
-        <% if params["ocs"] == "yes" %>
-        <% ocs_flag = "yes" %>
-        <% elsif params["ocs"] == "no" %>
-        <% ocs_flag = "no" %>
-        <% else %>
-        <% ocs_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("ocs", value = ocs_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if ocs_flag != "yes" %>deselected<% end %>">
@@ -429,13 +569,6 @@
       </div>
       <div class="filter_line">
         Disturb Track:
-        <% if params["disturb"] == "yes" %>
-        <% disturb_flag = "yes" %>
-        <% elsif params["disturb"] == "no" %>
-        <% disturb_flag = "no" %>
-        <% else %>
-        <% disturb_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("disturb", value = disturb_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if disturb_flag != "yes" %>deselected<% end %>">
@@ -451,13 +584,6 @@
       </div>
       <div class="filter_line">
         RMM on Track:
-        <% if params["rrm"] == "yes" %>
-        <% rrm_flag = "yes" %>
-        <% elsif params["rrm"] == "no" %>
-        <% rrm_flag = "no" %>
-        <% else %>
-        <% rrm_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("rrm", value = rrm_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if rrm_flag != "yes" %>deselected<% end %>">
@@ -473,13 +599,6 @@
       </div>
       <div class="filter_line">
         RMM Off Track:
-        <% if params["foul"] == "yes" %>
-        <% foul_flag = "yes" %>
-        <% elsif params["foul"] == "no" %>
-        <% foul_flag = "no" %>
-        <% else %>
-        <% foul_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("foul", value = foul_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if foul_flag != "yes" %>deselected<% end %>">
@@ -495,13 +614,6 @@
       </div>
       <div class="filter_line">
         Affect Xings:
-        <% if params["crossings"] == "yes" %>
-        <% crossings_flag = "yes" %>
-        <% elsif params["crossings"] == "no" %>
-        <% crossings_flag = "no" %>
-        <% else %>
-        <% crossings_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("crossings", value = crossings_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if crossings_flag != "yes" %>deselected<% end %>">
@@ -517,13 +629,6 @@
       </div>
       <div class="filter_line">
         Utility Locates:
-        <% if params["underground"] == "yes" %>
-        <% underground_flag = "yes" %>
-        <% elsif params["underground"] == "no" %>
-        <% underground_flag = "no" %>
-        <% else %>
-        <% underground_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("underground", value = underground_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if underground_flag != "yes" %>deselected<% end %>">
@@ -539,13 +644,6 @@
       </div>
       <div class="filter_line">
         Traffic Control:
-        <% if params["flagging"] == "yes" %>
-        <% flagging_flag = "yes" %>
-        <% elsif params["flagging"] == "no" %>
-        <% flagging_flag = "no" %>
-        <% else %>
-        <% flagging_flag = "all" %>
-        <% end %>
         <%= hidden_field_tag("flagging", value = flagging_flag, :data => { :positive => 'yes', :negative => 'no' }) %>
           <div class="filter_bar">
            <div class="filter_bar_block green_block <% if flagging_flag != "yes" %>deselected<% end %>">

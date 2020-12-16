@@ -11,8 +11,8 @@
 
   <body>
     <div id="top_nav_bar">
-      <a class='nav_link' href='<%= root_path %>'>Line Sheet</a>
       <% if user_signed_in? %>
+      <a class='nav_link' href='<%= root_path %>'>Line Sheet</a>
       <a class='nav_link' href='<%= new_request_path %>'>New Request</a>
       <% end %>
       <div id="account_overlay" class="hide">

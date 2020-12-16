@@ -42,7 +42,9 @@ class Request < ApplicationRecord
   scope :filter_by_night_work, -> (night_work) { where night_work: night_work }
   scope :filter_by_day_work, -> (day_work) { where night_work: 0 }
   scope :filter_by_week, -> (week) { where week: week }
+  scope :filter_by_filter_week, -> (week) { where week: week }
   scope :filter_by_year, -> (year) { where year: year }
+  scope :filter_by_filter_year, -> (year) { where year: year }
   scope :filter_by_single_tracking, -> (single_tracking) { joins(:weekly).where("single_tracking = ?", single_tracking)}
   scope :filter_by_no_single_tracking, -> (no_single_tracking) { joins(:weekly).where("single_tracking = ?", false)}
   scope :filter_by_mt1, -> (mt1) { joins(:weekly).where("mt1 = ?", mt1)}

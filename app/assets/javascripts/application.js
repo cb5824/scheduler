@@ -33,8 +33,7 @@ $("td > a").on("click",function(e){
 
 $(".notes_tab").on("click", function(){
   $('#notesOverlay').hide();
-
-  $( ".notes_tab" ).each(function() {
+  $(this).siblings().each(function() {
     $( this ).removeClass( "active" );
     $( this ).addClass( "inactive" );
   });
@@ -52,6 +51,8 @@ $(".notes_tab").on("click", function(){
 $(".daytab").on("click", function(){
   $(".superoverlay").css({height: "0%"});
   $('#divOverlay').hide();
+  $('#notesOverlay').hide();
+
   $( ".daytab" ).each(function() {
     $( this ).removeClass( "active" );
     $( this ).addClass( "inactive" );
@@ -1849,19 +1850,28 @@ $('.superoverlay_button').on('click', (event) =>{
  });
 });
 
-$('.notes_content').on("click", function() {
-    last_clicked = $(event.target);
-    let initial = $(event.target).html();
-    if ($(event.target).hasClass("requestor_notes")) {
+$('.notes_cell').on("click", function() {
+  var new_target = $(event.target)
+  if ($(event.target).hasClass("notes_content")) {
+    new_target = $(event.target).parent();
+  }
+    new_target.children().each(function(){
+      if ($(this).hasClass("hidden") === false) {
+        last_clicked = $(this);
+
+      }
+    });
+    let initial = last_clicked.html();
+    if (last_clicked.hasClass("requestor_notes")) {
       var type = "requestor";
     }
-    if ($(event.target).hasClass("admin_notes")) {
+    if (last_clicked.hasClass("admin_notes")) {
       var type = "admin";
     }
-    if ($(event.target).hasClass("inspector_notes")) {
+    if (last_clicked.hasClass("inspector_notes")) {
       var type = "inspector";
     }
-    var target_cell = $(event.target).parent()[0];
+    var target_cell = last_clicked.parent()[0];
 event.preventDefault();
 let req = target_cell.dataset.reqnum;
 let address = "/api/v1/requests/" + req;

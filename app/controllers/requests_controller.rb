@@ -402,12 +402,22 @@ end
       @thisweek = Time.zone.now.to_datetime.cweek
       @thisyear = Time.zone.now.to_datetime.cwyear
     end
+    if (Date.new @thisyear.to_i, 12, 30).cweek < @thisweek.to_i
+      week_counter = @thisweek.to_i
+      year_counter = @thisyear.to_i
+      while (Date.new year_counter, 12, 30).cweek < week_counter
+        week_counter -= (Date.new year_counter, 12, 30).cweek
+        year_counter += 1
+      end
+      @thisweek = week_counter.to_s
+      @thisyear = year_counter.to_s
+    end
     @today = Time.zone.now.to_datetime.cwday
   end
 
 
   def filtering_params(params)
-    filters = params.slice(:mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year, :show_cancelled, :show_approved, :show_pending, :show_rejected)
+    filters = params.slice(:mt1, :mt2, :mt3, :mt4, :other, :taw, :form_b, :form_c, :track_and_time, :contractor, :rwp, :ocs, :disturb, :rrm, :foul, :crossings, :underground, :flagging, :week, :year, :show_cancelled, :show_approved, :show_pending, :show_rejected, :filter_week, :filter_year)
     filters.reject{|key, value| value == "all" }
   end
 
