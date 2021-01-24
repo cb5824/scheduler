@@ -60,6 +60,25 @@ end
    FactoryBot.create(:request)
 end
 
+20.times do
+   FactoryBot.create(:request, week: Date.today.cweek + 1)
+end
+
+20.times do
+   FactoryBot.create(:request, week: Date.today.cweek + 2)
+end
+
+20.times do
+   FactoryBot.create(:request, week: Date.today.cweek + 3)
+end
+
+20.times do
+   FactoryBot.create(:request, week: Date.today.cweek - 1)
+end
+
+
+Date.today.cweek + 1
+
 Request.all.each do |request|
   request.update_weekly
 end
